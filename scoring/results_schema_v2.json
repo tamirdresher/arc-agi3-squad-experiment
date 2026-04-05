@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ARC-AGI-3 Squad Experiment — v2 Results Schema",
+  "description": "Schema for recording individual task run results in the v2 experiment. Designed for blind evaluation: the evaluator file MUST NOT include the condition name. Condition is recorded only in the master results file, never in per-evaluator exports.",
+  "type": "object",
+  "required": ["experiment_version", "results"],
+  "properties": {
+    "experiment_version": {
+      "type": "string",
+      "const": "2.0",
+      "description": "Schema version — must be '2.0' for v2 results"
+    },
+    "experiment_metadata": {
+      "type": "object",
+      "description": "Top-level experiment parameters (recorded once)",
+      "required": ["model", "model_version", "temperature", "max_tokens", "seed_strategy"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "LLM model name (e.g., 'claude-sonnet-4-20250514', 'gpt-4o-2025-03-26')"
+        },
+        "model_version": {
+          "type": "string",
+          "description": "Exact model version/checkpoint identifier"
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Temperature parameter used for all runs"
+        },
+        "max_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum token limit per agent turn"
+        },
+        "seed_strategy": {
+          "type": "string",
+          "enum": ["fixed", "per_run", "none"],
+          "description": "How seeds are assigned: 'fixed' = same seed all runs, 'per_run' = unique seed per run, 'none' = no seed control"
+        },
+        "total_tasks": {
+          "type": "integer",
+          "description": "Total number of unique tasks in the experiment"
+        },
+        "conditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of experimental conditions (e.g., ['baseline', 'chain-of-thought', 'arc-informed'])"
+        },
+        "runs_per_condition": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of repeated runs per task per condition"
+        },
+        "date_started": {
+          "type": "string",
+          "format": "date",
+          "description": "Experiment start date (ISO 8601)"
+        },
+        "date_completed": {
+          "type": "string",
+          "format": "date",
+          "description": "Experiment completion date (ISO 8601)"
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "description": "Array of individual task run results",
+      "items": {
+        "$ref": "#/definitions/task_run"
+      }
+    }
+  },
+  "definitions": {
+    "task_run": {
+      "type": "object",
+      "description": "A single task run result. In the master file, 'condition' is present. In evaluator exports, 'condition' MUST be omitted for blinding.",
+      "required": [
+        "task_id",
+        "run_number",
+        "seed",
+        "model",
+        "temperature",
+        "agent_actions",
+        "correct",
+        "evaluator_id",
+        "timestamp"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "pattern": "^v2-\\d{3}$",
+          "description": "Task identifier (e.g., 'v2-001'). Matches TASK_TEMPLATE_V2 task ID."
+        },
+        "condition": {
+          "type": "string",
+          "description": "Experimental condition. BLINDING: This field is present in the master results file ONLY. It MUST be stripped from any file given to evaluators.",
+          "enum": ["baseline", "chain-of-thought", "arc-informed"]
+        },
+        "run_number": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Which run of this task+condition combination (1, 2, 3, ...)"
+        },
+        "seed": {
+          "type": ["integer", "null"],
+          "description": "Random seed used for this run. null if no seed control."
+        },
+        "model": {
+          "type": "string",
+          "description": "Model used for this specific run (should match experiment_metadata.model)"
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Temperature for this specific run"
+        },
+        "agent_actions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of discrete agent actions taken to complete the task"
+        },
+        "human_baseline": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Human baseline action count for this task (from task template)"
+        },
+        "correct": {
+          "type": "string",
+          "enum": ["yes", "no", "partial"],
+          "description": "Correctness judgment by blind evaluator. 'yes' = all rubric criteria met; 'partial' = some met; 'no' = core answer wrong or fabricated."
+        },
+        "correctness_details": {
+          "type": "object",
+          "description": "Detailed correctness breakdown against rubric",
+          "properties": {
+            "explicit_requirements_met": {
+              "type": "integer",
+              "description": "Number of explicit rubric requirements satisfied"
+            },
+            "explicit_requirements_total": {
+              "type": "integer",
+              "description": "Total explicit rubric requirements"
+            },
+            "implicit_requirements_met": {
+              "type": "integer",
+              "description": "Number of implicit/hidden requirements satisfied"
+            },
+            "implicit_requirements_total": {
+              "type": "integer",
+              "description": "Total implicit requirements in the task"
+            },
+            "hallucination_detected": {
+              "type": "boolean",
+              "description": "Whether the evaluator detected fabricated information"
+            },
+            "hallucination_description": {
+              "type": ["string", "null"],
+              "description": "Description of hallucinated content, if any"
+            }
+          }
+        },
+        "evaluator_id": {
+          "type": "string",
+          "description": "Identifier for the blind evaluator (anonymized, e.g., 'evaluator-A'). Used for inter-rater reliability analysis."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this run was completed (ISO 8601 datetime)"
+        },
+        "duration_seconds": {
+          "type": ["number", "null"],
+          "description": "Wall-clock time for the run in seconds, if measured"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Free-text notes about this run (evaluator observations, anomalies)"
+        },
+        "output_hash": {
+          "type": "string",
+          "description": "SHA-256 hash of the agent's raw output, for integrity verification"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

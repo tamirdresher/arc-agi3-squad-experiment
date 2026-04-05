@@ -2,8 +2,18 @@
 
 **Testing ARC-informed agent prompt contracts for the Squad multi-agent framework**
 
-[![Research Issue](https://img.shields.io/badge/Issue-%232058-blue)](https://github.com/tamirdresher_microsoft/tamresearch1/issues/2058)
 [![Research Paper](https://img.shields.io/badge/arXiv-2603.24621-red)](https://arxiv.org/abs/2603.24621)
+
+---
+
+> ## ⚠️ Pilot Study — Exploratory Results Only
+>
+> This is an **exploratory pilot** with n=9 tasks, single runs, no blinding, and no ablation controls.
+> The results are directionally interesting but **cannot be treated as conclusive evidence**.
+> A v2 experiment with 50 tasks, 3 conditions (ARC-informed / chain-of-thought / unstructured baseline),
+> repeated runs, blind evaluation, and statistical controls is in preparation.
+>
+> **Do not cite these numbers as proven.** They are observations from a small, uncontrolled pilot.
 
 ---
 
@@ -25,6 +35,8 @@ This experiment tests whether explicitly embedding ARC's four pillars as **behav
 ## Hypothesis
 
 > Applying ARC-AGI-3's four pillars as explicit agent behavioral contracts will reduce task completion steps by ≥30%, reduce hallucination on novel task variants, and improve correctness on compositional tasks.
+
+**Pilot outcome:** The ≥30% step reduction target was **not met** — actual reduction was 20% (19 fewer actions out of 93). However, the correctness improvement (11% → 100%) was substantially larger than expected. The hypothesis was partially supported but missed its primary quantitative prediction by 33%.
 
 ## The ARC Prompt Contract
 
@@ -66,7 +78,7 @@ python scoring/compute-shae.py --example
 
 ## Explain Like I'm 15 (Why This Matters)
 
-**The Problem:** When AI agents hit unfamiliar problems, they hallucinate answers and miss critical requirements. The ARC-AGI benchmark proved this: humans ace abstract reasoning 100% of the time; AI only gets 26% right.
+**The Problem:** When AI agents hit unfamiliar problems, they hallucinate answers and miss critical requirements. The ARC-AGI benchmark proved this: humans ace abstract reasoning 100% of the time; frontier AI scores only 0.26%.
 
 **The Question:** What if we taught AI agents to think like humans do when confused? Instead of jumping straight to answering, humans pause and ask: *"What am I missing? What's really being asked?"*
 
@@ -74,7 +86,7 @@ python scoring/compute-shae.py --example
 
 **The Results (This Is Wild):**
 - **Correctness:** Baseline nailed 1 out of 9 tasks. ARC-informed got all 9 right. That's 100% vs 11%.
-- **Hallucination:** On hard problems, baseline agents made stuff up. ARC agents caught themselves: *"I don't know what Banach-Tarski is — let me check before inventing an answer."*
+- **Hallucination:** On hard problems, baseline agents made stuff up (1 documented case). ARC agents caught themselves: *"I don't know what Banach-Tarski is — let me check before inventing an answer."*
 - **Hidden Goals:** On tasks with implicit requirements (like "find the security hole"), baseline agents never found them (0/9). ARC agents found all 9.
 - **Efficiency Bonus:** We thought adding 4 thinking phases would slow things down. Nope. ARC agents actually used 20% fewer actions because they didn't waste time on revision cycles.
 
@@ -137,7 +149,7 @@ Human baseline: **6 actions** (recognizing 3 hidden requirements: "stable sort,"
 |--------|----------|--------------|-----------|
 | Tasks fully correct | 1/9 (11%) | 9/9 (100%) | **+89 pp** |
 | Tasks partially correct | 8/9 (89%) | 0/9 (0%) | **-89 pp** |
-| Hallucinations on far-OOD | 4 instances | 0 instances | **100% hallu. prevented** |
+| Hallucinations on far-OOD | 1 documented instance | 0 instances | **Hallu. prevented in documented case** |
 | Implicit goals detected | 1/9 (11%) | 9/9 (100%) | **+89 pp** |
 
 ---
@@ -159,14 +171,45 @@ Human baseline: **6 actions** (recognizing 3 hidden requirements: "stable sort,"
 
 SHAE = `(human_baseline_actions / agent_actions)²` — higher is better (1.0 = perfect efficiency)
 
-| Task | Baseline SHAE | ARC SHAE | SHAE Gain |
-|------|--------------|---------|-----------|
-| Task 1 Simple Factual | (3/7)² = **0.18** | (3/5)² = **0.36** | +0.18 |
-| Task 2 Multi-step | (8/17)² = **0.22** | (8/11)² = **0.53** | +0.31 |
-| Task 3 Implicit Goal | (6/6)² = **1.00** | (6/8)² = **0.56** | -0.44 |
-| **Mean SHAE** | **0.47** | **0.48** | **+0.01 (maintained)** |
+**SHAE-C** = SHAE with correctness gate: if the answer is wrong, SHAE-C = 0.0 regardless of action count. This addresses a flaw in raw SHAE where fast wrong answers could score high (e.g., Task 3 far-OOD baseline: 4 actions → SHAE = 1.0 while being incorrect).
 
-**Interpretation:** While SHAE slightly favors baseline on Task 3 (fewer actions taken), ARC achieved 100% correctness vs baseline's 11% — a massive quality win that outweighs action count. In practice, correctness >> efficiency when stakes are high.
+**Aggregation method:** Per-run SHAE computed first, then averaged across variants within each task.
+
+| Task | Baseline SHAE | Baseline SHAE-C | ARC SHAE | ARC SHAE-C | SHAE Gain | SHAE-C Gain |
+|------|--------------|-----------------|---------|------------|-----------|-------------|
+| Task 1 Simple Factual | 0.22 | 0.12 | 0.36 | 0.36 | +0.14 | +0.24 |
+| Task 2 Multi-step | 0.22 | 0.00 | 0.50 | 0.50 | +0.28 | +0.50 |
+| Task 3 Implicit Goal | 0.85 | 0.00 | 0.58 | 0.58 | -0.27 | +0.58 |
+| **Mean** | **0.43** | **0.04** | **0.48** | **0.48** | **+0.05** | **+0.44** |
+
+*Task 1 Baseline SHAE: avg of (3/5)²=0.36, (3/7)²=0.18, (3/9)²=0.11 = 0.22. SHAE-C: only familiar variant correct → 0.36/3 = 0.12.*
+*Task 2 Baseline SHAE: avg of (8/14)²=0.33, (8/17)²=0.22, (8/23)²=0.12 = 0.22. SHAE-C: 0/3 correct → 0.00.*
+*Task 3 Baseline SHAE: avg of (6/8)²=0.56, (6/6)²=1.00, (6/4)²→capped 1.00 = 0.85. SHAE-C: 0/3 correct → 0.00.*
+*All ARC runs correct → SHAE-C = SHAE for all ARC tasks.*
+
+**Key insight from SHAE-C:** Raw SHAE (0.43 vs 0.48) suggests near-parity, masking the fact that baseline achieves high SHAE scores *on wrong answers*. SHAE-C (0.04 vs 0.48) reveals the true efficiency gap: almost all baseline "efficiency" comes from fast incorrect completions.
+
+---
+
+## Limitations
+
+This pilot has significant methodological limitations that must be understood before drawing conclusions:
+
+1. **Small sample (n=9):** 9 tasks × 1 run each is far below the threshold for statistical power. No confidence intervals, p-values, or power analysis can produce reliable results at this scale. A single unlucky baseline run could explain the entire gap.
+
+2. **No controls:** There is no chain-of-thought control, no "structured but non-ARC" control, and no single-pillar ablation. The experiment cannot distinguish "ARC-specific pillars help" from "any structured deliberation helps."
+
+3. **No blinding:** The evaluator knew which configuration produced which output. Evaluation bias is possible.
+
+4. **Single run:** Each task was run exactly once per configuration. LLM outputs are stochastic — variance across runs is unknown.
+
+5. **Task-designed-by-testers (circular design risk):** Tasks were designed by the same team that designed the ARC intervention. Task 3 literally tests "does the agent detect implicit goals?" while the ARC contract says "check for implicit objectives." This risks teaching to the test.
+
+6. **No model/parameter specification:** The LLM model, version, temperature, and seed are not recorded. The experiment is not reproducible as documented.
+
+7. **SHAE metric limitation (v1):** The original SHAE formula had no correctness gate — fast wrong answers scored high. SHAE-C (added in this revision) fixes this, but the metric remains limited by sample size.
+
+> **Note:** A v2 experiment addressing these limitations — 50 tasks, 3 conditions (ARC / CoT / bare baseline), ≥3 runs per configuration, blind evaluation, fixed model parameters, and full statistical analysis — is in preparation.
 
 ---
 
@@ -179,6 +222,6 @@ See [`EXPERIMENT_RUN.md`](./EXPERIMENT_RUN.md) for detailed instructions.
 - **Primary paper:** [ARC-AGI-3: A New Challenge for Frontier Agentic Intelligence](https://arxiv.org/abs/2603.24621), arXiv:2603.24621, March 2026
 - **ARC Prize:** https://arcprize.org/blog/arc-agi-3-launch
 - **ARC-AGI-3 Agents GitHub:** https://github.com/arcprize/ARC-AGI-3-Agents
-- **Research report:** [tamirdresher_microsoft/tamresearch1#2058](https://github.com/tamirdresher_microsoft/tamresearch1/issues/2058)
+- **Research context:** This experiment originated from internal research exploring how ARC-AGI-3 reasoning pillars could improve multi-agent frameworks. The research question: can benchmark insights about exploration, world modeling, goal-setting, and planning transfer to production agent behavior?
 - **Parent Squad framework:** [bradygaster/squad](https://github.com/bradygaster/squad)
 ARC-AGI-3 Squad Experiment — testing ARC-informed agent prompt contracts
