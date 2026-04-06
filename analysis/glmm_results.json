@@ -1,0 +1,481 @@
+{
+  "descriptive": {
+    "per_condition": {
+      "arc-informed": {
+        "n": 250,
+        "correct_count": 250,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0,
+        "mean_tokens": 1184.556,
+        "mean_wall_clock": 15.6409,
+        "mean_response_length": 3579.94
+      },
+      "baseline": {
+        "n": 250,
+        "correct_count": 245,
+        "correctness_rate": 0.98,
+        "mean_shae_c": 0.98,
+        "mean_tokens": 1081.708,
+        "mean_wall_clock": 13.5938,
+        "mean_response_length": 3309.368
+      },
+      "chain-of-thought": {
+        "n": 250,
+        "correct_count": 250,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0,
+        "mean_tokens": 1100.428,
+        "mean_wall_clock": 14.5106,
+        "mean_response_length": 3148.9
+      }
+    },
+    "per_meta_category": {
+      "A": {
+        "baseline": {
+          "n": 125.0,
+          "correct_count": 120.0,
+          "correctness_rate": 0.96
+        },
+        "chain-of-thought": {
+          "n": 125.0,
+          "correct_count": 125.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 125.0,
+          "correct_count": 125.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "B": {
+        "baseline": {
+          "n": 75.0,
+          "correct_count": 75.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 75.0,
+          "correct_count": 75.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 75.0,
+          "correct_count": 75.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "C": {
+        "baseline": {
+          "n": 50.0,
+          "correct_count": 50.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 50.0,
+          "correct_count": 50.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 50.0,
+          "correct_count": 50.0,
+          "correctness_rate": 1.0
+        }
+      }
+    },
+    "per_task_type": {
+      "A1": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "A2": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "A3": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "A4": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "A5": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 20.0,
+          "correctness_rate": 0.8
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "B1": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "B2": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "B3": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "C1": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "C2": {
+        "baseline": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 25.0,
+          "correct_count": 25.0,
+          "correctness_rate": 1.0
+        }
+      }
+    },
+    "per_difficulty": {
+      "easy": {
+        "baseline": {
+          "n": 105.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 105.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 105.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "hard": {
+        "baseline": {
+          "n": 50.0,
+          "correctness_rate": 1.0
+        },
+        "chain-of-thought": {
+          "n": 50.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 50.0,
+          "correctness_rate": 1.0
+        }
+      },
+      "medium": {
+        "baseline": {
+          "n": 95.0,
+          "correctness_rate": 0.9474
+        },
+        "chain-of-thought": {
+          "n": 95.0,
+          "correctness_rate": 1.0
+        },
+        "arc-informed": {
+          "n": 95.0,
+          "correctness_rate": 1.0
+        }
+      }
+    }
+  },
+  "analysis": {
+    "glmm_fitted": true,
+    "glmm_note": "GLMM fitted via Variational Bayes (BinomialBayesMixedGLM)",
+    "hypotheses": {
+      "H1": {
+        "description": "ARC-informed > Baseline (correctness) by \u226515pp",
+        "arc_rate": 1.0,
+        "baseline_rate": 0.98,
+        "observed_difference_pp": 2.0,
+        "predicted_difference_pp": 15,
+        "fisher_p": 0.03062563759309363,
+        "statistically_significant": true,
+        "practically_significant": "False",
+        "verdict": "NOT SUPPORTED",
+        "explanation": "Observed 2.0pp difference (100.0% vs 98.0%). Statistically significant (p=0.0306). Ceiling effect: model is too capable for task difficulty.",
+        "holm_bonferroni_alpha": 0.025,
+        "holm_bonferroni_significant": false
+      },
+      "H2": {
+        "description": "ARC-informed > CoT (correctness) by \u226510pp",
+        "arc_rate": 1.0,
+        "cot_rate": 1.0,
+        "observed_difference_pp": 0.0,
+        "predicted_difference_pp": 10,
+        "fisher_p": 1.0,
+        "statistically_significant": false,
+        "practically_significant": "False",
+        "verdict": "NOT SUPPORTED",
+        "explanation": "Observed 0.0pp difference. Both conditions at ceiling (100.0% vs 100.0%). No evidence ARC-specific structure adds value beyond generic CoT.",
+        "holm_bonferroni_alpha": 0.05,
+        "holm_bonferroni_significant": false
+      },
+      "H3": {
+        "description": "ARC \u2264 10% more actions/tokens than Baseline",
+        "arc_mean_tokens": 1184.6,
+        "baseline_mean_tokens": 1081.7,
+        "overhead_pct": 9.5,
+        "verdict": "SUPPORTED",
+        "explanation": "ARC overhead: 9.5% more tokens (1185 vs 1082). Within the 10% threshold."
+      },
+      "H4": {
+        "description": "ARC advantage larger on hard/far-OOD tasks (\u22652\u00d7 easy gap)",
+        "gap_hard_pp": 0.0,
+        "gap_easy_pp": 0.0,
+        "ratio": 0,
+        "verdict": "NOT SUPPORTED",
+        "explanation": "Hard gap: 0.0pp, Easy gap: 0.0pp. Ceiling effect prevents meaningful comparison."
+      },
+      "H5": {
+        "description": "ARC \u2265 Baseline - 5pp on adversarial (B) tasks",
+        "arc_b_rate": 1.0,
+        "baseline_b_rate": 1.0,
+        "difference_pp": 0.0,
+        "non_inferiority_margin_pp": -5,
+        "verdict": "SUPPORTED",
+        "explanation": "ARC 100.0% vs Baseline 100.0% on B-tasks (diff: 0.0pp). Within non-inferiority margin."
+      }
+    },
+    "mcnemar": {
+      "H1_arc_vs_baseline": {
+        "arc_wins": 1,
+        "baseline_wins": 0,
+        "n_discordant": 1,
+        "p_value": 1.0,
+        "significant_005": false
+      },
+      "H2_arc_vs_cot": {
+        "arc_wins": 0,
+        "cot_wins": 0,
+        "n_discordant": 0,
+        "p_value": 1.0,
+        "significant_005": false
+      },
+      "H3_cot_vs_baseline": {
+        "cot_wins": 1,
+        "baseline_wins": 0,
+        "n_discordant": 1,
+        "p_value": 1.0,
+        "significant_005": false
+      }
+    },
+    "fisher_exact": {
+      "H1_arc_vs_baseline": {
+        "table": [
+          [
+            250,
+            0
+          ],
+          [
+            245,
+            5
+          ]
+        ],
+        "odds_ratio": "inf",
+        "p_value": 0.03062563759309363,
+        "significant_005": "True"
+      },
+      "H2_arc_vs_cot": {
+        "table": [
+          [
+            250,
+            0
+          ],
+          [
+            250,
+            0
+          ]
+        ],
+        "odds_ratio": "inf",
+        "p_value": 1.0,
+        "significant_005": false
+      },
+      "H3_cot_vs_baseline": {
+        "table": [
+          [
+            250,
+            0
+          ],
+          [
+            245,
+            5
+          ]
+        ],
+        "odds_ratio": "inf",
+        "p_value": 0.03062563759309363,
+        "significant_005": "True"
+      }
+    },
+    "effect_sizes": {
+      "chain-of-thought_vs_baseline": {
+        "correctness_difference_pp": 2.0,
+        "baseline_rate": 0.98,
+        "condition_rate": 1.0
+      },
+      "arc-informed_vs_baseline": {
+        "correctness_difference_pp": 2.0,
+        "baseline_rate": 0.98,
+        "condition_rate": 1.0
+      }
+    },
+    "glmm_coefficients": {
+      "intercept": {
+        "estimate": 6.426911261026018,
+        "se": 0.49417765537424574
+      },
+      "cot_vs_baseline": {
+        "estimate": 3.295759906582097,
+        "se": 1.1633604730799265,
+        "z": 2.8329653472382224,
+        "p_value": 0.004611838518040923,
+        "odds_ratio": 26.99792217555484,
+        "or_ci_lower": 2.7609460130311083,
+        "or_ci_upper": 263.9992952984637
+      },
+      "arc_vs_baseline": {
+        "estimate": 3.2957598683456415,
+        "se": 1.1633604853168862,
+        "z": 2.8329652845720594,
+        "p_value": 0.004611839422140385,
+        "odds_ratio": 26.997921143250014,
+        "or_ci_lower": 2.760945841242578,
+        "or_ci_upper": 263.9992915359422
+      }
+    },
+    "efficiency_H3": {
+      "arc_mean_tokens": 1184.6,
+      "baseline_mean_tokens": 1081.7,
+      "overhead_pct": 9.5,
+      "t_statistic": 1.066,
+      "p_value": 0.2868,
+      "h3_pass": true,
+      "note": "H3 predicts ARC uses no more than 10% more actions/tokens than baseline"
+    },
+    "wall_clock": {
+      "baseline_mean": 13.59,
+      "cot_mean": 14.51,
+      "arc_mean": 15.64
+    }
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "total_scored": 750,
+  "per_condition": {
+    "baseline": {
+      "n": 250,
+      "correct": 245,
+      "correctness_rate": 0.98,
+      "mean_shae_c": 0.98,
+      "mean_rubric": 0.9555,
+      "mean_tokens": 1081.7,
+      "mean_wall_clock": 13.59,
+      "mean_response_length": 3309.0
+    },
+    "chain-of-thought": {
+      "n": 250,
+      "correct": 250,
+      "correctness_rate": 1.0,
+      "mean_shae_c": 1.0,
+      "mean_rubric": 0.9664,
+      "mean_tokens": 1100.4,
+      "mean_wall_clock": 14.51,
+      "mean_response_length": 3149.0
+    },
+    "arc-informed": {
+      "n": 250,
+      "correct": 250,
+      "correctness_rate": 1.0,
+      "mean_shae_c": 1.0,
+      "mean_rubric": 0.9798,
+      "mean_tokens": 1184.6,
+      "mean_wall_clock": 15.64,
+      "mean_response_length": 3580.0
+    }
+  },
+  "per_task_type": {
+    "A1": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "A2": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "A3": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "A4": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "A5": {
+      "baseline": {
+        "n": 25,
+        "correct": 20,
+        "correctness_rate": 0.8
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "B1": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "B2": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "B3": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "C1": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    },
+    "C2": {
+      "baseline": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 25,
+        "correct": 25,
+        "correctness_rate": 1.0
+      }
+    }
+  },
+  "per_meta_category": {
+    "A": {
+      "baseline": {
+        "n": 125,
+        "correct": 120,
+        "correctness_rate": 0.96,
+        "mean_shae_c": 0.96
+      },
+      "chain-of-thought": {
+        "n": 125,
+        "correct": 125,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      },
+      "arc-informed": {
+        "n": 125,
+        "correct": 125,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      }
+    },
+    "B": {
+      "baseline": {
+        "n": 75,
+        "correct": 75,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      },
+      "chain-of-thought": {
+        "n": 75,
+        "correct": 75,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      },
+      "arc-informed": {
+        "n": 75,
+        "correct": 75,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      }
+    },
+    "C": {
+      "baseline": {
+        "n": 50,
+        "correct": 50,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      },
+      "chain-of-thought": {
+        "n": 50,
+        "correct": 50,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      },
+      "arc-informed": {
+        "n": 50,
+        "correct": 50,
+        "correctness_rate": 1.0,
+        "mean_shae_c": 1.0
+      }
+    }
+  },
+  "per_difficulty": {
+    "easy": {
+      "baseline": {
+        "n": 105,
+        "correct": 105,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 105,
+        "correct": 105,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 105,
+        "correct": 105,
+        "correctness_rate": 1.0
+      }
+    },
+    "hard": {
+      "baseline": {
+        "n": 50,
+        "correct": 50,
+        "correctness_rate": 1.0
+      },
+      "chain-of-thought": {
+        "n": 50,
+        "correct": 50,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 50,
+        "correct": 50,
+        "correctness_rate": 1.0
+      }
+    },
+    "medium": {
+      "baseline": {
+        "n": 95,
+        "correct": 90,
+        "correctness_rate": 0.9474
+      },
+      "chain-of-thought": {
+        "n": 95,
+        "correct": 95,
+        "correctness_rate": 1.0
+      },
+      "arc-informed": {
+        "n": 95,
+        "correct": 95,
+        "correctness_rate": 1.0
+      }
+    }
+  }
+}
