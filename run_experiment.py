@@ -35,6 +35,12 @@ except ImportError:
     print("ERROR: pyyaml is required. Install with: pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
+try:
+    import requests
+except ImportError:
+    print("ERROR: requests is required. Install with: pip install requests", file=sys.stderr)
+    sys.exit(1)
+
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -42,10 +48,49 @@ except ImportError:
 
 VALID_CONDITIONS = ("baseline", "chain-of-thought", "arc-informed")
 VALID_META_CATEGORIES = ("A", "B", "C")
-DEFAULT_MODEL = "claude-sonnet-4-20250514"
+DEFAULT_MODEL = "claude-sonnet-4"
 MAX_RETRIES = 3
 RETRY_BASE_DELAY = 2.0  # seconds; exponential backoff multiplier
 SWE_BENCH_MAX_TURNS = 10
+
+# Copilot Chat API configuration
+COPILOT_API_URL = "https://api.githubcopilot.com/chat/completions"
+COPILOT_API_TIMEOUT = 300  # 5 minutes per call
+COPILOT_API_HEADERS_STATIC = {
+    "Content-Type": "application/json",
+    "Editor-Version": "vscode/1.90.0",
+    "Editor-Plugin-Version": "copilot/1.0.0",
+    "Copilot-Integration-Id": "vscode-chat",
+}
+
+# Cached auth token (fetched once at startup)
+_gh_auth_token: Optional[str] = None
+
+
+def _get_gh_token() -> str:
+    """Retrieve the GitHub auth token via `gh auth token`.
+
+    Cached after the first call. Raises RuntimeError if unavailable.
+    """
+    global _gh_auth_token
+    if _gh_auth_token is not None:
+        return _gh_auth_token
+
+    try:
+        result = subprocess.run(
+            ["gh", "auth", "token"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f"gh auth token failed: {result.stderr.strip()}")
+        _gh_auth_token = result.stdout.strip()
+        if not _gh_auth_token:
+            raise RuntimeError("gh auth token returned empty string")
+        return _gh_auth_token
+    except FileNotFoundError:
+        raise RuntimeError("gh CLI not found on PATH")
+    except subprocess.TimeoutExpired:
+        raise RuntimeError("gh auth token timed out")
 
 # Condition prompt templates per protocol §2.1–2.3
 CONDITION_PROMPTS: dict[str, dict[str, str]] = {
@@ -229,7 +274,7 @@ def setup_logging(output_dir: Path) -> logging.Logger:
 
 REQUIRED_TASK_FIELDS = {
     "id", "type", "meta_category", "prompt",
-    "human_baseline_actions", "ground_truth", "scoring_rubric",
+    "human_baseline_actions", "expected_output",
 }
 
 
@@ -261,6 +306,20 @@ def load_task(path: Path) -> Task:
             f"{path}: meta_category '{meta}' not in {VALID_META_CATEGORIES}"
         )
 
+    # Extract ground_truth and scoring_rubric from expected_output
+    expected = data.get("expected_output", {})
+    if isinstance(expected, dict):
+        ground_truth = str(expected.get("value", "")).strip()
+        scoring_rubric = {}
+        for item in expected.get("rubric", []):
+            if isinstance(item, dict):
+                criterion = item.get("criterion", "")
+                weight = item.get("weight", 0)
+                scoring_rubric[criterion] = str(weight)
+    else:
+        ground_truth = str(expected).strip()
+        scoring_rubric = {}
+
     return Task(
         id=str(data["id"]),
         type=str(data.get("type", "")),
@@ -270,9 +329,9 @@ def load_task(path: Path) -> Task:
         source_id=data.get("source_id"),
         prompt=str(data["prompt"]).strip(),
         human_baseline_actions=int(data["human_baseline_actions"]),
-        ground_truth=str(data["ground_truth"]).strip(),
-        implicit_goals=data.get("implicit_goals", []) or [],
-        scoring_rubric=data.get("scoring_rubric", {}),
+        ground_truth=ground_truth,
+        implicit_goals=data.get("implicit_goals", data.get("tags", [])) or [],
+        scoring_rubric=scoring_rubric,
         designed_by=str(data.get("designed_by", "unknown")),
         reviewed_by=str(data.get("reviewed_by", "unknown")),
     )
@@ -347,16 +406,17 @@ def invoke_copilot_cli(
     dry_run: bool = False,
     logger: Optional[logging.Logger] = None,
 ) -> tuple[str, Optional[int]]:
-    """Call the Copilot CLI and capture the response.
+    """Call the GitHub Copilot Chat API and capture the response.
 
-    This is the integration point. In production, this calls `gh copilot`
-    (or equivalent). During development or --dry-run, returns a stub.
+    Uses the api.githubcopilot.com chat completions endpoint with
+    the GitHub auth token from `gh auth token`. Supports system and
+    user messages. Returns token usage when available.
 
     Args:
         system_prompt: The system-level instruction.
         user_prompt: The user-facing prompt.
-        model: Model identifier (e.g. 'claude-sonnet-4-20250514').
-        dry_run: If True, return a stub response without calling the CLI.
+        model: Model identifier (e.g. 'claude-sonnet-4').
+        dry_run: If True, return a stub response without calling the API.
         logger: Optional logger for diagnostics.
 
     Returns:
@@ -370,35 +430,72 @@ def invoke_copilot_cli(
         )
         return stub, None
 
-    # ---- Real CLI invocation ----
-    # Construct the subprocess command.
-    # NOTE: Adjust this command when the real Copilot CLI is available.
-    # The interface is: stdin → prompt, stdout → response.
-    combined_prompt = f"{system_prompt}\n\n{user_prompt}"
-    cmd = [
-        "gh", "copilot", "ask",
-        "--model", model,
-        combined_prompt,
-    ]
+    # ---- Real API invocation via Copilot Chat completions ----
+    token = _get_gh_token()
+    headers = {
+        **COPILOT_API_HEADERS_STATIC,
+        "Authorization": f"Bearer {token}",
+    }
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+        "stream": False,
+    }
 
     if logger:
-        logger.debug("CLI command: %s", " ".join(cmd[:4]) + " ...")
+        logger.debug(
+            "API call: model=%s system_len=%d user_len=%d",
+            model, len(system_prompt), len(user_prompt),
+        )
 
     try:
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=300,  # 5-minute timeout per call
+        resp = requests.post(
+            COPILOT_API_URL,
+            headers=headers,
+            json=payload,
+            timeout=COPILOT_API_TIMEOUT,
         )
-        response_text = result.stdout.strip()
-        if result.returncode != 0:
-            err_msg = result.stderr.strip() or f"exit code {result.returncode}"
-            raise RuntimeError(f"CLI error: {err_msg}")
-        return response_text, None  # Token counts not available via CLI
+    except requests.exceptions.Timeout:
+        raise RuntimeError(
+            f"Copilot API timed out after {COPILOT_API_TIMEOUT} seconds"
+        )
+    except requests.exceptions.ConnectionError as exc:
+        raise RuntimeError(f"Copilot API connection error: {exc}")
 
-    except subprocess.TimeoutExpired:
-        raise RuntimeError("CLI call timed out after 300 seconds")
+    if resp.status_code != 200:
+        # Extract error detail if available
+        try:
+            err_body = resp.json()
+            err_msg = err_body.get("error", {}).get("message", resp.text[:200])
+        except Exception:
+            err_msg = resp.text[:200]
+        raise RuntimeError(
+            f"Copilot API error (HTTP {resp.status_code}): {err_msg}"
+        )
+
+    data = resp.json()
+    choices = data.get("choices", [])
+    if not choices:
+        raise RuntimeError("Copilot API returned no choices")
+
+    response_text = choices[0].get("message", {}).get("content", "")
+    if not response_text:
+        raise RuntimeError("Copilot API returned empty content")
+
+    # Extract token usage if available
+    usage = data.get("usage")
+    tokens_used = usage.get("total_tokens") if usage else None
+
+    if logger:
+        logger.debug(
+            "API response: %d chars, tokens=%s, model=%s",
+            len(response_text), tokens_used, data.get("model", "unknown"),
+        )
+
+    return response_text, tokens_used
 
 
 def invoke_swe_bench_multi_turn(

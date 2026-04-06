@@ -34,12 +34,14 @@ SAMPLE_TASK_YAML = {
     "source_id": None,
     "prompt": "Summarize the following paragraph in 2-3 sentences.",
     "human_baseline_actions": 3,
-    "ground_truth": "A concise summary.",
-    "implicit_goals": ["capture main idea"],
-    "scoring_rubric": {
-        "correct": "Summary captures main idea and one detail",
-        "partial": "Main idea captured, detail missing",
-        "incorrect": "Main idea wrong or hallucinated",
+    "expected_output": {
+        "type": "rubric",
+        "value": "A concise summary.",
+        "rubric": [
+            {"criterion": "Summary captures main idea and one detail", "weight": 0.5},
+            {"criterion": "Main idea captured, detail missing", "weight": 0.3},
+            {"criterion": "Main idea wrong or hallucinated", "weight": 0.2},
+        ],
     },
     "designed_by": "tester",
     "reviewed_by": "reviewer",
