@@ -3,6 +3,7 @@
 **Testing ARC-informed agent prompt contracts for the Squad multi-agent framework**
 
 [![Research Paper](https://img.shields.io/badge/arXiv-2603.24621-red)](https://arxiv.org/abs/2603.24621)
+[![Pre-Registered](https://img.shields.io/badge/Pre--Registered-v2.1-blue)](https://github.com/tamirdresher/arc-agi3-squad-experiment/releases/tag/v2.1-preregistration)
 
 ---
 
@@ -210,6 +211,44 @@ This pilot has significant methodological limitations that must be understood be
 7. **SHAE metric limitation (v1):** The original SHAE formula had no correctness gate — fast wrong answers scored high. SHAE-C (added in this revision) fixes this, but the metric remains limited by sample size.
 
 > **Note:** A v2 experiment addressing these limitations — 50 tasks, 3 conditions (ARC / CoT / bare baseline), ≥3 runs per configuration, blind evaluation, fixed model parameters, and full statistical analysis — is in preparation.
+
+---
+
+## Pre-Registration
+
+**Status:** ✅ **Protocol V2.1 Pre-Registered** (2026-04-06)
+
+This experiment follows rigorous pre-registration practices to ensure transparency and prevent p-hacking:
+
+### What Was Pre-Registered
+
+- **Protocol:** [EXPERIMENT_V2_PROTOCOL.md](./EXPERIMENT_V2_PROTOCOL.md) — Full specification of 5 primary hypotheses, 5 counter-hypotheses, 50 task files, and GLMM analysis method
+- **Git Tag:** [`v2.1-preregistration`](https://github.com/tamirdresher/arc-agi3-squad-experiment/releases/tag/v2.1-preregistration) — Immutable, timestamped commit hash
+- **GitHub Release:** [Pre-Registration: ARC-Informed Prompting V2.1](https://github.com/tamirdresher/arc-agi3-squad-experiment/releases/tag/v2.1-preregistration) — Includes full protocol as release asset
+- **Documentation:** [PRE_REGISTRATION.md](./PRE_REGISTRATION.md) — Detailed record of frozen artifacts, hypotheses, and analysis method
+
+### Design Overview
+
+| Component | Value |
+|-----------|-------|
+| Tasks | 50 (drawn from external benchmarks + internal library) |
+| Conditions | 3 (Baseline / Chain-of-Thought / ARC-informed) |
+| Runs per task | 5 (stochastic Copilot CLI runs) |
+| Total observations | 750 (50 × 3 × 5) |
+| Primary test | Generalized Linear Mixed Model (GLMM, binomial family) |
+| Approval | ✅ Q (Devil's Advocate) approved on 2026-04-06 |
+
+### Key Hypotheses
+
+- **H1:** ARC-informed prompting increases correctness >30% vs. baseline
+- **H2:** Hallucination reduced on out-of-distribution tasks
+- **H3:** CoT intermediate to ARC-informed in correctness
+- **H4:** ARC pillar ordering (Explore→Model→Goal→Execute) is essential
+- **H5:** Gains hold across task difficulty categories
+
+### Formal OSF Registration (Planned)
+
+A formal [Open Science Framework](https://osf.io) pre-registration is planned as a follow-up. This GitHub release serves as the timestamped, immutable pre-registration with git-backed proof-of-time.
 
 ---
 
