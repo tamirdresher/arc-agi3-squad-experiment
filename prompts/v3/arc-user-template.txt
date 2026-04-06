@@ -1,0 +1,15 @@
+Here is a pattern recognition puzzle. Study the example input-output grid pairs, then produce the correct output for the test input.
+
+{grid_data}
+
+Before answering, follow this reasoning contract:
+
+PHASE 1 — EXPLORE: Examine each example pair carefully. For each pair, describe: What objects or patterns exist in the input? What changes between input and output? What stays the same? Note grid dimensions, colors used, and spatial relationships.
+
+PHASE 2 — MODEL: Synthesize a single transformation rule that explains ALL example pairs. State the rule precisely. Test it mentally against each example — does it produce the correct output? If not, revise the rule. The rule must be general enough to apply to any valid input, not just memorized from examples.
+
+PHASE 3 — GOAL: Apply the transformation rule to the test input. Determine the expected output grid dimensions. Predict what each region/cell of the output should contain based on the rule.
+
+PHASE 4 — EXECUTE: Construct the output grid cell by cell. After construction, verify: Does the output match what the rule predicts? Check dimensions, colors, and spatial relationships against your model.
+
+After completing all four phases, provide the output grid as a JSON array of arrays (list of rows, each row is a list of integers 0-9). Mark your final answer clearly with "ANSWER:" followed by the JSON array.

@@ -1,0 +1,3752 @@
+[
+  {
+    "task_id": "7b0280bc",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "da515329",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "da515329",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "da515329",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "da515329",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "da515329",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "da515329",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "da515329",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "da515329",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "da515329",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "da515329",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "8f3a5a89",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "da515329",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "2ba387bc",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "a395ee82",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "7666fa5d",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "b9e38dc0",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "8f215267",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "53fb4810",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "45a5af55",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "c4d067a0",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "8698868d",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "981571dc",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "7b5033c1",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "135a2760",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "58f5dbd5",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "aa4ec2a5",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "271d71e2",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "5545f144",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "b5ca7ac4",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "4c416de3",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "6e453dd6",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "1818057f",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "9aaea919",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "baseline",
+    "run_number": 4
+  },
+  {
+    "task_id": "dfadab01",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "arc-informed",
+    "run_number": 3
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "8b9c3697",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "e376de54",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "da515329",
+    "condition": "baseline",
+    "run_number": 3
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "da515329",
+    "condition": "chain-of-thought",
+    "run_number": 1
+  },
+  {
+    "task_id": "c7f57c3e",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "67e490f4",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "89565ca0",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "e87109e9",
+    "condition": "baseline",
+    "run_number": 1
+  },
+  {
+    "task_id": "7b3084d4",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "97d7923e",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "800d221b",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "arc-informed",
+    "run_number": 1
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "f560132c",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "chain-of-thought",
+    "run_number": 3
+  },
+  {
+    "task_id": "28a6681f",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  },
+  {
+    "task_id": "bf45cf4b",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "b10624e5",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "409aa875",
+    "condition": "arc-informed",
+    "run_number": 4
+  },
+  {
+    "task_id": "5961cc34",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "e8686506",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "edb79dae",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "da515329",
+    "condition": "arc-informed",
+    "run_number": 5
+  },
+  {
+    "task_id": "fc7cae8d",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "db0c5428",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "3dc255db",
+    "condition": "arc-informed",
+    "run_number": 2
+  },
+  {
+    "task_id": "7b0280bc",
+    "condition": "chain-of-thought",
+    "run_number": 4
+  },
+  {
+    "task_id": "d59b0160",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "da515329",
+    "condition": "baseline",
+    "run_number": 5
+  },
+  {
+    "task_id": "898e7135",
+    "condition": "baseline",
+    "run_number": 2
+  },
+  {
+    "task_id": "abc82100",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "6ffbe589",
+    "condition": "chain-of-thought",
+    "run_number": 5
+  },
+  {
+    "task_id": "2c181942",
+    "condition": "chain-of-thought",
+    "run_number": 2
+  }
+]

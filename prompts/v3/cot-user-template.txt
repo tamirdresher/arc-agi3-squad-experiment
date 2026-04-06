@@ -1,0 +1,11 @@
+Here is a pattern recognition puzzle. Study the example input-output pairs, then produce the correct output for the test input.
+
+{grid_data}
+
+Let's think step by step. Before giving your final answer, reason through the problem carefully:
+1. What patterns do you notice in the examples?
+2. What transformation rule could explain the input-to-output mapping?
+3. Apply that rule to the test input.
+4. Verify your answer makes sense.
+
+After your reasoning, provide the output grid as a JSON array of arrays (list of rows, each row is a list of integers 0-9). Mark your final answer clearly with "ANSWER:" followed by the JSON array.

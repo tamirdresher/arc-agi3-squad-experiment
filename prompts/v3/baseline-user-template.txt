@@ -1,0 +1,5 @@
+Here is a pattern recognition puzzle. Study the example input-output pairs, then produce the correct output for the test input.
+
+{grid_data}
+
+Provide the output grid as a JSON array of arrays (list of rows, each row is a list of integers 0-9). After considering the puzzle, you may include brief reasoning. Mark your final answer clearly with "ANSWER:" followed by the JSON array.
