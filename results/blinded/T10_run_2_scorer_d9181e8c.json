@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T10",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:04:38.009265+00:00",
+  "response_text": "The memory leak is caused by **accumulating event listeners on WebSocket instances that are never cleaned up**.\n\n## The Problem\n\nEach time `connect()` is called (which happens on every reconnection), a new WebSocket instance is created, but the old one is simply replaced without removing its event listeners. Even though the old WebSocket reference is lost, the event listeners remain in memory, creating a memory leak that grows with each reconnection.\n\n## The Fix\n\nClean up the previous WebSocket connection before creating a new one:\n\n```javascript\nclass WebSocketManager {\n    constructor(url) {\n        this.url = url;\n        this.messageHandlers = [];\n        this.connect();\n    }\n\n    connect() {\n        // Clean up existing connection before creating new one\n        if (this.ws) {\n            this.ws.removeEventListener('message', this.messageListener);\n            this.ws.removeEventListener('close', this.closeListener);\n            this.ws.close();\n        }\n\n        this.ws = new WebSocket(this.url);\n        \n        // Store references to listeners so they can be removed later\n        this.messageListener = (event) => {\n            this.messageHandlers.forEach(h => h(event.data));\n        };\n        this.closeListener = () => {\n            console.log('Disconnected, reconnecting in 1s...');\n            setTimeout(() => this.connect(), 1000);\n        };\n\n        this.ws.addEventListener('message', this.messageListener);\n        this.ws.addEventListener('close', this.closeListener);\n    }\n\n    onMessage(handler) {\n        this.messageHandlers.push(handler);\n    }\n}\n```\n\n## Why This Fixes It\n\n1. **Explicit cleanup**: Before creating a new WebSocket, we remove all event listeners from the previous instance\n2. **Proper connection closure**: We call `close()` on the old WebSocket to ensure it's properly terminated\n3. **Listener references**: We store references to the listener functions so they can be removed with `removeEventListener()`\n\nThis ensures that each reconnection properly cleans up the previous connection's resources, preventing the memory leak.",
+  "wall_clock_seconds": 8.55,
+  "actions_count": 1,
+  "tokens_used": 789,
+  "output_hash": "109afc15689b8119f22a7cb7994e93d3f249e8aca3998c85dd065f4390962c6f"
+}

@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T26",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:52:11.710055+00:00",
+  "response_text": "## PHASE 1 — EXPLORE\nWhat information is missing or ambiguous?\n1. The question is straightforward and complete - asking for a specific HTTP status code\n2. No ambiguity about which \"Not Found\" error is being referenced (this is a standard HTTP term)\n3. No missing context - this is a factual technical question with a definitive answer\n\n## PHASE 2 — MODEL\n**Constraints:**\n- Must provide accurate HTTP status code information\n- Should be concise since this is a direct factual query\n- Must use standard web protocol terminology\n\n**Success Criteria:**\n- Provide the correct numerical HTTP status code for \"Not Found\"\n- Optionally include brief context about its meaning/usage\n\n**Risks:**\n- Minimal risk - this is well-established technical knowledge\n- Could potentially confuse with other 4xx error codes, but question is specific\n\n## PHASE 3 — GOAL\n**Target Outcome:**\n- Deliver the correct HTTP status code (404) for \"Not Found\" errors\n- Provide clear, accurate information that directly answers the question\n\n**Implicit Objectives:**\n- Demonstrate knowledge of HTTP protocol standards\n- Provide useful technical information\n\n## PHASE 4 — EXECUTE\n**Action:** Providing the HTTP status code for \"Not Found\"\n\nThe HTTP status code for \"Not Found\" is **404**.\n\n**Verification:** This is correct according to RFC 7231 and standard web protocols. The 404 status code indicates that the server cannot find the requested resource, which matches the \"Not Found\" description in the question.",
+  "wall_clock_seconds": 6.25,
+  "actions_count": 1,
+  "tokens_used": 507,
+  "output_hash": "b9cc07256b63303203e6cdb0a8d780e073b54b9cdb21f7ce195dec2c0914829c"
+}

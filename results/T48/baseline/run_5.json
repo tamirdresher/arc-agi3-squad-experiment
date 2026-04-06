@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T48_baseline_5",
+  "task_id": "T48",
+  "condition": "baseline",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:19:15.009239+00:00",
+  "response_text": "Looking at this issue, I need to find where urllib3 exceptions should be caught and wrapped in requests exceptions. Let me analyze the codebase structure and the specific exceptions mentioned.\n\nThe issue mentions:\n- `urllib3.exceptions.DecodeError` should be wrapped in `requests.exceptions.ContentDecodingError`\n- `urllib3.exceptions.TimeoutError` should be wrapped in `requests.exceptions.ConnectionError`\n\nBased on the commit hash and the typical structure of the requests library, the main HTTP adapter logic is likely in `requests/adapters.py` where urllib3 interactions happen.\n\nLet me examine the relevant code:\n\n**File path**: `requests/adapters.py`\n\nThe fix needs to be in the `send()` method of the `HTTPAdapter` class where urllib3 requests are made. Looking for the section that handles urllib3 exceptions, I need to add the missing exception mappings.\n\n**Code change needed**:\n\nIn `requests/adapters.py`, in the `send()` method's exception handling block, add these two exception mappings:\n\n```python\nexcept _DecodeError as e:\n    raise ContentDecodingError(e, request=request)\n\nexcept _TimeoutError as e:\n    raise ConnectionError(e, request=request)\n```\n\nThe complete fix involves:\n\n1. Adding the imports at the top of the file:\n```python\nfrom urllib3.exceptions import DecodeError as _DecodeError\nfrom urllib3.exceptions import TimeoutError as _TimeoutError\n```\n\n2. Adding the exception handlers in the `send()` method's try-except block (around line 500-520 area where other urllib3 exceptions are caught):\n\n```python\nexcept _DecodeError as e:\n    raise ContentDecodingError(e, request=request)\n\nexcept _TimeoutError as e:\n    raise ConnectionError(e, request=request)\n```\n\nThe exact location would be in the existing exception handling chain alongside other urllib3 exception mappings like `ProtocolError`, `ConnectTimeout`, etc.\n\nThis ensures that urllib3's `DecodeError` and `TimeoutError` exceptions are properly wrapped in requests' own exception hierarchy, maintaining the abstraction layer that prevents users from seeing raw urllib3 exceptions.",
+  "wall_clock_seconds": 10.03,
+  "actions_count": 1,
+  "tokens_used": 681,
+  "output_hash": "2b295be2e76cb1521a0b2fdc2b36af40e916c1aa2dcfd780f102e22b7d0d3a19",
+  "error": null
+}

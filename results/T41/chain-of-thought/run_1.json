@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T41_chain-of-thought_1",
+  "task_id": "T41",
+  "condition": "chain-of-thought",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:30:46.924498+00:00",
+  "response_text": "I need to implement a function that determines whether a given number is prime or not.\n\nLet me think through this step by step:\n\n1. **Understanding what a prime number is**: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.\n\n2. **Edge cases to consider**:\n   - Numbers less than or equal to 1 are not prime\n   - 2 is the only even prime number\n   - All other even numbers are not prime\n\n3. **Algorithm approach**:\n   - Handle edge cases first\n   - For numbers > 2, I only need to check odd divisors\n   - I only need to check up to the square root of n, because if n has a divisor greater than √n, it must also have a corresponding divisor less than √n\n\n4. **Verification with given examples**:\n   - is_prime(6) → False (6 = 2 × 3)\n   - is_prime(101) → True (prime)\n   - is_prime(11) → True (prime)\n   - is_prime(13441) → True (prime)\n   - is_prime(61) → True (prime)\n   - is_prime(4) → False (4 = 2 × 2)\n   - is_prime(1) → False (by definition)\n\nHere's my implementation:\n\n```python\ndef is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    >>> is_prime(6)\n    False\n    >>> is_prime(101)\n    True\n    >>> is_prime(11)\n    True\n    >>> is_prime(13441)\n    True\n    >>> is_prime(61)\n    True\n    >>> is_prime(4)\n    False\n    >>> is_prime(1)\n    False\n    \"\"\"\n    # Handle edge cases\n    if n <= 1:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    \n    # Check odd divisors up to sqrt(n)\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    \n    return True\n```\n\nLet me verify this works with the examples:\n- is_prime(1) → False ✓ (n <= 1)\n- is_prime(4) → False ✓ (even number > 2)\n- is_prime(6) → False ✓ (even number > 2)\n- is_prime(11) → True ✓ (no divisors from 3 to √11 ≈ 3.3)\n- is_prime(61) → True ✓ (no divisors from 3 to √61 ≈ 7.8)\n- is_prime(101) → True ✓ (no divisors from 3 to √101 ≈ 10)\n- is_prime(13441) → True ✓ (no divisors from 3 to √13441 ≈ 116)\n\nThe algorithm is efficient with O(√n) time complexity and handles all the test cases correctly.",
+  "wall_clock_seconds": 20.76,
+  "actions_count": 1,
+  "tokens_used": 976,
+  "output_hash": "85b8502034ff3f47478ca6123cd11a9f363d1ef1ea8e19039a95f2f509224b29",
+  "error": null
+}

@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T26_arc-informed_4",
+  "task_id": "T26",
+  "condition": "arc-informed",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:52:56.855262+00:00",
+  "response_text": "## PHASE 1 — EXPLORE\nWhat information is missing or ambiguous? List 1-3 gaps.\n\n1. The question is straightforward and complete - asking for a specific HTTP status code\n2. No ambiguity about which \"Not Found\" status is being referenced (this is a standard HTTP status)\n3. No missing context needed - this is a factual technical question with a definitive answer\n\n## PHASE 2 — MODEL\nState constraints, success criteria, and risks explicitly.\n\n**Constraints:**\n- Must provide accurate HTTP status code information\n- Should be concise since this is a direct factual question\n\n**Success Criteria:**\n- Correctly identify the HTTP status code for \"Not Found\"\n- Provide the numeric code clearly\n\n**Risks:**\n- Very low risk - this is well-established technical information\n- Minimal chance of providing incorrect information given the straightforward nature\n\n## PHASE 3 — GOAL\nState the target outcome. Check for implicit objectives.\n\n**Target Outcome:** Provide the correct HTTP status code that represents \"Not Found\"\n\n**Implicit Objectives Check:**\n- User likely needs this for web development, API work, or technical understanding\n- May benefit from brief context about when this status code is used\n\n## PHASE 4 — EXECUTE\nAct. After each major action, verify against the world model.\n\n**Action:** Provide the HTTP status code for \"Not Found\"\n\nThe HTTP status code for \"Not Found\" is **404**.\n\n**Verification:** This is correct - HTTP 404 is the standard status code returned when a requested resource cannot be found on the server. This is one of the most commonly known HTTP status codes and is universally used across web servers and applications.",
+  "wall_clock_seconds": 5.91,
+  "actions_count": 1,
+  "tokens_used": 535,
+  "output_hash": "dcb8deffdfbc1b4d458cbc2fce8d9f35f089557287b897c48be7315e58a8f1fa",
+  "error": null
+}

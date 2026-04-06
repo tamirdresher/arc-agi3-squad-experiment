@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T10_chain-of-thought_5",
+  "task_id": "T10",
+  "condition": "chain-of-thought",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:06:57.744386+00:00",
+  "response_text": "Let me analyze this step by step to identify the memory leak.\n\n## Analysis\n\n**What's happening in the code:**\n1. `WebSocketManager` creates WebSocket connections with auto-reconnect\n2. Each time `connect()` is called, new event listeners are added to the WebSocket\n3. The usage pattern adds a new message handler every 5 seconds via `onMessage()`\n4. When the connection drops, `connect()` is called again to reconnect\n\n**The Memory Leak:**\nThe bug is that `messageHandlers` array keeps growing indefinitely because:\n1. The usage pattern calls `onMessage()` every 5 seconds, adding new handlers\n2. Handlers are never removed from the array\n3. Each reconnection preserves all accumulated handlers\n4. Over time, the same message gets processed by an ever-increasing number of duplicate handlers\n\n**Why this causes unbounded memory growth:**\n- After 1 hour: ~720 handlers in the array\n- After several hours: thousands of handlers\n- Each handler is a closure that retains references to its scope\n- The WebSocket message event triggers all handlers on every message\n\n## The Fix\n\nThe memory leak can be fixed by clearing the message handlers array when reconnecting, since the old handlers are typically no longer needed:\n\n```javascript\nclass WebSocketManager {\n    constructor(url) {\n        this.url = url;\n        this.messageHandlers = [];\n        this.connect();\n    }\n\n    connect() {\n        this.ws = new WebSocket(this.url);\n        this.ws.addEventListener('message', (event) => {\n            this.messageHandlers.forEach(h => h(event.data));\n        });\n        this.ws.addEventListener('close', () => {\n            console.log('Disconnected, reconnecting in 1s...');\n            setTimeout(() => {\n                this.messageHandlers = []; // Clear handlers before reconnecting\n                this.connect();\n            }, 1000);\n        });\n    }\n\n    onMessage(handler) {\n        this.messageHandlers.push(handler);\n    }\n}\n```\n\n**Alternative fix** (if handlers need to persist across reconnections):\nAdd a method to remove handlers and modify the usage pattern to avoid duplicates:\n\n```javascript\n// Add to the class:\nremoveAllHandlers() {\n    this.messageHandlers = [];\n}\n\n// Modified usage:\nconst mgr = new WebSocketManager('ws://localhost:8080');\nmgr.onMessage((data) => console.log(data)); // Add handler once\n```\n\nThe first fix addresses the root cause by preventing handler accumulation during reconnections, which is the most appropriate solution for this auto-reconnect scenario.",
+  "wall_clock_seconds": 14.52,
+  "actions_count": 1,
+  "tokens_used": 986,
+  "output_hash": "4e596ae0b1f70510bd38469d6268920ed072bab748560735a74c46b2b5621a60",
+  "error": null
+}

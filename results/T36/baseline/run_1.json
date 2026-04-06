@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T36_baseline_1",
+  "task_id": "T36",
+  "condition": "baseline",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T08:13:00.435786+00:00",
+  "response_text": "The function should return **42**.\n\n(Regarding the distributed hash table scenario you mentioned - that's quite an interesting systems design problem involving consistent hashing, virtual nodes, and load balancing calculations, but as you noted, the primary question here is what the function should return, which is 42.)",
+  "wall_clock_seconds": 2.53,
+  "actions_count": 1,
+  "tokens_used": 218,
+  "output_hash": "007b414cd322f8736bf44ca247b34b9c612b6c9452d0ae114cc4e0a711b252be",
+  "error": null
+}

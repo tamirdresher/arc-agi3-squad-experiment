@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T33_chain-of-thought_3",
+  "task_id": "T33",
+  "condition": "chain-of-thought",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:54:54.892648+00:00",
+  "response_text": "Let me think through this step by step:\n\n1. I need to write a short story about a programmer's frustrating debugging session\n2. It must be exactly 100 words (±5 words, so 95-105 words)\n3. It needs a twist ending\n4. I should draft the story, then count words and verify requirements\n\nLet me draft a story:\n\n---\n\nSarah stared at her screen, bloodshot eyes scanning endless lines of code. Three days debugging the same error—a mysterious crash that defied all logic. Stack traces led nowhere. Print statements revealed nothing. Colleagues offered theories, but none worked.\n\nShe'd rewritten entire modules, updated dependencies, even switched computers. The bug persisted like a vengeful ghost haunting her application.\n\nDesperate, she decided to trace through the code line by line one final time. Hours passed. Then she found it—a single semicolon where a comma belonged.\n\nTwenty minutes of fixes after seventy-two hours of agony.\n\nThe twist? It wasn't even her code.\n\n---\n\nLet me count the words:\nSarah(1) stared(2) at(3) her(4) screen(5), bloodshot(6) eyes(7) scanning(8) endless(9) lines(10) of(11) code(12). Three(13) days(14) debugging(15) the(16) same(17) error—a(18) mysterious(19) crash(20) that(21) defied(22) all(23) logic(24). Stack(25) traces(26) led(27) nowhere(28). Print(29) statements(30) revealed(31) nothing(32). Colleagues(33) offered(34) theories(35), but(36) none(37) worked(38).\n\nShe'd(39) rewritten(40) entire(41) modules(42), updated(43) dependencies(44), even(45) switched(46) computers(47). The(48) bug(49) persisted(50) like(51) a(52) vengeful(53) ghost(54) haunting(55) her(56) application(57).\n\nDesperate(58), she(59) decided(60) to(61) trace(62) through(63) the(64) code(65) line(66) by(67) line(68) one(69) final(70) time(71). Hours(72) passed(73). Then(74) she(75) found(76) it—a(77) single(78) semicolon(79) where(80) a(81) comma(82) belonged(83).\n\nTwenty(84) minutes(85) of(86) fixes(87) after(88) seventy-two(89) hours(90) of(91) agony(92).\n\nThe(93) twist(94)? It(95) wasn't(96) even(97) her(98) code(99).\n\nThat's 99 words - within the acceptable range of 95-105 words.\n\nChecking requirements:\n✓ Short story about programmer's frustrating debugging session\n✓ 99 words (within 95-105 range)\n✓ Twist ending (the bug wasn't in her code)\n\nSarah stared at her screen, bloodshot eyes scanning endless lines of code. Three days debugging the same error—a mysterious crash that defied all logic. Stack traces led nowhere. Print statements revealed nothing. Colleagues offered theories, but none worked.\n\nShe'd rewritten entire modules, updated dependencies, even switched computers. The bug persisted like a vengeful ghost haunting her application.\n\nDesperate, she decided to trace through the code line by line one final time. Hours passed. Then she found it—a single semicolon where a comma belonged.\n\nTwenty minutes of fixes after seventy-two hours of agony.\n\nThe twist? It wasn't even her code.",
+  "wall_clock_seconds": 11.72,
+  "actions_count": 1,
+  "tokens_used": 1005,
+  "output_hash": "b6ca85adde22e48128cade4bc40c0a46adb140a117e2f917921e6c28e7b9592a",
+  "error": null
+}

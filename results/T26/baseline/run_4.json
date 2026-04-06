@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T26_baseline_4",
+  "task_id": "T26",
+  "condition": "baseline",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:52:42.614413+00:00",
+  "response_text": "The HTTP status code **404** means 'Not Found'.\n\nThis status code indicates that the server cannot find the requested resource. It's one of the most commonly encountered HTTP status codes and typically occurs when a user tries to access a webpage, file, or API endpoint that doesn't exist on the server.",
+  "wall_clock_seconds": 2.33,
+  "actions_count": 1,
+  "tokens_used": 96,
+  "output_hash": "24a67ec424931a7d325f5bb508d94cf6a682e9c37d72b11ee0714d26aabca66a",
+  "error": null
+}

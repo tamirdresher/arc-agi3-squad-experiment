@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T48",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:17:53.116117+00:00",
+  "response_text": "I need to analyze the repository structure and the specific commit to understand how urllib3 exceptions should be wrapped in requests exceptions.\n\nLet me examine the codebase to understand the current exception handling and identify where the urllib3 exceptions need to be wrapped.\n\nBased on the issue description, I need to:\n1. Find where urllib3's `DecodeError` and `TimeoutError` are raised\n2. Ensure they are wrapped in `requests.exceptions.ContentDecodingError` and `requests.exceptions.ConnectionError` respectively\n\nLet me look at the main requests module structure and exception handling:\n\n**File path:** `requests/adapters.py`\n\nThe issue is in the `send` method of the `HTTPAdapter` class where urllib3 exceptions need to be caught and wrapped. Here's the specific code change needed:\n\n```python\n# Around line 440-480 in the send method, add these exception handlers:\n\nexcept (DecodeError, ContentDecodingError) as e:\n    raise ContentDecodingError(e, request=request)\n\nexcept (TimeoutError, ConnectTimeoutError, ReadTimeoutError) as e:\n    raise ConnectionError(e, request=request)\n```\n\nMore specifically, the complete fix requires adding the imports at the top of the file and updating the exception handling block:\n\n**File path:** `requests/adapters.py`\n\n1. Add to imports (around line 10-20):\n```python\nfrom urllib3.exceptions import DecodeError, TimeoutError\n```\n\n2. In the `send` method's exception handling block (around line 440-480), add these handlers before the existing exception handlers:\n\n```python\nexcept DecodeError as e:\n    raise ContentDecodingError(e, request=request)\n\nexcept TimeoutError as e:\n    raise ConnectionError(e, request=request)\n```\n\nThe exact location would be in the try-except block that handles the `urlopen` call to ensure urllib3 exceptions are properly wrapped before they can propagate to the user.",
+  "wall_clock_seconds": 9.33,
+  "actions_count": 1,
+  "tokens_used": 626,
+  "output_hash": "609049351c9446cb9cfaf6d6071667ef85c57bd7c7463f299fb7f8cd63eed8bf"
+}

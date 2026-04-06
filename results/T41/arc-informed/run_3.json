@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T41_arc-informed_3",
+  "task_id": "T41",
+  "condition": "arc-informed",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:31:56.939072+00:00",
+  "response_text": "## PHASE 1 — EXPLORE: What information is missing or ambiguous?\n\n1. **Edge case handling**: The docstring shows `is_prime(1)` returns `False`, but mathematically, 1 is neither prime nor composite - need to confirm this convention.\n2. **Performance requirements**: No specification about efficiency needs (basic trial division vs. optimized algorithms for large numbers).\n3. **Input validation**: No indication of how to handle negative numbers, zero, or non-integer inputs.\n\n## PHASE 2 — MODEL: State constraints, success criteria, and risks\n\n**Constraints:**\n- Must return boolean values (True/False)\n- Must handle at least positive integers\n- Should follow mathematical definition: prime = natural number > 1 with exactly two divisors (1 and itself)\n\n**Success Criteria:**\n- All provided doctests must pass\n- Correctly identifies prime numbers (2, 3, 5, 7, 11, 13, 17, etc.)\n- Correctly identifies composite numbers (4, 6, 8, 9, 10, 12, etc.)\n- Returns False for 1 (by convention shown in doctest)\n\n**Risks:**\n- Performance issues with large numbers if using naive approach\n- Incorrect handling of edge cases (1, 2, negative numbers)\n\n## PHASE 3 — GOAL: State the target outcome\n\n**Target Outcome:** Implement a function that accurately determines primality of positive integers, passing all provided doctests while following standard mathematical conventions.\n\n**Implicit Objectives:**\n- Code should be readable and maintainable\n- Should handle the number 2 correctly (only even prime)\n- Should be reasonably efficient for typical use cases\n\n## PHASE 4 — EXECUTE: Act\n\n```python\ndef is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    >>> is_prime(6)\n    False\n    >>> is_prime(101)\n    True\n    >>> is_prime(11)\n    True\n    >>> is_prime(13441)\n    True\n    >>> is_prime(61)\n    True\n    >>> is_prime(4)\n    False\n    >>> is_prime(1)\n    False\n    \"\"\"\n    # Handle edge cases\n    if n < 2:\n        return False\n    \n    # 2 is the only even prime number\n    if n == 2:\n        return True\n    \n    # All other even numbers are not prime\n    if n % 2 == 0:\n        return False\n    \n    # Check odd divisors from 3 up to sqrt(n)\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    \n    return True\n```\n\n**Verification against world model:**\n- ✅ Handles n < 2 (including 1) by returning False\n- ✅ Correctly identifies 2 as prime\n- ✅ Efficiently skips even numbers > 2\n- ✅ Uses optimized trial division (only up to √n, only odd divisors)\n- ✅ Should pass all provided doctests\n\nLet me verify with the given test cases:\n- `is_prime(6)`: 6 % 2 == 0, returns False ✅\n- `is_prime(101)`: No divisors found up to √101 ≈ 10, returns True ✅\n- `is_prime(11)`: No divisors found up to √11 ≈ 3.3, returns True ✅\n- `is_prime(1)`: n < 2, returns False ✅\n\nThe implementation is complete and should satisfy all requirements.",
+  "wall_clock_seconds": 9.64,
+  "actions_count": 1,
+  "tokens_used": 1126,
+  "output_hash": "5c4025cd91ec17a107442196b0a321d75ea3a1d8f22ebda31a3fc549d9308629",
+  "error": null
+}

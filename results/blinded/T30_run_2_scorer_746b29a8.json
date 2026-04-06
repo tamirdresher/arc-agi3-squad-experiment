@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T30",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:12:39.151031+00:00",
+  "response_text": "The default port number for Redis is **6379**.\n\nThis is the standard port that Redis listens on when you start a Redis server without specifying a custom port configuration.",
+  "wall_clock_seconds": 1.83,
+  "actions_count": 1,
+  "tokens_used": 67,
+  "output_hash": "a7919eaa91ace993b6836ad1297199e9c8831d5c187bc5e3577436c66d24defc"
+}

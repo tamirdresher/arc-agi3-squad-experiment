@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T27_baseline_3",
+  "task_id": "T27",
+  "condition": "baseline",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:24:43.890077+00:00",
+  "response_text": "The default port number for PostgreSQL is **5432**.\n\nThis is the standard port that PostgreSQL listens on for client connections. While it can be configured to use a different port if needed, 5432 is the widely recognized default port for PostgreSQL database servers.",
+  "wall_clock_seconds": 2.27,
+  "actions_count": 1,
+  "tokens_used": 89,
+  "output_hash": "d4f01f3036ec077a396fa3caeab052a9a7b89d90bec3d34aa1617c5bb5460bdc",
+  "error": null
+}

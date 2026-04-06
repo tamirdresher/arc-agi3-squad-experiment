@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T02_arc-informed_3",
+  "task_id": "T02",
+  "condition": "arc-informed",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:11:46.731216+00:00",
+  "response_text": "## PHASE 1 — EXPLORE\nThe passage provides clear information for all three questions with no significant gaps. The information about multiplexing's benefits and limitations, HPACK's advantages for APIs, and browser TLS requirements is explicitly stated in the text.\n\n## PHASE 2 — MODEL\n**Constraints:** Each answer must be exactly one sentence. Answers must be based solely on information provided in the passage.\n**Success criteria:** Three grammatically correct, complete sentences that accurately address each question without adding external information.\n**Risks:** Creating run-on sentences or compound sentences that could be interpreted as multiple sentences; misinterpreting the technical details.\n\n## PHASE 3 — GOAL\nThe target outcome is to provide three precise, single-sentence answers that directly respond to each question using only the information given in the passage. No implicit objectives beyond accurate, concise responses to the specific questions asked.\n\n## PHASE 4 — EXECUTE\n**Answer 1:** Multiplexing eliminates head-of-line blocking at the HTTP level by allowing multiple request-response pairs to share a single TCP connection simultaneously, but it does NOT solve TCP-level head-of-line blocking.\n\n**Answer 2:** HPACK is particularly beneficial for APIs because it reduces overhead for repeated headers, which is especially valuable since APIs send similar headers across many requests.\n\n**Answer 3:** All major browsers mandate encryption (TLS) for HTTP/2, even though the specification allows plaintext connections.\n\n*Verification: Each answer is one complete sentence, addresses the specific question asked, and uses only information from the passage.*",
+  "wall_clock_seconds": 14.89,
+  "actions_count": 1,
+  "tokens_used": 744,
+  "output_hash": "2176d9c1610b6161deecf88401d092a72258b2840c2516d96ff225f91f89d1eb",
+  "error": null
+}

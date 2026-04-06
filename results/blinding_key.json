@@ -1,20 +1,38 @@
 {
-  "T26_run_1_scorer_5cdeade9.json": {
-    "task_id": "T26",
+  "T42_run_2_scorer_306f80cf.json": {
+    "task_id": "T42",
+    "condition": "baseline",
+    "run_number": "2",
+    "run_id": "T42_baseline_2"
+  },
+  "T48_run_5_scorer_f6d185d8.json": {
+    "task_id": "T48",
+    "condition": "arc-informed",
+    "run_number": "5",
+    "run_id": "T48_arc-informed_5"
+  },
+  "T36_run_1_scorer_824edaf5.json": {
+    "task_id": "T36",
     "condition": "baseline",
     "run_number": "1",
-    "run_id": "T26_baseline_1"
+    "run_id": "T36_baseline_1"
   },
-  "T26_run_1_scorer_a1d256b3.json": {
-    "task_id": "T26",
+  "T36_run_5_scorer_b324cbaa.json": {
+    "task_id": "T36",
     "condition": "chain-of-thought",
-    "run_number": "1",
-    "run_id": "T26_chain-of-thought_1"
+    "run_number": "5",
+    "run_id": "T36_chain-of-thought_5"
   },
-  "T26_run_1_scorer_ff4ed1ae.json": {
-    "task_id": "T26",
-    "condition": "arc-informed",
-    "run_number": "1",
-    "run_id": "T26_arc-informed_1"
+  "T14_run_2_scorer_8ea169d8.json": {
+    "task_id": "T14",
+    "condition": "chain-of-thought",
+    "run_number": "2",
+    "run_id": "T14_chain-of-thought_2"
+  },
+  "T18_run_4_scorer_b458892b.json": {
+    "task_id": "T18",
+    "condition": "baseline",
+    "run_number": "4",
+    "run_id": "T18_baseline_4"
   }
 }

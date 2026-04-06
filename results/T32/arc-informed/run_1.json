@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T32_arc-informed_1",
+  "task_id": "T32",
+  "condition": "arc-informed",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:33:21.993256+00:00",
+  "response_text": "## PHASE 1 — EXPLORE\n**Information gaps identified:**\n1. Target audience specificity - Are we targeting enterprise teams, indie developers, or specific programming languages/frameworks?\n2. Brand personality preference - Should the names lean technical/professional, playful/approachable, or somewhere in between?\n3. Competitive landscape awareness - Are there existing tools we should differentiate from or avoid similarity with?\n\n## PHASE 2 — MODEL\n**Constraints:**\n- Names must be memorable and catchy\n- Must hint at AI-powered code review functionality\n- Need accompanying one-sentence taglines\n- Should be brandable (likely available as domains/trademarks)\n\n**Success criteria:**\n- Names evoke automation, intelligence, and code quality\n- Easy to pronounce and spell\n- Taglines clearly communicate value proposition\n- Names work across different developer demographics\n\n**Risks:**\n- Generic naming that doesn't differentiate\n- Overly technical names that alienate broader audience\n- Names too similar to existing tools\n\n## PHASE 3 — GOAL\n**Target outcome:** Generate 5 distinctive names that developers would remember and want to use, each paired with a compelling tagline that immediately communicates the AI code review automation benefit.\n\n**Implicit objectives:** Names should inspire confidence in code quality improvement and suggest time-saving benefits.\n\n## PHASE 4 — EXECUTE\n\nHere are 5 creative names for your AI-powered code review tool:\n\n**1. CodeSentry**\n*Your vigilant AI guardian that never misses a code issue.*\n\n**2. ReviewBot**\n*Instant, intelligent code reviews that help your team ship faster.*\n\n**3. LintLens**\n*AI-powered microscope for code quality that sees what humans miss.*\n\n**4. CodeCritic**\n*The constructive AI teammate that makes every commit better.*\n\n**5. SwiftReview**\n*Lightning-fast AI code analysis that keeps your development velocity high.*\n\n**Verification against model:** Each name successfully combines memorability with clear functional hints (Sentry=protection, Bot=automation, Lens=examination, Critic=review, Swift=speed). Taglines emphasize key benefits: quality improvement, speed, and team enhancement. Names avoid overly technical jargon while remaining professional enough for enterprise adoption.",
+  "wall_clock_seconds": 9.39,
+  "actions_count": 1,
+  "tokens_used": 707,
+  "output_hash": "dc2075219cb147eb073380ef877ac2fc42bb31e1fd80718dac37b46ea82d52ab",
+  "error": null
+}

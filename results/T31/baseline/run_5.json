@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T31_baseline_5",
+  "task_id": "T31",
+  "condition": "baseline",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:38:33.654926+00:00",
+  "response_text": "Here's a haiku about Kubernetes:\n\nPods dance in clusters,\nOrchestrating workloads smooth—\nDevOps harmony.",
+  "wall_clock_seconds": 3.72,
+  "actions_count": 1,
+  "tokens_used": 72,
+  "output_hash": "a5ce75a695b20c0e59a1440f037ae113ba1d1115f4a08e2c87042ad1e70a078f",
+  "error": null
+}

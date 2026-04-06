@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T30_arc-informed_4",
+  "task_id": "T30",
+  "condition": "arc-informed",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:13:39.825356+00:00",
+  "response_text": "## PHASE 1 — EXPLORE\nWhat information is missing or ambiguous?\n1. The question is straightforward and complete - asking for Redis default port number\n2. No ambiguity about which Redis service (the standard Redis server)\n3. No missing context needed for this factual query\n\n## PHASE 2 — MODEL\n**Constraints:**\n- Must provide accurate technical information\n- Should be a specific port number\n- Information should be verifiable and standard\n\n**Success Criteria:**\n- Provide the correct default port number for Redis\n- Answer should be concise and definitive\n\n**Risks:**\n- Minimal risk - this is well-documented, standard information\n- Could confuse with Redis Cluster ports, but question asks for \"default\" which implies standard Redis\n\n## PHASE 3 — GOAL\n**Target Outcome:** Provide the accurate default port number that Redis uses for client connections.\n\n**Implicit Objectives:** User likely needs this for configuration, connection, or networking purposes.\n\n## PHASE 4 — EXECUTE\n\nThe default port number for Redis is **6379**.\n\n**Verification:** This is the standard, well-documented default port that Redis server listens on for client connections. This port number has been consistent across Redis versions and is widely referenced in Redis documentation and configuration files.",
+  "wall_clock_seconds": 7.17,
+  "actions_count": 1,
+  "tokens_used": 440,
+  "output_hash": "216b3e1c6ca07216bfc1d1e8a8951d9b858f86d0c95674afb168c6f921c0af05",
+  "error": null
+}

@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T29",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:32:27.981353+00:00",
+  "response_text": "In the context of database transactions, ACID stands for:\n\n- **Atomicity**: A transaction is treated as a single, indivisible unit of work. Either all operations within the transaction complete successfully, or none of them do. If any part fails, the entire transaction is rolled back.\n\n- **Consistency**: A transaction must leave the database in a valid state. All data must satisfy the defined rules, constraints, and relationships both before and after the transaction.\n\n- **Isolation**: Concurrent transactions should not interfere with each other. Each transaction should execute as if it were the only transaction running on the system, preventing issues like dirty reads or phantom reads.\n\n- **Durability**: Once a transaction is committed, its changes are permanently stored and will survive system failures, crashes, or power outages.\n\nThese four properties ensure that database transactions are processed reliably and maintain data integrity, making ACID compliance a fundamental requirement for most relational database management systems.",
+  "wall_clock_seconds": 12.78,
+  "actions_count": 1,
+  "tokens_used": 240,
+  "output_hash": "d8633b128987811e2ff9bde318cce2cdd09a026d26cb7d60325aa051327ae145"
+}

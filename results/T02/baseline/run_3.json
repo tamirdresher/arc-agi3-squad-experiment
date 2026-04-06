@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T02_baseline_3",
+  "task_id": "T02",
+  "condition": "baseline",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:11:24.968547+00:00",
+  "response_text": "1. Multiplexing eliminates head-of-line blocking at the HTTP level but does not solve TCP-level head-of-line blocking.\n\n2. HPACK is particularly beneficial for APIs because they send similar headers across many requests, and header compression reduces the overhead from these repeated headers.\n\n3. All major browsers mandate encryption (TLS) for HTTP/2, even though the specification allows plaintext connections.",
+  "wall_clock_seconds": 2.3,
+  "actions_count": 1,
+  "tokens_used": 365,
+  "output_hash": "e88707fed0ff4a3952b82c6068fb9572d23f05d33df9be9d5bd688e08d87b8a4",
+  "error": null
+}

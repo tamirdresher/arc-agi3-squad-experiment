@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T02_arc-informed_1",
+  "task_id": "T02",
+  "condition": "arc-informed",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:11:01.599048+00:00",
+  "response_text": "## PHASE 1 — EXPLORE: What information is missing or ambiguous? List 1-3 gaps.\n\n1. The passage doesn't explicitly define what \"head-of-line blocking at the HTTP level\" means versus \"TCP-level head-of-line blocking\"\n2. The distinction between what the HTTP/2 specification allows versus what browsers actually require could be clearer\n3. The passage doesn't explain why HPACK specifically helps with \"repeated headers\" in API contexts\n\n## PHASE 2 — MODEL: State constraints, success criteria, and risks explicitly.\n\n**Constraints:**\n- Each answer must be exactly one sentence\n- Answers must be derived from the provided passage only\n- Must answer all three questions accurately\n\n**Success criteria:**\n- Three grammatically complete sentences\n- Each sentence directly addresses its corresponding question\n- Information extracted accurately from the passage\n\n**Risks:**\n- Making inferences beyond what's stated in the passage\n- Creating run-on sentences or fragments\n- Misinterpreting technical distinctions\n\n## PHASE 3 — GOAL: State the target outcome. Check for implicit objectives.\n\n**Target outcome:** Provide three precise, single-sentence answers that demonstrate comprehension of HTTP/2's technical improvements as described in the passage.\n\n**Implicit objectives:** Show understanding of the distinction between solving some problems while not solving others, and the gap between specifications and real-world implementation.\n\n## PHASE 4 — EXECUTE: Act. After each major action, verify against the world model.\n\n**Action: Answering the three questions**\n\n1. Multiplexing eliminates head-of-line blocking at the HTTP level by allowing multiple request-response pairs to share a single TCP connection simultaneously, but it does NOT solve TCP-level head-of-line blocking.\n\n2. HPACK is particularly beneficial for APIs because it reduces overhead for repeated headers, which APIs frequently send across many requests.\n\n3. All major browsers mandate encryption (TLS) for HTTP/2, even though the specification allows plaintext connections.\n\n**Verification:** Each answer is exactly one sentence, directly addresses the question asked, and uses only information provided in the passage.",
+  "wall_clock_seconds": 11.7,
+  "actions_count": 1,
+  "tokens_used": 869,
+  "output_hash": "5ffe2a158f074c18d5f5b9a98be5089623db46cab36d726c4263a51ed26c0ed4",
+  "error": null
+}

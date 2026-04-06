@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T27",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T07:23:52.150263+00:00",
+  "response_text": "The default port number for PostgreSQL is **5432**.\n\nThis is the standard port that PostgreSQL listens on for client connections when installed with default settings. However, this port can be configured to use a different number if needed by modifying the PostgreSQL configuration file (postgresql.conf).",
+  "wall_clock_seconds": 4.31,
+  "actions_count": 1,
+  "tokens_used": 92,
+  "output_hash": "3b7e27d388ef31db061fdd1b4f05450acd136dc06d73f38f9c9c98751d3a9913"
+}

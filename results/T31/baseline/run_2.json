@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T31_baseline_2",
+  "task_id": "T31",
+  "condition": "baseline",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:37:12.385276+00:00",
+  "response_text": "Here's a haiku about Kubernetes:\n\nPods dance in clusters\nOrchestrating containers—\nScale without limits",
+  "wall_clock_seconds": 3.7,
+  "actions_count": 1,
+  "tokens_used": 66,
+  "output_hash": "28f234a7b80f82a37faeab9625206593864c9940047e64cd3633c04a9a7d8254",
+  "error": null
+}

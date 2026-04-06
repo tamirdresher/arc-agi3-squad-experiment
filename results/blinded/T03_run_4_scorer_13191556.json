@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T03",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:28:57.392940+00:00",
+  "response_text": "Based on the passage, here are exactly 3 tradeoffs described:\n\n1. **Throughput vs Latency** - High overall throughput from batched work vs low latency pauses (throughput-oriented collectors achieve high throughput but cause latency spikes over 200ms)\n\n2. **Low latency vs CPU overhead** - Keeping pauses under 1ms vs consuming 10-15% of CPU cycles for concurrent GC work\n\n3. **Fragmentation elimination vs Reference update costs** - Eliminating fragmentation and enabling fast allocation vs the cost of copying objects and updating all references to moved objects",
+  "wall_clock_seconds": 3.3,
+  "actions_count": 1,
+  "tokens_used": 388,
+  "output_hash": "ce1ed8e9b4bae84b02596a7f3160475e7aaaecf086536d8fdad08151e259fd4d"
+}

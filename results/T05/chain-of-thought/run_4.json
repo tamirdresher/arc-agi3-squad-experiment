@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T05_chain-of-thought_4",
+  "task_id": "T05",
+  "condition": "chain-of-thought",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:09:04.139187+00:00",
+  "response_text": "Let me carefully read through the passage and identify the four security properties and the limitation.\n\nFirst, I'll identify the four security properties mentioned:\n\n1. **Memory isolation**: Each Wasm module operates within a linear memory region that it cannot escape; all memory accesses are bounds-checked, and out-of-bounds access traps rather than corrupting host memory.\n\n2. **Control-flow integrity**: Indirect calls are validated against a type table, preventing ROP-style attacks that exploit arbitrary jumps.\n\n3. **No ambient authority**: A Wasm module has zero capabilities by default — it cannot access the file system, network, or even the system clock unless the host explicitly provides these through imported functions.\n\n4. **Deterministic execution**: Given the same inputs and imports, a Wasm module produces identical outputs regardless of platform, which aids security auditing.\n\nNow, I'll identify the acknowledged limitation:\n\nThe passage states: \"However, the sandbox does not protect against algorithmic complexity attacks — a malicious module can still consume excessive CPU time or memory within its allocation, requiring the host to impose resource limits externally through mechanisms like fuel metering or memory caps.\"\n\nLet me verify this covers everything requested:\n- ✓ Four specific security properties identified\n- ✓ One acknowledged limitation identified\n- ✓ Information extracted directly from the passage\n\n**Final Answer:**\n\nThe four specific security properties of WebAssembly's sandbox model are:\n\n1. **Memory isolation** - Each Wasm module operates within a linear memory region with bounds-checked accesses that trap on violations rather than corrupting host memory\n2. **Control-flow integrity** - Indirect calls are validated against a type table to prevent ROP-style attacks\n3. **No ambient authority** - Modules have zero default capabilities and cannot access system resources unless explicitly provided by the host\n4. **Deterministic execution** - Modules produce identical outputs given the same inputs and imports, regardless of platform\n\nThe one acknowledged limitation is that **the sandbox does not protect against algorithmic complexity attacks** - malicious modules can still consume excessive CPU time or memory within their allocation, requiring the host to impose external resource limits through mechanisms like fuel metering or memory caps.",
+  "wall_clock_seconds": 9.17,
+  "actions_count": 1,
+  "tokens_used": 832,
+  "output_hash": "269487e99282328bacb9eee2730bd9f69de10ddb2e5273f4017b1b098d513cb3",
+  "error": null
+}

@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T01_chain-of-thought_2",
+  "task_id": "T01",
+  "condition": "chain-of-thought",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:34:36.915656+00:00",
+  "response_text": "Let me analyze this passage step by step to create an effective summary.\n\n**What information do I have?**\n- Raft is a consensus algorithm designed as an alternative to Paxos\n- It breaks consensus into three parts: leader election, log replication, and safety\n- Key features: single leader at a time, handles failures through elections, guarantees durability\n- Differences from Paxos: no holes in logs, more understandable\n- Has formal verification and real-world implementations\n\n**What are the requirements?**\n- Exactly 3 bullet points\n- Each bullet point must be no longer than one sentence\n- Should summarize the key information from the passage\n\n**What should my output capture?**\n- The purpose/nature of Raft\n- How it works (key mechanisms)\n- Its advantages/characteristics\n\nLet me draft my response:\n\n• Raft is a consensus algorithm designed as an understandable alternative to Paxos, decomposing consensus into leader election, log replication, and safety.\n\n• The algorithm operates with a single leader that accepts client requests and replicates log entries to followers, with new elections triggered by randomized timeouts when leaders fail.\n\n• Raft guarantees durability of committed entries and simplifies consistency reasoning by preventing holes in logs, unlike Paxos, and has been formally verified and implemented in real systems.\n\n**Verification:**\n- ✓ Exactly 3 bullet points\n- ✓ Each is one sentence\n- ✓ Covers the main aspects: what Raft is, how it works, and its key advantages\n- ✓ Includes important details like the three sub-problems, single leader approach, and differences from Paxos\n\n• Raft is a consensus algorithm designed as an understandable alternative to Paxos, decomposing consensus into leader election, log replication, and safety.\n\n• The algorithm operates with a single leader that accepts client requests and replicates log entries to followers, with new elections triggered by randomized timeouts when leaders fail.\n\n• Raft guarantees durability of committed entries and simplifies consistency reasoning by preventing holes in logs, unlike Paxos, and has been formally verified and implemented in real systems.",
+  "wall_clock_seconds": 10.31,
+  "actions_count": 1,
+  "tokens_used": 798,
+  "output_hash": "5d72afdcbb99365383b232eadda4f28c7ccf1e125da0c2fe1118e1919bfa8c08",
+  "error": null
+}

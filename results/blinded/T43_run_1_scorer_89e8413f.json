@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T43",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:45:39.552896+00:00",
+  "response_text": "I need to write a function that determines if a given number is the product of exactly 3 prime numbers.\n\nLet me think through this step by step:\n\n1. **Understanding the problem**: \n   - Input: A number `a` (less than 100)\n   - Output: True if `a` is the product of exactly 3 prime numbers, False otherwise\n   - The 3 prime numbers don't need to be distinct (e.g., 8 = 2×2×2 would count)\n\n2. **Approach**:\n   - I need to find the prime factorization of the number\n   - Count the total number of prime factors (including repetitions)\n   - Return True if the count is exactly 3\n\n3. **Implementation strategy**:\n   - Create a helper function to find prime factors\n   - Count the total number of prime factors\n   - Check if the count equals 3\n\nLet me implement this:\n\n```python\ndef is_multiply_prime(a):\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\n    Knowing that (a) is less than 100.\n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n    if a < 2:\n        return False\n    \n    # Count prime factors (including repetitions)\n    factor_count = 0\n    temp = a\n    \n    # Check for factor 2\n    while temp % 2 == 0:\n        factor_count += 1\n        temp //= 2\n    \n    # Check for odd factors from 3 onwards\n    i = 3\n    while i * i <= temp:\n        while temp % i == 0:\n            factor_count += 1\n            temp //= i\n        i += 2\n    \n    # If temp > 1, then it's a prime factor\n    if temp > 1:\n        factor_count += 1\n    \n    return factor_count == 3\n```\n\nLet me verify this with the given example:\n- `is_multiply_prime(30)`: 30 = 2 × 3 × 5, so 3 prime factors → True ✓\n\nLet me test a few more cases:\n- `is_multiply_prime(8)`: 8 = 2 × 2 × 2, so 3 prime factors → True ✓\n- `is_multiply_prime(6)`: 6 = 2 × 3, so 2 prime factors → False ✓\n- `is_multiply_prime(12)`: 12 = 2 × 2 × 3, so 3 prime factors → True ✓\n- `is_multiply_prime(2)`: 2 = 2, so 1 prime factor → False ✓\n\n**Verification**:\n- ✅ Function handles the given example correctly\n- ✅ Counts prime factors including repetitions\n- ✅ Returns True only when exactly 3 prime factors exist\n- ✅ Handles edge cases (numbers less than 2)\n- ✅ Efficient for numbers less than 100\n\nThe solution correctly implements the required functionality.",
+  "wall_clock_seconds": 9.95,
+  "actions_count": 1,
+  "tokens_used": 948,
+  "output_hash": "5e5bb5ec5afbdd443e1ed8ecdc8b927b417a61d2f5a425b40a6199caed5848f8"
+}

@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T03",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:28:07.658623+00:00",
+  "response_text": "Based on the passage, here are the 3 tradeoffs described:\n\n1. **Throughput vs Latency** - Throughput-oriented collectors achieve high overall throughput but cause latency spikes, while low-latency collectors keep pauses minimal but consume CPU cycles that reduce application throughput.\n\n2. **Collection Efficiency vs Constant Overhead** - Generational collectors can focus collection on young objects (more efficient) but require write barriers that add overhead even when no collection is occurring.\n\n3. **Memory Efficiency vs Collection Cost** - Compacting collectors eliminate fragmentation and enable fast allocation but require copying objects and updating references, with costs proportional to live set size.",
+  "wall_clock_seconds": 3.3,
+  "actions_count": 1,
+  "tokens_used": 402,
+  "output_hash": "b29c29e33d6fdf47c5178c75177750a2a99b83c5b2c22adf41c623d4001d18db"
+}

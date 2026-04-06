@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T05_arc-informed_2",
+  "task_id": "T05",
+  "condition": "arc-informed",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:08:22.978902+00:00",
+  "response_text": "## PHASE 1 — EXPLORE: What information is missing or ambiguous?\n\n1. The passage is clear and comprehensive regarding the four security properties and the limitation - no significant information gaps exist for answering the specific question asked.\n\n2. Minor ambiguity: The passage mentions \"fuel metering\" as an external mechanism but doesn't define what this means, though this doesn't impact answering the core question.\n\n3. The passage structure makes it straightforward to identify the numbered security properties and the explicitly stated limitation.\n\n## PHASE 2 — MODEL: State constraints, success criteria, and risks\n\n**Constraints:**\n- Must extract exactly four security properties as described in the passage\n- Must identify the single acknowledged limitation mentioned\n- Must use the specific terminology from the passage\n\n**Success criteria:**\n- Accurately list all four security properties with their correct names\n- Correctly identify the one limitation mentioned\n- Present information clearly and completely\n\n**Risks:**\n- Misreading or missing one of the four properties\n- Confusing the limitation with one of the properties\n- Paraphrasing incorrectly instead of using precise terms from the passage\n\n## PHASE 3 — GOAL: State the target outcome\n\n**Target outcome:** Provide a complete and accurate answer that lists the four specific security properties of WebAssembly's sandbox model and identifies the one acknowledged limitation, using the exact terminology and concepts from the passage.\n\n**Implicit objectives:** Demonstrate careful reading comprehension and ability to extract structured information from technical text.\n\n## PHASE 4 — EXECUTE: Act and verify\n\n**The four specific security properties of WebAssembly's sandbox model are:**\n\n1. **Memory isolation** - Each Wasm module operates within a linear memory region that it cannot escape; all memory accesses are bounds-checked, and out-of-bounds access traps rather than corrupting host memory.\n\n2. **Control-flow integrity** - Indirect calls are validated against a type table, preventing ROP-style attacks that exploit arbitrary jumps.\n\n3. **No ambient authority** - A Wasm module has zero capabilities by default and cannot access the file system, network, or system clock unless the host explicitly provides these through imported functions.\n\n4. **Deterministic execution** - Given the same inputs and imports, a Wasm module produces identical outputs regardless of platform, which aids security auditing.\n\n**The one acknowledged limitation is:**\nThe sandbox does not protect against **algorithmic complexity attacks** - a malicious module can still consume excessive CPU time or memory within its allocation, requiring the host to impose resource limits externally.\n\n**Verification:** ✓ All four properties identified with correct names and descriptions ✓ Single limitation correctly identified ✓ Used precise terminology from the passage",
+  "wall_clock_seconds": 11.44,
+  "actions_count": 1,
+  "tokens_used": 1000,
+  "output_hash": "353077149d0847acc1058adbc7bf54646823563ba0533a31e276adc28e619ce4",
+  "error": null
+}

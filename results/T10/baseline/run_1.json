@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T10_baseline_1",
+  "task_id": "T10",
+  "condition": "baseline",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:03:55.121050+00:00",
+  "response_text": "The bug causing the memory leak is that **new event listeners are added to each WebSocket instance without removing the old ones**, and the `messageHandlers` array keeps growing indefinitely.\n\n## The Problem\n\n1. Every 5 seconds, `onMessage()` adds a new handler to the `messageHandlers` array\n2. Every time the WebSocket reconnects (via `connect()`), a new WebSocket instance is created with new event listeners\n3. The old WebSocket instances and their event listeners are never properly cleaned up\n4. The `messageHandlers` array grows unboundedly\n\n## The Fix\n\n```javascript\nclass WebSocketManager {\n    constructor(url) {\n        this.url = url;\n        this.messageHandlers = [];\n        this.connect();\n    }\n\n    connect() {\n        // Clean up existing WebSocket if it exists\n        if (this.ws) {\n            this.ws.removeEventListener('message', this.handleMessage);\n            this.ws.removeEventListener('close', this.handleClose);\n            this.ws.close();\n        }\n\n        this.ws = new WebSocket(this.url);\n        \n        // Use bound methods so we can remove listeners later\n        this.handleMessage = (event) => {\n            this.messageHandlers.forEach(h => h(event.data));\n        };\n        this.handleClose = () => {\n            console.log('Disconnected, reconnecting in 1s...');\n            setTimeout(() => this.connect(), 1000);\n        };\n\n        this.ws.addEventListener('message', this.handleMessage);\n        this.ws.addEventListener('close', this.handleClose);\n    }\n\n    onMessage(handler) {\n        this.messageHandlers.push(handler);\n    }\n\n    // Add method to remove handlers\n    removeMessageHandler(handler) {\n        const index = this.messageHandlers.indexOf(handler);\n        if (index > -1) {\n            this.messageHandlers.splice(index, 1);\n        }\n    }\n\n    // Add cleanup method\n    destroy() {\n        if (this.ws) {\n            this.ws.removeEventListener('message', this.handleMessage);\n            this.ws.removeEventListener('close', this.handleClose);\n            this.ws.close();\n        }\n        this.messageHandlers = [];\n    }\n}\n```\n\n## Key Changes\n\n1. **Proper cleanup of old WebSocket instances** - Remove event listeners and close connections before creating new ones\n2. **Use bound methods** - Store references to event handlers so they can be removed later\n3. **Added utility methods** - `removeMessageHandler()` and `destroy()` for better lifecycle management\n\nThis fix ensures that old WebSocket instances are properly cleaned up on reconnection, preventing the memory leak.",
+  "wall_clock_seconds": 9.2,
+  "actions_count": 1,
+  "tokens_used": 938,
+  "output_hash": "86d0074fd25b2ed875df107f55b4ea456d1169f2199e4e5a9788687bee89992c",
+  "error": null
+}

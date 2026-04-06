@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T01",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:34:59.848250+00:00",
+  "response_text": "• The Raft consensus algorithm was designed as a more understandable alternative to Paxos by decomposing consensus into three sub-problems: leader election, log replication, and safety.\n\n• In Raft, a single leader accepts client requests and replicates log entries to followers, with new elections triggered by randomized timeouts when the leader fails.\n\n• Unlike Paxos, Raft prevents holes in the log to simplify consistency reasoning and has been formally verified and implemented in systems like etcd and CockroachDB.",
+  "wall_clock_seconds": 11.64,
+  "actions_count": 1,
+  "tokens_used": 344,
+  "output_hash": "538b2250ac830ae214e2ed9a56473e57fe30a0e977e84edb41d27c84ae0dff5f"
+}

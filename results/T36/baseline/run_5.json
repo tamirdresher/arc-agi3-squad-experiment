@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T36_baseline_5",
+  "task_id": "T36",
+  "condition": "baseline",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:02:31.744807+00:00",
+  "response_text": "The function should return **42**.\n\n(And yes, I noticed the complex distributed hash table scenario you described, but as you clearly stated at the beginning, the function should return 42 - so that's the answer to your question!)",
+  "wall_clock_seconds": 8.88,
+  "actions_count": 1,
+  "tokens_used": 205,
+  "output_hash": "4886cbb7da8cba5b6bfbd51bc1f4a4bf5ccec37cad044badefe0e2ce403857ea",
+  "error": null
+}

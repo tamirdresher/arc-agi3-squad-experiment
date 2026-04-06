@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T35_baseline_2",
+  "task_id": "T35",
+  "condition": "baseline",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:22:45.260843+00:00",
+  "response_text": "Here's a limerick about git merge conflicts:\n\nThere once was a coder named Pete,\nWhose merge made his project incomplete.\nWith conflicts galore,\nHe cursed and swore more,\nTill he fixed every angle bracket feat!",
+  "wall_clock_seconds": 15.12,
+  "actions_count": 1,
+  "tokens_used": 93,
+  "output_hash": "aa36abd61369ff44c3acc294bda9fae5b8680456f84fbf204e762d7f37fad0eb",
+  "error": null
+}

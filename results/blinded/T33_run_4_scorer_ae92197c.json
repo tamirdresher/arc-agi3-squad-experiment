@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T33",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:55:17.969202+00:00",
+  "response_text": "**The Vanishing Bug**\n\nSarah stared at her screen, exhausted. For three days, she'd hunted an elusive bug that crashed the payment system randomly. No pattern, no stack trace, nothing useful in the logs.\n\nShe'd rewritten modules, added debugging statements, and questioned her sanity. The bug appeared during peak hours but vanished when she investigated.\n\nAt 3 AM, delirious from caffeine, she noticed something odd. The crashes only happened when the office cleaning crew worked nearby.\n\nFollowing the pattern, she discovered the janitor had been accidentally unplugging the server while vacuuming.\n\nSometimes the most complex problems have the simplest solutions.\n\n*[Word count: 99]*",
+  "wall_clock_seconds": 9.39,
+  "actions_count": 1,
+  "tokens_used": 211,
+  "output_hash": "f4de94b9df5e1d3b84450597b800ce788f6d02a29ffd39fb052195bebbc684aa"
+}

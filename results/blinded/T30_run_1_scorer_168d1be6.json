@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T30",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:12:19.220507+00:00",
+  "response_text": "The default port number for Redis is **6379**.\n\nThis is the standard port that Redis uses when no custom port is specified in the configuration. You can connect to a Redis server running on the default port using commands like:\n\n```\nredis-cli -h localhost -p 6379\n```\n\nOr simply:\n```\nredis-cli\n```\n(since it defaults to localhost:6379)",
+  "wall_clock_seconds": 2.78,
+  "actions_count": 1,
+  "tokens_used": 116,
+  "output_hash": "7e53c1491705b986f31c2103a14c03e01256ddf32b31dfcee1e7f367046ea9c8"
+}

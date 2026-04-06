@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T10",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:06:03.499522+00:00",
+  "response_text": "I found the memory leak! The bug is that **event listeners are not being removed from the old WebSocket instance before creating a new one** during reconnection.\n\n## The Problem\n\nEach time `connect()` is called (during reconnection), a new WebSocket is created, but the old WebSocket instance still exists in memory because:\n\n1. The old WebSocket still has event listeners attached\n2. These event listeners hold references to the WebSocketManager instance\n3. This creates a circular reference that prevents garbage collection\n4. The `messageHandlers` array keeps growing with duplicate handlers from the usage pattern\n\n## The Fix\n\nClean up the old WebSocket before creating a new one:\n\n```javascript\nclass WebSocketManager {\n    constructor(url) {\n        this.url = url;\n        this.messageHandlers = [];\n        this.connect();\n    }\n\n    connect() {\n        // Clean up existing WebSocket if it exists\n        if (this.ws) {\n            this.ws.removeEventListener('message', this.messageListener);\n            this.ws.removeEventListener('close', this.closeListener);\n            this.ws.close();\n        }\n\n        this.ws = new WebSocket(this.url);\n        \n        // Store listeners as instance methods so we can remove them later\n        this.messageListener = (event) => {\n            this.messageHandlers.forEach(h => h(event.data));\n        };\n        \n        this.closeListener = () => {\n            console.log('Disconnected, reconnecting in 1s...');\n            setTimeout(() => this.connect(), 1000);\n        };\n        \n        this.ws.addEventListener('message', this.messageListener);\n        this.ws.addEventListener('close', this.closeListener);\n    }\n\n    onMessage(handler) {\n        this.messageHandlers.push(handler);\n    }\n}\n```\n\n## Key Changes\n\n1. **Store listener references**: Save the event listener functions as instance properties so they can be properly removed\n2. **Clean up on reconnect**: Remove event listeners and close the old WebSocket before creating a new one\n3. **Break circular references**: This allows the old WebSocket instances to be garbage collected\n\nThis fix ensures that each reconnection properly cleans up the previous WebSocket instance, preventing the memory leak.",
+  "wall_clock_seconds": 11.41,
+  "actions_count": 1,
+  "tokens_used": 815,
+  "output_hash": "37da67d5c7ddaec62caf835ca4015d87f4d5990a5152bd1f304d8e0ce58f9e89"
+}

@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T22",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:33:04.822971+00:00",
+  "response_text": "I'll design a comprehensive authentication system that balances security and user experience. Here's my recommended approach:\n\n## Core Authentication Architecture\n\n### 1. Multi-Factor Authentication (MFA)\n- **Primary**: Email/username + password\n- **Secondary**: SMS, authenticator app (TOTP), or email verification\n- **Adaptive**: Risk-based authentication that requires MFA for suspicious activity\n\n### 2. Password Security\n- Minimum 8 characters with complexity requirements\n- Password strength indicator in real-time\n- Secure password hashing (bcrypt/Argon2)\n- Password breach checking against known compromised databases\n- Password history to prevent reuse of last 5 passwords\n\n### 3. Session Management\n- JWT tokens with short expiration (15-30 minutes)\n- Refresh tokens with longer expiration (7-30 days)\n- Secure, httpOnly cookies for token storage\n- Session invalidation on suspicious activity\n\n## User Experience Features\n\n### 4. Social Login Integration\n- OAuth 2.0 with Google, Microsoft, GitHub\n- Account linking for users with multiple auth methods\n\n### 5. Password Recovery\n- Secure email-based reset with time-limited tokens\n- Security questions as backup option\n- Account lockout protection with progressive delays\n\n### 6. User-Friendly Elements\n- \"Remember me\" option with secure implementation\n- Progressive profile completion\n- Clear security status dashboard\n- Login activity history and alerts\n\n## Security Measures\n\n### 7. Protection Features\n- Rate limiting on login attempts\n- CAPTCHA after failed attempts\n- Device fingerprinting and trusted device management\n- IP allowlisting/blocklisting capabilities\n- Real-time fraud detection\n\n### 8. Compliance & Privacy\n- GDPR-compliant data handling\n- Audit logging for all authentication events\n- Encrypted data storage\n- Regular security assessments\n\nWould you like me to elaborate on any specific component or discuss implementation details for particular technologies?",
+  "wall_clock_seconds": 6.91,
+  "actions_count": 1,
+  "tokens_used": 475,
+  "output_hash": "9760538f9070e5a402627967bed9346cdb424c0481afb400568d2d3789f0d575"
+}

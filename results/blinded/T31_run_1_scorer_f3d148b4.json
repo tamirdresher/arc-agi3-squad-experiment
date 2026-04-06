@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T31",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:36:52.197905+00:00",
+  "response_text": "Here's a haiku about Kubernetes:\n\nPods dance in clusters  \nOrchestrating containers  \nScale without worry",
+  "wall_clock_seconds": 3.78,
+  "actions_count": 1,
+  "tokens_used": 67,
+  "output_hash": "21ebe26875e4bbd20b68b3c1d65e2e2cf2523e3685f2b0b3398f9d495a59a749"
+}

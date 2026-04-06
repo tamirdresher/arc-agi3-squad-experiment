@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T05",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:07:39.700721+00:00",
+  "response_text": "Let me carefully read through the passage and identify the four security properties and the limitation.\n\n**Step-by-step analysis:**\n\n1. **Identifying the four security properties:** The passage clearly states \"WebAssembly (Wasm) executes within a sandboxed environment that provides four key security properties\" and then lists them with ordinal indicators (First, Second, Third, Fourth).\n\n2. **Extracting each property:**\n   - First: Memory isolation\n   - Second: Control-flow integrity  \n   - Third: No ambient authority\n   - Fourth: Deterministic execution\n\n3. **Identifying the limitation:** The passage uses \"However\" to introduce a contrasting point about what the sandbox does NOT protect against.\n\n4. **Verifying completeness:** The passage explicitly mentions \"four key security properties\" and presents exactly four, plus one clear limitation.\n\n**The four specific security properties are:**\n\n1. **Memory isolation**: Each Wasm module operates within a linear memory region that it cannot escape; all memory accesses are bounds-checked, and out-of-bounds access traps rather than corrupting host memory.\n\n2. **Control-flow integrity**: Indirect calls are validated against a type table, preventing ROP-style attacks that exploit arbitrary jumps.\n\n3. **No ambient authority**: A Wasm module has zero capabilities by default — it cannot access the file system, network, or even the system clock unless the host explicitly provides these through imported functions.\n\n4. **Deterministic execution**: Given the same inputs and imports, a Wasm module produces identical outputs regardless of platform, which aids security auditing.\n\n**The one acknowledged limitation is:**\n\nThe sandbox does not protect against algorithmic complexity attacks — a malicious module can still consume excessive CPU time or memory within its allocation, requiring the host to impose resource limits externally through mechanisms like fuel metering or memory caps.",
+  "wall_clock_seconds": 20.12,
+  "actions_count": 1,
+  "tokens_used": 762,
+  "output_hash": "d0c1f98ca9d3c742281d4b5b2264a03bd22362acd2f0ef703255f83774bb5d55"
+}

@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T03_baseline_1",
+  "task_id": "T03",
+  "condition": "baseline",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:27:50.002086+00:00",
+  "response_text": "Based on the passage, here are exactly 3 tradeoffs described:\n\n1. **Throughput vs Latency** - High overall throughput achieved through batched work vs low latency with pauses under 1ms\n\n2. **Low Latency vs CPU Usage** - Keeping pauses minimal vs consuming 10-15% of CPU cycles for concurrent GC work\n\n3. **Fast Allocation vs Runtime Overhead** - Fast bump-pointer allocation and eliminated fragmentation vs the overhead of copying objects and updating references during compaction",
+  "wall_clock_seconds": 4.94,
+  "actions_count": 1,
+  "tokens_used": 369,
+  "output_hash": "66900a4ec287e986d8ac9f22dc9ec7184739a9392f77ecc2248179ab1fcfb2c6",
+  "error": null
+}

@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T02",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T07:10:49.878109+00:00",
+  "response_text": "Let me carefully read through the passage and extract the specific information needed to answer each question with exactly one sentence.\n\nFor question 1, I need to identify what multiplexing solves and what it doesn't solve. The passage states that multiplexing \"eliminates head-of-line blocking at the HTTP level (though TCP-level head-of-line blocking remains).\"\n\nFor question 2, I need to explain why HPACK is particularly beneficial for APIs. The passage mentions that header compression \"is especially beneficial for APIs that send similar headers across many requests.\"\n\nFor question 3, I need to identify what browsers require beyond the specification. The passage states \"HTTP/2 requires TLS in practice, even though the specification allows plaintext connections — all major browsers mandate encryption.\"\n\nLet me verify each answer is exactly one sentence and directly addresses the question:\n\n1. Multiplexing solves head-of-line blocking at the HTTP level but does not solve TCP-level head-of-line blocking.\n\n2. HPACK is particularly beneficial for APIs because they send similar headers across many requests, making header compression especially effective.\n\n3. All major browsers mandate encryption (TLS) for HTTP/2, even though the specification allows plaintext connections.\n\nEach answer is one sentence and directly answers the corresponding question based on information from the passage.",
+  "wall_clock_seconds": 9.5,
+  "actions_count": 1,
+  "tokens_used": 637,
+  "output_hash": "ee24fd4c46a682fe2f79fae5c0222d9f3abb9d854c82dce9b238068fbe99f0f8"
+}

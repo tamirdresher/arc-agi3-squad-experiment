@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T34_baseline_5",
+  "task_id": "T34",
+  "condition": "baseline",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:55:12.406789+00:00",
+  "response_text": "Imagine if your entire school was just one giant room where everyone - kindergarteners, 5th graders, teachers, cafeteria workers, and the principal - all had to do everything together in the same space. That would be really messy and confusing, right? Microservices are like having separate classrooms, a cafeteria, a library, and an office - each room has its own job and the people in each room are experts at what they do there. This way, if something breaks in the cafeteria, the classrooms can keep working, and if you need to make the library bigger, you don't have to rebuild the whole school!",
+  "wall_clock_seconds": 8.59,
+  "actions_count": 1,
+  "tokens_used": 214,
+  "output_hash": "3d1d44556c5424e9bdfe7984c64a9e9c02a256874c3957008c779a26e361737e",
+  "error": null
+}

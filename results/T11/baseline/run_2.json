@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T11_baseline_2",
+  "task_id": "T11",
+  "condition": "baseline",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:49:19.397791+00:00",
+  "response_text": "Looking at the test cases, I need to create a function that:\n1. Sorts records by priority in ascending order\n2. Handles `None` priorities by placing them at the end\n3. Maintains stable sorting (preserves original order for equal priorities)\n4. Handles empty lists\n\nHere's my solution:\n\n```python\ndef sort_records(records):\n    \"\"\"\n    Sort a list of records by their 'priority' field in ascending order.\n    Records with None priority are placed at the end.\n    \n    Args:\n        records: List of dictionaries, each containing a 'priority' field\n        \n    Returns:\n        List of dictionaries sorted by priority\n    \"\"\"\n    return sorted(records, key=lambda record: (record['priority'] is None, record['priority']))\n```\n\nThe key insight is using a tuple as the sort key: `(record['priority'] is None, record['priority'])`. This works because:\n\n1. `record['priority'] is None` returns `True` (which sorts as 1) for None values and `False` (which sorts as 0) for non-None values\n2. Python sorts tuples lexicographically, so records with None priority get `(True, None)` which sorts after any `(False, number)` tuple\n3. For records with the same None/non-None status, they're then sorted by their actual priority value\n4. Python's `sorted()` function is stable by default, preserving original order for equal keys\n\nLet me verify with the test cases:\n\n```python\n# Test the function\ndef test_sort_records():\n    # Basic sorting\n    result1 = sort_records([{'name': 'c', 'priority': 3}, {'name': 'a', 'priority': 1}])\n    expected1 = [{'name': 'a', 'priority': 1}, {'name': 'c', 'priority': 3}]\n    assert result1 == expected1\n    \n    # Handle None priority\n    result2 = sort_records([{'name': 'a', 'priority': None}, {'name': 'b', 'priority': 1}])\n    expected2 = [{'name': 'b', 'priority': 1}, {'name': 'a', 'priority': None}]\n    assert result2 == expected2\n    \n    # Stable sorting\n    result3 = sort_records([{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}])\n    expected3 = [{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}]\n    assert result3 == expected3\n    \n    # Empty list\n    result4 = sort_records([])\n    expected4 = []\n    assert result4 == expected4\n    \n    print(\"All tests passed!\")\n\ntest_sort_records()\n```\n\nThe function handles all the requirements efficiently in a single line using Python's built-in sorting capabilities.",
+  "wall_clock_seconds": 7.95,
+  "actions_count": 1,
+  "tokens_used": 1034,
+  "output_hash": "9a5baf149d3dbc48257e3b5b77778630720b9cd33be78d9b820a8f586882fef8",
+  "error": null
+}

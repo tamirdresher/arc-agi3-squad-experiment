@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T02_chain-of-thought_4",
+  "task_id": "T02",
+  "condition": "chain-of-thought",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:11:53.754569+00:00",
+  "response_text": "Let me carefully read through the passage and extract the specific information needed to answer each question with exactly one sentence.\n\nLet me analyze each question:\n\n1. **What specific problem does multiplexing solve, and what related problem does it NOT solve?**\nLooking at the passage: \"Multiplexing allows multiple request-response pairs to share a single TCP connection simultaneously, eliminating head-of-line blocking at the HTTP level (though TCP-level head-of-line blocking remains).\"\n\n2. **Why is HPACK particularly beneficial for APIs?**\nFrom the passage: \"Header compression via HPACK reduces overhead for repeated headers, which is especially beneficial for APIs that send similar headers across many requests.\"\n\n3. **What is the practical requirement that all major browsers impose on HTTP/2 that goes beyond the specification?**\nThe passage states: \"HTTP/2 requires TLS in practice, even though the specification allows plaintext connections — all major browsers mandate encryption.\"\n\nNow I'll formulate my answers as single sentences:\n\n**Final Answer:**\n\n1. Multiplexing solves head-of-line blocking at the HTTP level by allowing multiple request-response pairs to share a single TCP connection simultaneously, but it does not solve TCP-level head-of-line blocking.\n\n2. HPACK is particularly beneficial for APIs because it reduces overhead for repeated headers, which is common when APIs send similar headers across many requests.\n\n3. All major browsers mandate encryption (TLS) for HTTP/2, even though the specification allows plaintext connections.",
+  "wall_clock_seconds": 4.22,
+  "actions_count": 1,
+  "tokens_used": 682,
+  "output_hash": "336a1017d89ad66165ecd77b836a2b1be2de282bda9980d383005d9b9b4c701b",
+  "error": null
+}

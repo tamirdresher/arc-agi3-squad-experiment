@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T48",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:17:07.546279+00:00",
+  "response_text": "Looking at this issue, I need to find where urllib3 exceptions should be wrapped in requests exceptions. Let me analyze the repository structure and the specific commit.\n\nThe issue is that `urllib3.exceptions.DecodeError` and `urllib3.exceptions.TimeoutError` should be wrapped in `requests.exceptions.ContentDecodingError` and `requests.exceptions.ConnectionError` respectively.\n\nBased on the typical structure of the requests library, the main adapter code would be in `requests/adapters.py`, where HTTP requests are actually executed and where urllib3 exceptions would first be encountered.\n\n**File path:** `requests/adapters.py`\n\n**Code change needed:**\n\nIn the `send` method of the `HTTPAdapter` class, I need to add exception handling for these specific urllib3 exceptions. The change should be made in the exception handling block where other urllib3 exceptions are already being caught and wrapped.\n\n```python\n# Add these imports at the top of the file with other urllib3 imports\nfrom urllib3.exceptions import DecodeError, TimeoutError\n\n# In the send method of HTTPAdapter class, add this exception handling:\nexcept DecodeError as e:\n    raise ContentDecodingError(e, request=request)\nexcept TimeoutError as e:\n    raise ConnectionError(e, request=request)\n```\n\nThe exact location would be in the `send` method where there's already a try-except block handling urllib3 exceptions. These new exception handlers should be added alongside the existing ones, typically before the more general exception handlers.\n\nThe complete exception handling block should look something like:\n\n```python\nexcept (ProtocolError, socket.error) as err:\n    raise ConnectionError(err, request=request)\nexcept MaxRetryError as e:\n    if isinstance(e.reason, ConnectTimeoutError):\n        raise ConnectTimeout(e, request=request)\n    if isinstance(e.reason, ResponseError):\n        raise RetryError(e, request=request)\n    if isinstance(e.reason, LocationParseError):\n        raise InvalidURL(*e.args, request=request)\n    raise ConnectionError(e, request=request)\nexcept DecodeError as e:\n    raise ContentDecodingError(e, request=request)\nexcept TimeoutError as e:\n    raise ConnectionError(e, request=request)\n```\n\nThis ensures that urllib3's `DecodeError` and `TimeoutError` exceptions are properly wrapped in requests' own exception hierarchy, maintaining the abstraction layer.",
+  "wall_clock_seconds": 21.14,
+  "actions_count": 1,
+  "tokens_used": 737,
+  "output_hash": "b9b933b02fc5fe48e18d203ddb1a80ec5b6b93f9e04f501130cee5d03710e5a0"
+}

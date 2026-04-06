@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T26",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:51:33.477764+00:00",
+  "response_text": "The HTTP status code **404** means 'Not Found'.\n\nThis status code indicates that the server cannot find the requested resource. It's one of the most commonly encountered HTTP status codes when browsing the web, typically displayed as \"404 Not Found\" or \"404 Page Not Found\" error pages.",
+  "wall_clock_seconds": 8.19,
+  "actions_count": 1,
+  "tokens_used": 97,
+  "output_hash": "d43b4cb73cbd2e4f91c3710608e6cba0b886ea7a2031ff66d297ba6b5a58f7e8"
+}

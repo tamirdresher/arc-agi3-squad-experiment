@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T22",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:29:46.809850+00:00",
+  "response_text": "I'll design a comprehensive authentication system that balances security with user experience. Here's my recommended approach:\n\n## Core Authentication Components\n\n### 1. **Multi-Factor Authentication (MFA)**\n- **Primary**: Email/username + password\n- **Secondary**: SMS, authenticator app (TOTP), or email verification\n- **Backup**: Recovery codes for account recovery\n\n### 2. **Password Security**\n- Minimum 12 characters with complexity requirements\n- Password strength meter during registration\n- Bcrypt hashing with salt (cost factor 12+)\n- Password breach checking against known compromised databases\n- Password history to prevent reuse of last 5 passwords\n\n### 3. **Session Management**\n- JWT tokens with short expiration (15-30 minutes)\n- Refresh token rotation for extended sessions\n- Secure, httpOnly cookies for token storage\n- Session timeout after inactivity\n- Device/location tracking for suspicious login detection\n\n## User Experience Features\n\n### 4. **Streamlined Login Flow**\n- Social login options (Google, GitHub, etc.)\n- \"Remember this device\" for trusted devices\n- Biometric authentication support (where available)\n- Progressive profiling to reduce initial friction\n\n### 5. **Account Recovery**\n- Self-service password reset via email\n- Security questions as backup\n- Account lockout protection with progressive delays\n- Admin override capabilities for enterprise accounts\n\n## Security Measures\n\n### 6. **Protection Against Attacks**\n- Rate limiting on login attempts\n- CAPTCHA after failed attempts\n- IP-based blocking for suspicious activity\n- CSRF tokens for state-changing operations\n- SQL injection and XSS protection\n\n### 7. **Monitoring & Compliance**\n- Audit logging for all authentication events\n- Anomaly detection for unusual login patterns\n- GDPR/privacy compliance features\n- Regular security assessments and updates\n\n## Technical Implementation\n\n### 8. **Architecture**\n```\nFrontend ↔ API Gateway ↔ Auth Service ↔ User Database\n                ↓\n        Rate Limiter & WAF\n                ↓\n        Monitoring & Logging\n```\n\nWould you like me to elaborate on any specific component or discuss implementation details for your particular tech stack?",
+  "wall_clock_seconds": 14.05,
+  "actions_count": 1,
+  "tokens_used": 540,
+  "output_hash": "4cd9846dc818f63488ad2d49acda93ab6ec0887e09ce2e5da209c07261c811e4"
+}

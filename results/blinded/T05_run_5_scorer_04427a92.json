@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T05",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:09:26.119034+00:00",
+  "response_text": "Based on the passage, the four specific security properties of WebAssembly's sandbox model are:\n\n1. **Memory isolation**: Each Wasm module operates within a linear memory region that it cannot escape, with bounds-checked memory accesses that trap on out-of-bounds attempts rather than corrupting host memory.\n\n2. **Control-flow integrity**: Indirect calls are validated against a type table, preventing ROP-style attacks that exploit arbitrary jumps.\n\n3. **No ambient authority**: Wasm modules have zero capabilities by default and cannot access resources like the file system, network, or system clock unless the host explicitly provides these through imported functions.\n\n4. **Deterministic execution**: Given the same inputs and imports, a Wasm module produces identical outputs regardless of platform, which aids security auditing.\n\nThe one acknowledged limitation is that **the sandbox does not protect against algorithmic complexity attacks** — malicious modules can still consume excessive CPU time or memory within their allocation, requiring the host to impose external resource limits through mechanisms like fuel metering or memory caps.",
+  "wall_clock_seconds": 5.3,
+  "actions_count": 1,
+  "tokens_used": 503,
+  "output_hash": "26b2b143bc94e61bfd14468b47dc084581fadb28446d1ff8c5937abd365d94b9"
+}

@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T33",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:54:43.166688+00:00",
+  "response_text": "**The Phantom Bug**\n\nSarah stared at her screen, bloodshot eyes scanning the same code for the eighth hour. The program crashed randomly, no pattern, no logic. She'd rewritten functions, added countless print statements, even rubber-duck debugged with her coffee mug.\n\n\"It has to be a memory leak,\" she muttered, diving into the debugger again.\n\nHours later, defeated, she slumped back in her chair. Her elbow knocked over her water bottle, soaking her wireless keyboard. The program suddenly ran perfectly.\n\nShe looked down at the soggy keyboard, then at her screen. The 'enter' key had been stuck, sending invisible commands all along.\n\n*[Word count: 99]*",
+  "wall_clock_seconds": 9.89,
+  "actions_count": 1,
+  "tokens_used": 212,
+  "output_hash": "a4b1327a1e84ee15ee0c2a2032817a51c0ea2a944a99e424e6117d1525e116b4"
+}

@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T10_baseline_3",
+  "task_id": "T10",
+  "condition": "baseline",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:05:25.052622+00:00",
+  "response_text": "Looking at this code, I can identify the memory leak bug. The issue is in the `connect()` method - it creates a new WebSocket connection without cleaning up the previous one.\n\n**The Bug:**\nEach time `connect()` is called (during reconnection), a new WebSocket is created and new event listeners are added, but the old WebSocket and its event listeners are never properly cleaned up. This causes:\n1. Multiple WebSocket connections to accumulate\n2. Event listeners to pile up in memory\n3. Each reconnection multiplies the number of message handlers being called\n\n**The Fix:**\nClean up the existing WebSocket before creating a new one:\n\n```javascript\nclass WebSocketManager {\n    constructor(url) {\n        this.url = url;\n        this.messageHandlers = [];\n        this.connect();\n    }\n\n    connect() {\n        // Clean up existing WebSocket before creating new one\n        if (this.ws) {\n            this.ws.removeEventListener('message', this.messageListener);\n            this.ws.removeEventListener('close', this.closeListener);\n            this.ws.close();\n        }\n\n        this.ws = new WebSocket(this.url);\n        \n        // Store references to listeners so they can be removed later\n        this.messageListener = (event) => {\n            this.messageHandlers.forEach(h => h(event.data));\n        };\n        this.closeListener = () => {\n            console.log('Disconnected, reconnecting in 1s...');\n            setTimeout(() => this.connect(), 1000);\n        };\n\n        this.ws.addEventListener('message', this.messageListener);\n        this.ws.addEventListener('close', this.closeListener);\n    }\n\n    onMessage(handler) {\n        this.messageHandlers.push(handler);\n    }\n}\n```\n\nThe key changes:\n1. Store references to the event listener functions so they can be removed\n2. Before creating a new WebSocket, remove the old event listeners and close the old connection\n3. This ensures only one WebSocket connection exists at a time and prevents accumulation of event listeners",
+  "wall_clock_seconds": 7.89,
+  "actions_count": 1,
+  "tokens_used": 777,
+  "output_hash": "37900e045505759b7ed1bf2520c99559369412bf1a27fd1ea1f02b601ed60910",
+  "error": null
+}

@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T22_baseline_3",
+  "task_id": "T22",
+  "condition": "baseline",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:31:19.716600+00:00",
+  "response_text": "I'll design a comprehensive authentication system that balances security with user experience. Here's my recommended approach:\n\n## Core Authentication Components\n\n### 1. **Multi-Factor Authentication (MFA)**\n- **Primary**: Email/username + password\n- **Secondary**: SMS, authenticator app (TOTP), or email verification\n- **Backup codes**: Generated recovery codes for account access\n\n### 2. **Password Security**\n- Minimum 8 characters with complexity requirements\n- Password strength indicator during creation\n- Secure password hashing (bcrypt/Argon2)\n- Password history prevention (last 5 passwords)\n- Optional password manager integration\n\n### 3. **Session Management**\n- JWT tokens with short expiration (15-30 minutes)\n- Refresh tokens (longer-lived, stored securely)\n- Session timeout after inactivity\n- Concurrent session limits\n- Device/location tracking for suspicious activity\n\n## User-Friendly Features\n\n### 4. **Social Login Options**\n- Google, GitHub, Microsoft OAuth integration\n- Seamless account linking/unlinking\n- Profile data synchronization\n\n### 5. **Account Recovery**\n- Email-based password reset with time-limited tokens\n- Security questions as backup\n- Account lockout protection with progressive delays\n- \"Remember this device\" for trusted devices\n\n### 6. **Progressive Enhancement**\n- Basic login works without JavaScript\n- Enhanced UX with JavaScript enabled\n- Biometric authentication support (WebAuthn/FIDO2)\n- \"Magic link\" email authentication option\n\n## Security Measures\n\n### 7. **Protection Systems**\n- Rate limiting on login attempts\n- CAPTCHA after multiple failed attempts\n- IP-based risk assessment\n- Device fingerprinting\n- Suspicious activity notifications\n\n### 8. **Privacy & Compliance**\n- GDPR/CCPA compliant data handling\n- Clear privacy policy integration\n- Data encryption at rest and in transit\n- Audit logging for security events\n\n## Technical Implementation\n\n```javascript\n// Example login flow structure\nconst authFlow = {\n  login: {\n    steps: ['credentials', 'mfa', 'device_check'],\n    fallbacks: ['magic_link', 'recovery_codes']\n  },\n  security: {\n    tokens: 'JWT + refresh',\n    encryption: 'AES-256',\n    hashing: 'bcrypt/Argon2'\n  }\n}\n```\n\n### 9. **User Experience Flow**\n1. Login page with clear options (password, social, magic link)\n2. Progressive MFA (only when needed)\n3. New device verification\n4. Dashboard with security settings\n5. Easy account management\n\nWould you like me to elaborate on any specific component or discuss implementation details for your tech stack?",
+  "wall_clock_seconds": 9.25,
+  "actions_count": 1,
+  "tokens_used": 664,
+  "output_hash": "9243b0e1b0c3bb37dabc11fd45b7ddc2801b74a95b5295e9bf68cab84400af6f",
+  "error": null
+}

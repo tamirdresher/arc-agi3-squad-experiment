@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T26",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:51:46.438538+00:00",
+  "response_text": "Let me think through this step by step.\n\nThe question is asking about a specific HTTP status code that corresponds to \"Not Found.\"\n\nHTTP status codes are three-digit numbers that indicate the result of an HTTP request. They are organized into different categories:\n- 1xx: Informational responses\n- 2xx: Successful responses\n- 3xx: Redirection responses\n- 4xx: Client error responses\n- 5xx: Server error responses\n\nThe \"Not Found\" status would fall into the 4xx category since it represents a client error - the client is requesting something that doesn't exist.\n\nThe specific HTTP status code for \"Not Found\" is 404. This is one of the most commonly encountered HTTP status codes, returned when a server cannot find the requested resource (like a webpage, file, or API endpoint).\n\nLet me verify: The question asks for the HTTP status code that means 'Not Found', and I'm confident that 404 is the correct answer. This is a straightforward factual question about web standards.\n\n**404** is the HTTP status code that means 'Not Found'. This status code is returned when the server cannot locate the requested resource.",
+  "wall_clock_seconds": 12.95,
+  "actions_count": 1,
+  "tokens_used": 363,
+  "output_hash": "e32cf1d1834374857178dcbd045bd9099279fe2bfdedf17ea1c54f750fdd5d5e"
+}

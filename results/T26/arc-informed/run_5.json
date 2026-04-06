@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T26_arc-informed_5",
+  "task_id": "T26",
+  "condition": "arc-informed",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:53:15.612688+00:00",
+  "response_text": "**PHASE 1 — EXPLORE: What information is missing or ambiguous?**\n\n1. The question is straightforward and complete - asking for a specific HTTP status code\n2. No ambiguity about which \"Not Found\" status is being referenced (this is a standard HTTP term)\n3. No missing context - this is a factual technical question with a definitive answer\n\n**PHASE 2 — MODEL: State constraints, success criteria, and risks explicitly**\n\nConstraints:\n- Must provide the correct numeric HTTP status code\n- Should be accurate according to HTTP specification standards\n\nSuccess criteria:\n- Provide the exact 3-digit status code for \"Not Found\"\n- Answer should be clear and unambiguous\n\nRisks:\n- Very low risk - this is well-established technical knowledge\n- Potential confusion with other 4xx error codes, but question is specific\n\n**PHASE 3 — GOAL: State the target outcome**\n\nTarget outcome: Provide the correct HTTP status code that corresponds to \"Not Found\" error\nImplicit objectives: Deliver accurate technical information quickly and clearly\n\n**PHASE 4 — EXECUTE: Act and verify**\n\nThe HTTP status code for \"Not Found\" is **404**.\n\nVerification: This aligns with RFC 7231 HTTP specification where 404 indicates that the server has not found anything matching the requested URI, which is exactly what \"Not Found\" means in HTTP context.",
+  "wall_clock_seconds": 5.64,
+  "actions_count": 1,
+  "tokens_used": 467,
+  "output_hash": "6482324018418be8d40bc9b422cb51110f319510c5227bd375df39593b76411c",
+  "error": null
+}

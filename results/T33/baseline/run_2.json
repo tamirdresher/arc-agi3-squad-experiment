@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T33_baseline_2",
+  "task_id": "T33",
+  "condition": "baseline",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:54:02.453750+00:00",
+  "response_text": "**The Phantom Bug**\n\nSarah stared at her screen, bloodshot eyes scanning the same code for the tenth hour. The application crashed randomly, but only for certain users. Stack traces led nowhere. Logs showed nothing suspicious.\n\nShe'd rewritten entire modules, added countless debug statements, even rewrote the database queries from scratch. Coffee cups littered her desk like casualties of war.\n\nFinally, at 3 AM, she found it: a single semicolon missing from line 247. One tiny character had consumed three days of her life.\n\nSarah fixed it, pushed the code, and collapsed in relief.\n\nHer cat walked across the keyboard, deleting everything.\n\n**Word count: 99**",
+  "wall_clock_seconds": 10.34,
+  "actions_count": 1,
+  "tokens_used": 206,
+  "output_hash": "e4044ce82700c8d4bb6dc825b8d22084d6eb62ed1c14abea5abdd4a5fa38d195",
+  "error": null
+}

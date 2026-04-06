@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T11",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:51:00.040182+00:00",
+  "response_text": "Here's a Python function that sorts records by their 'priority' field in ascending order:\n\n```python\ndef sort_records(records):\n    \"\"\"\n    Sorts a list of records by their 'priority' field in ascending order.\n    Records with None priority are sorted to the end.\n    \n    Args:\n        records: List of dictionaries, each containing a 'priority' field\n        \n    Returns:\n        List of records sorted by priority in ascending order\n    \"\"\"\n    def priority_key(record):\n        priority = record['priority']\n        # Use a tuple where None values get a very large number to sort to the end\n        if priority is None:\n            return (float('inf'),)\n        else:\n            return (priority,)\n    \n    return sorted(records, key=priority_key)\n```\n\nLet me verify this works with the test cases:\n\n```python\n# Test the function\ndef sort_records(records):\n    def priority_key(record):\n        priority = record['priority']\n        if priority is None:\n            return (float('inf'),)\n        else:\n            return (priority,)\n    \n    return sorted(records, key=priority_key)\n\n# Basic sorting\nassert sort_records([{'name': 'c', 'priority': 3}, {'name': 'a', 'priority': 1}]) == \\\n    [{'name': 'a', 'priority': 1}, {'name': 'c', 'priority': 3}]\n\n# Must handle None priority (should sort to end)\nassert sort_records([{'name': 'a', 'priority': None}, {'name': 'b', 'priority': 1}]) == \\\n    [{'name': 'b', 'priority': 1}, {'name': 'a', 'priority': None}]\n\n# Must be stable: equal priorities preserve original order\nassert sort_records([{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}]) == \\\n    [{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}]\n\n# Empty list\nassert sort_records([]) == []\n\nprint(\"All test cases passed!\")\n```\n\nThe function works by:\n\n1. Using Python's built-in `sorted()` function with a custom key function\n2. The key function handles `None` values by mapping them to `float('inf')`, which ensures they sort to the end\n3. Non-None values are used directly for sorting\n4. The `sorted()` function is stable by default, so records with equal priorities maintain their original relative order\n5. Empty lists are handled naturally by `sorted()`\n\nThe solution is clean, efficient (O(n log n)), and handles all the specified requirements including None values and stability.",
+  "wall_clock_seconds": 7.7,
+  "actions_count": 1,
+  "tokens_used": 985,
+  "output_hash": "45f6817add9f77e7729b991d0f299267e23eff9ba117e38af88f22d2605fd147"
+}

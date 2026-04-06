@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T26",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T05:51:52.254419+00:00",
+  "response_text": "PHASE 1 — EXPLORE: What information is missing or ambiguous?\n1. The question is straightforward and complete - asking for a specific HTTP status code\n2. No ambiguity about which \"Not Found\" status is being referenced\n3. No missing context needed for this standard web protocol question\n\nPHASE 2 — MODEL: State constraints, success criteria, and risks explicitly.\n- Constraints: Must provide accurate HTTP status code information per RFC standards\n- Success criteria: Correctly identify the numerical code for \"Not Found\" status\n- Risks: Minimal risk - this is factual technical information with a definitive answer\n\nPHASE 3 — GOAL: State the target outcome. Check for implicit objectives.\n- Primary goal: Provide the correct HTTP status code number for \"Not Found\"\n- Implicit objective: Ensure the answer is technically accurate and follows web standards\n- Additional value: Could briefly explain what this status means\n\nPHASE 4 — EXECUTE: Act. After each major action, verify against the world model.\n\nThe HTTP status code for 'Not Found' is **404**.\n\nVerification: This aligns with RFC 7231 and is the universally recognized standard for indicating that the server cannot find the requested resource. The 404 status code is part of the 4xx client error class, specifically meaning the requested resource could not be found on the server.",
+  "wall_clock_seconds": 5.81,
+  "actions_count": 1,
+  "tokens_used": 457,
+  "output_hash": "d2e47fd167e13b6f1a67d729fdde9c5862671419c1adbad068b3eae46fab5a64"
+}

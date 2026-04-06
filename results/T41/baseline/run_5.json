@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T41_baseline_5",
+  "task_id": "T41",
+  "condition": "baseline",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:32:27.833367+00:00",
+  "response_text": "Here's an efficient implementation of the `is_prime` function:\n\n```python\ndef is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    >>> is_prime(6)\n    False\n    >>> is_prime(101)\n    True\n    >>> is_prime(11)\n    True\n    >>> is_prime(13441)\n    True\n    >>> is_prime(61)\n    True\n    >>> is_prime(4)\n    False\n    >>> is_prime(1)\n    False\n    \"\"\"\n    # Handle edge cases\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    \n    # Check odd divisors up to sqrt(n)\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    \n    return True\n```\n\nThis implementation:\n\n1. **Handles edge cases**: Numbers less than 2 are not prime by definition\n2. **Special case for 2**: The only even prime number\n3. **Eliminates even numbers**: If n > 2 and even, it's not prime\n4. **Optimized checking**: Only checks odd divisors up to √n since:\n   - If n has a divisor greater than √n, it must also have a corresponding divisor less than √n\n   - We only need to check odd numbers since we already ruled out even divisors\n\nThe time complexity is O(√n) and it efficiently handles all the test cases provided.",
+  "wall_clock_seconds": 4.61,
+  "actions_count": 1,
+  "tokens_used": 512,
+  "output_hash": "852fbb7b00cb12bf824d3f2f00453a38fe438e99136b12e27d3cfc54c279499a",
+  "error": null
+}

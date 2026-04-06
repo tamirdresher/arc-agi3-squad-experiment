@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T44_baseline_1",
+  "task_id": "T44",
+  "condition": "baseline",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:50:43.534508+00:00",
+  "response_text": "Looking at this problem, I need to:\n1. Get the length of the input string\n2. Check if that length is a prime number\n3. Return True if prime, False otherwise\n\nLet me first write a helper function to check if a number is prime, then use it in the main function:\n\n```python\ndef prime_length(string):\n    \"\"\"Write a function that takes a string and returns True if the string\n    length is a prime number or False otherwise\n    Examples\n    prime_length('Hello') == True\n    prime_length('abcdcba') == True\n    prime_length('kittens') == True\n    prime_length('orange') == False\n    \"\"\"\n    def is_prime(n):\n        if n < 2:\n            return False\n        if n == 2:\n            return True\n        if n % 2 == 0:\n            return False\n        \n        # Check odd divisors up to sqrt(n)\n        for i in range(3, int(n**0.5) + 1, 2):\n            if n % i == 0:\n                return False\n        return True\n    \n    length = len(string)\n    return is_prime(length)\n```\n\nLet me verify this works with the given examples:\n- `prime_length('Hello')`: length = 5, which is prime → True ✓\n- `prime_length('abcdcba')`: length = 7, which is prime → True ✓  \n- `prime_length('kittens')`: length = 7, which is prime → True ✓\n- `prime_length('orange')`: length = 6, which is not prime (6 = 2×3) → False ✓\n\nThe function correctly identifies prime numbers by:\n1. Handling edge cases (numbers less than 2 are not prime)\n2. Handling the special case of 2 (the only even prime)\n3. Checking if the number is divisible by any odd number up to its square root",
+  "wall_clock_seconds": 9.76,
+  "actions_count": 1,
+  "tokens_used": 569,
+  "output_hash": "5ec2cdd1d75c096a6b61b23b8f8edceb795d9f1636e7b92a0b271c49068b94f7",
+  "error": null
+}

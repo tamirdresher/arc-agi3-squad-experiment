@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T11_baseline_4",
+  "task_id": "T11",
+  "condition": "baseline",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:50:32.632563+00:00",
+  "response_text": "Looking at the requirements, I need to create a function that:\n1. Sorts records by 'priority' field in ascending order\n2. Handles `None` priority values (should sort to the end)\n3. Maintains stable sorting (preserves original order for equal priorities)\n4. Handles empty lists\n\nHere's my solution:\n\n```python\ndef sort_records(records):\n    \"\"\"\n    Sort a list of records by their 'priority' field in ascending order.\n    Records with None priority are sorted to the end.\n    \n    Args:\n        records: List of dictionaries, each containing a 'priority' field\n        \n    Returns:\n        List of records sorted by priority (ascending), with None values at end\n    \"\"\"\n    def priority_key(record):\n        priority = record['priority']\n        # Use a tuple where None values get a high sort value\n        # This ensures None priorities sort to the end\n        if priority is None:\n            return (1, 0)  # (is_none, value) - None gets high first element\n        else:\n            return (0, priority)  # Non-None gets low first element\n    \n    return sorted(records, key=priority_key)\n```\n\nLet me verify this works with the test cases:\n\n```python\n# Test the function\ndef test_sort_records():\n    # Basic sorting\n    result1 = sort_records([{'name': 'c', 'priority': 3}, {'name': 'a', 'priority': 1}])\n    expected1 = [{'name': 'a', 'priority': 1}, {'name': 'c', 'priority': 3}]\n    assert result1 == expected1\n    \n    # Handle None priority (should sort to end)\n    result2 = sort_records([{'name': 'a', 'priority': None}, {'name': 'b', 'priority': 1}])\n    expected2 = [{'name': 'b', 'priority': 1}, {'name': 'a', 'priority': None}]\n    assert result2 == expected2\n    \n    # Stable sorting: equal priorities preserve original order\n    result3 = sort_records([{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}])\n    expected3 = [{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}]\n    assert result3 == expected3\n    \n    # Empty list\n    result4 = sort_records([])\n    expected4 = []\n    assert result4 == expected4\n    \n    print(\"All tests passed!\")\n\ntest_sort_records()\n```\n\nThe key insight is using a tuple as the sort key: `(is_none_flag, priority_value)`. Python sorts tuples lexicographically, so:\n- Records with `None` priority get `(1, 0)` \n- Records with numeric priority get `(0, priority)`\n\nSince `0 < 1`, all non-None priorities will sort before None priorities. Within each group, the actual priority values determine the order. The `sorted()` function is stable by default, preserving original order for equal keys.",
+  "wall_clock_seconds": 10.45,
+  "actions_count": 1,
+  "tokens_used": 1088,
+  "output_hash": "a3d782e320f7cbbf27c7cbc8bed8a48620350be16cad40b8d446686a57cfb826",
+  "error": null
+}

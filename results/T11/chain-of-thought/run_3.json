@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T11_chain-of-thought_3",
+  "task_id": "T11",
+  "condition": "chain-of-thought",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:50:01.441037+00:00",
+  "response_text": "Let me think through this step by step.\n\n## Analysis of Requirements\n\n1. **Basic sorting**: Sort records by 'priority' field in ascending order\n2. **Handle None values**: Records with `None` priority should sort to the end\n3. **Stable sorting**: Records with equal priorities should maintain their original relative order\n4. **Edge cases**: Handle empty lists\n\n## Key Considerations\n\n- Python's `sorted()` function is stable by default, which helps with requirement #3\n- For None handling, I need a custom key function that treats None as a value larger than any number\n- I should return a new list rather than modifying the input list in-place\n\n## Solution Approach\n\nI'll use `sorted()` with a custom key function that:\n- Returns the priority value if it's not None\n- Returns a very large number (like `float('inf')`) if priority is None, ensuring None values sort to the end\n\nLet me implement and verify:\n\n```python\ndef sort_records(records):\n    \"\"\"\n    Sort records by priority in ascending order.\n    Records with None priority are sorted to the end.\n    Maintains stable sorting for equal priorities.\n    \"\"\"\n    return sorted(records, key=lambda record: record['priority'] if record['priority'] is not None else float('inf'))\n```\n\n## Verification\n\nLet me trace through each test case:\n\n1. **Basic sorting**: `[{'name': 'c', 'priority': 3}, {'name': 'a', 'priority': 1}]`\n   - Key values: [3, 1] → sorted order: [1, 3] ✓\n\n2. **None handling**: `[{'name': 'a', 'priority': None}, {'name': 'b', 'priority': 1}]`\n   - Key values: [inf, 1] → sorted order: [1, inf] ✓\n\n3. **Stable sorting**: `[{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}]`\n   - Key values: [2, 2] → maintains original order due to stable sort ✓\n\n4. **Empty list**: `[]` → returns `[]` ✓\n\nThe solution handles all requirements correctly.\n\n```python\ndef sort_records(records):\n    \"\"\"\n    Sort records by priority in ascending order.\n    Records with None priority are sorted to the end.\n    Maintains stable sorting for equal priorities.\n    \"\"\"\n    return sorted(records, key=lambda record: record['priority'] if record['priority'] is not None else float('inf'))\n```",
+  "wall_clock_seconds": 9.41,
+  "actions_count": 1,
+  "tokens_used": 1003,
+  "output_hash": "27214ca652b2b1deb6fbfe4c045ced6490c70beb7688135dc8c5e04dc489f4f9",
+  "error": null
+}

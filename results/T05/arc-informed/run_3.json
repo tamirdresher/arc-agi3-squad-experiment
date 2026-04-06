@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T05_arc-informed_3",
+  "task_id": "T05",
+  "condition": "arc-informed",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:08:51.309087+00:00",
+  "response_text": "## PHASE 1 — EXPLORE: What information is missing or ambiguous?\n\n1. The passage is comprehensive and well-structured, clearly enumerating four security properties and one limitation\n2. All technical terms are sufficiently defined in context (e.g., \"linear memory region,\" \"bounds-checked,\" \"type table\")\n3. No significant information gaps - the passage directly answers both parts of the question\n\n## PHASE 2 — MODEL: State constraints, success criteria, and risks explicitly.\n\n**Constraints:**\n- Must extract exactly four security properties and one limitation as stated in the passage\n- Must use the specific terminology and descriptions provided\n- Cannot add interpretations beyond what's explicitly stated\n\n**Success Criteria:**\n- Accurately identify all four numbered security properties\n- Correctly identify the single acknowledged limitation\n- Present information clearly and completely\n\n**Risks:**\n- Misreading or skipping one of the properties\n- Conflating the limitation with a security property\n- Adding external knowledge not present in the passage\n\n## PHASE 3 — GOAL: State the target outcome.\n\n**Target Outcome:** Provide a complete, accurate list of the four specific security properties of WebAssembly's sandbox model and identify the one acknowledged limitation, as explicitly described in the given passage.\n\n**Implicit Objectives:** Demonstrate careful reading comprehension and ability to extract structured information from technical text.\n\n## PHASE 4 — EXECUTE: Act and verify.\n\nBased on the passage, here are the four specific security properties of WebAssembly's sandbox model:\n\n**Four Security Properties:**\n1. **Memory isolation**: Each Wasm module operates within a linear memory region that it cannot escape; all memory accesses are bounds-checked, and out-of-bounds access traps rather than corrupting host memory.\n\n2. **Control-flow integrity**: Indirect calls are validated against a type table, preventing ROP-style attacks that exploit arbitrary jumps.\n\n3. **No ambient authority**: A Wasm module has zero capabilities by default — it cannot access the file system, network, or even the system clock unless the host explicitly provides these through imported functions.\n\n4. **Deterministic execution**: Given the same inputs and imports, a Wasm module produces identical outputs regardless of platform, which aids security auditing.\n\n**One Acknowledged Limitation:**\nThe sandbox does not protect against algorithmic complexity attacks — a malicious module can still consume excessive CPU time or memory within its allocation, requiring the host to impose resource limits externally through mechanisms like fuel metering or memory caps.\n\n**Verification:** All four properties and the single limitation have been extracted exactly as described in the passage, maintaining the original terminology and explanations.",
+  "wall_clock_seconds": 12.89,
+  "actions_count": 1,
+  "tokens_used": 986,
+  "output_hash": "d77e1ccc91a0574e45a0ceb9bbf68dea67de7498d622f23463bab8b4421fbb04",
+  "error": null
+}

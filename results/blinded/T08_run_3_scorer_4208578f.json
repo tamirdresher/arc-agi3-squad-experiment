@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T08",
+  "run_number": 3,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T08:09:52.420575+00:00",
+  "response_text": "The bug is that multiple goroutines are writing to the same map `counts` concurrently without synchronization, which causes the \"concurrent map writes\" panic.\n\nThe fix is to protect the map writes with a mutex:\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"strings\"\n    \"sync\"\n)\n\nfunc countWords(texts []string) map[string]int {\n    counts := make(map[string]int)\n    var wg sync.WaitGroup\n    var mu sync.Mutex  // Add mutex for synchronization\n\n    for _, text := range texts {\n        wg.Add(1)\n        go func(t string) {\n            defer wg.Done()\n            for _, word := range strings.Fields(t) {\n                mu.Lock()  // Lock before map write\n                counts[strings.ToLower(word)]++\n                mu.Unlock()  // Unlock after map write\n            }\n        }(text)\n    }\n\n    wg.Wait()\n    return counts\n}\n\nfunc main() {\n    texts := []string{\"Hello World\", \"hello Go\", \"world of Go\"}\n    fmt.Println(countWords(texts))\n}\n```\n\n**The bug:** Multiple goroutines were accessing the shared `counts` map concurrently without synchronization.\n\n**The fix:** Added a `sync.Mutex` to protect the critical section where the map is being written to. Each goroutine now acquires the lock before updating the map and releases it afterward, ensuring only one goroutine can write to the map at a time.",
+  "wall_clock_seconds": 6.66,
+  "actions_count": 1,
+  "tokens_used": 609,
+  "output_hash": "1282aca9313fe008647b843910707a498ff9f257e0c87d8dd190b5c40f9eca1e"
+}

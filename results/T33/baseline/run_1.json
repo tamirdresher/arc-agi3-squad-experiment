@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T33_baseline_1",
+  "task_id": "T33",
+  "condition": "baseline",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:53:28.489853+00:00",
+  "response_text": "**The Bug Hunt**\n\nSarah stared at her screen, eyes bloodshot. Three days debugging the same crash—her e-commerce app randomly failed during checkout. Stack traces revealed nothing. Memory leaks? None. Logic errors? Clean. She'd rewritten entire modules, questioned her sanity, and consumed lethal amounts of coffee.\n\nFinally, she added logging everywhere, tracing each variable's journey. The pattern emerged: failures occurred only on Tuesdays, specifically between 2-4 PM. Impossible. Code doesn't know calendar days.\n\nThen she noticed her teammate Mike's cron job—a database backup running Tuesdays at 2 PM, locking tables mid-transaction.\n\nThree days hunting ghosts. The bug was perfectly logical after all.\n\n**Word count: 99 words**",
+  "wall_clock_seconds": 10.97,
+  "actions_count": 1,
+  "tokens_used": 230,
+  "output_hash": "7552fe3cbe23f341573d9d6d2299dbd774e3d43dac37814f8816bc8fbe608bb8",
+  "error": null
+}

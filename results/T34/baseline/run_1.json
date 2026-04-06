@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T34_baseline_1",
+  "task_id": "T34",
+  "condition": "baseline",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:53:04.518116+00:00",
+  "response_text": "Imagine a big toy store that used to have just one giant room where one person had to handle everything - selling toys, fixing broken ones, managing money, and cleaning up. This was really hard because if that one person got sick, the whole store would shut down! Now, the smart store owner decided to split the store into smaller specialized shops: one person just sells action figures, another fixes broken toys, someone else handles the money, and another person cleans. This way, if the toy-fixer gets sick, kids can still buy action figures and the store mostly stays open, plus each person becomes really good at their specific job!",
+  "wall_clock_seconds": 6.47,
+  "actions_count": 1,
+  "tokens_used": 205,
+  "output_hash": "db4c828a36343cbd53962698fce1aff35f43cbf2bb0425b7e724ef7bf1e8c7ba",
+  "error": null
+}

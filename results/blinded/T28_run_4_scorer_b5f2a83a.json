@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T28",
+  "run_number": 4,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T06:52:39.433990+00:00",
+  "response_text": "The time complexity of binary search on a sorted array of n elements is **O(log n)**.\n\nHere's why:\n\n**How binary search works:**\n- In each iteration, binary search eliminates half of the remaining elements\n- It compares the target with the middle element and decides whether to search the left or right half\n- This process continues until the element is found or the search space is exhausted\n\n**Mathematical analysis:**\n- Starting with n elements\n- After 1st comparison: n/2 elements remain\n- After 2nd comparison: n/4 elements remain  \n- After 3rd comparison: n/8 elements remain\n- After k comparisons: n/2^k elements remain\n\nThe search terminates when we have 1 or 0 elements left, so:\n- n/2^k = 1\n- Solving for k: k = log₂(n)\n\nTherefore, the maximum number of comparisons needed is log₂(n), giving us **O(log n)** time complexity.\n\n**Space complexity:** O(1) for iterative implementation, O(log n) for recursive implementation due to the call stack.\n\nThis logarithmic time complexity makes binary search very efficient even for large datasets - for example, searching in 1 million elements requires at most about 20 comparisons.",
+  "wall_clock_seconds": 4.69,
+  "actions_count": 1,
+  "tokens_used": 331,
+  "output_hash": "a774d9ef96e0dbda5233de2b4a67d1f997d94f0156dfadecdee09481efe6f0cb"
+}

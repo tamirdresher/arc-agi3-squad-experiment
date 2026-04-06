@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T03_baseline_5",
+  "task_id": "T03",
+  "condition": "baseline",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:29:16.148373+00:00",
+  "response_text": "Based on the passage, here are exactly 3 tradeoffs described:\n\n1. **Throughput vs Latency** - High overall throughput but causing latency spikes vs keeping pauses low\n\n2. **Low Latency vs CPU Overhead** - Keeping pauses under 1ms vs consuming 10-15% of CPU cycles for concurrent GC work\n\n3. **Fragmentation Elimination vs Reference Update Cost** - Eliminating fragmentation and enabling fast allocation vs the cost of copying objects and updating references",
+  "wall_clock_seconds": 2.77,
+  "actions_count": 1,
+  "tokens_used": 367,
+  "output_hash": "5a4b136125cf10ff5632a06c8ab5eb246b2afc52cf217e4fa6bb2376b99eb799",
+  "error": null
+}

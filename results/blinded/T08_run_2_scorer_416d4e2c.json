@@ -1,0 +1,13 @@
+{
+  "experiment_version": "2.0",
+  "task_id": "T08",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "timestamp": "2026-04-06T08:09:15.599261+00:00",
+  "response_text": "The bug is in the concurrent access to the shared `counts` map. Multiple goroutines are writing to the same map simultaneously without synchronization, which causes the \"concurrent map writes\" panic.\n\n**The Problem:**\nAll goroutines are accessing the same `counts` map concurrently. In Go, maps are not thread-safe, so concurrent writes will cause a panic.\n\n**The Fix:**\nAdd a mutex to synchronize access to the shared map:\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"strings\"\n    \"sync\"\n)\n\nfunc countWords(texts []string) map[string]int {\n    counts := make(map[string]int)\n    var wg sync.WaitGroup\n    var mu sync.Mutex  // Add mutex for synchronization\n\n    for _, text := range texts {\n        wg.Add(1)\n        go func(t string) {\n            defer wg.Done()\n            for _, word := range strings.Fields(t) {\n                mu.Lock()  // Lock before map access\n                counts[strings.ToLower(word)]++\n                mu.Unlock()  // Unlock after map access\n            }\n        }(text)\n    }\n\n    wg.Wait()\n    return counts\n}\n\nfunc main() {\n    texts := []string{\"Hello World\", \"hello Go\", \"world of Go\"}\n    fmt.Println(countWords(texts))\n}\n```\n\n**Alternative Solution** (more efficient for this use case):\nInstead of locking for each word, you could have each goroutine create its own local map and then merge them:\n\n```go\nfunc countWords(texts []string) map[string]int {\n    counts := make(map[string]int)\n    var wg sync.WaitGroup\n    var mu sync.Mutex\n    \n    for _, text := range texts {\n        wg.Add(1)\n        go func(t string) {\n            defer wg.Done()\n            localCounts := make(map[string]int)\n            \n            // Count words locally\n            for _, word := range strings.Fields(t) {\n                localCounts[strings.ToLower(word)]++\n            }\n            \n            // Merge into global map (only one lock per goroutine)\n            mu.Lock()\n            for word, count := range localCounts {\n                counts[word] += count\n            }\n            mu.Unlock()\n        }(text)\n    }\n    \n    wg.Wait()\n    return counts\n}\n```\n\nThe first fix is the minimal change needed to resolve the concurrent map writes issue.",
+  "wall_clock_seconds": 8.94,
+  "actions_count": 1,
+  "tokens_used": 853,
+  "output_hash": "c951111c845bd7cbe0a8ee8ccc6d560cf64c09008d904b021fb8a9802c5191db"
+}

@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T02_chain-of-thought_2",
+  "task_id": "T02",
+  "condition": "chain-of-thought",
+  "run_number": 2,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T07:11:11.692011+00:00",
+  "response_text": "Let me analyze the passage carefully to answer each question with exactly one sentence.\n\nLooking at the passage for relevant information:\n\n1. For multiplexing: The passage states \"Multiplexing allows multiple request-response pairs to share a single TCP connection simultaneously, eliminating head-of-line blocking at the HTTP level (though TCP-level head-of-line blocking remains).\"\n\n2. For HPACK and APIs: The passage mentions \"Header compression via HPACK reduces overhead for repeated headers, which is especially beneficial for APIs that send similar headers across many requests.\"\n\n3. For browser requirements: The passage states \"HTTP/2 requires TLS in practice, even though the specification allows plaintext connections — all major browsers mandate encryption.\"\n\nLet me draft my answers:\n\n1. Multiplexing solves head-of-line blocking at the HTTP level by allowing multiple request-response pairs to share a single TCP connection simultaneously, but it does NOT solve TCP-level head-of-line blocking.\n\n2. HPACK is particularly beneficial for APIs because they send similar headers across many requests, so header compression reduces overhead for these repeated headers.\n\n3. All major browsers mandate encryption (TLS) for HTTP/2, even though the specification allows plaintext connections.\n\nVerification: Each answer is exactly one sentence and directly addresses the question asked based on information from the passage.\n\n**Final Answers:**\n\n1. Multiplexing solves head-of-line blocking at the HTTP level by allowing multiple request-response pairs to share a single TCP connection simultaneously, but it does NOT solve TCP-level head-of-line blocking.\n\n2. HPACK is particularly beneficial for APIs because they send similar headers across many requests, so header compression reduces overhead for these repeated headers.\n\n3. All major browsers mandate encryption (TLS) for HTTP/2, even though the specification allows plaintext connections.",
+  "wall_clock_seconds": 7.83,
+  "actions_count": 1,
+  "tokens_used": 754,
+  "output_hash": "93ff72282a073bfea9fc14c20ea8f95c60e3fc741e8ccadee57a7dd7baba237a",
+  "error": null
+}

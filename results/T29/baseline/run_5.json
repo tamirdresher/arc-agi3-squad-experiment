@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T29_baseline_5",
+  "task_id": "T29",
+  "condition": "baseline",
+  "run_number": 5,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T06:33:39.586305+00:00",
+  "response_text": "In the context of database transactions, ACID stands for:\n\n- **A**tomicity\n- **C**onsistency\n- **I**solation\n- **D**urability\n\nThese are the four fundamental properties that guarantee reliable processing of database transactions:\n\n1. **Atomicity**: A transaction is treated as a single, indivisible unit. Either all operations within the transaction complete successfully, or none of them do (all-or-nothing principle).\n\n2. **Consistency**: A transaction brings the database from one valid state to another valid state, maintaining all defined rules, constraints, and relationships.\n\n3. **Isolation**: Concurrent transactions execute independently without interfering with each other. The intermediate state of one transaction is not visible to other transactions.\n\n4. **Durability**: Once a transaction is committed, its changes are permanently stored in the database and will survive system failures, power outages, or crashes.\n\nThese ACID properties ensure data integrity and reliability in database management systems, making them essential for applications that require dependable data storage and retrieval.",
+  "wall_clock_seconds": 6.08,
+  "actions_count": 1,
+  "tokens_used": 266,
+  "output_hash": "b2bb304571f662bf74f14d0ed8a1d0d65aa6eb1a490dd197b5805d736026dc8a",
+  "error": null
+}
