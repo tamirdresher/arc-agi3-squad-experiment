@@ -92,6 +92,65 @@ def _get_gh_token() -> str:
     except subprocess.TimeoutExpired:
         raise RuntimeError("gh auth token timed out")
 
+
+def _refresh_gh_token() -> str:
+    """Force-refresh the GitHub auth token (clear cache and re-fetch)."""
+    global _gh_auth_token
+    _gh_auth_token = None
+    return _get_gh_token()
+
+
+def warmup_copilot_api(logger: Optional[logging.Logger] = None) -> None:
+    """Send a minimal warmup request to validate the API token.
+
+    The Copilot API sometimes returns 403 on the first request with a
+    freshly-retrieved token. This warmup call absorbs that failure and
+    retries with a refreshed token, ensuring subsequent experiment calls
+    succeed reliably.
+
+    Args:
+        logger: Optional logger for diagnostics.
+    """
+    token = _get_gh_token()
+    headers = {**COPILOT_API_HEADERS_STATIC, "Authorization": f"Bearer {token}"}
+    warmup_body = {
+        "model": DEFAULT_MODEL,
+        "messages": [{"role": "user", "content": "Say OK"}],
+        "stream": False,
+    }
+
+    for attempt in range(1, 4):
+        try:
+            resp = requests.post(
+                COPILOT_API_URL, headers=headers, json=warmup_body, timeout=30,
+            )
+            if resp.status_code == 200:
+                if logger:
+                    logger.info("Copilot API warmup OK (attempt %d)", attempt)
+                return
+            elif resp.status_code == 403:
+                if logger:
+                    logger.warning(
+                        "Copilot API warmup 403 (attempt %d) — refreshing token", attempt,
+                    )
+                token = _refresh_gh_token()
+                headers["Authorization"] = f"Bearer {token}"
+                time.sleep(RETRY_BASE_DELAY * attempt)
+            else:
+                if logger:
+                    logger.warning(
+                        "Copilot API warmup HTTP %d (attempt %d)", resp.status_code, attempt,
+                    )
+                time.sleep(RETRY_BASE_DELAY * attempt)
+        except Exception as exc:
+            if logger:
+                logger.warning("Copilot API warmup error (attempt %d): %s", attempt, exc)
+            time.sleep(RETRY_BASE_DELAY * attempt)
+
+    # If we still failed, log but don't crash — the experiment retries will handle it
+    if logger:
+        logger.warning("Copilot API warmup failed after 3 attempts — proceeding anyway")
+
 # Condition prompt templates per protocol §2.1–2.3
 CONDITION_PROMPTS: dict[str, dict[str, str]] = {
     "baseline": {
@@ -458,6 +517,19 @@ def invoke_copilot_cli(
             json=payload,
             timeout=COPILOT_API_TIMEOUT,
         )
+        # On 403, try refreshing the token once
+        if resp.status_code == 403:
+            if logger:
+                logger.debug("Got 403 — refreshing token and retrying")
+            token = _refresh_gh_token()
+            headers["Authorization"] = f"Bearer {token}"
+            time.sleep(1)
+            resp = requests.post(
+                COPILOT_API_URL,
+                headers=headers,
+                json=payload,
+                timeout=COPILOT_API_TIMEOUT,
+            )
     except requests.exceptions.Timeout:
         raise RuntimeError(
             f"Copilot API timed out after {COPILOT_API_TIMEOUT} seconds"
@@ -903,6 +975,10 @@ def run_experiment(args: argparse.Namespace) -> None:
     # --- Dry run check ---
     if args.dry_run:
         logger.info("[DRY RUN] Validating plan without executing CLI calls")
+    else:
+        # Warmup the Copilot API to absorb any initial 403 errors
+        logger.info("Warming up Copilot API...")
+        warmup_copilot_api(logger=logger)
 
     # --- Execute ---
     blinding_key: dict[str, dict[str, str]] = {}

@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T26_arc-informed_1",
+  "task_id": "T26",
+  "condition": "arc-informed",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:08:28.139482+00:00",
+  "response_text": "## PHASE 1 — EXPLORE\nWhat information is missing or ambiguous?\n1. The question is straightforward and complete - no missing information\n2. No ambiguity about which HTTP status code represents \"Not Found\"\n3. No gaps identified - this is a direct factual question about web standards\n\n## PHASE 2 — MODEL\n**Constraints:**\n- Must provide accurate HTTP status code information\n- Should reference official web standards (RFC specifications)\n\n**Success Criteria:**\n- Correctly identify the specific numeric code for \"Not Found\"\n- Provide accurate information about its meaning and usage\n\n**Risks:**\n- Providing incorrect status code number\n- Confusing with similar error codes\n\n## PHASE 3 — GOAL\n**Target Outcome:** \nProvide the correct HTTP status code that represents \"Not Found\" along with brief context about its meaning.\n\n**Implicit Objectives:**\n- Ensure accuracy for web development/technical reference\n- Provide sufficient detail for practical understanding\n\n## PHASE 4 — EXECUTE\n\nThe HTTP status code for \"Not Found\" is **404**.\n\n**Verification against world model:** \n✓ 404 is indeed the standard HTTP status code defined in RFC 7231 for \"Not Found\"\n✓ This indicates the server cannot find the requested resource\n✓ It's one of the most commonly encountered HTTP error codes\n✓ The information provided is accurate and complete for the question asked\n\nThe 404 status code specifically means that the server has not found anything matching the requested URI (Uniform Resource Identifier), and no indication is given of whether the condition is temporary or permanent.",
+  "wall_clock_seconds": 8.16,
+  "actions_count": 1,
+  "tokens_used": 517,
+  "output_hash": "6a767272bf1a324b7e0594d2f676c6ae4139e9af973028ab118e3e7429f74c48",
+  "error": null
+}

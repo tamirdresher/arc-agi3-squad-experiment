@@ -1,0 +1,13 @@
+{
+  "total_planned": 3,
+  "completed": 3,
+  "failed": 0,
+  "remaining": 0,
+  "completed_run_ids": [
+    "T26_baseline_1",
+    "T26_chain-of-thought_1",
+    "T26_arc-informed_1"
+  ],
+  "failed_run_ids": [],
+  "last_updated": "2026-04-06T05:08:28.144304+00:00"
+}

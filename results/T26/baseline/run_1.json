@@ -1,0 +1,17 @@
+{
+  "experiment_version": "2.0",
+  "run_id": "T26_baseline_1",
+  "task_id": "T26",
+  "condition": "baseline",
+  "run_number": 1,
+  "model": "claude-sonnet-4",
+  "seed": null,
+  "temperature": null,
+  "timestamp": "2026-04-06T05:08:11.064663+00:00",
+  "response_text": "The HTTP status code for 'Not Found' is **404**.\n\nThis status code indicates that the server cannot find the requested resource. It's one of the most commonly encountered HTTP status codes when browsing the web.",
+  "wall_clock_seconds": 3.84,
+  "actions_count": 1,
+  "tokens_used": 78,
+  "output_hash": "d0a003cd81b512ee7da0ce3ee6544594afdbde53d80fab0c305d583576ab301c",
+  "error": null
+}
