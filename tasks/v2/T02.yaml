@@ -1,0 +1,46 @@
+id: T02
+title: Extract HTTP/2 protocol features
+type: A1
+meta_category: A
+description: Tests careful reading to extract specific technical facts from a passage about HTTP/2.
+prompt: 'Read the following passage and answer these three questions. Each answer must be exactly one sentence.
+
+
+  Passage:
+
+  HTTP/2, standardized in RFC 7540, introduced several key improvements over HTTP/1.1. It uses binary framing instead of textual
+  protocols, which reduces parsing complexity and error rates. Multiplexing allows multiple request-response pairs to share
+  a single TCP connection simultaneously, eliminating head-of-line blocking at the HTTP level (though TCP-level head-of-line
+  blocking remains). Header compression via HPACK reduces overhead for repeated headers, which is especially beneficial for
+  APIs that send similar headers across many requests. Server push allows the server to proactively send resources to the
+  client before they are requested, although this feature has seen limited adoption and is deprecated in some implementations.
+  HTTP/2 requires TLS in practice, even though the specification allows plaintext connections — all major browsers mandate
+  encryption.
+
+
+  Questions:
+
+  1. What specific problem does multiplexing solve, and what related problem does it NOT solve?
+
+  2. Why is HPACK particularly beneficial for APIs?
+
+  3. What is the practical requirement that all major browsers impose on HTTP/2 that goes beyond the specification?'
+expected_output:
+  type: rubric
+  value: Accurate answers to all three questions based solely on the passage.
+  rubric:
+  - criterion: 'Q1: Multiplexing eliminates HTTP-level head-of-line blocking but not TCP-level'
+    weight: 0.35
+  - criterion: 'Q2: HPACK helps APIs because they send similar/repeated headers across requests'
+    weight: 0.3
+  - criterion: 'Q3: Browsers require TLS/encryption even though the spec allows plaintext'
+    weight: 0.35
+human_baseline_actions: 4
+difficulty: easy
+source: original
+source_id: null
+tags:
+- factual
+- comprehension
+- networking
+- http

@@ -1,0 +1,32 @@
+id: T08
+title: Debug Go concurrent map access race condition
+type: A2
+meta_category: A
+description: Tests ability to identify a race condition in Go code with concurrent map writes.
+prompt: "The following Go program counts word frequencies across multiple files concurrently. It panics intermittently with\
+  \ 'concurrent map writes'. Find the one bug and provide the fix.\n\n```go\npackage main\n\nimport (\n    \"fmt\"\n    \"\
+  strings\"\n    \"sync\"\n)\n\nfunc countWords(texts []string) map[string]int {\n    counts := make(map[string]int)\n   \
+  \ var wg sync.WaitGroup\n\n    for _, text := range texts {\n        wg.Add(1)\n        go func(t string) {\n          \
+  \  defer wg.Done()\n            for _, word := range strings.Fields(t) {\n                counts[strings.ToLower(word)]++\n\
+  \            }\n        }(text)\n    }\n\n    wg.Wait()\n    return counts\n}\n\nfunc main() {\n    texts := []string{\"\
+  Hello World\", \"hello Go\", \"world of Go\"}\n    fmt.Println(countWords(texts))\n}\n```"
+expected_output:
+  type: code_test
+  value: The map is accessed concurrently by multiple goroutines without synchronization. Fix with a sync.Mutex around map
+    writes.
+  rubric:
+  - criterion: 'Identifies the bug: concurrent unsynchronized map writes cause panic'
+    weight: 0.4
+  - criterion: Provides fix using sync.Mutex (or sync.RWMutex, or sync.Map) to protect map access
+    weight: 0.5
+  - criterion: Corrected code compiles and produces correct word counts
+    weight: 0.1
+human_baseline_actions: 4
+difficulty: medium
+source: original
+source_id: null
+tags:
+- debugging
+- go
+- concurrency
+- race-condition

@@ -1,0 +1,28 @@
+id: T33
+title: Write a 100-word story about a debugging session
+type: B2
+meta_category: B
+description: Short creative fiction — tests creative fluency under a word constraint.
+prompt: Write a short story in exactly 100 words (+-5 words) about a programmer's most frustrating debugging session. It should
+  have a twist ending.
+expected_output:
+  type: rubric
+  value: A 100-word story about debugging with a twist ending.
+  rubric:
+  - criterion: Word count is between 95 and 105 words
+    weight: 0.2
+  - criterion: Story is about a debugging session and is relatable to programmers
+    weight: 0.3
+  - criterion: Has a clear twist ending that is surprising but logical
+    weight: 0.3
+  - criterion: 'Writing quality: engaging prose, not just a technical description'
+    weight: 0.2
+human_baseline_actions: 4
+difficulty: medium
+source: original
+source_id: null
+tags:
+- creative
+- fiction
+- debugging
+- storytelling

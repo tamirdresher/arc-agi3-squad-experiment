@@ -1,0 +1,30 @@
+id: T07
+title: Debug JavaScript async callback ordering
+type: A2
+meta_category: A
+description: Tests ability to find a bug in JavaScript async code where a callback returns before async work completes.
+prompt: "The following JavaScript function should read three files in parallel and return their combined contents as a single\
+  \ string. It has exactly one bug. Find it and provide the corrected function.\n\n```javascript\nconst fs = require('fs').promises;\n\
+  \nasync function readAllFiles(filePaths) {\n    const results = [];\n    filePaths.forEach(async (path) => {\n        const\
+  \ content = await fs.readFile(path, 'utf-8');\n        results.push(content);\n    });\n    return results.join('\\n');\n\
+  }\n```\n\nExpected behavior: Given ['a.txt', 'b.txt', 'c.txt'], returns the contents of all three files joined by newlines.\
+  \ Currently returns an empty string."
+expected_output:
+  type: code_test
+  value: forEach does not await async callbacks. Use Promise.all with map instead.
+  rubric:
+  - criterion: 'Identifies bug: forEach does not await async callbacks, so results is empty when join is called'
+    weight: 0.5
+  - criterion: Corrected code uses Promise.all(filePaths.map(...)) or equivalent awaitable pattern
+    weight: 0.4
+  - criterion: Explains the timing issue clearly
+    weight: 0.1
+human_baseline_actions: 4
+difficulty: medium
+source: original
+source_id: null
+tags:
+- debugging
+- javascript
+- async
+- promises

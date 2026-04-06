@@ -1,0 +1,47 @@
+id: T19
+title: Design a log aggregation pipeline with real-time, cost, and durability
+type: A4
+meta_category: A
+description: Tests multi-constraint reasoning for a log aggregation system.
+prompt: 'Design a log aggregation system that must satisfy:
+
+
+  1. **Real-time**: Logs must be searchable within 5 seconds of emission.
+
+  2. **Cost**: Total storage cost must be < $500/month for 10TB of logs per day.
+
+  3. **Durability**: No log line may be lost, even during component failures.
+
+  4. **Retention**: Logs must be queryable for 30 days; after that, archived for 1 year.
+
+
+  Provide:
+
+  a) The architecture (which components: queue, indexer, storage tiers)
+
+  b) How you achieve the 5-second search latency with 10TB/day volume
+
+  c) A cost breakdown showing how $500/month is achievable
+
+  d) How durability is guaranteed across the pipeline (no lost logs)'
+expected_output:
+  type: rubric
+  value: Architecture addressing all 4 constraints with cost breakdown.
+  rubric:
+  - criterion: Architecture has appropriate components (ingestion queue, indexing layer, hot/cold storage tiers)
+    weight: 0.25
+  - criterion: 5-second latency is achievable with described indexing approach
+    weight: 0.25
+  - criterion: Cost breakdown is realistic and shows path to <$500/month (tiered storage, compression)
+    weight: 0.25
+  - criterion: Durability guarantee is credible (WAL, replication, or acknowledgment-based pipeline)
+    weight: 0.25
+human_baseline_actions: 8
+difficulty: hard
+source: original
+source_id: null
+tags:
+- multi-constraint
+- system-design
+- logging
+- cost-optimization

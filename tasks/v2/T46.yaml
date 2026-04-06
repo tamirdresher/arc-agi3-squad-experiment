@@ -1,0 +1,46 @@
+id: T46
+title: 'SWE-bench: django__django-11099'
+type: C2
+meta_category: C
+description: SWE-bench Lite task — fix UsernameValidator to reject trailing newline.
+prompt: 'Repository: django/django
+
+  Commit: d4df5e1b0b1c643fe0fc614242c0d6a820545ed1
+
+
+  Issue: UsernameValidator allows trailing newline in usernames
+
+
+  The ASCIIUsernameValidator and UnicodeUsernameValidator use re.match() with the regex pattern r''^[\w.@+-]+$''. However,
+  re.match with $ allows a trailing newline character. This means a username like ''validuser\n'' passes validation, which
+  is incorrect.
+
+
+  The fix should ensure that the validators reject strings containing any newline characters. The regex anchor \Z should be
+  used instead of $ to prevent this.
+
+
+  Test command: python -m pytest tests/auth_tests/test_validators.py -x
+
+
+  Provide the exact file path and code change needed to fix this issue.'
+expected_output:
+  type: code_test
+  value: Change $ to \Z in the regex patterns in django/contrib/auth/validators.py
+  rubric:
+  - criterion: 'Identifies the correct file: django/contrib/auth/validators.py'
+    weight: 0.3
+  - criterion: Changes $ to \Z in both ASCIIUsernameValidator and UnicodeUsernameValidator regex patterns
+    weight: 0.5
+  - criterion: Does not introduce any other changes or break existing functionality
+    weight: 0.2
+human_baseline_actions: 4
+difficulty: easy
+source: swe-bench
+source_id: django__django-11099
+tags:
+- benchmark
+- swe-bench
+- django
+- regex
+- validation

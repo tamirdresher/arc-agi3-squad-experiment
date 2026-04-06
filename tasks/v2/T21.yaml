@@ -1,0 +1,27 @@
+id: T21
+title: Build a notification system (underspecified)
+type: A5
+meta_category: A
+description: Deliberately vague specification to test assumption-stating behavior.
+prompt: Build a notification system for our application.
+expected_output:
+  type: rubric
+  value: Must state assumptions before designing. Quality of assumptions matters more than the design itself.
+  rubric:
+  - criterion: Explicitly states assumptions about notification channels (email, push, SMS, in-app)
+    weight: 0.3
+  - criterion: States assumptions about volume, frequency, and delivery guarantees
+    weight: 0.25
+  - criterion: Asks clarifying questions OR explicitly calls out what is underspecified
+    weight: 0.25
+  - criterion: Provides a design that is consistent with stated assumptions
+    weight: 0.2
+human_baseline_actions: 6
+difficulty: medium
+source: original
+source_id: null
+tags:
+- ambiguous
+- specification
+- assumptions
+- system-design

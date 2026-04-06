@@ -1,0 +1,33 @@
+id: T45
+title: 'HumanEval #119: match_parens'
+type: C1
+meta_category: C
+description: 'HumanEval+ problem #119 — check if concatenating two paren strings can form a balanced sequence.'
+prompt: "def match_parens(lst):\n    \"\"\"\n    You are given a list of two strings, both strings consist of open\n    parentheses\
+  \ '(' or close parentheses ')' only.\n    Your job is to check if it is possible to concatenate the two strings in\n   \
+  \ some order, that the resulting string will be good.\n    A string S is considered to be good if and only if all parentheses\
+  \ in S\n    are balanced. For example: the string '(())()' is good, while the string\n    '())' is not.\n    Return 'Yes'\
+  \ if there's a way to make a good string, and return 'No' otherwise.\n\n    Examples:\n    match_parens(['()(', ')']) ==\
+  \ 'Yes'\n    match_parens([')', ')']) == 'No'\n    \"\"\""
+expected_output:
+  type: code_test
+  value: Try both concatenation orders (s0+s1 and s1+s0), check if either produces balanced parentheses.
+  rubric:
+  - criterion: Tries both orderings of concatenation
+    weight: 0.3
+  - criterion: Correctly validates balanced parentheses (counter never goes negative, ends at 0)
+    weight: 0.4
+  - criterion: Returns 'Yes' or 'No' as strings, not booleans
+    weight: 0.1
+  - criterion: Passes all HumanEval+ test cases
+    weight: 0.2
+human_baseline_actions: 5
+difficulty: medium
+source: humaneval+
+source_id: HumanEval/119
+tags:
+- benchmark
+- humaneval
+- python
+- parentheses
+- strings

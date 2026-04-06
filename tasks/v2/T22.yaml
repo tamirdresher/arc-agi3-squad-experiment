@@ -1,0 +1,27 @@
+id: T22
+title: Design a user authentication system (underspecified)
+type: A5
+meta_category: A
+description: Vague auth spec to test whether model identifies missing requirements.
+prompt: Design an authentication system for our new web app. It needs to be secure and user-friendly.
+expected_output:
+  type: rubric
+  value: Must identify and state assumptions about MFA, session management, OAuth, password policy, etc.
+  rubric:
+  - criterion: Identifies and states assumptions about auth methods (password, OAuth, SSO, passwordless)
+    weight: 0.3
+  - criterion: Addresses session management (tokens, cookies, expiration, refresh)
+    weight: 0.25
+  - criterion: Considers security requirements (MFA, rate limiting, password hashing algorithm)
+    weight: 0.25
+  - criterion: Acknowledges what is underspecified and either asks questions or documents assumptions
+    weight: 0.2
+human_baseline_actions: 6
+difficulty: medium
+source: original
+source_id: null
+tags:
+- ambiguous
+- specification
+- authentication
+- security

@@ -1,0 +1,26 @@
+id: T42
+title: 'HumanEval #54: same_chars'
+type: C1
+meta_category: C
+description: 'HumanEval+ problem #54 — check if two words have the same character set.'
+prompt: "def same_chars(s0: str, s1: str) -> bool:\n    \"\"\"\n    Check if two words have the same characters.\n    >>>\
+  \ same_chars('eabcdzzzz', 'dddzzzzzzzddeddabc')\n    True\n    >>> same_chars('abcd', 'dddddddabc')\n    True\n    >>> same_chars('dddddddabc',\
+  \ 'abcd')\n    True\n    >>> same_chars('eabcd', 'dddddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabce')\n \
+  \   False\n    >>> same_chars('aabb', 'aaccc')\n    False\n    \"\"\""
+expected_output:
+  type: code_test
+  value: return set(s0) == set(s1)
+  rubric:
+  - criterion: Correctly compares character sets (not multisets) of both strings
+    weight: 0.6
+  - criterion: Passes all HumanEval+ test cases including edge cases
+    weight: 0.4
+human_baseline_actions: 2
+difficulty: easy
+source: humaneval+
+source_id: HumanEval/54
+tags:
+- benchmark
+- humaneval
+- python
+- strings

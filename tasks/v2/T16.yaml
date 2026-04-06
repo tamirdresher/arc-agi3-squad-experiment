@@ -1,0 +1,47 @@
+id: T16
+title: Design an API rate limiter with competing constraints
+type: A4
+meta_category: A
+description: Tests ability to balance fairness, performance, and memory constraints in system design.
+prompt: 'Design an API rate limiter that satisfies ALL of the following constraints:
+
+
+  1. **Fairness**: Each user gets exactly 100 requests per minute. No user can starve another.
+
+  2. **Performance**: Rate-limit check must complete in O(1) time per request.
+
+  3. **Memory**: Total memory usage must not exceed 50MB for 1 million concurrent users.
+
+  4. **Accuracy**: Must not allow more than 105 requests per minute per user (5% burst tolerance).
+
+
+  Provide:
+
+  a) The algorithm choice with justification (why it meets all 4 constraints)
+
+  b) The data structure and memory calculation showing it fits in 50MB for 1M users
+
+  c) Python pseudocode for the `is_allowed(user_id) -> bool` function
+
+  d) What happens when constraint 3 conflicts with constraint 4 (tradeoff analysis)'
+expected_output:
+  type: rubric
+  value: Design addressing all 4 constraints with explicit tradeoff analysis.
+  rubric:
+  - criterion: Chooses appropriate algorithm (sliding window counter, token bucket, or leaky bucket) with O(1) check
+    weight: 0.3
+  - criterion: Memory calculation is correct and fits 50MB for 1M users (e.g., ~50 bytes per user)
+    weight: 0.3
+  - criterion: Pseudocode is correct and implements the described algorithm
+    weight: 0.2
+  - criterion: Explicitly addresses constraint conflicts and tradeoffs
+    weight: 0.2
+human_baseline_actions: 8
+difficulty: hard
+source: original
+source_id: null
+tags:
+- multi-constraint
+- system-design
+- rate-limiting
+- optimization

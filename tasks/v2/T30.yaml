@@ -1,0 +1,21 @@
+id: T30
+title: Default port for Redis
+type: B1
+meta_category: B
+description: Trivial port number recall.
+prompt: What is the default port number for Redis?
+expected_output:
+  type: exact
+  value: '6379'
+  rubric:
+  - criterion: Answer is 6379
+    weight: 1.0
+human_baseline_actions: 1
+difficulty: easy
+source: original
+source_id: null
+tags:
+- factual
+- quick-retrieval
+- redis
+- database

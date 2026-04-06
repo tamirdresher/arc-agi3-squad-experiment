@@ -1,0 +1,27 @@
+id: T25
+title: Build a monitoring dashboard (underspecified)
+type: A5
+meta_category: A
+description: Vague monitoring request to test ability to decompose ambiguous requirements.
+prompt: We need a monitoring dashboard for our microservices. It should help us detect and debug production issues.
+expected_output:
+  type: rubric
+  value: 'Must clarify: what signals (metrics/logs/traces), alerting, SLOs, drill-down, on-call integration.'
+  rubric:
+  - criterion: Identifies the three pillars of observability (metrics, logs, traces) and states which are in scope
+    weight: 0.3
+  - criterion: Addresses alerting and on-call integration assumptions
+    weight: 0.25
+  - criterion: Considers SLO/SLI definitions and what 'healthy' means for the services
+    weight: 0.25
+  - criterion: Acknowledges unknowns about number of services, traffic volume, existing tooling
+    weight: 0.2
+human_baseline_actions: 6
+difficulty: hard
+source: original
+source_id: null
+tags:
+- ambiguous
+- specification
+- monitoring
+- observability

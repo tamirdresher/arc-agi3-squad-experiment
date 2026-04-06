@@ -1,0 +1,27 @@
+id: T23
+title: Create a data pipeline (underspecified)
+type: A5
+meta_category: A
+description: Extremely vague data pipeline spec to test assumption identification.
+prompt: We need a data pipeline. It should take data from our sources and make it available for analytics.
+expected_output:
+  type: rubric
+  value: 'Must clarify: data sources, volume, latency requirements, schema, quality checks, destinations.'
+  rubric:
+  - criterion: States assumptions about data sources (databases, APIs, files, streams)
+    weight: 0.25
+  - criterion: Addresses batch vs streaming, latency requirements, and volume estimates
+    weight: 0.25
+  - criterion: Considers data quality, schema evolution, and error handling
+    weight: 0.25
+  - criterion: Identifies key unknowns and either asks or documents assumptions for each
+    weight: 0.25
+human_baseline_actions: 6
+difficulty: medium
+source: original
+source_id: null
+tags:
+- ambiguous
+- specification
+- data-pipeline
+- etl

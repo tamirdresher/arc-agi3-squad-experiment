@@ -1,0 +1,28 @@
+id: T44
+title: 'HumanEval #82: prime_length'
+type: C1
+meta_category: C
+description: 'HumanEval+ problem #82 — check if string length is prime.'
+prompt: "def prime_length(string):\n    \"\"\"Write a function that takes a string and returns True if the string\n    length\
+  \ is a prime number or False otherwise\n    Examples\n    prime_length('Hello') == True\n    prime_length('abcdcba') ==\
+  \ True\n    prime_length('kittens') == True\n    prime_length('orange') == False\n    \"\"\""
+expected_output:
+  type: code_test
+  value: Check if len(string) is prime using standard primality test.
+  rubric:
+  - criterion: Correctly determines if string length is prime
+    weight: 0.5
+  - criterion: 'Handles edge cases: empty string (length 0, not prime), single char (length 1, not prime)'
+    weight: 0.3
+  - criterion: Primality check is correct (not treating 0 or 1 as prime)
+    weight: 0.2
+human_baseline_actions: 3
+difficulty: easy
+source: humaneval+
+source_id: HumanEval/82
+tags:
+- benchmark
+- humaneval
+- python
+- strings
+- math

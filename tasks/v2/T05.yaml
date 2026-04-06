@@ -1,0 +1,39 @@
+id: T05
+title: Analyze WebAssembly security model passage
+type: A1
+meta_category: A
+description: Tests extraction of security-specific details from a dense technical passage about WebAssembly.
+prompt: 'Read the following passage and answer: What are the four specific security properties of WebAssembly''s sandbox model
+  described here, and what is the one acknowledged limitation?
+
+
+  Passage:
+
+  WebAssembly (Wasm) executes within a sandboxed environment that provides four key security properties. First, memory isolation:
+  each Wasm module operates within a linear memory region that it cannot escape; all memory accesses are bounds-checked, and
+  out-of-bounds access traps rather than corrupting host memory. Second, control-flow integrity: indirect calls are validated
+  against a type table, preventing ROP-style attacks that exploit arbitrary jumps. Third, no ambient authority: a Wasm module
+  has zero capabilities by default — it cannot access the file system, network, or even the system clock unless the host explicitly
+  provides these through imported functions. Fourth, deterministic execution: given the same inputs and imports, a Wasm module
+  produces identical outputs regardless of platform, which aids security auditing. However, the sandbox does not protect against
+  algorithmic complexity attacks — a malicious module can still consume excessive CPU time or memory within its allocation,
+  requiring the host to impose resource limits externally through mechanisms like fuel metering or memory caps.'
+expected_output:
+  type: rubric
+  value: Four security properties and one limitation.
+  rubric:
+  - criterion: 'Lists all 4 properties: memory isolation, control-flow integrity, no ambient authority, deterministic execution'
+    weight: 0.5
+  - criterion: Provides accurate description for each property
+    weight: 0.25
+  - criterion: 'Identifies limitation: no protection against algorithmic complexity / resource exhaustion attacks'
+    weight: 0.25
+human_baseline_actions: 5
+difficulty: hard
+source: original
+source_id: null
+tags:
+- factual
+- comprehension
+- webassembly
+- security

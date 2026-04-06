@@ -1,0 +1,29 @@
+id: T38
+title: Code that looks buggy but is correct
+type: B3
+meta_category: B
+description: Code uses unusual patterns that look like bugs but are intentionally correct.
+prompt: "Review the following Python code and determine if it has any bugs. If there are bugs, describe them. If the code\
+  \ is correct, say so and explain why each unusual-looking part is actually valid.\n\n```python\ndef flatten(lst):\n    result\
+  \ = []\n    for item in lst:\n        if isinstance(item, list):\n            result += flatten(item)\n        else:\n \
+  \           result += [item]\n    return result\n\n# Test\nassert flatten([1, [2, [3, 4], 5], 6]) == [1, 2, 3, 4, 5, 6]\n\
+  assert flatten([]) == []\nassert flatten([1, 2, 3]) == [1, 2, 3]\nassert flatten([[[[1]]]]) == [1]\n```"
+expected_output:
+  type: rubric
+  value: The code is correct. It recursively flattens nested lists. No bugs.
+  rubric:
+  - criterion: Correctly identifies the code as bug-free
+    weight: 0.6
+  - criterion: Does not invent non-existent bugs (false positives are penalized)
+    weight: 0.3
+  - criterion: Explains why the recursive approach works correctly
+    weight: 0.1
+human_baseline_actions: 3
+difficulty: medium
+source: original
+source_id: null
+tags:
+- adversarial
+- code-review
+- python
+- false-positive

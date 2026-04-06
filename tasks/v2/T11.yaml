@@ -1,0 +1,34 @@
+id: T11
+title: Sort function with hidden requirements
+type: A3
+meta_category: A
+description: Task asks for a sort function but test cases reveal it must handle None values and be stable.
+prompt: "Write a Python function `sort_records(records)` that sorts a list of records by their 'priority' field in ascending\
+  \ order.\n\nEach record is a dict like: {'name': 'task-A', 'priority': 3}\n\nTest cases:\n```python\n# Basic sorting\nassert\
+  \ sort_records([{'name': 'c', 'priority': 3}, {'name': 'a', 'priority': 1}]) == \\\n    [{'name': 'a', 'priority': 1}, {'name':\
+  \ 'c', 'priority': 3}]\n\n# Must handle None priority (should sort to end)\nassert sort_records([{'name': 'a', 'priority':\
+  \ None}, {'name': 'b', 'priority': 1}]) == \\\n    [{'name': 'b', 'priority': 1}, {'name': 'a', 'priority': None}]\n\n#\
+  \ Must be stable: equal priorities preserve original order\nassert sort_records([{'name': 'x', 'priority': 2}, {'name':\
+  \ 'y', 'priority': 2}]) == \\\n    [{'name': 'x', 'priority': 2}, {'name': 'y', 'priority': 2}]\n\n# Empty list\nassert\
+  \ sort_records([]) == []\n```"
+expected_output:
+  type: code_test
+  value: 'Function must: (1) sort by priority ascending, (2) handle None by sorting to end, (3) be stable for equal priorities.'
+  rubric:
+  - criterion: Basic sorting by priority works correctly
+    weight: 0.3
+  - criterion: None priorities are sorted to the end (not crash or sort to front)
+    weight: 0.35
+  - criterion: Sort is stable — equal priorities preserve insertion order
+    weight: 0.25
+  - criterion: Handles empty list edge case
+    weight: 0.1
+human_baseline_actions: 4
+difficulty: medium
+source: original
+source_id: null
+tags:
+- implicit-goal
+- python
+- sorting
+- edge-cases

@@ -1,0 +1,20 @@
+id: T26
+title: HTTP status code for Not Found
+type: B1
+meta_category: B
+description: Trivial factual lookup — should be answered immediately without deliberation.
+prompt: What HTTP status code means 'Not Found'?
+expected_output:
+  type: exact
+  value: '404'
+  rubric:
+  - criterion: Answer is 404
+    weight: 1.0
+human_baseline_actions: 1
+difficulty: easy
+source: original
+source_id: null
+tags:
+- factual
+- quick-retrieval
+- http

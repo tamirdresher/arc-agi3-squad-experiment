@@ -1,0 +1,25 @@
+id: T35
+title: Write a limerick about git merge conflicts
+type: B2
+meta_category: B
+description: Constrained creative writing — limerick form with technical subject.
+prompt: Write a limerick (AABBA rhyme scheme) about git merge conflicts.
+expected_output:
+  type: rubric
+  value: A valid limerick about git merge conflicts.
+  rubric:
+  - criterion: Follows AABBA rhyme scheme with correct limerick meter
+    weight: 0.4
+  - criterion: Content is about git merge conflicts specifically
+    weight: 0.3
+  - criterion: Humor or wit — makes the reader smile
+    weight: 0.3
+human_baseline_actions: 3
+difficulty: medium
+source: original
+source_id: null
+tags:
+- creative
+- poetry
+- git
+- humor

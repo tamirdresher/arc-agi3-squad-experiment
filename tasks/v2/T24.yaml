@@ -1,0 +1,27 @@
+id: T24
+title: Implement a search feature (underspecified)
+type: A5
+meta_category: A
+description: Vague search feature request to test requirement elicitation.
+prompt: Add search to our e-commerce site. Customers should be able to find products quickly.
+expected_output:
+  type: rubric
+  value: 'Must clarify: search scope, ranking, filters, autocomplete, fuzzy matching, index size.'
+  rubric:
+  - criterion: States assumptions about what is searchable (products, categories, descriptions, reviews)
+    weight: 0.25
+  - criterion: Addresses search quality concerns (relevance ranking, typo tolerance, synonyms)
+    weight: 0.25
+  - criterion: Considers UX features (autocomplete, faceted filtering, pagination)
+    weight: 0.25
+  - criterion: Identifies infrastructure unknowns (catalog size, update frequency, latency budget)
+    weight: 0.25
+human_baseline_actions: 5
+difficulty: easy
+source: original
+source_id: null
+tags:
+- ambiguous
+- specification
+- search
+- e-commerce

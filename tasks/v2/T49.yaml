@@ -1,0 +1,32 @@
+id: T49
+title: 'SWE-bench: sympy__sympy-13146'
+type: C2
+meta_category: C
+description: SWE-bench Lite task — fix simplification of Rational exponents.
+prompt: "Repository: sympy/sympy\nCommit: 2381701bfce5e9b47a8bb1c10c1e56dfe0a3cad0\n\nIssue: Exponent simplification produces\
+  \ wrong result for Rational bases\n\nIn SymPy, evaluating `(-2)**Rational(1,3)` should return the real cube root `-2**(1/3)`\
+  \ but instead returns a complex result. The issue is in the power evaluation logic in `sympy/core/power.py` where negative\
+  \ bases with rational exponents are not handled correctly for odd roots.\n\nThe real cube root of -8 is -2, but SymPy returns\
+  \ `2*(-1)**(1/3)` which is a complex number.\n\nExpected behavior:\n  (-8)**Rational(1, 3) should simplify to -2\n  (-2)**Rational(1,\
+  \ 3) should simplify to -2**(1/3), not 2*(-1)**(1/3)\n\nTest command: python -m pytest sympy/core/tests/test_power.py -x\n\
+  \nProvide the diagnosis and the approach to fix this issue."
+expected_output:
+  type: rubric
+  value: Identifies the issue in power evaluation for negative bases with odd rational exponents.
+  rubric:
+  - criterion: 'Identifies the correct file: sympy/core/power.py (Pow.__new__ or eval method)'
+    weight: 0.3
+  - criterion: 'Correctly diagnoses: negative base with odd-denominator rational exponent should yield real result'
+    weight: 0.4
+  - criterion: 'Proposes adding a check: if base < 0 and exponent denominator is odd, extract the sign'
+    weight: 0.3
+human_baseline_actions: 7
+difficulty: hard
+source: swe-bench
+source_id: sympy__sympy-13146
+tags:
+- benchmark
+- swe-bench
+- sympy
+- math
+- simplification

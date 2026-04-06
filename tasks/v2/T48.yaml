@@ -1,0 +1,46 @@
+id: T48
+title: 'SWE-bench: requests__requests-3362'
+type: C2
+meta_category: C
+description: SWE-bench Lite task — fix urllib3 exception wrapping in requests.
+prompt: 'Repository: psf/requests
+
+  Commit: 36453b95b13079296776d11b09cab2567ea3e703
+
+
+  Issue: urllib3 exceptions not properly wrapped
+
+
+  When urllib3 raises a DecodeError or TimeoutError, the requests library should wrap these in requests.exceptions.ContentDecodingError
+  and requests.exceptions.ConnectionError respectively. Currently, these exceptions propagate unwrapped, breaking the abstraction
+  layer that requests provides over urllib3.
+
+
+  Users should never see raw urllib3 exceptions when using the requests library.
+
+
+  Test command: python -m pytest tests/test_requests.py -x
+
+
+  Provide the exact file path and code change needed to fix this issue.'
+expected_output:
+  type: code_test
+  value: Add except clauses in requests/adapters.py to catch urllib3.exceptions.DecodeError and TimeoutError, re-raising as
+    requests exceptions.
+  rubric:
+  - criterion: 'Identifies the correct file: requests/adapters.py (in the send() method)'
+    weight: 0.3
+  - criterion: Adds exception handling for urllib3 DecodeError -> ContentDecodingError
+    weight: 0.35
+  - criterion: Adds exception handling for urllib3 TimeoutError -> ConnectionError
+    weight: 0.35
+human_baseline_actions: 5
+difficulty: medium
+source: swe-bench
+source_id: psf__requests-3362
+tags:
+- benchmark
+- swe-bench
+- requests
+- exception-handling
+- python

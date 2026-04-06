@@ -1,0 +1,32 @@
+id: T06
+title: Debug Python binary search off-by-one error
+type: A2
+meta_category: A
+description: Tests ability to find and fix an off-by-one error in a Python binary search implementation.
+prompt: "The following Python function is supposed to return the index of `target` in a sorted list, or -1 if not found. It\
+  \ has exactly one bug. Find it and provide the corrected function.\n\n```python\ndef binary_search(arr, target):\n    left,\
+  \ right = 0, len(arr)\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n   \
+  \         return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid\
+  \ - 1\n    return -1\n```\n\nTest cases that should pass:\n- binary_search([1, 3, 5, 7, 9], 5) == 2\n- binary_search([1,\
+  \ 3, 5, 7, 9], 1) == 0\n- binary_search([1, 3, 5, 7, 9], 9) == 4\n- binary_search([1, 3, 5, 7, 9], 4) == -1\n- binary_search([],\
+  \ 1) == -1"
+expected_output:
+  type: code_test
+  value: right should be initialized to len(arr) - 1, not len(arr). The current code causes an IndexError when checking arr[mid]
+    because mid can equal len(arr).
+  rubric:
+  - criterion: 'Correctly identifies the bug: right = len(arr) should be right = len(arr) - 1'
+    weight: 0.5
+  - criterion: Provides corrected code that passes all test cases
+    weight: 0.4
+  - criterion: Explains why the original code fails (IndexError on arr[mid] when mid == len(arr))
+    weight: 0.1
+human_baseline_actions: 3
+difficulty: easy
+source: original
+source_id: null
+tags:
+- debugging
+- python
+- off-by-one
+- binary-search

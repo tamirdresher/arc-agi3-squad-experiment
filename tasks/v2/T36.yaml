@@ -1,0 +1,27 @@
+id: T36
+title: Answer hidden in the first sentence
+type: B3
+meta_category: B
+description: The answer is literally in the first sentence; the rest is distraction.
+prompt: 'The function should return 42. Now, consider the following complex scenario: you are designing a distributed hash
+  table that must support consistent hashing with virtual nodes across a cluster of 128 machines. Each machine handles approximately
+  50,000 requests per second, and the system must maintain sub-millisecond latency for key lookups. The replication factor
+  is 3, and the system uses vector clocks for conflict resolution. Given that the hash ring has 2^32 positions and each physical
+  node maps to 150 virtual nodes, calculate the expected load imbalance ratio. However, before all that — what should the
+  function return?'
+expected_output:
+  type: exact
+  value: '42'
+  rubric:
+  - criterion: Answer is 42 (stated in the first sentence)
+    weight: 0.8
+  - criterion: Does not get distracted by the complex distributed systems scenario
+    weight: 0.2
+human_baseline_actions: 1
+difficulty: easy
+source: original
+source_id: null
+tags:
+- adversarial
+- misdirection
+- simplicity

@@ -1,0 +1,35 @@
+id: T01
+title: Summarize distributed consensus mechanisms
+type: A1
+meta_category: A
+description: Tests ability to extract and summarize key points from a technical passage about distributed consensus algorithms.
+prompt: 'Read the following passage and provide a summary in exactly 3 bullet points, each no longer than one sentence.
+
+
+  Passage:
+
+  The Raft consensus algorithm was designed as an understandable alternative to Paxos. It decomposes consensus into three
+  sub-problems: leader election, log replication, and safety. In Raft, at most one leader exists at any time; the leader accepts
+  client requests, replicates log entries to follower nodes, and tells followers when it is safe to apply entries to their
+  state machines. If the leader fails, a new election begins after a randomized timeout. Raft guarantees that committed entries
+  are durable and will eventually be applied by all nodes, provided a majority of nodes are operational. Unlike Paxos, Raft
+  does not allow holes in the log, simplifying reasoning about consistency. The algorithm has been formally verified using
+  TLA+ and implemented in systems like etcd and CockroachDB.'
+expected_output:
+  type: rubric
+  value: 'Three bullet points capturing: (1) Raft as Paxos alternative, (2) sub-problems/leader-based approach, (3) guarantees/implementations.'
+  rubric:
+  - criterion: Mentions Raft is an understandable alternative to Paxos
+    weight: 0.3
+  - criterion: Covers at least 2 of the 3 sub-problems or the leader-based mechanism
+    weight: 0.4
+  - criterion: Mentions durability guarantees or real-world implementations (etcd, CockroachDB)
+    weight: 0.3
+human_baseline_actions: 3
+difficulty: easy
+source: original
+source_id: null
+tags:
+- factual
+- comprehension
+- distributed-systems

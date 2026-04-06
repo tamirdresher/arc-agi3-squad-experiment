@@ -1,0 +1,21 @@
+id: T28
+title: Time complexity of binary search
+type: B1
+meta_category: B
+description: Basic CS knowledge retrieval.
+prompt: What is the time complexity of binary search on a sorted array of n elements?
+expected_output:
+  type: exact
+  value: O(log n)
+  rubric:
+  - criterion: Answer is O(log n) or O(log2 n)
+    weight: 1.0
+human_baseline_actions: 1
+difficulty: easy
+source: original
+source_id: null
+tags:
+- factual
+- quick-retrieval
+- algorithms
+- complexity

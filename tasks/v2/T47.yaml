@@ -1,0 +1,50 @@
+id: T47
+title: 'SWE-bench: django__django-11179'
+type: C2
+meta_category: C
+description: SWE-bench Lite task — fix delete() to return per-model deletion counts.
+prompt: 'Repository: django/django
+
+  Commit: 8a844e761d9b4cf1d35e2d4e8b55da5e40e592e3
+
+
+  Issue: QuerySet.delete() should return a dict of per-model deletion counts
+
+
+  Currently, QuerySet.delete() on a model with cascading deletes returns a tuple where the second element is a dict like {''app.Model'':
+  count}. However, when deleting objects that have no related objects to cascade-delete, the function returns an empty dict
+  {} instead of including the primary model''s count.
+
+
+  Expected: Model.objects.filter(...).delete() should always include the primary model in the deletion count dict, even if
+  the count is 0 for related models.
+
+
+  The deletion collector in django/db/models/deletion.py should be updated to ensure the primary model''s count is always
+  included in the result.
+
+
+  Test command: python -m pytest tests/delete/tests.py -x
+
+
+  Provide the exact file path and code change needed.'
+expected_output:
+  type: code_test
+  value: Update django/db/models/deletion.py Collector.delete() to always include the primary model in the returned dict.
+  rubric:
+  - criterion: 'Identifies the correct file: django/db/models/deletion.py'
+    weight: 0.3
+  - criterion: Modifies the Collector.delete() method to include the origin model in the return dict
+    weight: 0.5
+  - criterion: Fix is minimal and does not change the method signature or break cascading deletes
+    weight: 0.2
+human_baseline_actions: 6
+difficulty: medium
+source: swe-bench
+source_id: django__django-11179
+tags:
+- benchmark
+- swe-bench
+- django
+- orm
+- delete

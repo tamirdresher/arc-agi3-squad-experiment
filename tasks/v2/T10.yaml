@@ -1,0 +1,34 @@
+id: T10
+title: Debug JavaScript event listener memory leak
+type: A2
+meta_category: A
+description: Tests ability to find a logic error in JavaScript that causes a memory leak via unremoved event listeners.
+prompt: "The following JavaScript class manages a WebSocket connection with auto-reconnect. After running for several hours,\
+  \ memory usage grows unboundedly. Find the one bug causing the memory leak and provide the fix.\n\n```javascript\nclass\
+  \ WebSocketManager {\n    constructor(url) {\n        this.url = url;\n        this.messageHandlers = [];\n        this.connect();\n\
+  \    }\n\n    connect() {\n        this.ws = new WebSocket(this.url);\n        this.ws.addEventListener('message', (event)\
+  \ => {\n            this.messageHandlers.forEach(h => h(event.data));\n        });\n        this.ws.addEventListener('close',\
+  \ () => {\n            console.log('Disconnected, reconnecting in 1s...');\n            setTimeout(() => this.connect(),\
+  \ 1000);\n        });\n    }\n\n    onMessage(handler) {\n        this.messageHandlers.push(handler);\n    }\n}\n```\n\n\
+  Usage pattern that causes the leak:\n```javascript\nconst mgr = new WebSocketManager('ws://localhost:8080');\nsetInterval(()\
+  \ => {\n    mgr.onMessage((data) => console.log(data));\n}, 5000);\n```"
+expected_output:
+  type: code_test
+  value: The messageHandlers array grows without bound because onMessage always pushes new handlers and never removes old
+    ones. Each setInterval call adds a duplicate handler.
+  rubric:
+  - criterion: 'Identifies the bug: messageHandlers array grows unboundedly as duplicate handlers accumulate'
+    weight: 0.4
+  - criterion: 'Provides fix: add deduplication, or return an unsubscribe function, or clear handlers on reconnect'
+    weight: 0.5
+  - criterion: Notes that the usage pattern (setInterval + onMessage) is the trigger
+    weight: 0.1
+human_baseline_actions: 5
+difficulty: hard
+source: original
+source_id: null
+tags:
+- debugging
+- javascript
+- memory-leak
+- event-listeners

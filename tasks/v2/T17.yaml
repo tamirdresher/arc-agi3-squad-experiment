@@ -1,0 +1,47 @@
+id: T17
+title: Design a task scheduler with latency, throughput, and fairness
+type: A4
+meta_category: A
+description: Tests multi-constraint reasoning for a task scheduling system.
+prompt: 'Design a task scheduling system for a shared compute cluster that must satisfy:
+
+
+  1. **Latency**: High-priority tasks must start within 100ms of submission.
+
+  2. **Throughput**: The scheduler must handle 10,000 task submissions per second.
+
+  3. **Fairness**: No tenant should receive less than their proportional share of resources over any 5-minute window.
+
+  4. **Efficiency**: CPU utilization must stay above 85% when there are pending tasks.
+
+
+  Provide:
+
+  a) The scheduling algorithm and its priority mechanism
+
+  b) How fairness is enforced alongside priority
+
+  c) How the system achieves 10K tasks/sec throughput
+
+  d) A concrete scenario where two constraints conflict and how you resolve it'
+expected_output:
+  type: rubric
+  value: Scheduling design addressing all 4 constraints with conflict resolution.
+  rubric:
+  - criterion: Proposes a viable scheduling algorithm (multi-level feedback queue, weighted fair queueing, or similar)
+    weight: 0.25
+  - criterion: Priority mechanism allows high-priority tasks to start within 100ms without starving low-priority
+    weight: 0.25
+  - criterion: Describes specific mechanism for fairness enforcement (quotas, tokens, DRF)
+    weight: 0.25
+  - criterion: Identifies and resolves a concrete conflict (e.g., priority vs fairness when high-pri tasks dominate)
+    weight: 0.25
+human_baseline_actions: 8
+difficulty: hard
+source: original
+source_id: null
+tags:
+- multi-constraint
+- system-design
+- scheduling
+- optimization

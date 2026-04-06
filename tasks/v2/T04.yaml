@@ -1,0 +1,39 @@
+id: T04
+title: Extract CAP theorem misconceptions
+type: A1
+meta_category: A
+description: Tests precise extraction from a passage that contains subtle distinctions about CAP theorem.
+prompt: 'Read the following passage carefully. Then answer: According to this passage, what are two common misconceptions
+  about the CAP theorem, and what is the actual nuance the author describes?
+
+
+  Passage:
+
+  The CAP theorem, proved by Gilbert and Lynch in 2002, states that a distributed system cannot simultaneously provide all
+  three of Consistency, Availability, and Partition tolerance. A common misconception is that you must permanently choose
+  two of three (''pick 2 out of 3''). In reality, partition events are rare — most of the time, you can provide both consistency
+  and availability. The real choice happens only during a network partition: at that point, you must choose between consistency
+  (reject operations that could lead to divergence) and availability (accept operations, risking inconsistency that must be
+  resolved later). A second misconception is that ''consistency'' in CAP means the same as in ACID. CAP consistency refers
+  specifically to linearizability — a strong single-object guarantee — whereas ACID consistency is about application-level
+  invariants. Systems like DynamoDB operate in a nuanced middle ground, offering tunable consistency: eventually consistent
+  reads by default, with optional strongly consistent reads at higher latency.'
+expected_output:
+  type: rubric
+  value: Two misconceptions and the actual nuance.
+  rubric:
+  - criterion: 'Misconception 1: Must permanently pick 2 of 3 (actually choice only matters during partitions)'
+    weight: 0.35
+  - criterion: 'Misconception 2: CAP consistency = ACID consistency (CAP = linearizability, ACID = app invariants)'
+    weight: 0.35
+  - criterion: 'Nuance: Tunable consistency as middle ground (e.g., DynamoDB)'
+    weight: 0.3
+human_baseline_actions: 5
+difficulty: medium
+source: original
+source_id: null
+tags:
+- factual
+- comprehension
+- distributed-systems
+- cap-theorem

@@ -1,0 +1,29 @@
+id: T37
+title: Simple math buried in overwhelming context
+type: B3
+meta_category: B
+description: A trivial arithmetic problem surrounded by irrelevant technical complexity.
+prompt: 'A Kubernetes cluster has 3 nodes. Each node runs 4 pods. A rolling update replaces pods one at a time. The cluster
+  uses Calico for CNI with BGP peering, and each pod gets a /32 IP from a /24 subnet allocated per node. The kube-proxy runs
+  in IPVS mode with round-robin scheduling. Service mesh is Istio 1.20 with mTLS enabled and PERMISSIVE mode for gradual migration.
+  The Envoy sidecar consumes approximately 50Mi of memory and 0.1 CPU cores per pod.
+
+
+  Question: How many pods are running in total across the cluster?'
+expected_output:
+  type: exact
+  value: '12'
+  rubric:
+  - criterion: Answer is 12 (3 nodes x 4 pods = 12)
+    weight: 0.8
+  - criterion: Shows simple multiplication, not distracted by CNI/mesh details
+    weight: 0.2
+human_baseline_actions: 1
+difficulty: easy
+source: original
+source_id: null
+tags:
+- adversarial
+- misdirection
+- arithmetic
+- kubernetes

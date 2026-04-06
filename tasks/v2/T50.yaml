@@ -1,0 +1,34 @@
+id: T50
+title: 'SWE-bench: flask__flask-4045'
+type: C2
+meta_category: C
+description: SWE-bench Lite task — fix Blueprint.cli to properly register CLI commands.
+prompt: "Repository: pallets/flask\nCommit: 1d55b80bf0fbb3e19232b5e5129c33fc1fcd5e2c\n\nIssue: Nested Blueprint CLI groups\
+  \ lose their commands\n\nWhen registering CLI commands on a Blueprint using `@bp.cli.command()`, the commands are not properly\
+  \ available when the Blueprint is registered on the app. The issue is that Blueprint.cli creates an AppGroup, but the commands\
+  \ registered on it are lost during the deferred registration process because the cli group is recreated.\n\nSteps to reproduce:\n\
+  ```python\nfrom flask import Flask, Blueprint\nbp = Blueprint('test', __name__)\n\n@bp.cli.command('hello')\ndef hello_cmd():\n\
+  \    print('Hello from blueprint!')\n\napp = Flask(__name__)\napp.register_blueprint(bp)\n\n# Running 'flask test hello'\
+  \ should work but the command is not found\n```\n\nTest command: python -m pytest tests/test_cli.py -x\n\nProvide the diagnosis\
+  \ and approach to fix this issue."
+expected_output:
+  type: rubric
+  value: Identifies the deferred registration issue with Blueprint CLI commands.
+  rubric:
+  - criterion: Identifies the issue is in Blueprint's deferred CLI command registration
+    weight: 0.3
+  - criterion: Correctly points to flask/blueprints.py or flask/cli.py as the relevant files
+    weight: 0.3
+  - criterion: 'Proposes fix: preserve CLI commands during blueprint registration (copy commands from blueprint cli to app
+      cli group)'
+    weight: 0.4
+human_baseline_actions: 8
+difficulty: hard
+source: swe-bench
+source_id: pallets__flask-4045
+tags:
+- benchmark
+- swe-bench
+- flask
+- cli
+- blueprints

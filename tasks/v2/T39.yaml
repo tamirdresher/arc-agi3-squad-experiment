@@ -1,0 +1,33 @@
+id: T39
+title: Long problem with trivial solution
+type: B3
+meta_category: B
+description: Extremely long problem description where the solution is trivially simple.
+prompt: 'You are implementing a critical component of a real-time trading system. The system processes millions of orders
+  per day across multiple asset classes including equities, fixed income, derivatives, and commodities. The matching engine
+  must maintain price-time priority and support multiple order types: market, limit, stop, stop-limit, iceberg, and fill-or-kill.
+  The system runs on a cluster of 24 bare-metal servers with FPGA-accelerated network cards for sub-microsecond latency. Each
+  server has 512GB of RAM and dual EPYC processors.
+
+
+  Your specific task: Write a function that takes two integers and returns their sum.
+
+
+  The function signature is: `def add(a: int, b: int) -> int`'
+expected_output:
+  type: code_test
+  value: "def add(a: int, b: int) -> int:\n    return a + b"
+  rubric:
+  - criterion: Returns a + b (the correct trivial implementation)
+    weight: 0.7
+  - criterion: Does not over-engineer (no unnecessary complexity from the trading context)
+    weight: 0.3
+human_baseline_actions: 1
+difficulty: easy
+source: original
+source_id: null
+tags:
+- adversarial
+- misdirection
+- over-engineering
+- simplicity

@@ -1,0 +1,29 @@
+id: T41
+title: 'HumanEval #31: is_prime'
+type: C1
+meta_category: C
+description: 'HumanEval+ problem #31 — determine if a number is prime.'
+prompt: "def is_prime(n):\n    \"\"\"Return true if a given number is prime, and false otherwise.\n    >>> is_prime(6)\n \
+  \   False\n    >>> is_prime(101)\n    True\n    >>> is_prime(11)\n    True\n    >>> is_prime(13441)\n    True\n    >>> is_prime(61)\n\
+  \    True\n    >>> is_prime(4)\n    False\n    >>> is_prime(1)\n    False\n    \"\"\""
+expected_output:
+  type: code_test
+  value: Correct is_prime implementation that handles edge cases (0, 1, 2, negative numbers) and passes all HumanEval+ test
+    cases.
+  rubric:
+  - criterion: Correct for all basic primes and composites
+    weight: 0.4
+  - criterion: 'Handles edge cases: 0, 1, 2, negative numbers'
+    weight: 0.3
+  - criterion: 'Efficient: O(sqrt(n)) or better'
+    weight: 0.3
+human_baseline_actions: 3
+difficulty: easy
+source: humaneval+
+source_id: HumanEval/31
+tags:
+- benchmark
+- humaneval
+- python
+- math
+- primality

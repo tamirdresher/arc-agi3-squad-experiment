@@ -1,0 +1,24 @@
+id: T31
+title: Write a haiku about Kubernetes
+type: B2
+meta_category: B
+description: Creative task — structured reasoning may suppress creative fluency.
+prompt: Write a haiku (5-7-5 syllable structure) about Kubernetes.
+expected_output:
+  type: rubric
+  value: A valid haiku about Kubernetes.
+  rubric:
+  - criterion: Follows 5-7-5 syllable structure
+    weight: 0.4
+  - criterion: Content relates to Kubernetes (containers, orchestration, pods, clusters)
+    weight: 0.3
+  - criterion: Creative quality — evocative imagery or wit, not just technical description
+    weight: 0.3
+human_baseline_actions: 2
+difficulty: easy
+source: original
+source_id: null
+tags:
+- creative
+- poetry
+- kubernetes

@@ -1,0 +1,45 @@
+id: T15
+title: REST endpoint with implicit idempotency requirement
+type: A3
+meta_category: A
+description: Asks for a REST endpoint; usage context implies idempotency and error handling requirements.
+prompt: 'Write a Python Flask endpoint `POST /api/orders` that creates a new order from a JSON body:
+
+  ```json
+
+  {"customer_id": "C123", "items": [{"sku": "WIDGET-1", "qty": 2}], "request_id": "req-abc-123"}
+
+  ```
+
+
+  The endpoint should validate the input, save the order (you can use a simple in-memory dict), and return the created order
+  with a generated order ID.
+
+
+  Context: This API is called by a mobile app over unreliable cellular networks. The app retries failed requests with the
+  same request_id. The order triggers a payment charge.
+
+
+  Provide the complete Flask route handler.'
+expected_output:
+  type: rubric
+  value: 'Must implement: input validation, order creation, AND idempotency via request_id to prevent duplicate charges.'
+  rubric:
+  - criterion: 'Implements idempotency: same request_id returns same order without creating duplicates'
+    weight: 0.35
+  - criterion: Validates input (customer_id, items array, required fields)
+    weight: 0.25
+  - criterion: Returns proper HTTP status codes (201 for new, 200 for idempotent retry, 400 for invalid)
+    weight: 0.2
+  - criterion: Generates unique order ID and stores the order
+    weight: 0.2
+human_baseline_actions: 6
+difficulty: hard
+source: original
+source_id: null
+tags:
+- implicit-goal
+- python
+- flask
+- rest-api
+- idempotency

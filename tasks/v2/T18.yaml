@@ -1,0 +1,47 @@
+id: T18
+title: Design a connection pool with efficiency, memory, and failover
+type: A4
+meta_category: A
+description: Tests reasoning about database connection pool tradeoffs.
+prompt: 'Design a database connection pool for a microservice that must satisfy:
+
+
+  1. **Efficiency**: Connection acquisition must take < 1ms for 99th percentile under normal load.
+
+  2. **Memory**: Maximum 50 connections per service instance (database limit: 500 total across 10 instances).
+
+  3. **Failover**: If the primary database fails, switch to a read replica within 5 seconds.
+
+  4. **Idle cleanup**: Connections idle for > 30 seconds should be closed to free database resources.
+
+
+  Provide:
+
+  a) The pool sizing strategy (min, max, idle settings) with justification
+
+  b) The connection validation approach (how do you detect stale/broken connections?)
+
+  c) The failover mechanism (how do you switch 50 connections to a replica in < 5s?)
+
+  d) What happens under connection exhaustion — how does constraint 1 degrade gracefully?'
+expected_output:
+  type: rubric
+  value: Pool design addressing all 4 constraints with graceful degradation analysis.
+  rubric:
+  - criterion: Pool sizing is justified (min/max/idle with math for 50-connection limit)
+    weight: 0.25
+  - criterion: Connection validation approach is practical (test-on-borrow, background pings, or TCP keepalive)
+    weight: 0.25
+  - criterion: Failover mechanism is realistic (drain existing, redirect new, health checks)
+    weight: 0.25
+  - criterion: Describes graceful degradation under exhaustion (queuing, backpressure, timeout)
+    weight: 0.25
+human_baseline_actions: 7
+difficulty: medium
+source: original
+source_id: null
+tags:
+- multi-constraint
+- system-design
+- connection-pool
+- database

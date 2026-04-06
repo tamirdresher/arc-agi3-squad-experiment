@@ -1,0 +1,28 @@
+id: T34
+title: Explain microservices with a non-technical analogy
+type: B2
+meta_category: B
+description: Tests creative communication — explaining tech concepts to non-engineers.
+prompt: Explain the concept of microservices architecture to a 10-year-old using an analogy from everyday life. The explanation
+  should be no longer than 4 sentences and should cover why microservices are useful (not just what they are).
+expected_output:
+  type: rubric
+  value: A clear, age-appropriate analogy that covers both what and why.
+  rubric:
+  - criterion: Uses a concrete, relatable analogy (not abstract technical terms)
+    weight: 0.3
+  - criterion: Explains what microservices are (independent, small pieces working together)
+    weight: 0.3
+  - criterion: Explains why they are useful (independence, fix one without breaking others)
+    weight: 0.2
+  - criterion: 4 sentences or fewer, accessible to a 10-year-old
+    weight: 0.2
+human_baseline_actions: 3
+difficulty: easy
+source: original
+source_id: null
+tags:
+- creative
+- analogy
+- microservices
+- communication

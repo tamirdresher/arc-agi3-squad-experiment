@@ -1,0 +1,58 @@
+id: T14
+title: Password validator with implicit security requirements
+type: A3
+meta_category: A
+description: Asks for a password validator with explicit rules, but the context implies additional security requirements.
+prompt: 'Write a Python function `validate_password(password)` that returns True if the password meets these requirements:
+
+  - At least 8 characters long
+
+  - Contains at least one uppercase letter
+
+  - Contains at least one lowercase letter
+
+  - Contains at least one digit
+
+  - Contains at least one special character (!@#$%^&*)
+
+
+  This function will be used in a user registration API endpoint. Return a tuple of (bool, str) where the string explains
+  why validation failed, or ''Valid'' if it passed.
+
+
+  Test cases:
+
+  ```python
+
+  assert validate_password(''Abcdef1!'')[0] == True
+
+  assert validate_password(''short1!'')[0] == False
+
+  assert validate_password(''A'' * 1000000 + ''1!a'')[0]  # should not hang or crash
+
+  assert validate_password('''')[0] == False
+
+  assert validate_password(None)  # should not raise an exception
+
+  ```'
+expected_output:
+  type: code_test
+  value: 'Must handle: explicit rules + None input gracefully + very long input without hanging (no ReDoS) + empty string.'
+  rubric:
+  - criterion: All explicit validation rules implemented correctly
+    weight: 0.3
+  - criterion: Handles None input without raising an exception
+    weight: 0.25
+  - criterion: Handles extremely long input efficiently (no ReDoS or O(n^2) behavior)
+    weight: 0.25
+  - criterion: Returns informative (bool, str) tuples with clear failure messages
+    weight: 0.2
+human_baseline_actions: 5
+difficulty: medium
+source: original
+source_id: null
+tags:
+- implicit-goal
+- python
+- validation
+- security

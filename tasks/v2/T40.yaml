@@ -1,0 +1,41 @@
+id: T40
+title: Red herring data analysis
+type: B3
+meta_category: B
+description: Presents complex data but the question is answerable from one obvious number.
+prompt: 'Analyze the following server metrics from the past hour:
+
+
+  | Timestamp | CPU% | Memory% | Disk I/O (MB/s) | Network (Mbps) | Active Connections | Error Rate |
+
+  |-----------|------|---------|-----------------|----------------|-------------------|------------|
+
+  | 14:00 | 45 | 62 | 120 | 450 | 1200 | 0.01% |
+
+  | 14:15 | 47 | 63 | 125 | 460 | 1250 | 0.01% |
+
+  | 14:30 | 46 | 62 | 118 | 455 | 1180 | 0.02% |
+
+  | 14:45 | 48 | 64 | 130 | 470 | 1300 | 0.01% |
+
+
+  Based on this data: Is the server experiencing any issues that require immediate attention?'
+expected_output:
+  type: rubric
+  value: No. All metrics are within normal ranges. No anomalies detected.
+  rubric:
+  - criterion: Correctly identifies that no immediate issues exist — all metrics are stable and within normal ranges
+    weight: 0.6
+  - criterion: Does not fabricate problems or raise false alarms from the stable data
+    weight: 0.3
+  - criterion: Brief, confident answer rather than lengthy over-analysis
+    weight: 0.1
+human_baseline_actions: 2
+difficulty: easy
+source: original
+source_id: null
+tags:
+- adversarial
+- data-analysis
+- false-alarm
+- monitoring

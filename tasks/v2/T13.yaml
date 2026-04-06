@@ -1,0 +1,32 @@
+id: T13
+title: CSV parser with implicit edge-case handling
+type: A3
+meta_category: A
+description: Asks for a CSV parser but test data reveals it must handle quoted fields with embedded commas and newlines.
+prompt: "Write a Python function `parse_csv(text)` that takes a CSV string and returns a list of lists (rows and columns).\n\
+  \nTest data:\n```\nname,city,note\nAlice,Portland,simple\n\"Bob \"\"Bobby\"\"\",Denver,\"has a comma, here\"\n\"Carol\"\
+  ,\"\",\"multi\nline note\"\n```\n\nExpected output:\n```python\n[\n    ['name', 'city', 'note'],\n    ['Alice', 'Portland',\
+  \ 'simple'],\n    ['Bob \"Bobby\"', 'Denver', 'has a comma, here'],\n    ['Carol', '', 'multi\\nline note'],\n]\n```\n\n\
+  Do not use the csv module or any external libraries."
+expected_output:
+  type: code_test
+  value: 'Parser handles: basic CSV, quoted fields with commas, escaped quotes (doubled), multiline fields.'
+  rubric:
+  - criterion: Basic CSV parsing works (unquoted fields, simple rows)
+    weight: 0.2
+  - criterion: Handles quoted fields containing commas
+    weight: 0.25
+  - criterion: Handles escaped quotes (doubled quotes within quoted fields)
+    weight: 0.25
+  - criterion: Handles multiline values within quoted fields
+    weight: 0.3
+human_baseline_actions: 7
+difficulty: hard
+source: original
+source_id: null
+tags:
+- implicit-goal
+- python
+- parsing
+- csv
+- edge-cases

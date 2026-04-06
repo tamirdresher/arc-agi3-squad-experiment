@@ -1,0 +1,27 @@
+id: T32
+title: Suggest creative names for a developer tool
+type: B2
+meta_category: B
+description: Open-ended naming brainstorm — structure may limit creative breadth.
+prompt: Suggest 5 creative and memorable names for a developer productivity tool that automates code reviews using AI. The
+  names should be catchy, easy to remember, and hint at the tool's purpose. For each name, provide a one-sentence tagline.
+expected_output:
+  type: rubric
+  value: Five creative names with taglines.
+  rubric:
+  - criterion: Provides exactly 5 distinct names
+    weight: 0.2
+  - criterion: Names are creative, memorable, and not generic (e.g., not 'AI Code Reviewer')
+    weight: 0.3
+  - criterion: Names hint at the tool's purpose (code review, AI, quality)
+    weight: 0.2
+  - criterion: Each name has a compelling one-sentence tagline
+    weight: 0.3
+human_baseline_actions: 3
+difficulty: easy
+source: original
+source_id: null
+tags:
+- creative
+- naming
+- brainstorming

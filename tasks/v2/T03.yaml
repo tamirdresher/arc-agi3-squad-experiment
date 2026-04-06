@@ -1,0 +1,38 @@
+id: T03
+title: Summarize garbage collection tradeoffs
+type: A1
+meta_category: A
+description: Tests ability to identify tradeoffs from a nuanced technical passage.
+prompt: 'Read the following passage and list exactly 3 tradeoffs described. For each tradeoff, state the two competing concerns
+  in the format ''X vs Y''.
+
+
+  Passage:
+
+  Modern garbage collectors face several fundamental tradeoffs. Throughput-oriented collectors like G1 batch work into large
+  pauses, achieving high overall throughput but causing latency spikes that can exceed 200ms. Low-latency collectors like
+  ZGC and Shenandoah use concurrent marking and relocation to keep pauses under 1ms, but consume 10-15% of CPU cycles for
+  concurrent GC work, reducing application throughput. Generational collectors exploit the weak generational hypothesis —
+  most objects die young — to focus collection on the young generation, but this requires write barriers on every reference
+  store, adding 2-5% overhead even when no collection is occurring. Compacting collectors eliminate fragmentation and enable
+  fast bump-pointer allocation, but compaction requires copying objects, which means updating every reference to moved objects
+  — a cost proportional to the live set size rather than the garbage volume.'
+expected_output:
+  type: rubric
+  value: Three tradeoffs in X vs Y format from the passage.
+  rubric:
+  - criterion: Identifies throughput vs latency tradeoff (G1 vs ZGC/Shenandoah)
+    weight: 0.35
+  - criterion: Identifies generational efficiency vs write barrier overhead
+    weight: 0.35
+  - criterion: Identifies compaction benefits (no fragmentation) vs reference-update/copying cost
+    weight: 0.3
+human_baseline_actions: 4
+difficulty: medium
+source: original
+source_id: null
+tags:
+- factual
+- comprehension
+- garbage-collection
+- systems

@@ -1,0 +1,47 @@
+id: T20
+title: Design a feature flag system with consistency, latency, and safety
+type: A4
+meta_category: A
+description: Tests multi-constraint reasoning for a feature flag system used in production.
+prompt: 'Design a feature flag system for a global web application with these constraints:
+
+
+  1. **Consistency**: When a flag is toggled off (kill switch), all servers must stop serving the feature within 10 seconds.
+
+  2. **Latency**: Feature flag evaluation must add < 1ms to request processing (p99).
+
+  3. **Safety**: A flag change must not be able to cause a full outage (blast radius control).
+
+  4. **Auditability**: Every flag change must be traceable to a person, time, and reason.
+
+
+  Provide:
+
+  a) The architecture for flag storage, distribution, and evaluation
+
+  b) How you achieve < 1ms evaluation (hint: consider local caching)
+
+  c) The blast radius control mechanism (gradual rollout, canary, etc.)
+
+  d) How you reconcile constraint 1 (fast propagation) with constraint 3 (blast radius control)'
+expected_output:
+  type: rubric
+  value: Feature flag design addressing all 4 constraints with conflict resolution.
+  rubric:
+  - criterion: Architecture includes local cache for <1ms reads with push/pull sync mechanism
+    weight: 0.25
+  - criterion: Kill switch propagation within 10s is achievable (push notification or aggressive polling)
+    weight: 0.25
+  - criterion: 'Blast radius control: percentage rollouts, user segment targeting, or canary groups'
+    weight: 0.25
+  - criterion: Addresses tension between fast kill switch and gradual rollout with a clear resolution
+    weight: 0.25
+human_baseline_actions: 7
+difficulty: medium
+source: original
+source_id: null
+tags:
+- multi-constraint
+- system-design
+- feature-flags
+- distributed-systems
