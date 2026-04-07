@@ -1,0 +1,317 @@
+2026-04-07T16:55:08 | INFO    | ============================================================
+2026-04-07T16:55:08 | INFO    | ARC Experiment V4 — Execution Harness
+2026-04-07T16:55:08 | INFO    | ============================================================
+2026-04-07T16:55:08 | INFO    | PILOT MODE: 10 tasks, 1 rep(s)
+2026-04-07T16:55:08 | INFO    | DRY-RUN MODE: no API calls will be made
+2026-04-07T16:55:08 | INFO    | Loading tasks from C:\Temp\arc-experiment\tasks\v4
+2026-04-07T16:55:08 | INFO    | Loaded 10 tasks
+2026-04-07T16:55:08 | INFO    | Run plan: 30 runs (10 tasks × 3 conditions × 1 reps), seed=42
+2026-04-07T16:55:08 | INFO    | Remaining: 30 runs to execute
+2026-04-07T16:55:08 | INFO    | [1/30] PILOT-REV-001 | cot | rep 1
+2026-04-07T16:55:08 | DEBUG   | Prompt built: task=PILOT-REV-001 cond=cot rep=1 len=1702
+2026-04-07T16:55:08 | INFO    |   → ERROR (tokens: 425+50)
+2026-04-07T16:55:08 | INFO    | [2/30] PILOT-REF-001 | arc | rep 1
+2026-04-07T16:55:08 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=arc rep=1 len=2336
+2026-04-07T16:55:08 | INFO    |   → ERROR (tokens: 584+50 arc=0/4)
+2026-04-07T16:55:08 | INFO    | [3/30] PILOT-BUG-002 | cot | rep 1
+2026-04-07T16:55:08 | DEBUG   | Prompt built: task=PILOT-BUG-002 cond=cot rep=1 len=1416
+2026-04-07T16:55:08 | INFO    |   → ERROR (tokens: 354+50)
+2026-04-07T16:55:08 | INFO    | [4/30] PILOT-TST-001 | arc | rep 1
+2026-04-07T16:55:08 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=arc rep=1 len=2245
+2026-04-07T16:55:51 | INFO    | ============================================================
+2026-04-07T16:55:51 | INFO    | ARC Experiment V4 — Execution Harness
+2026-04-07T16:55:51 | INFO    | ============================================================
+2026-04-07T16:55:51 | INFO    | PILOT MODE: 10 tasks, 1 rep(s)
+2026-04-07T16:55:51 | INFO    | DRY-RUN MODE: no API calls will be made
+2026-04-07T16:55:51 | INFO    | Loading tasks from C:\Temp\arc-experiment\tasks\v4
+2026-04-07T16:55:51 | INFO    | Loaded 10 tasks
+2026-04-07T16:55:51 | INFO    | Run plan: 30 runs (10 tasks × 3 conditions × 1 reps), seed=42
+2026-04-07T16:55:51 | INFO    | Resuming: 3 runs already completed
+2026-04-07T16:55:51 | INFO    | Remaining: 27 runs to execute
+2026-04-07T16:55:51 | INFO    | [1/27] PILOT-TST-001 | arc | rep 1
+2026-04-07T16:55:51 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=arc rep=1 len=2245
+2026-04-07T16:55:51 | INFO    |   -> ERROR (tokens: 561+50 arc=0/4)
+2026-04-07T16:55:51 | INFO    | [2/27] PILOT-REV-002 | cot | rep 1
+2026-04-07T16:55:51 | DEBUG   | Prompt built: task=PILOT-REV-002 cond=cot rep=1 len=1710
+2026-04-07T16:55:51 | INFO    |   -> ERROR (tokens: 427+50)
+2026-04-07T16:55:51 | INFO    | [3/27] PILOT-BUG-001 | baseline | rep 1
+2026-04-07T16:55:51 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=baseline rep=1 len=777
+2026-04-07T16:55:51 | INFO    |   -> ERROR (tokens: 194+50)
+2026-04-07T16:55:51 | INFO    | [4/27] PILOT-ALG-002 | arc | rep 1
+2026-04-07T16:55:51 | DEBUG   | Prompt built: task=PILOT-ALG-002 cond=arc rep=1 len=1996
+2026-04-07T16:55:51 | INFO    |   -> ERROR (tokens: 499+50 arc=0/4)
+2026-04-07T16:55:51 | INFO    | [5/27] PILOT-REF-001 | baseline | rep 1
+2026-04-07T16:55:51 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=baseline rep=1 len=1194
+2026-04-07T16:55:51 | INFO    |   -> ERROR (tokens: 298+50)
+2026-04-07T16:55:51 | INFO    | [6/27] PILOT-BUG-002 | arc | rep 1
+2026-04-07T16:55:51 | DEBUG   | Prompt built: task=PILOT-BUG-002 cond=arc rep=1 len=1848
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 462+50 arc=0/4)
+2026-04-07T16:55:52 | INFO    | [7/27] PILOT-REF-002 | baseline | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-REF-002 cond=baseline rep=1 len=937
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 234+50)
+2026-04-07T16:55:52 | INFO    | [8/27] PILOT-BUG-002 | baseline | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-BUG-002 cond=baseline rep=1 len=706
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 176+50)
+2026-04-07T16:55:52 | INFO    | [9/27] PILOT-TST-001 | cot | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=cot rep=1 len=1813
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 453+50)
+2026-04-07T16:55:52 | INFO    | [10/27] PILOT-TST-002 | arc | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-TST-002 cond=arc rep=1 len=2005
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 501+50 arc=0/4)
+2026-04-07T16:55:52 | INFO    | [11/27] PILOT-REV-002 | baseline | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-REV-002 cond=baseline rep=1 len=1000
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 250+50)
+2026-04-07T16:55:52 | INFO    | [12/27] PILOT-REF-002 | cot | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-REF-002 cond=cot rep=1 len=1647
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 411+50)
+2026-04-07T16:55:52 | INFO    | [13/27] PILOT-TST-002 | baseline | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-TST-002 cond=baseline rep=1 len=863
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 215+50)
+2026-04-07T16:55:52 | INFO    | [14/27] PILOT-ALG-001 | cot | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-ALG-001 cond=cot rep=1 len=1370
+2026-04-07T16:55:52 | INFO    |   -> ERROR (tokens: 342+50)
+2026-04-07T16:55:52 | INFO    | [15/27] PILOT-REF-001 | cot | rep 1
+2026-04-07T16:55:52 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=cot rep=1 len=1904
+2026-04-07T16:55:53 | INFO    |   -> ERROR (tokens: 476+50)
+2026-04-07T16:55:53 | INFO    | [16/27] PILOT-REV-001 | baseline | rep 1
+2026-04-07T16:55:53 | DEBUG   | Prompt built: task=PILOT-REV-001 cond=baseline rep=1 len=992
+2026-04-07T16:55:53 | INFO    |   -> ERROR (tokens: 248+50)
+2026-04-07T16:55:53 | INFO    | [17/27] PILOT-ALG-001 | arc | rep 1
+2026-04-07T16:55:53 | DEBUG   | Prompt built: task=PILOT-ALG-001 cond=arc rep=1 len=1802
+2026-04-07T16:55:53 | INFO    |   -> ERROR (tokens: 450+50 arc=0/4)
+2026-04-07T16:55:53 | INFO    | [18/27] PILOT-REF-002 | arc | rep 1
+2026-04-07T16:55:53 | DEBUG   | Prompt built: task=PILOT-REF-002 cond=arc rep=1 len=2079
+2026-04-07T16:55:53 | INFO    |   -> ERROR (tokens: 519+50 arc=0/4)
+2026-04-07T16:55:53 | INFO    | [19/27] PILOT-TST-002 | cot | rep 1
+2026-04-07T16:55:53 | DEBUG   | Prompt built: task=PILOT-TST-002 cond=cot rep=1 len=1573
+2026-04-07T16:55:53 | INFO    |   -> ERROR (tokens: 393+50)
+2026-04-07T16:55:53 | INFO    | [20/27] PILOT-ALG-002 | cot | rep 1
+2026-04-07T16:55:53 | DEBUG   | Prompt built: task=PILOT-ALG-002 cond=cot rep=1 len=1564
+2026-04-07T16:55:53 | INFO    |   -> ERROR (tokens: 391+50)
+2026-04-07T16:55:53 | INFO    | [21/27] PILOT-TST-001 | baseline | rep 1
+2026-04-07T16:55:53 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=baseline rep=1 len=1103
+2026-04-07T16:55:53 | INFO    |   -> ERROR (tokens: 275+50)
+2026-04-07T16:55:53 | INFO    | [22/27] PILOT-BUG-001 | cot | rep 1
+2026-04-07T16:55:53 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=cot rep=1 len=1487
+2026-04-07T16:56:05 | INFO    | ============================================================
+2026-04-07T16:56:05 | INFO    | ARC Experiment V4 — Execution Harness
+2026-04-07T16:56:05 | INFO    | ============================================================
+2026-04-07T16:56:05 | INFO    | PILOT MODE: 10 tasks, 1 rep(s)
+2026-04-07T16:56:05 | INFO    | DRY-RUN MODE: no API calls will be made
+2026-04-07T16:56:05 | INFO    | Loading tasks from C:\Temp\arc-experiment\tasks\v4
+2026-04-07T16:56:05 | INFO    | Loaded 10 tasks
+2026-04-07T16:56:05 | INFO    | Run plan: 30 runs (10 tasks × 3 conditions × 1 reps), seed=42
+2026-04-07T16:56:05 | INFO    | Resuming: 24 runs already completed
+2026-04-07T16:56:05 | INFO    | Remaining: 6 runs to execute
+2026-04-07T16:56:05 | INFO    | [1/6] PILOT-BUG-001 | cot | rep 1
+2026-04-07T16:56:05 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=cot rep=1 len=1487
+2026-04-07T16:56:05 | INFO    |   -> ERROR (tokens: 371+50)
+2026-04-07T16:56:05 | INFO    | [2/6] PILOT-BUG-001 | arc | rep 1
+2026-04-07T16:56:05 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=arc rep=1 len=1919
+2026-04-07T16:56:05 | INFO    |   -> ERROR (tokens: 479+50 arc=0/4)
+2026-04-07T16:56:05 | INFO    | [3/6] PILOT-REV-002 | arc | rep 1
+2026-04-07T16:56:05 | DEBUG   | Prompt built: task=PILOT-REV-002 cond=arc rep=1 len=2142
+2026-04-07T16:56:05 | INFO    |   -> ERROR (tokens: 535+50 arc=0/4)
+2026-04-07T16:56:05 | INFO    | [4/6] PILOT-ALG-001 | baseline | rep 1
+2026-04-07T16:56:05 | DEBUG   | Prompt built: task=PILOT-ALG-001 cond=baseline rep=1 len=660
+2026-04-07T16:56:05 | INFO    |   -> ERROR (tokens: 165+50)
+2026-04-07T16:56:05 | INFO    | [5/6] PILOT-ALG-002 | baseline | rep 1
+2026-04-07T16:56:05 | DEBUG   | Prompt built: task=PILOT-ALG-002 cond=baseline rep=1 len=854
+2026-04-07T16:56:05 | INFO    |   -> ERROR (tokens: 213+50)
+2026-04-07T16:56:05 | INFO    | [6/6] PILOT-REV-001 | arc | rep 1
+2026-04-07T16:56:05 | DEBUG   | Prompt built: task=PILOT-REV-001 cond=arc rep=1 len=2134
+2026-04-07T16:56:05 | INFO    |   -> ERROR (tokens: 533+50 arc=0/4)
+2026-04-07T16:56:05 | INFO    | ============================================================
+2026-04-07T16:56:05 | INFO    | EXECUTION COMPLETE
+2026-04-07T16:56:05 | INFO    |   Passed: 0 | Failed: 0 | Errors: 6 | Total: 6
+2026-04-07T16:56:05 | INFO    |   Checkpoint: C:\Temp\arc-experiment\results\v4_pilot\checkpoint.jsonl
+2026-04-07T16:56:05 | INFO    | ============================================================
+2026-04-07T17:58:50 | INFO    | ============================================================
+2026-04-07T17:58:50 | INFO    | ARC Experiment V4 — Execution Harness
+2026-04-07T17:58:50 | INFO    | ============================================================
+2026-04-07T17:58:50 | INFO    | PILOT MODE: 10 tasks, 1 rep(s)
+2026-04-07T17:58:50 | INFO    | Loading tasks from C:\Temp\arc-experiment\tasks\v4
+2026-04-07T17:58:50 | INFO    | Loaded 10 tasks
+2026-04-07T17:58:50 | INFO    | Run plan: 30 runs (10 tasks × 3 conditions × 1 reps), seed=42
+2026-04-07T17:58:50 | INFO    | Remaining: 30 runs to execute
+2026-04-07T17:58:50 | INFO    | Warming up Copilot API...
+2026-04-07T17:58:51 | WARNING | API warmup HTTP 400 (attempt 1)
+2026-04-07T17:58:54 | WARNING | API warmup HTTP 400 (attempt 2)
+2026-04-07T17:58:59 | WARNING | API warmup HTTP 400 (attempt 3)
+2026-04-07T17:59:05 | WARNING | API warmup failed after 3 attempts — proceeding anyway
+2026-04-07T17:59:05 | INFO    | [1/30] PILOT-REV-001 | cot | rep 1
+2026-04-07T17:59:05 | DEBUG   | Prompt built: task=PILOT-REV-001 cond=cot rep=1 len=1702
+2026-04-07T17:59:05 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T17:59:08 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T17:59:13 | WARNING | Unexpected HTTP 400 (attempt 3)
+2026-04-07T17:59:19 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T17:59:20 | INFO    | [2/30] PILOT-REF-001 | arc | rep 1
+2026-04-07T17:59:20 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=arc rep=1 len=2336
+2026-04-07T17:59:21 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T17:59:23 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T17:59:28 | WARNING | Unexpected HTTP 400 (attempt 3)
+2026-04-07T17:59:34 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T17:59:35 | INFO    | [3/30] PILOT-BUG-002 | cot | rep 1
+2026-04-07T17:59:35 | DEBUG   | Prompt built: task=PILOT-BUG-002 cond=cot rep=1 len=1416
+2026-04-07T17:59:36 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T17:59:39 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T17:59:43 | WARNING | Unexpected HTTP 400 (attempt 3)
+2026-04-07T17:59:49 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T17:59:50 | INFO    | [4/30] PILOT-TST-001 | arc | rep 1
+2026-04-07T17:59:50 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=arc rep=1 len=2245
+2026-04-07T17:59:51 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T17:59:54 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T17:59:59 | WARNING | Unexpected HTTP 400 (attempt 3)
+2026-04-07T18:00:05 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T18:00:06 | INFO    | [5/30] PILOT-REV-002 | cot | rep 1
+2026-04-07T18:00:06 | DEBUG   | Prompt built: task=PILOT-REV-002 cond=cot rep=1 len=1710
+2026-04-07T18:00:06 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T18:00:09 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T18:00:14 | WARNING | Unexpected HTTP 400 (attempt 3)
+2026-04-07T18:00:20 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T18:00:21 | INFO    | [6/30] PILOT-BUG-001 | baseline | rep 1
+2026-04-07T18:00:21 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=baseline rep=1 len=777
+2026-04-07T18:00:22 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T18:00:24 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T18:00:29 | WARNING | Unexpected HTTP 400 (attempt 3)
+2026-04-07T18:00:35 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T18:00:36 | INFO    | [7/30] PILOT-ALG-002 | arc | rep 1
+2026-04-07T18:00:36 | DEBUG   | Prompt built: task=PILOT-ALG-002 cond=arc rep=1 len=1996
+2026-04-07T18:00:37 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T18:00:40 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T18:00:45 | WARNING | Unexpected HTTP 400 (attempt 3)
+2026-04-07T18:00:51 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T18:00:52 | INFO    | [8/30] PILOT-REF-001 | baseline | rep 1
+2026-04-07T18:00:52 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=baseline rep=1 len=1194
+2026-04-07T18:00:52 | WARNING | Unexpected HTTP 400 (attempt 1)
+2026-04-07T18:00:55 | WARNING | Unexpected HTTP 400 (attempt 2)
+2026-04-07T18:04:48 | INFO    | ============================================================
+2026-04-07T18:04:48 | INFO    | ARC Experiment V4 — Execution Harness
+2026-04-07T18:04:48 | INFO    | ============================================================
+2026-04-07T18:04:48 | INFO    | PILOT MODE: 10 tasks, 1 rep(s)
+2026-04-07T18:04:48 | INFO    | Loading tasks from C:\Temp\arc-experiment\tasks\v4
+2026-04-07T18:04:48 | INFO    | Loaded 10 tasks
+2026-04-07T18:04:48 | INFO    | Run plan: 30 runs (10 tasks × 3 conditions × 1 reps), seed=42
+2026-04-07T18:04:48 | INFO    | Remaining: 30 runs to execute
+2026-04-07T18:04:48 | INFO    | Warming up Copilot API...
+2026-04-07T18:04:49 | WARNING | API warmup 403 — refreshing token (attempt 1)
+2026-04-07T18:04:53 | INFO    | API warmup OK (attempt 2)
+2026-04-07T18:04:53 | INFO    | [1/30] PILOT-REV-001 | cot | rep 1
+2026-04-07T18:04:53 | DEBUG   | Prompt built: task=PILOT-REV-001 cond=cot rep=1 len=1702
+2026-04-07T18:05:16 | INFO    |   -> PASS (tokens: 462+1518)
+2026-04-07T18:05:17 | INFO    | [2/30] PILOT-REF-001 | arc | rep 1
+2026-04-07T18:05:17 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=arc rep=1 len=2336
+2026-04-07T18:05:17 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:06:42 | INFO    |   -> ERROR (tokens: 600+625 arc=4/4)
+2026-04-07T18:06:43 | INFO    | [3/30] PILOT-BUG-002 | cot | rep 1
+2026-04-07T18:06:43 | DEBUG   | Prompt built: task=PILOT-BUG-002 cond=cot rep=1 len=1416
+2026-04-07T18:06:44 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:08:01 | INFO    |   -> PASS (tokens: 350+980)
+2026-04-07T18:08:02 | INFO    | [4/30] PILOT-TST-001 | arc | rep 1
+2026-04-07T18:08:02 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=arc rep=1 len=2245
+2026-04-07T18:08:35 | INFO    |   -> PASS (tokens: 572+2496 arc=0/4)
+2026-04-07T18:08:36 | INFO    | [5/30] PILOT-REV-002 | cot | rep 1
+2026-04-07T18:08:36 | DEBUG   | Prompt built: task=PILOT-REV-002 cond=cot rep=1 len=1710
+2026-04-07T18:08:57 | INFO    |   -> PASS (tokens: 453+1518)
+2026-04-07T18:08:58 | INFO    | [6/30] PILOT-BUG-001 | baseline | rep 1
+2026-04-07T18:08:58 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=baseline rep=1 len=777
+2026-04-07T18:08:59 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:10:00 | WARNING | HTTP 403 (attempt 2) — refreshing token
+2026-04-07T18:11:07 | INFO    |   -> PASS (tokens: 239+371)
+2026-04-07T18:11:08 | INFO    | [7/30] PILOT-ALG-002 | arc | rep 1
+2026-04-07T18:11:08 | DEBUG   | Prompt built: task=PILOT-ALG-002 cond=arc rep=1 len=1996
+2026-04-07T18:11:08 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:12:10 | WARNING | HTTP 403 (attempt 2) — refreshing token
+2026-04-07T18:13:25 | INFO    |   -> PASS (tokens: 527+1210 arc=4/4)
+2026-04-07T18:13:26 | INFO    | [8/30] PILOT-REF-001 | baseline | rep 1
+2026-04-07T18:13:26 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=baseline rep=1 len=1194
+2026-04-07T18:13:26 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:14:27 | WARNING | HTTP 403 (attempt 2) — refreshing token
+2026-04-07T18:15:28 | WARNING | HTTP 403 (attempt 3) — refreshing token
+2026-04-07T18:16:28 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T18:16:29 | INFO    | [9/30] PILOT-BUG-002 | arc | rep 1
+2026-04-07T18:16:29 | DEBUG   | Prompt built: task=PILOT-BUG-002 cond=arc rep=1 len=1848
+2026-04-07T18:16:40 | INFO    |   -> PASS (tokens: 456+730 arc=4/4)
+2026-04-07T18:16:41 | INFO    | [10/30] PILOT-REF-002 | baseline | rep 1
+2026-04-07T18:16:41 | DEBUG   | Prompt built: task=PILOT-REF-002 cond=baseline rep=1 len=937
+2026-04-07T18:16:41 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:17:47 | INFO    |   -> PASS (tokens: 261+402)
+2026-04-07T18:17:48 | INFO    | [11/30] PILOT-BUG-002 | baseline | rep 1
+2026-04-07T18:17:48 | DEBUG   | Prompt built: task=PILOT-BUG-002 cond=baseline rep=1 len=706
+2026-04-07T18:17:49 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:18:51 | WARNING | HTTP 403 (attempt 2) — refreshing token
+2026-04-07T18:19:52 | WARNING | HTTP 403 (attempt 3) — refreshing token
+2026-04-07T18:20:52 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T18:20:53 | INFO    | [12/30] PILOT-TST-001 | cot | rep 1
+2026-04-07T18:20:53 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=cot rep=1 len=1813
+2026-04-07T18:20:54 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:21:55 | WARNING | HTTP 403 (attempt 2) — refreshing token
+2026-04-07T18:22:55 | WARNING | HTTP 403 (attempt 3) — refreshing token
+2026-04-07T18:23:56 | INFO    |   -> ERROR (tokens: 0+0)
+2026-04-07T18:23:57 | INFO    | [13/30] PILOT-TST-002 | arc | rep 1
+2026-04-07T18:23:57 | DEBUG   | Prompt built: task=PILOT-TST-002 cond=arc rep=1 len=2005
+2026-04-07T18:24:30 | INFO    |   -> ERROR (tokens: 508+1799 arc=0/4)
+2026-04-07T18:24:31 | INFO    | [14/30] PILOT-REV-002 | baseline | rep 1
+2026-04-07T18:24:31 | DEBUG   | Prompt built: task=PILOT-REV-002 cond=baseline rep=1 len=1000
+2026-04-07T18:24:32 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:25:56 | INFO    |   -> PASS (tokens: 293+1385)
+2026-04-07T18:25:57 | INFO    | [15/30] PILOT-REF-002 | cot | rep 1
+2026-04-07T18:25:57 | DEBUG   | Prompt built: task=PILOT-REF-002 cond=cot rep=1 len=1647
+2026-04-07T18:26:08 | INFO    |   -> PASS (tokens: 421+831)
+2026-04-07T18:26:09 | INFO    | [16/30] PILOT-TST-002 | baseline | rep 1
+2026-04-07T18:26:09 | DEBUG   | Prompt built: task=PILOT-TST-002 cond=baseline rep=1 len=863
+2026-04-07T18:26:22 | INFO    |   -> ERROR (tokens: 242+808)
+2026-04-07T18:26:23 | INFO    | [17/30] PILOT-ALG-001 | cot | rep 1
+2026-04-07T18:26:23 | DEBUG   | Prompt built: task=PILOT-ALG-001 cond=cot rep=1 len=1370
+2026-04-07T18:26:24 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:27:40 | INFO    |   -> PASS (tokens: 336+814)
+2026-04-07T18:27:41 | INFO    | [18/30] PILOT-REF-001 | cot | rep 1
+2026-04-07T18:27:41 | DEBUG   | Prompt built: task=PILOT-REF-001 cond=cot rep=1 len=1904
+2026-04-07T18:28:02 | INFO    |   -> ERROR (tokens: 494+964)
+2026-04-07T18:28:03 | INFO    | [19/30] PILOT-REV-001 | baseline | rep 1
+2026-04-07T18:28:03 | DEBUG   | Prompt built: task=PILOT-REV-001 cond=baseline rep=1 len=992
+2026-04-07T18:28:14 | INFO    |   -> PASS (tokens: 302+1112)
+2026-04-07T18:28:15 | INFO    | [20/30] PILOT-ALG-001 | arc | rep 1
+2026-04-07T18:28:15 | DEBUG   | Prompt built: task=PILOT-ALG-001 cond=arc rep=1 len=1802
+2026-04-07T18:28:16 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:29:28 | INFO    |   -> PASS (tokens: 442+920 arc=1/4)
+2026-04-07T18:29:29 | INFO    | [21/30] PILOT-REF-002 | arc | rep 1
+2026-04-07T18:29:29 | DEBUG   | Prompt built: task=PILOT-REF-002 cond=arc rep=1 len=2079
+2026-04-07T18:29:30 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:30:43 | INFO    |   -> PASS (tokens: 527+822 arc=4/4)
+2026-04-07T18:30:44 | INFO    | [22/30] PILOT-TST-002 | cot | rep 1
+2026-04-07T18:30:44 | DEBUG   | Prompt built: task=PILOT-TST-002 cond=cot rep=1 len=1573
+2026-04-07T18:30:45 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:31:47 | WARNING | HTTP 403 (attempt 2) — refreshing token
+2026-04-07T18:33:10 | INFO    |   -> ERROR (tokens: 402+1547)
+2026-04-07T18:33:11 | INFO    | [23/30] PILOT-ALG-002 | cot | rep 1
+2026-04-07T18:33:11 | DEBUG   | Prompt built: task=PILOT-ALG-002 cond=cot rep=1 len=1564
+2026-04-07T18:33:32 | INFO    |   -> PASS (tokens: 421+1229)
+2026-04-07T18:33:33 | INFO    | [24/30] PILOT-TST-001 | baseline | rep 1
+2026-04-07T18:33:33 | DEBUG   | Prompt built: task=PILOT-TST-001 cond=baseline rep=1 len=1103
+2026-04-07T18:33:55 | INFO    |   -> PASS (tokens: 306+1889)
+2026-04-07T18:33:56 | INFO    | [25/30] PILOT-BUG-001 | cot | rep 1
+2026-04-07T18:33:56 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=cot rep=1 len=1487
+2026-04-07T18:34:10 | INFO    |   -> PASS (tokens: 399+953)
+2026-04-07T18:34:11 | INFO    | [26/30] PILOT-BUG-001 | arc | rep 1
+2026-04-07T18:34:11 | DEBUG   | Prompt built: task=PILOT-BUG-001 cond=arc rep=1 len=1919
+2026-04-07T18:34:33 | INFO    |   -> PASS (tokens: 505+893 arc=4/4)
+2026-04-07T18:34:34 | INFO    | [27/30] PILOT-REV-002 | arc | rep 1
+2026-04-07T18:34:34 | DEBUG   | Prompt built: task=PILOT-REV-002 cond=arc rep=1 len=2142
+2026-04-07T18:35:00 | INFO    |   -> PASS (tokens: 559+1568 arc=1/4)
+2026-04-07T18:35:01 | INFO    | [28/30] PILOT-ALG-001 | baseline | rep 1
+2026-04-07T18:35:01 | DEBUG   | Prompt built: task=PILOT-ALG-001 cond=baseline rep=1 len=660
+2026-04-07T18:35:15 | INFO    |   -> PASS (tokens: 176+417)
+2026-04-07T18:35:16 | INFO    | [29/30] PILOT-ALG-002 | baseline | rep 1
+2026-04-07T18:35:16 | DEBUG   | Prompt built: task=PILOT-ALG-002 cond=baseline rep=1 len=854
+2026-04-07T18:35:29 | INFO    |   -> PASS (tokens: 261+879)
+2026-04-07T18:35:30 | INFO    | [30/30] PILOT-REV-001 | arc | rep 1
+2026-04-07T18:35:30 | DEBUG   | Prompt built: task=PILOT-REV-001 cond=arc rep=1 len=2134
+2026-04-07T18:35:31 | WARNING | HTTP 403 (attempt 1) — refreshing token
+2026-04-07T18:36:32 | WARNING | HTTP 403 (attempt 2) — refreshing token
+2026-04-07T18:37:59 | INFO    |   -> PASS (tokens: 568+1735 arc=0/4)
+2026-04-07T18:37:59 | INFO    | ============================================================
+2026-04-07T18:37:59 | INFO    | EXECUTION COMPLETE
+2026-04-07T18:37:59 | INFO    |   Passed: 22 | Failed: 0 | Errors: 8 | Total: 30
+2026-04-07T18:37:59 | INFO    |   Checkpoint: C:\Temp\arc-experiment\results\v4_pilot\checkpoint.jsonl
+2026-04-07T18:37:59 | INFO    | ============================================================

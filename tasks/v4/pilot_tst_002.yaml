@@ -1,0 +1,56 @@
+id: "PILOT-TST-002"
+category: "TST"
+difficulty: "medium"
+source: "pilot-synthetic"
+title: "Write edge-case tests for string truncation utility"
+problem: |
+  Write a test suite for the truncate function below. Focus on edge cases:
+  empty strings, max_len shorter than suffix, unicode characters,
+  exact boundary lengths, and type errors. Use assert statements.
+context_files:
+  - path: "strutils.py"
+    content: |
+      def truncate(text, max_len=50, suffix='...'):
+          """Truncate text to max_len chars, adding suffix if truncated."""
+          if not isinstance(text, str):
+              raise TypeError('text must be a string')
+          if max_len < len(suffix):
+              raise ValueError('max_len must be >= len(suffix)')
+          if len(text) <= max_len:
+              return text
+          return text[:max_len - len(suffix)] + suffix
+output_format: "code_block"
+scoring:
+  method: "test_suite"
+  test_script: |
+    # Make the function available
+    with open('strutils.py', 'w') as f:
+        f.write('''
+    def truncate(text, max_len=50, suffix='...'):
+        if not isinstance(text, str):
+            raise TypeError('text must be a string')
+        if max_len < len(suffix):
+            raise ValueError('max_len must be >= len(suffix)')
+        if len(text) <= max_len:
+            return text
+        return text[:max_len - len(suffix)] + suffix
+    ''')
+    
+    exec(open('solution.py').read())
+    
+    with open('solution.py') as f:
+        src = f.read()
+    
+    # Must test: truncation, no-truncation, empty string, TypeError, ValueError
+    assert 'truncate' in src, 'Tests should call truncate'
+    checks = [
+        ('TypeError', 'Should test TypeError for non-string input'),
+        ('ValueError', 'Should test ValueError for small max_len'),
+    ]
+    for keyword, msg in checks:
+        assert keyword in src, msg
+    
+    # Must have at least 5 assertions
+    assert src.count('assert') >= 5, f'Expected >=5 assertions, found {src.count("assert")}'
+    
+    print('ALL TESTS PASSED')

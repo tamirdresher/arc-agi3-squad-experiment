@@ -1,0 +1,51 @@
+id: "PILOT-ALG-001"
+category: "ALG"
+difficulty: "easy"
+source: "pilot-synthetic"
+title: "Implement binary search returning insertion point"
+problem: |
+  Implement a function bisect_left(arr, target) that returns the leftmost
+  index where target could be inserted in the sorted array arr to maintain
+  sorted order. If target already exists, return the index of the first
+  occurrence. Do NOT use the bisect module.
+context_files:
+  - path: "search.py"
+    content: |
+      def bisect_left(arr, target):
+          """Return leftmost insertion point for target in sorted arr."""
+          # TODO: implement
+          pass
+output_format: "code_block"
+scoring:
+  method: "test_suite"
+  test_script: |
+    exec(open('solution.py').read())
+    
+    # Test 1: Basic cases
+    assert bisect_left([1, 3, 5, 7], 5) == 2
+    assert bisect_left([1, 3, 5, 7], 4) == 2
+    assert bisect_left([1, 3, 5, 7], 0) == 0
+    assert bisect_left([1, 3, 5, 7], 8) == 4
+    
+    # Test 2: Duplicates — must return leftmost
+    assert bisect_left([1, 2, 2, 2, 3], 2) == 1
+    
+    # Test 3: Empty array
+    assert bisect_left([], 5) == 0
+    
+    # Test 4: Single element
+    assert bisect_left([5], 3) == 0
+    assert bisect_left([5], 5) == 0
+    assert bisect_left([5], 7) == 1
+    
+    # Test 5: Large array (must be efficient — no timeout)
+    big = list(range(0, 1000000, 2))  # even numbers
+    assert bisect_left(big, 500000) == 250000
+    assert bisect_left(big, 500001) == 250001
+    
+    # Test 6: No bisect module used
+    with open('solution.py') as f:
+        src = f.read()
+    assert 'import bisect' not in src, 'Must not use bisect module'
+    
+    print('ALL TESTS PASSED')

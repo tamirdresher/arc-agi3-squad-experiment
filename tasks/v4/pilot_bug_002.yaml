@@ -1,0 +1,49 @@
+id: "PILOT-BUG-002"
+category: "BUG"
+difficulty: "medium"
+source: "pilot-synthetic"
+title: "Fix shallow merge that clobbers nested dicts"
+problem: |
+  The deep_merge function is supposed to recursively merge two dictionaries,
+  but it currently does a shallow update that overwrites nested dicts entirely
+  instead of merging them. Fix the function so nested dicts are merged recursively.
+context_files:
+  - path: "merge.py"
+    content: |
+      def deep_merge(base, override):
+          """Recursively merge override into base. Returns new dict."""
+          result = base.copy()
+          result.update(override)  # BUG: clobbers nested dicts
+          return result
+output_format: "code_block"
+scoring:
+  method: "test_suite"
+  test_script: |
+    exec(open('solution.py').read())
+    
+    # Test 1: Simple merge
+    a = {'x': 1, 'y': 2}
+    b = {'y': 3, 'z': 4}
+    r = deep_merge(a, b)
+    assert r == {'x': 1, 'y': 3, 'z': 4}, f'Simple merge failed: {r}'
+    
+    # Test 2: Nested merge (the bug case)
+    a = {'db': {'host': 'localhost', 'port': 5432}, 'debug': True}
+    b = {'db': {'port': 3306}}
+    r = deep_merge(a, b)
+    assert r == {'db': {'host': 'localhost', 'port': 3306}, 'debug': True}, f'Nested merge failed: {r}'
+    
+    # Test 3: Deep nesting
+    a = {'a': {'b': {'c': 1, 'd': 2}}}
+    b = {'a': {'b': {'d': 3, 'e': 4}}}
+    r = deep_merge(a, b)
+    assert r == {'a': {'b': {'c': 1, 'd': 3, 'e': 4}}}, f'Deep nesting failed: {r}'
+    
+    # Test 4: Original dicts not mutated
+    a = {'x': {'y': 1}}
+    b = {'x': {'z': 2}}
+    r = deep_merge(a, b)
+    assert a == {'x': {'y': 1}}, 'Base dict was mutated'
+    assert b == {'x': {'z': 2}}, 'Override dict was mutated'
+    
+    print('ALL TESTS PASSED')

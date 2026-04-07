@@ -1,0 +1,66 @@
+id: "PILOT-REF-002"
+category: "REF"
+difficulty: "easy"
+source: "pilot-synthetic"
+title: "Replace magic numbers with named constants"
+problem: |
+  The shipping cost calculator uses magic numbers throughout.
+  Refactor to use named constants at module level. The function
+  behavior must remain identical. Define constants for all numeric
+  literals used in the function (thresholds and rates).
+context_files:
+  - path: "shipping.py"
+    content: |
+      def calculate_shipping(weight, distance, express=False):
+          if weight <= 0 or distance <= 0:
+              raise ValueError('Weight and distance must be positive')
+          
+          if weight < 5:
+              base = 4.99
+          elif weight < 20:
+              base = 9.99
+          else:
+              base = 19.99
+          
+          distance_charge = distance * 0.05
+          
+          if express:
+              return (base + distance_charge) * 1.5
+          return base + distance_charge
+output_format: "code_block"
+scoring:
+  method: "test_suite"
+  test_script: |
+    exec(open('solution.py').read())
+    import re
+    
+    # Test 1: Behavior unchanged
+    assert calculate_shipping(2, 100) == 4.99 + 100 * 0.05
+    assert calculate_shipping(10, 50) == 9.99 + 50 * 0.05
+    assert calculate_shipping(25, 200) == 19.99 + 200 * 0.05
+    assert calculate_shipping(2, 100, express=True) == (4.99 + 5.0) * 1.5
+    
+    # Test 2: ValueError still raised
+    try:
+        calculate_shipping(-1, 10)
+        assert False, 'Should raise ValueError'
+    except ValueError:
+        pass
+    
+    # Test 3: Named constants exist (check that module-level UPPER_CASE names exist)
+    with open('solution.py') as f:
+        src = f.read()
+    # Must have at least 3 module-level constants (UPPER_CASE = number)
+    constants = re.findall(r'^[A-Z][A-Z_0-9]+\s*=\s*[\d.]+', src, re.MULTILINE)
+    assert len(constants) >= 3, f'Expected >=3 named constants, found {len(constants)}: {constants}'
+    
+    # Test 4: No magic numbers in the function body (except 0)
+    # Find function body
+    func_start = src.index('def calculate_shipping')
+    func_body = src[func_start:]
+    # Should not contain literal 4.99, 9.99, 19.99, 0.05, 1.5 in function body
+    for magic in ['4.99', '9.99', '19.99', '0.05', '1.5']:
+        assert magic not in func_body.split(':', 1)[1] if ':' in func_body else True, \
+            f'Magic number {magic} still in function body'
+    
+    print('ALL TESTS PASSED')

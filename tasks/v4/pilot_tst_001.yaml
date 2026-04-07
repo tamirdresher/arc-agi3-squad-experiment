@@ -1,0 +1,77 @@
+id: "PILOT-TST-001"
+category: "TST"
+difficulty: "easy"
+source: "pilot-synthetic"
+title: "Write unit tests for a stack implementation"
+problem: |
+  Write a comprehensive test suite for the Stack class below.
+  Your tests should cover: push, pop, peek, is_empty, size,
+  underflow error handling, and multiple sequential operations.
+  Provide the tests as a Python script using assert statements.
+  The test script should import the Stack class and run all tests.
+context_files:
+  - path: "stack.py"
+    content: |
+      class Stack:
+          def __init__(self):
+              self._items = []
+          
+          def push(self, item):
+              self._items.append(item)
+          
+          def pop(self):
+              if not self._items:
+                  raise IndexError('pop from empty stack')
+              return self._items.pop()
+          
+          def peek(self):
+              if not self._items:
+                  raise IndexError('peek at empty stack')
+              return self._items[-1]
+          
+          def is_empty(self):
+              return len(self._items) == 0
+          
+          def size(self):
+              return len(self._items)
+output_format: "code_block"
+scoring:
+  method: "test_suite"
+  test_script: |
+    # The solution should be a test script. We run it and check it exercises the Stack.
+    # First, make the Stack available.
+    with open('stack.py', 'w') as f:
+        f.write('''
+    class Stack:
+        def __init__(self):
+            self._items = []
+        def push(self, item):
+            self._items.append(item)
+        def pop(self):
+            if not self._items:
+                raise IndexError('pop from empty stack')
+            return self._items.pop()
+        def peek(self):
+            if not self._items:
+                raise IndexError('peek at empty stack')
+            return self._items[-1]
+        def is_empty(self):
+            return len(self._items) == 0
+        def size(self):
+            return len(self._items)
+    ''')
+    
+    # Run the model's test script
+    exec(open('solution.py').read())
+    
+    # Meta-check: the solution should reference key methods
+    with open('solution.py') as f:
+        src = f.read()
+    required = ['push', 'pop', 'peek', 'is_empty', 'size']
+    for method in required:
+        assert method in src, f'Tests should exercise .{method}()'
+    
+    # Meta-check: should test underflow
+    assert 'IndexError' in src or 'empty' in src.lower(), 'Should test empty stack behavior'
+    
+    print('ALL TESTS PASSED')

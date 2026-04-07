@@ -1,0 +1,41 @@
+id: "PILOT-REV-001"
+category: "REV"
+difficulty: "medium"
+source: "pilot-synthetic"
+title: "Review: find bugs in user session handler"
+problem: |
+  Review the following session management code and identify all bugs.
+  List each bug with a description of the issue and its impact.
+context_files:
+  - path: "session.py"
+    content: |
+      import time
+      import hashlib
+      
+      sessions = {}  # BUG 1: global mutable state, not thread-safe
+      
+      def create_session(user_id):
+          token = hashlib.md5(str(user_id).encode()).hexdigest()  # BUG 2: predictable token
+          sessions[token] = {
+              'user_id': user_id,
+              'created': time.time(),
+              'expires': time.time() + 3600,
+          }
+          return token
+      
+      def get_session(token):
+          session = sessions.get(token)
+          if session:
+              return session  # BUG 3: no expiry check
+          return None
+      
+      def delete_session(token):
+          del sessions[token]  # BUG 4: KeyError if token doesn't exist
+output_format: "code_block"
+scoring:
+  method: "f1_score"
+  ground_truth_issues:
+    - "thread_safety"
+    - "predictable_token"
+    - "no_expiry_check"
+    - "key_error_delete"

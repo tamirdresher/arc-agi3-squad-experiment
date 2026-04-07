@@ -1,0 +1,35 @@
+id: "PILOT-REV-002"
+category: "REV"
+difficulty: "medium"
+source: "pilot-synthetic"
+title: "Review: find issues in REST API handler"
+problem: |
+  Review the following API endpoint code and identify all bugs
+  and security issues. List each issue with a description.
+context_files:
+  - path: "api.py"
+    content: |
+      import sqlite3
+      import json
+      
+      def get_user(request):
+          user_id = request.args.get('id')
+          # BUG 1: SQL injection — string formatting instead of parameterized query
+          conn = sqlite3.connect('users.db')
+          cursor = conn.execute(f"SELECT * FROM users WHERE id = '{user_id}'")
+          row = cursor.fetchone()
+          conn.close()
+          
+          if row:
+              # BUG 2: exposes all columns including password_hash
+              return json.dumps({'user': dict(zip(['id','name','email','password_hash'], row))})
+          # BUG 3: no proper HTTP status code handling (returns None implicitly)
+          # BUG 4: no input validation on user_id
+output_format: "code_block"
+scoring:
+  method: "f1_score"
+  ground_truth_issues:
+    - "sql_injection"
+    - "password_hash_exposure"
+    - "missing_error_response"
+    - "no_input_validation"

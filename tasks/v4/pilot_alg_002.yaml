@@ -1,0 +1,75 @@
+id: "PILOT-ALG-002"
+category: "ALG"
+difficulty: "medium"
+source: "pilot-synthetic"
+title: "Implement LRU cache with O(1) get and put"
+problem: |
+  Implement an LRUCache class with a fixed capacity.
+  - LRUCache(capacity): Initialize with given capacity.
+  - get(key): Return the value if key exists, else -1. Marks key as recently used.
+  - put(key, value): Insert or update the key-value pair. If the cache exceeds
+    capacity, evict the least recently used item.
+  Do NOT use functools.lru_cache or collections.OrderedDict.
+context_files:
+  - path: "lru.py"
+    content: |
+      class LRUCache:
+          def __init__(self, capacity: int):
+              pass  # TODO
+          
+          def get(self, key: int) -> int:
+              pass  # TODO
+          
+          def put(self, key: int, value: int) -> None:
+              pass  # TODO
+output_format: "code_block"
+scoring:
+  method: "test_suite"
+  test_script: |
+    exec(open('solution.py').read())
+    
+    # Test 1: Basic operations
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    assert cache.get(1) == 1
+    cache.put(3, 3)  # evicts key 2
+    assert cache.get(2) == -1
+    cache.put(4, 4)  # evicts key 1
+    assert cache.get(1) == -1
+    assert cache.get(3) == 3
+    assert cache.get(4) == 4
+    
+    # Test 2: Update existing key
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    cache.put(1, 10)  # update, key 1 is now most recent
+    cache.put(3, 3)  # should evict key 2 (least recent)
+    assert cache.get(2) == -1
+    assert cache.get(1) == 10
+    
+    # Test 3: Capacity 1
+    cache = LRUCache(1)
+    cache.put(1, 1)
+    assert cache.get(1) == 1
+    cache.put(2, 2)
+    assert cache.get(1) == -1
+    assert cache.get(2) == 2
+    
+    # Test 4: Get makes key recently used
+    cache = LRUCache(2)
+    cache.put(1, 1)
+    cache.put(2, 2)
+    cache.get(1)     # key 1 is now most recent
+    cache.put(3, 3)  # should evict key 2
+    assert cache.get(2) == -1
+    assert cache.get(1) == 1
+    
+    # Test 5: No OrderedDict or lru_cache
+    with open('solution.py') as f:
+        src = f.read()
+    assert 'OrderedDict' not in src, 'Must not use OrderedDict'
+    assert 'lru_cache' not in src, 'Must not use functools.lru_cache'
+    
+    print('ALL TESTS PASSED')
