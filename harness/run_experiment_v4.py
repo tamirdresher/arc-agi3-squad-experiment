@@ -446,12 +446,33 @@ REQUIRED_TASK_FIELDS = {"id", "category", "problem", "output_format", "scoring"}
 
 
 def load_task(path: Path) -> dict[str, Any]:
-    """Load and validate a single V4 task YAML file."""
+    """Load and validate a single V4 task YAML file.
+    
+    Normalizes two task schemas:
+      - Pilot format: output_format + scoring: {method, test_script}
+      - New format: scoring_method + test_script (flat keys)
+    Both are normalized to the pilot format for the harness.
+    """
     with open(path, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
 
     if not isinstance(data, dict):
         raise ValueError(f"{path}: YAML root must be a mapping")
+
+    # Normalize flat scoring_method + test_script -> nested scoring dict
+    if "scoring" not in data and "scoring_method" in data:
+        method = data.pop("scoring_method")
+        # Map alternate method names to harness-expected values
+        if method == "test_pass":
+            method = "test_suite"
+        data["scoring"] = {
+            "method": method,
+            "test_script": data.pop("test_script", ""),
+        }
+
+    # Default output_format to code_block if missing
+    if "output_format" not in data:
+        data["output_format"] = "code_block"
 
     missing = REQUIRED_TASK_FIELDS - set(data.keys())
     if missing:
