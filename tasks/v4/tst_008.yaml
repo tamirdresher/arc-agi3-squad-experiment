@@ -1,0 +1,128 @@
+id: TASK-TST-008
+category: TST
+difficulty: hard
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following retry decorator.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements using retry() and RetryError directly.
+  These are already available in scope - do not import them.
+  Include at least 8 test cases covering: successful function (no retries), function
+  that fails then succeeds, function that exhausts all retries (raises RetryError),
+  only retrying specified exception types, max_attempts=1, the on_retry callback,
+  invalid parameter validation, and wraps preserving function metadata.
+  NOTE: Set delay=0 in tests to avoid slow execution.
+context_files:
+- path: module.py
+  content: |
+    import time
+    import functools
+
+    class RetryError(Exception):
+        """Raised when all retry attempts are exhausted."""
+        def __init__(self, last_exception, attempts):
+            self.last_exception = last_exception
+            self.attempts = attempts
+            super().__init__(f"Failed after {attempts} attempts: {last_exception}")
+
+    def retry(max_attempts=3, delay=0.0, backoff=1.0, exceptions=(Exception,),
+              on_retry=None):
+        """Decorator that retries a function on failure.
+        Args:
+            max_attempts: Maximum total attempts (including first try). Must be >= 1.
+            delay: Initial delay between retries in seconds. Must be >= 0.
+            backoff: Multiplier applied to delay after each retry. Must be >= 1.
+            exceptions: Tuple of exception types to catch and retry on.
+            on_retry: Optional callback(attempt, exception, next_delay).
+        """
+        if max_attempts < 1:
+            raise ValueError("max_attempts must be at least 1")
+        if delay < 0:
+            raise ValueError("delay must be non-negative")
+        if backoff < 1:
+            raise ValueError("backoff must be at least 1")
+
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                last_exc = None
+                current_delay = delay
+                for attempt in range(1, max_attempts + 1):
+                    try:
+                        return func(*args, **kwargs)
+                    except exceptions as e:
+                        last_exc = e
+                        if attempt == max_attempts:
+                            break
+                        if on_retry:
+                            on_retry(attempt, e, current_delay)
+                        if current_delay > 0:
+                            time.sleep(current_delay)
+                        current_delay *= backoff
+                raise RetryError(last_exc, max_attempts)
+            return wrapper
+        return decorator
+expected_output_description: |
+  A thorough test suite with 8+ assertions covering no-retry success, fail-then-succeed,
+  all-retries-exhausted raising RetryError, exception type filtering (only catch specified),
+  on_retry callback invocation count, max_attempts=1 (no retries), functools.wraps
+  metadata preservation, and invalid parameter validation.
+test_script: |
+  import sys, time, functools
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  ns = {'time': time, 'functools': functools}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: catches ALL exceptions, ignoring the 'exceptions' filter
+  buggy_code = '''
+  import time, functools
+  class RetryError(Exception):
+      def __init__(self, last_exception, attempts):
+          self.last_exception = last_exception
+          self.attempts = attempts
+          super().__init__(f"Failed after {attempts} attempts: {last_exception}")
+  def retry(max_attempts=3, delay=0.0, backoff=1.0, exceptions=(Exception,),
+            on_retry=None):
+      if max_attempts < 1:
+          raise ValueError("max_attempts must be at least 1")
+      if delay < 0:
+          raise ValueError("delay must be non-negative")
+      if backoff < 1:
+          raise ValueError("backoff must be at least 1")
+      def decorator(func):
+          @functools.wraps(func)
+          def wrapper(*args, **kwargs):
+              last_exc = None
+              current_delay = delay
+              for attempt in range(1, max_attempts + 1):
+                  try:
+                      return func(*args, **kwargs)
+                  except Exception as e:
+                      last_exc = e
+                      if attempt == max_attempts:
+                          break
+                      if on_retry:
+                          on_retry(attempt, e, current_delay)
+                      if current_delay > 0:
+                          time.sleep(current_delay)
+                      current_delay *= backoff
+              raise RetryError(last_exc, max_attempts)
+          return wrapper
+      return decorator
+  '''
+  ns2 = {'time': time, 'functools': functools}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the missing exception-type filter'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

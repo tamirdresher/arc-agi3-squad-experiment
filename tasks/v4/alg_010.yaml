@@ -1,0 +1,123 @@
+id: "TASK-ALG-010"
+category: "ALG"
+difficulty: "hard"
+source: "synthetic-contest"
+problem: |
+  Implement a function find_median_sorted_arrays(nums1, nums2) that returns the
+  median of two sorted arrays. The overall run time complexity must be
+  O(log(min(n, m))), where n and m are the lengths of the two arrays.
+
+  The median is defined as:
+    - If the combined length is odd, return the middle element (as a float).
+    - If the combined length is even, return the average of the two middle elements.
+
+  Parameters:
+    - nums1 (List[int]): A sorted array of integers (may be empty).
+    - nums2 (List[int]): A sorted array of integers (may be empty).
+    - At least one of the arrays is non-empty.
+
+  Returns:
+    - float: The median value.
+
+  You MUST use a binary search approach. A merge-based O(n+m) solution will be
+  rejected by the performance test.
+
+  Examples:
+    find_median_sorted_arrays([1,3], [2]) => 2.0
+    find_median_sorted_arrays([1,2], [3,4]) => 2.5
+    find_median_sorted_arrays([0,0], [0,0]) => 0.0
+    find_median_sorted_arrays([], [1]) => 1.0
+context_files:
+  - path: "median.py"
+    content: |
+      from typing import List
+
+      def find_median_sorted_arrays(nums1: List[int], nums2: List[int]) -> float:
+          """
+          Find the median of two sorted arrays in O(log(min(n, m))).
+          Must use binary search, not merge.
+          """
+          # TODO: implement using binary search on the shorter array
+          # Partition both arrays such that:
+          #   left_part has (n+m+1)//2 elements
+          #   max(left_part) <= min(right_part)
+          pass
+expected_output_description: |
+  Returns the median as a float. Uses binary search on the shorter array
+  to achieve O(log(min(n, m))) time complexity.
+test_script: |
+  exec(open('solution.py').read())
+  import time
+
+  # Basic examples from problem
+  assert find_median_sorted_arrays([1,3], [2]) == 2.0
+  assert find_median_sorted_arrays([1,2], [3,4]) == 2.5
+  assert find_median_sorted_arrays([0,0], [0,0]) == 0.0
+  assert find_median_sorted_arrays([], [1]) == 1.0
+
+  # Single element each
+  assert find_median_sorted_arrays([1], [2]) == 1.5
+  assert find_median_sorted_arrays([2], [1]) == 1.5
+
+  # One empty array
+  assert find_median_sorted_arrays([], [2,3]) == 2.5
+  assert find_median_sorted_arrays([1,2,3,4,5], []) == 3.0
+
+  # Identical arrays
+  assert find_median_sorted_arrays([1,2,3], [1,2,3]) == 2.0
+
+  # Non-overlapping ranges
+  assert find_median_sorted_arrays([1,2,3], [10,20,30]) == 6.5
+  assert find_median_sorted_arrays([10,20,30], [1,2,3]) == 6.5
+
+  # One array entirely before the other
+  assert find_median_sorted_arrays([1,2], [3,4,5,6]) == 3.5
+
+  # Large vs small
+  assert find_median_sorted_arrays([1], [2,3,4,5,6,7,8]) == 4.5
+
+  # Negative numbers
+  assert find_median_sorted_arrays([-5,-3,-1], [0,2,4]) == -0.5
+
+  # All same values
+  assert find_median_sorted_arrays([3,3,3], [3,3,3]) == 3.0
+
+  # Odd combined length
+  assert find_median_sorted_arrays([1,3,5,7], [2,4,6]) == 4.0
+
+  # Even combined length
+  assert find_median_sorted_arrays([1,3,5], [2,4,6]) == 3.5
+
+  # Edge: single element vs empty
+  assert find_median_sorted_arrays([100], []) == 100.0
+  assert find_median_sorted_arrays([], [42]) == 42.0
+
+  # Stress test: two large arrays — must complete fast for O(log(min(n,m)))
+  big1 = list(range(0, 1000000, 2))    # 500k even numbers
+  big2 = list(range(1, 1000000, 2))    # 500k odd numbers
+  t0 = time.time()
+  med = find_median_sorted_arrays(big1, big2)
+  elapsed = time.time() - t0
+  assert med == 499999.5, f"Large arrays median should be 499999.5, got {med}"
+  assert elapsed < 1.0, f"Too slow ({elapsed:.3f}s) — must be O(log(min(n,m))), not O(n+m)"
+
+  # Stress 2: very asymmetric sizes
+  tiny = [500000]
+  huge = list(range(1000000))
+  t0 = time.time()
+  med2 = find_median_sorted_arrays(tiny, huge)
+  elapsed2 = time.time() - t0
+  assert elapsed2 < 1.0, f"Asymmetric too slow ({elapsed2:.3f}s)"
+  # Combined has 1000001 elements, median is element at index 500000 = 500000
+  # But 500000 appears in both tiny and huge. Sorted combined:
+  # 0,1,...,499999,500000,500000,500001,...,999999 -> 1000001 elems -> median at idx 500000
+  assert med2 == 500000.0, f"Asymmetric median wrong, got {med2}"
+
+  # Verify not using O(n+m) merge by checking source
+  import inspect
+  src = inspect.getsource(find_median_sorted_arrays)
+  # A merge solution would typically use 'sorted(' or manual merge loops
+  # This is a heuristic check — the performance test above is the real guard
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

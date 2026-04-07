@@ -1,0 +1,167 @@
+id: TASK-TST-009
+category: TST
+difficulty: hard
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following cron schedule parser.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements that use CronSchedule directly.
+  The class and datetime/timedelta are already available in scope - do not import them.
+  Include at least 8 test cases covering: wildcard expressions (*/5, *), exact values,
+  ranges (1-5), comma-separated lists, step values with ranges, the matches() method,
+  next_run() calculation, invalid expressions, and weekday mapping (0=Monday).
+context_files:
+- path: module.py
+  content: |
+    from datetime import datetime, timedelta
+
+    class CronSchedule:
+        """Parse and evaluate cron expressions (minute hour day month weekday).
+        Weekday: 0=Monday, 6=Sunday (matches Python's datetime.weekday()).
+        """
+
+        def __init__(self, expression):
+            parts = expression.strip().split()
+            if len(parts) != 5:
+                raise ValueError(f"Cron expression must have 5 fields, got {len(parts)}")
+            self.minute = self._parse_field(parts[0], 0, 59)
+            self.hour = self._parse_field(parts[1], 0, 23)
+            self.day = self._parse_field(parts[2], 1, 31)
+            self.month = self._parse_field(parts[3], 1, 12)
+            self.weekday = self._parse_field(parts[4], 0, 6)
+
+        def _parse_field(self, field, min_val, max_val):
+            """Parse a cron field into a set of valid integer values."""
+            values = set()
+            for part in field.split(','):
+                if '/' in part:
+                    range_part, step_str = part.split('/', 1)
+                    step = int(step_str)
+                    if step <= 0:
+                        raise ValueError(f"Step must be positive: {part}")
+                    if range_part == '*':
+                        start, end = min_val, max_val
+                    elif '-' in range_part:
+                        start, end = map(int, range_part.split('-', 1))
+                    else:
+                        start = int(range_part)
+                        end = max_val
+                    values.update(range(start, end + 1, step))
+                elif part == '*':
+                    values.update(range(min_val, max_val + 1))
+                elif '-' in part:
+                    start, end = map(int, part.split('-', 1))
+                    if start < min_val or end > max_val or start > end:
+                        raise ValueError(f"Invalid range: {part}")
+                    values.update(range(start, end + 1))
+                else:
+                    val = int(part)
+                    if val < min_val or val > max_val:
+                        raise ValueError(f"Value out of range: {val}")
+                    values.add(val)
+            return values
+
+        def matches(self, dt):
+            """Check if a datetime matches this cron schedule."""
+            return (dt.minute in self.minute and
+                    dt.hour in self.hour and
+                    dt.day in self.day and
+                    dt.month in self.month and
+                    dt.weekday() in self.weekday)
+
+        def next_run(self, after=None):
+            """Find the next datetime matching the schedule after the given time."""
+            if after is None:
+                after = datetime.now()
+            candidate = after.replace(second=0, microsecond=0) + timedelta(minutes=1)
+            for _ in range(525960):
+                if self.matches(candidate):
+                    return candidate
+                candidate += timedelta(minutes=1)
+            raise ValueError("No matching time found within one year")
+expected_output_description: |
+  A thorough test suite with 8+ assertions covering: every-minute '* * * * *',
+  specific values '30 9 * * *', ranges '0-30', step '*/15', comma lists '1,15',
+  matches() with specific datetimes, next_run() correctness, weekday 0=Monday,
+  invalid field count, out-of-range values, and combined patterns '*/5 9-17 * * 0-4'.
+test_script: |
+  import sys
+  from datetime import datetime, timedelta
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  ns = {'datetime': datetime, 'timedelta': timedelta}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: uses isoweekday() (1=Mon,7=Sun) instead of weekday() (0=Mon,6=Sun)
+  buggy_code = '''
+  from datetime import datetime, timedelta
+  class CronSchedule:
+      def __init__(self, expression):
+          parts = expression.strip().split()
+          if len(parts) != 5:
+              raise ValueError(f"Cron expression must have 5 fields, got {len(parts)}")
+          self.minute = self._parse_field(parts[0], 0, 59)
+          self.hour = self._parse_field(parts[1], 0, 23)
+          self.day = self._parse_field(parts[2], 1, 31)
+          self.month = self._parse_field(parts[3], 1, 12)
+          self.weekday = self._parse_field(parts[4], 0, 6)
+      def _parse_field(self, field, min_val, max_val):
+          values = set()
+          for part in field.split(","):
+              if "/" in part:
+                  range_part, step_str = part.split("/", 1)
+                  step = int(step_str)
+                  if step <= 0:
+                      raise ValueError(f"Step must be positive: {part}")
+                  if range_part == "*":
+                      start, end = min_val, max_val
+                  elif "-" in range_part:
+                      start, end = map(int, range_part.split("-", 1))
+                  else:
+                      start = int(range_part)
+                      end = max_val
+                  values.update(range(start, end + 1, step))
+              elif part == "*":
+                  values.update(range(min_val, max_val + 1))
+              elif "-" in part:
+                  start, end = map(int, part.split("-", 1))
+                  if start < min_val or end > max_val or start > end:
+                      raise ValueError(f"Invalid range: {part}")
+                  values.update(range(start, end + 1))
+              else:
+                  val = int(part)
+                  if val < min_val or val > max_val:
+                      raise ValueError(f"Value out of range: {val}")
+                  values.add(val)
+          return values
+      def matches(self, dt):
+          return (dt.minute in self.minute and
+                  dt.hour in self.hour and
+                  dt.day in self.day and
+                  dt.month in self.month and
+                  dt.isoweekday() in self.weekday)
+      def next_run(self, after=None):
+          if after is None:
+              after = datetime.now()
+          candidate = after.replace(second=0, microsecond=0) + timedelta(minutes=1)
+          for _ in range(525960):
+              if self.matches(candidate):
+                  return candidate
+              candidate += timedelta(minutes=1)
+          raise ValueError("No matching time found within one year")
+  '''
+  ns2 = {'datetime': datetime, 'timedelta': timedelta}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the isoweekday vs weekday bug'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

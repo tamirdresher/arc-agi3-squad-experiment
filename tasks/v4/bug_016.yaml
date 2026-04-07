@@ -1,0 +1,202 @@
+id: "TASK-BUG-016"
+category: "BUG"
+difficulty: "hard"
+source: "synthetic-swebench"
+problem: |
+  A JSON-like expression parser uses recursive descent to parse nested structures
+  like arrays and objects. It works on shallow inputs, but users report:
+
+  1. RecursionError (stack overflow) on deeply nested arrays like `[[[...1000 levels...]]]`
+  2. The parser silently accepts malformed input like `[1,,2]` or `[,]`
+  3. Trailing content after a valid expression is ignored: `[1]garbage` parses as `[1]`
+
+  The developer needs to fix the parser to:
+  - Handle deep nesting without stack overflow (convert recursion to iteration, or
+    add a configurable depth limit with a clear error)
+  - Reject malformed input with empty elements
+  - Reject input with trailing non-whitespace characters
+context_files:
+  - path: "code.py"
+    content: |
+      class ParseError(Exception):
+          pass
+
+      class ExprParser:
+          def __init__(self, max_depth=500):
+              self.max_depth = max_depth
+
+          def parse(self, text):
+              """Parse a JSON-like expression. Returns Python object."""
+              self.text = text
+              self.pos = 0
+              result = self._parse_value()
+              return result
+
+          def _parse_value(self):
+              self._skip_whitespace()
+              if self.pos >= len(self.text):
+                  raise ParseError("Unexpected end of input")
+              ch = self.text[self.pos]
+              if ch == '[':
+                  return self._parse_array()
+              elif ch == '{':
+                  return self._parse_object()
+              elif ch == '"':
+                  return self._parse_string()
+              elif ch in '-0123456789':
+                  return self._parse_number()
+              elif self.text[self.pos:self.pos+4] == 'true':
+                  self.pos += 4
+                  return True
+              elif self.text[self.pos:self.pos+5] == 'false':
+                  self.pos += 5
+                  return False
+              elif self.text[self.pos:self.pos+4] == 'null':
+                  self.pos += 4
+                  return None
+              else:
+                  raise ParseError(f"Unexpected char: {ch}")
+
+          def _parse_array(self):
+              self.pos += 1  # skip '['
+              items = []
+              self._skip_whitespace()
+              if self.pos < len(self.text) and self.text[self.pos] == ']':
+                  self.pos += 1
+                  return items
+              while True:
+                  items.append(self._parse_value())
+                  self._skip_whitespace()
+                  if self.pos >= len(self.text):
+                      raise ParseError("Unterminated array")
+                  if self.text[self.pos] == ']':
+                      self.pos += 1
+                      return items
+                  if self.text[self.pos] == ',':
+                      self.pos += 1
+                      # BUG: does not check for trailing comma or empty element
+
+          def _parse_object(self):
+              self.pos += 1  # skip '{'
+              obj = {}
+              self._skip_whitespace()
+              if self.pos < len(self.text) and self.text[self.pos] == '}':
+                  self.pos += 1
+                  return obj
+              while True:
+                  self._skip_whitespace()
+                  key = self._parse_string()
+                  self._skip_whitespace()
+                  if self.pos >= len(self.text) or self.text[self.pos] != ':':
+                      raise ParseError("Expected ':'")
+                  self.pos += 1
+                  value = self._parse_value()
+                  obj[key] = value
+                  self._skip_whitespace()
+                  if self.pos >= len(self.text):
+                      raise ParseError("Unterminated object")
+                  if self.text[self.pos] == '}':
+                      self.pos += 1
+                      return obj
+                  if self.text[self.pos] == ',':
+                      self.pos += 1
+
+          def _parse_string(self):
+              self._skip_whitespace()
+              if self.text[self.pos] != '"':
+                  raise ParseError("Expected string")
+              self.pos += 1
+              start = self.pos
+              while self.pos < len(self.text) and self.text[self.pos] != '"':
+                  if self.text[self.pos] == '\\':
+                      self.pos += 1
+                  self.pos += 1
+              if self.pos >= len(self.text):
+                  raise ParseError("Unterminated string")
+              s = self.text[start:self.pos]
+              self.pos += 1
+              return s
+
+          def _parse_number(self):
+              start = self.pos
+              if self.text[self.pos] == '-':
+                  self.pos += 1
+              while self.pos < len(self.text) and self.text[self.pos].isdigit():
+                  self.pos += 1
+              if self.pos < len(self.text) and self.text[self.pos] == '.':
+                  self.pos += 1
+                  while self.pos < len(self.text) and self.text[self.pos].isdigit():
+                      self.pos += 1
+              num_str = self.text[start:self.pos]
+              return float(num_str) if '.' in num_str else int(num_str)
+
+          def _skip_whitespace(self):
+              while self.pos < len(self.text) and self.text[self.pos] in ' \t\n\r':
+                  self.pos += 1
+expected_output_description: |
+  1. Add depth tracking: pass/track a depth counter. If depth exceeds max_depth,
+     raise ParseError instead of crashing with RecursionError.
+  2. After consuming ',' in _parse_array and _parse_object, check that the next
+     token is NOT ']' / '}' (trailing comma) and NOT ',' (empty element).
+  3. In `parse`, after _parse_value returns, skip whitespace and verify
+     self.pos == len(self.text). If not, raise ParseError for trailing content.
+test_script: |
+  exec(open('solution.py').read())
+
+  p = ExprParser(max_depth=200)
+
+  # Test 1: valid inputs parse correctly
+  assert p.parse('42') == 42
+  assert p.parse('"hello"') == "hello"
+  assert p.parse('[1, 2, 3]') == [1, 2, 3]
+  assert p.parse('{"a": 1}') == {"a": 1}
+  assert p.parse('[]') == []
+  assert p.parse('{}') == {}
+  assert p.parse('null') is None
+  assert p.parse('[1, [2, [3]]]') == [1, [2, [3]]]
+
+  # Test 2: deeply nested input — should raise ParseError, NOT RecursionError
+  deep = '[' * 300 + '1' + ']' * 300
+  try:
+      p.parse(deep)
+      assert False, "Should have raised ParseError for depth > 200"
+  except ParseError:
+      pass  # correct
+  except RecursionError:
+      assert False, "Got RecursionError — must raise ParseError with depth limit"
+
+  # Test 3: trailing comma must be rejected
+  try:
+      p.parse('[1, 2, 3,]')
+      assert False, "Should reject trailing comma in array"
+  except ParseError:
+      pass
+
+  # Test 4: empty element (double comma) must be rejected
+  try:
+      p.parse('[1,,2]')
+      assert False, "Should reject empty element"
+  except ParseError:
+      pass
+
+  # Test 5: trailing content after valid expression
+  try:
+      p.parse('[1, 2] extra')
+      assert False, "Should reject trailing content"
+  except ParseError:
+      pass
+
+  # Test 6: object trailing comma
+  try:
+      p.parse('{"a": 1,}')
+      assert False, "Should reject trailing comma in object"
+  except ParseError:
+      pass
+
+  # Test 7: nested objects work within depth limit
+  nested = '{"a": {"b": {"c": [1, 2, {"d": true}]}}}'
+  result = p.parse(nested)
+  assert result['a']['b']['c'][2]['d'] == True
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

@@ -1,0 +1,165 @@
+id: "TASK-BUG-020"
+category: "BUG"
+difficulty: "hard"
+source: "synthetic-swebench"
+problem: |
+  An async task scheduler processes jobs from a bounded queue. Users report:
+
+  1. Tasks are silently dropped when the queue is full — `submit` returns True
+     (indicating success) even though the task was never enqueued because the
+     `queue.put_nowait` call fails with `queue.Full` but the exception is caught
+     and swallowed.
+  2. When a task raises an exception, the worker crashes and stops processing
+     all subsequent tasks. The worker should log the error and continue.
+  3. `shutdown` doesn't wait for in-flight tasks to complete — it sets the stop
+     flag and returns immediately, so tasks may be abandoned mid-execution.
+  4. The `get_results` method has a race condition: it reads the results dict
+     while workers may still be writing to it, and returns a reference to the
+     internal dict instead of a copy.
+  5. `task_count` returns the number of submitted tasks, not pending tasks,
+     giving a misleading view of backlog.
+context_files:
+  - path: "code.py"
+    content: |
+      import threading
+      import queue
+      import time
+
+      class TaskScheduler:
+          def __init__(self, max_workers=2, max_queue_size=10):
+              self._queue = queue.Queue(maxsize=max_queue_size)
+              self._results = {}
+              self._lock = threading.Lock()
+              self._stop = False
+              self._task_count = 0
+              self._workers = []
+              for _ in range(max_workers):
+                  w = threading.Thread(target=self._worker, daemon=True)
+                  w.start()
+                  self._workers.append(w)
+
+          def submit(self, task_id, func, *args):
+              """Submit a task. Returns True if accepted, False if rejected."""
+              try:
+                  self._queue.put_nowait((task_id, func, args))
+                  self._task_count += 1
+                  return True
+              except queue.Full:
+                  return True  # BUG: returns True even when task is dropped
+
+          def _worker(self):
+              """Worker loop — processes tasks from queue."""
+              while not self._stop:
+                  try:
+                      task_id, func, args = self._queue.get(timeout=0.1)
+                  except queue.Empty:
+                      continue
+                  # BUG: no try/except — exception kills the worker
+                  result = func(*args)
+                  with self._lock:
+                      self._results[task_id] = ('success', result)
+                  self._queue.task_done()
+
+          def get_result(self, task_id):
+              """Get result for a specific task."""
+              return self._results.get(task_id)
+
+          def get_results(self):
+              """Get all results."""
+              return self._results  # BUG: returns reference, not copy
+
+          def shutdown(self, wait=True):
+              """Shutdown the scheduler."""
+              self._stop = True
+              # BUG: doesn't join workers or wait for queue to drain
+
+          def task_count(self):
+              """Returns number of tasks submitted (misleading name)."""
+              return self._task_count
+
+          def pending_count(self):
+              """Returns number of tasks waiting in queue."""
+              return self._queue.qsize()
+
+          def is_idle(self):
+              """Check if all work is done."""
+              return self._queue.empty() and len(self._results) == self._task_count
+expected_output_description: |
+  1. `submit`: return False in the except queue.Full block.
+  2. `_worker`: wrap func(*args) in try/except. On exception, store
+     ('error', str(e)) in results and continue processing.
+  3. `shutdown`: if wait=True, call self._queue.join() before setting _stop,
+     then join all worker threads.
+  4. `get_results`: return dict(self._results) under the lock.
+  5. Optionally fix task_count semantics, or at minimum ensure submit returns
+     False when the task was not actually enqueued.
+test_script: |
+  exec(open('solution.py').read())
+  import time
+
+  # Test 1: basic submit and result
+  sched = TaskScheduler(max_workers=2, max_queue_size=5)
+  sched.submit('t1', lambda x: x * 2, 21)
+  time.sleep(0.5)
+  r = sched.get_result('t1')
+  assert r is not None, "Should have result for t1"
+  assert r[0] == 'success' and r[1] == 42, f"Expected ('success', 42), got {r}"
+
+  # Test 2: full queue returns False
+  sched2 = TaskScheduler(max_workers=1, max_queue_size=3)
+  # Stuff the queue with slow tasks
+  accepted = 0
+  rejected = 0
+  for i in range(20):
+      ok = sched2.submit(f'fill_{i}', time.sleep, 0.5)
+      if ok:
+          accepted += 1
+      else:
+          rejected += 1
+  assert rejected > 0, f"Some tasks should be rejected, got 0 rejected out of 20"
+
+  # Test 3: task exception doesn't kill worker
+  sched3 = TaskScheduler(max_workers=1, max_queue_size=10)
+  def bad_task():
+      raise ValueError("I fail")
+  sched3.submit('bad', bad_task)
+  time.sleep(0.3)
+  sched3.submit('good', lambda: 'ok')
+  time.sleep(0.3)
+  r_bad = sched3.get_result('bad')
+  r_good = sched3.get_result('good')
+  assert r_bad is not None, "Failed task should still have a result entry"
+  assert r_bad[0] == 'error', f"Failed task status should be 'error', got {r_bad[0]}"
+  assert r_good is not None, "Good task after bad should execute"
+  assert r_good[0] == 'success', f"Good task should succeed, got {r_good}"
+
+  # Test 4: get_results returns a copy
+  sched4 = TaskScheduler(max_workers=1, max_queue_size=5)
+  sched4.submit('x', lambda: 1)
+  time.sleep(0.3)
+  snapshot = sched4.get_results()
+  sched4.submit('y', lambda: 2)
+  time.sleep(0.3)
+  assert 'y' not in snapshot, "Snapshot should be independent of new results"
+
+  # Test 5: shutdown waits for tasks
+  sched5 = TaskScheduler(max_workers=2, max_queue_size=10)
+  for i in range(5):
+      sched5.submit(f's{i}', lambda idx=i: idx * 10)
+  sched5.shutdown(wait=True)
+  results5 = sched5.get_results()
+  assert len(results5) == 5, f"Expected 5 results after shutdown, got {len(results5)}"
+
+  # Test 6: multiple tasks produce correct results
+  sched6 = TaskScheduler(max_workers=2, max_queue_size=20)
+  for i in range(10):
+      sched6.submit(f'm{i}', lambda v=i: v ** 2)
+  time.sleep(1)
+  for i in range(10):
+      r = sched6.get_result(f'm{i}')
+      assert r is not None and r[0] == 'success', f"m{i} failed: {r}"
+      assert r[1] == i ** 2, f"m{i}: expected {i**2}, got {r[1]}"
+  sched6.shutdown(wait=True)
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

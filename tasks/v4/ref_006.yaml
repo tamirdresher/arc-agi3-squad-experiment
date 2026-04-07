@@ -1,0 +1,143 @@
+id: TASK-REF-006
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: |
+  Refactor this shipping cost calculator that is riddled with magic numbers. Extract all
+  numeric constants into named constants at module level. Also break the single long
+  function into smaller logical pieces. Preserve exact return values.
+context_files:
+  - path: code.py
+    content: |
+      def calculate_shipping(weight, distance, pkg_type, is_express, is_fragile, is_insured):
+          if weight <= 0 or distance <= 0:
+              return {'cost': 0, 'breakdown': {}, 'error': 'invalid input'}
+          if pkg_type == 'envelope':
+              base = 2.99
+              if weight > 0.5:
+                  base += (weight - 0.5) * 1.50
+          elif pkg_type == 'parcel':
+              base = 5.99
+              if weight > 2.0:
+                  base += (weight - 2.0) * 2.25
+              if weight > 10.0:
+                  base += (weight - 10.0) * 1.75
+          elif pkg_type == 'freight':
+              base = 19.99
+              base += weight * 0.85
+              if weight > 50.0:
+                  base += (weight - 50.0) * 0.50
+          else:
+              base = 7.99
+              base += weight * 1.25
+          if distance <= 100:
+              dist_fee = distance * 0.05
+          elif distance <= 500:
+              dist_fee = 100 * 0.05 + (distance - 100) * 0.08
+          elif distance <= 2000:
+              dist_fee = 100 * 0.05 + 400 * 0.08 + (distance - 500) * 0.12
+          else:
+              dist_fee = 100 * 0.05 + 400 * 0.08 + 1500 * 0.12 + (distance - 2000) * 0.18
+          subtotal = base + dist_fee
+          express_fee = 0
+          if is_express:
+              express_fee = subtotal * 0.50
+              if express_fee < 4.99:
+                  express_fee = 4.99
+          fragile_fee = 0
+          if is_fragile:
+              fragile_fee = subtotal * 0.20
+              if fragile_fee < 2.99:
+                  fragile_fee = 2.99
+          insurance_fee = 0
+          if is_insured:
+              insurance_fee = subtotal * 0.10
+              if insurance_fee < 1.99:
+                  insurance_fee = 1.99
+          total = subtotal + express_fee + fragile_fee + insurance_fee
+          if total > 500:
+              total = total * 0.95
+          elif total > 200:
+              total = total * 0.97
+          return {
+              'cost': round(total, 2),
+              'breakdown': {
+                  'base': round(base, 2),
+                  'distance': round(dist_fee, 2),
+                  'express': round(express_fee, 2),
+                  'fragile': round(fragile_fee, 2),
+                  'insurance': round(insurance_fee, 2),
+              },
+              'error': None
+          }
+expected_output_description: |
+  Extract all magic numbers into named constants (e.g., ENVELOPE_BASE_RATE, EXPRESS_MULTIPLIER).
+  Split into helper functions for base cost, distance fee, surcharges. Same return values.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Basic envelope
+  r = calculate_shipping(0.3, 50, 'envelope', False, False, False)
+  assert r['error'] is None
+  assert abs(r['cost'] - (2.99 + 50*0.05)) < 0.01
+
+  # Heavy parcel, medium distance
+  r2 = calculate_shipping(12, 300, 'parcel', False, False, False)
+  base2 = 5.99 + (12-2.0)*2.25 + (12-10.0)*1.75
+  dist2 = 100*0.05 + (300-100)*0.08
+  assert abs(r2['cost'] - round(base2+dist2, 2)) < 0.02
+
+  # Freight, long distance, all surcharges
+  r3 = calculate_shipping(60, 2500, 'freight', True, True, True)
+  base3 = 19.99 + 60*0.85 + (60-50)*0.50
+  dist3 = 100*0.05+400*0.08+1500*0.12+(2500-2000)*0.18
+  sub3 = base3 + dist3
+  exp3 = max(sub3*0.50, 4.99)
+  frag3 = max(sub3*0.20, 2.99)
+  ins3 = max(sub3*0.10, 1.99)
+  tot3 = sub3+exp3+frag3+ins3
+  if tot3 > 500: tot3 *= 0.95
+  elif tot3 > 200: tot3 *= 0.97
+  assert abs(r3['cost'] - round(tot3, 2)) < 0.02
+
+  # Invalid
+  assert calculate_shipping(0, 100, 'parcel', False, False, False)['error'] == 'invalid input'
+  assert calculate_shipping(5, -1, 'parcel', False, False, False)['error'] == 'invalid input'
+
+  # Unknown package type
+  r4 = calculate_shipping(3, 80, 'box', False, False, False)
+  base4 = 7.99 + 3*1.25
+  assert abs(r4['cost'] - round(base4 + 80*0.05, 2)) < 0.01
+
+  # Express minimum fee
+  r5 = calculate_shipping(0.2, 10, 'envelope', True, False, False)
+  base5 = 2.99
+  dist5 = 10*0.05
+  sub5 = base5+dist5
+  exp5 = max(sub5*0.50, 4.99)
+  assert abs(r5['breakdown']['express'] - round(exp5, 2)) < 0.01
+
+  # Structural: named constants
+  with open('solution.py') as f:
+      code = f.read()
+
+  import re
+  # Count UPPER_CASE assignments at module level (before first def/class)
+  module_level = code.split('\ndef ')[0] if '\ndef ' in code else code
+  if code.startswith('def '):
+      module_level = ''
+  constants = re.findall(r'^[A-Z][A-Z0-9_]+\s*=\s*[\d.]+', module_level, re.MULTILINE)
+  assert len(constants) >= 8, f"Expected 8+ named constants, found {len(constants)}: {constants}"
+
+  # Should have multiple functions
+  func_count = code.count('def ')
+  assert func_count >= 3, f"Expected 3+ functions, found {func_count}"
+
+  # Magic numbers should be mostly gone from function bodies
+  func_bodies = '\n'.join(code.split('\ndef ')[1:]) if '\ndef ' in code else ''
+  bare_floats = re.findall(r'(?<!=\s)(?<![A-Z_])\b\d+\.\d{2,}\b', func_bodies)
+  # Allow round() calls and a few format strings, but not many raw magic numbers
+  assert len(bare_floats) <= 5, f"Still {len(bare_floats)} magic numbers in function bodies"
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

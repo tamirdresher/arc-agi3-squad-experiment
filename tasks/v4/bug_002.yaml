@@ -1,0 +1,76 @@
+id: "TASK-BUG-002"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A JSON serialization helper has a bug when handling nested datetime objects.
+  The function should recursively convert all datetime objects to ISO format
+  strings, but it fails on nested structures like lists of dicts containing
+  datetime objects.
+  
+  Current behavior: Only converts top-level datetime objects, missing nested ones.
+  Expected: All datetime objects at any nesting level should be converted.
+context_files:
+  - path: "serializer.py"
+    content: |
+      from datetime import datetime
+      
+      def serialize_json(obj):
+          """Convert object to JSON-serializable format, handling datetime."""
+          if isinstance(obj, datetime):
+              return obj.isoformat()
+          elif isinstance(obj, dict):
+              return {k: serialize_json(v) for k, v in obj.items()}
+          elif isinstance(obj, list):
+              return [serialize_json(item) for item in obj]
+          else:
+              return obj
+      
+      # Bug: works for simple cases but fails on deeply nested structures
+expected_output_description: |
+  Fix the serialize_json function to handle all edge cases including:
+  - Nested dicts within lists
+  - Lists within dicts
+  - Multiple levels of nesting
+  - Mixed types at each level
+test_script: |
+  exec(open('solution.py').read())
+  from datetime import datetime
+  
+  # Test 1: Simple datetime
+  dt = datetime(2024, 1, 1, 12, 0, 0)
+  assert serialize_json(dt) == '2024-01-01T12:00:00'
+  
+  # Test 2: Dict with datetime
+  result = serialize_json({'created': dt})
+  assert result == {'created': '2024-01-01T12:00:00'}
+  
+  # Test 3: List with datetime
+  result = serialize_json([dt, dt])
+  assert all(isinstance(x, str) for x in result)
+  
+  # Test 4: Nested structure (the tricky case)
+  data = {
+      'users': [
+          {'name': 'Alice', 'joined': dt},
+          {'name': 'Bob', 'joined': dt}
+      ]
+  }
+  result = serialize_json(data)
+  assert isinstance(result['users'][0]['joined'], str), f"Got {type(result['users'][0]['joined'])}"
+  assert isinstance(result['users'][1]['joined'], str), f"Got {type(result['users'][1]['joined'])}"
+  
+  # Test 5: Triple nesting
+  data = {'levels': [{'items': [{'timestamp': dt}]}]}
+  result = serialize_json(data)
+  assert isinstance(result['levels'][0]['items'][0]['timestamp'], str)
+  
+  # Test 6: Mixed types
+  data = {'count': 5, 'active': True, 'name': 'test', 'created': dt}
+  result = serialize_json(data)
+  assert result['count'] == 5
+  assert result['active'] is True
+  assert isinstance(result['created'], str)
+  
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

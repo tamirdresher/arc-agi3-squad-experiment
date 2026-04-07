@@ -1,0 +1,27 @@
+id: TASK-BUG-008
+category: BUG
+difficulty: hard
+source: synthetic-swebench
+problem: "A module loader has a bug that doesn't detect circular dependencies,\n \
+  \           leading to infinite recursion. Fix the import_module function."
+context_files:
+- path: loader.py
+  content: "_loading = set()\n\ndef import_module(name, modules_map):\n    '''Load\
+    \ module by name. BUG: doesn't detect circular deps!'''\n    if name in modules_map:\n\
+    \        return modules_map[name]\n    \n    # Simulate loading - should detect\
+    \ if name is already being loaded\n    _loading.add(name)\n    \n    # Get dependencies\n\
+    \    deps = get_dependencies(name)\n    for dep in deps:\n        import_module(dep,\
+    \ modules_map)  # Could recurse infinitely!\n    \n    modules_map[name] = f'module:{name}'\n\
+    \    return modules_map[name]\n\ndef get_dependencies(name):\n    deps_map = {'A':\
+    \ ['B'], 'B': ['A'], 'C': ['D'], 'D': []}\n    return deps_map.get(name, [])"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: "exec(open('solution.py').read())\n\n# Test 1: No circular dependency\n\
+  modules = {}\nresult = import_module('C', modules)\nassert result == 'module:C'\n\
+  \n# Test 2: CRITICAL - detect circular dependency\nmodules = {}\ntry:\n    import_module('A',\
+  \ modules)  # A->B->A (circular!)\n    assert False, \"Should detect circular dependency!\"\
+  \nexcept (RecursionError, ValueError, RuntimeError) as e:\n    pass  # Expected\n\
+  \n# Test 3: Self-dependency\nget_dependencies_orig = get_dependencies\n\ndef get_dependencies(name):\n\
+  \    if name == 'E':\n        return ['E']  # Self-loop\n    return []\n\ntry:\n\
+  \    import_module('E', {})\n    assert False, \"Should detect self-loop!\"\nexcept\
+  \ (RecursionError, ValueError, RuntimeError):\n    pass\n\nprint('ALL TESTS PASSED')"
+scoring_method: test_pass

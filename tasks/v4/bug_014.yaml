@@ -1,0 +1,146 @@
+id: "TASK-BUG-014"
+category: "BUG"
+difficulty: "hard"
+source: "synthetic-swebench"
+problem: |
+  A log file processor reads lines from files that may be encoded in UTF-8,
+  Latin-1, or contain mixed encodings (common in real server logs). The
+  `LogProcessor` class has several bugs related to string/bytes handling:
+
+  1. `read_log` opens the file without specifying an encoding and without error
+     handling, so it crashes on non-UTF-8 bytes on some platforms.
+  2. `parse_line` tries to `.decode()` a value that's already a str (when the
+     file was opened in text mode), causing AttributeError.
+  3. `normalize_text` does `.encode().decode()` round-tripping that destroys
+     characters not representable in ASCII.
+  4. `search_logs` concatenates bytes and str when building results.
+
+  The processor should handle mixed-encoding logs gracefully, never crash on
+  encoding issues, and preserve as much content as possible.
+context_files:
+  - path: "code.py"
+    content: |
+      import os
+
+      class LogProcessor:
+          def __init__(self):
+              self.entries = []
+
+          def read_log(self, filepath):
+              """Read a log file and return lines."""
+              with open(filepath) as f:
+                  return f.readlines()
+
+          def parse_line(self, line):
+              """Parse a log line into (timestamp, level, message).
+              Format: '[TIMESTAMP] LEVEL: message'"""
+              if isinstance(line, bytes):
+                  line = line.decode('utf-8')
+              line = line.strip()
+              if not line or not line.startswith('['):
+                  return None
+              try:
+                  bracket_end = line.index(']')
+                  timestamp = line[1:bracket_end]
+                  rest = line[bracket_end + 2:]  # skip '] '
+                  level, message = rest.split(': ', 1)
+                  return (timestamp, level, self.normalize_text(message))
+              except (ValueError, IndexError):
+                  return None
+
+          def normalize_text(self, text):
+              """Normalize text to clean ASCII-safe string."""
+              return text.encode('ascii', 'ignore').decode('ascii')
+
+          def process_file(self, filepath):
+              """Process a log file and store parsed entries."""
+              lines = self.read_log(filepath)
+              for line in lines:
+                  parsed = self.parse_line(line)
+                  if parsed:
+                      self.entries.append(parsed)
+              return len(self.entries)
+
+          def search_logs(self, keyword):
+              """Search entries for keyword in message field."""
+              results = []
+              for ts, level, msg in self.entries:
+                  if keyword.lower() in msg.lower():
+                      results.append(ts + b' ' + level + b': ' + msg)
+              return results
+
+          def get_by_level(self, level):
+              """Get all entries matching a severity level."""
+              return [(ts, msg) for ts, lv, msg in self.entries
+                      if lv.upper() == level.upper()]
+
+          def process_bytes(self, raw_data):
+              """Process raw bytes data as log content."""
+              lines = raw_data.split(b'\n')
+              for line in lines:
+                  parsed = self.parse_line(line)
+                  if parsed:
+                      self.entries.append(parsed)
+expected_output_description: |
+  1. `read_log` must open with encoding='utf-8', errors='replace' (or 'surrogateescape')
+     to handle non-UTF-8 bytes gracefully.
+  2. `parse_line` already handles bytes, but the caller may pass str — this is fine.
+  3. `normalize_text` must preserve Unicode characters — remove the ASCII
+     encode/decode round-trip. Just return text.strip() or use 'utf-8' if encoding is needed.
+  4. `search_logs` must concatenate strings, not mix bytes and str — use
+     f-strings or str concatenation with ' ' not b' '.
+test_script: |
+  import os, tempfile
+  exec(open('solution.py').read())
+
+  # Helper: write temp file with specific bytes
+  def write_temp(content_bytes):
+      fd, path = tempfile.mkstemp(suffix='.log')
+      os.write(fd, content_bytes)
+      os.close(fd)
+      return path
+
+  lp = LogProcessor()
+
+  # Test 1: standard UTF-8 log
+  p1 = write_temp(b'[2024-01-01 10:00:00] INFO: Server started\n[2024-01-01 10:01:00] ERROR: Disk full\n')
+  count = lp.process_file(p1)
+  assert count >= 2, f"Expected >=2 entries, got {count}"
+  os.unlink(p1)
+
+  # Test 2: search returns strings, not bytes
+  results = lp.search_logs('disk')
+  assert len(results) >= 1, "Should find 'disk' in logs"
+  assert isinstance(results[0], str), f"Expected str result, got {type(results[0])}"
+
+  # Test 3: file with non-UTF-8 bytes (Latin-1 accented chars)
+  lp2 = LogProcessor()
+  latin_line = '[2024-01-02 12:00:00] WARN: Caf\xe9 connection lost\n'.encode('latin-1')
+  p2 = write_temp(latin_line)
+  count2 = lp2.process_file(p2)  # must not crash
+  assert count2 >= 1, "Should parse Latin-1 log line"
+  os.unlink(p2)
+
+  # Test 4: normalize_text preserves unicode
+  lp3 = LogProcessor()
+  assert 'caf' in lp3.normalize_text('Café latté').lower(), \
+      "normalize_text should preserve text content"
+  # Should keep non-ASCII if possible
+  normalized = lp3.normalize_text('Ünïcödé tëst')
+  assert len(normalized) >= 8, \
+      f"normalize_text destroyed too many chars: '{normalized}'"
+
+  # Test 5: process raw bytes
+  lp4 = LogProcessor()
+  raw = b'[2024-03-01 09:00:00] DEBUG: raw bytes test\n[2024-03-01 09:01:00] INFO: another line'
+  lp4.process_bytes(raw)
+  assert len(lp4.entries) >= 2
+
+  # Test 6: get_by_level works
+  errors = lp.get_by_level('ERROR')
+  assert len(errors) >= 1
+  assert any('Disk' in msg or 'disk' in msg for _, msg in errors)
+
+  # Cleanup
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

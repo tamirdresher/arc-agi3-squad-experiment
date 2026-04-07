@@ -1,0 +1,138 @@
+id: "TASK-BUG-012"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A game engine uses a `GameState` class with a `snapshot` method that is supposed
+  to produce an independent copy of the current state for undo/redo functionality.
+  Players report that after taking a snapshot and then making moves, the snapshot
+  is corrupted — undoing reverts to the wrong state. Some entity positions change
+  in the snapshot even though no one modified it.
+
+  The root cause is that `snapshot` uses `copy.copy` (shallow copy), so nested
+  mutable objects like entity position lists and the inventory dict-of-lists are
+  shared between the original and the copy. Mutations to the original's nested
+  structures silently corrupt the snapshot.
+context_files:
+  - path: "code.py"
+    content: |
+      import copy
+
+      class Entity:
+          def __init__(self, name, x, y, tags=None):
+              self.name = name
+              self.pos = [x, y]
+              self.tags = tags or []
+
+          def move(self, dx, dy):
+              self.pos[0] += dx
+              self.pos[1] += dy
+
+          def add_tag(self, tag):
+              self.tags.append(tag)
+
+      class GameState:
+          def __init__(self):
+              self.turn = 0
+              self.entities = {}
+              self.inventory = {}
+              self.event_log = []
+
+          def add_entity(self, entity):
+              self.entities[entity.name] = entity
+
+          def add_item(self, owner, item):
+              if owner not in self.inventory:
+                  self.inventory[owner] = []
+              self.inventory[owner].append(item)
+
+          def log_event(self, event):
+              self.event_log.append(event)
+
+          def snapshot(self):
+              """Create an independent copy of this game state."""
+              return copy.copy(self)
+
+          def restore(self, snap):
+              """Restore state from a snapshot."""
+              self.turn = snap.turn
+              self.entities = snap.entities
+              self.inventory = snap.inventory
+              self.event_log = snap.event_log
+
+          def get_entity_pos(self, name):
+              e = self.entities.get(name)
+              return list(e.pos) if e else None
+
+          def get_items(self, owner):
+              return list(self.inventory.get(owner, []))
+expected_output_description: |
+  Fix `snapshot` to use `copy.deepcopy(self)` so that all nested mutable objects
+  (entity positions, tags, inventory lists, event_log) are fully independent.
+  The `restore` method should also deepcopy from the snapshot to avoid the
+  snapshot becoming entangled with the live state after restore.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Test 1: snapshot preserves state after entity moves
+  gs = GameState()
+  gs.add_entity(Entity('hero', 0, 0))
+  gs.turn = 5
+  snap = gs.snapshot()
+  gs.entities['hero'].move(10, 20)
+  gs.turn = 6
+  assert snap.get_entity_pos('hero') == [0, 0], \
+      f"Snapshot hero pos should be [0,0], got {snap.get_entity_pos('hero')}"
+  assert snap.turn == 5
+
+  # Test 2: inventory isolation
+  gs2 = GameState()
+  gs2.add_item('player', 'sword')
+  snap2 = gs2.snapshot()
+  gs2.add_item('player', 'shield')
+  assert snap2.get_items('player') == ['sword'], \
+      f"Snapshot should have only sword, got {snap2.get_items('player')}"
+
+  # Test 3: event log isolation
+  gs3 = GameState()
+  gs3.log_event('start')
+  snap3 = gs3.snapshot()
+  gs3.log_event('attack')
+  gs3.log_event('defend')
+  assert len(snap3.event_log) == 1, \
+      f"Snapshot log should have 1 event, got {len(snap3.event_log)}"
+
+  # Test 4: restore then mutate doesn't corrupt the snapshot
+  gs4 = GameState()
+  gs4.add_entity(Entity('mage', 5, 5))
+  gs4.add_item('mage', 'staff')
+  snap4 = gs4.snapshot()
+  gs4.entities['mage'].move(100, 100)
+  gs4.add_item('mage', 'robe')
+  gs4.restore(snap4)
+  assert gs4.get_entity_pos('mage') == [5, 5]
+  gs4.entities['mage'].move(1, 1)
+  assert snap4.get_entity_pos('mage') == [5, 5], \
+      "Snapshot must remain independent after restore"
+
+  # Test 5: entity tags isolation
+  gs5 = GameState()
+  e = Entity('goblin', 3, 3, tags=['enemy'])
+  gs5.add_entity(e)
+  snap5 = gs5.snapshot()
+  e.add_tag('boss')
+  assert 'boss' not in snap5.entities['goblin'].tags, \
+      "Snapshot entity tags must be independent"
+
+  # Test 6: multiple snapshots are independent
+  gs6 = GameState()
+  gs6.add_entity(Entity('npc', 0, 0))
+  s1 = gs6.snapshot()
+  gs6.entities['npc'].move(1, 0)
+  s2 = gs6.snapshot()
+  gs6.entities['npc'].move(1, 0)
+  assert s1.get_entity_pos('npc') == [0, 0]
+  assert s2.get_entity_pos('npc') == [1, 0]
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

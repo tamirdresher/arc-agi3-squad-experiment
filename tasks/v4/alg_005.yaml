@@ -1,0 +1,171 @@
+id: "TASK-ALG-005"
+category: "ALG"
+difficulty: "hard"
+source: "synthetic-contest"
+problem: |
+  Implement a MinHeap class that supports the standard heap operations plus
+  a decrease_key operation, all with correct time complexity.
+
+  Operations:
+    - MinHeap(): Create an empty min-heap.
+    - insert(key, value): Insert an element with the given key (priority) and value.
+      Keys are numeric. Values are unique identifiers (strings or ints).
+    - extract_min(): Remove and return (key, value) of the element with the smallest key.
+      Raise IndexError if the heap is empty.
+    - peek(): Return (key, value) of the minimum element without removing it.
+      Raise IndexError if the heap is empty.
+    - decrease_key(value, new_key): Decrease the key of the element identified by 'value'
+      to new_key. If new_key >= current key, raise ValueError.
+      If value is not in the heap, raise KeyError.
+    - __len__(): Return the number of elements in the heap.
+    - __contains__(value): Return True if value is in the heap.
+
+  The decrease_key operation must run in O(log n) time, which requires maintaining
+  an index map from values to their positions in the heap array.
+
+  Constraints:
+    - Keys can be any comparable numeric value (int or float).
+    - Values are unique within the heap.
+context_files:
+  - path: "min_heap.py"
+    content: |
+      class MinHeap:
+          """
+          A min-heap supporting decrease_key in O(log n).
+          Must maintain a position map for O(log n) decrease_key.
+          """
+          def __init__(self):
+              # TODO: initialize heap array and position index
+              pass
+
+          def insert(self, key, value):
+              # TODO: insert (key, value) and bubble up
+              pass
+
+          def extract_min(self):
+              # TODO: remove and return (key, value) of minimum
+              pass
+
+          def peek(self):
+              # TODO: return (key, value) of minimum without removing
+              pass
+
+          def decrease_key(self, value, new_key):
+              # TODO: decrease key of element with given value
+              pass
+
+          def __len__(self):
+              pass
+
+          def __contains__(self, value):
+              pass
+expected_output_description: |
+  A working MinHeap with O(log n) insert, extract_min, and decrease_key.
+  The heap property must be maintained after every operation.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Basic insert and extract
+  h = MinHeap()
+  h.insert(5, 'a')
+  h.insert(3, 'b')
+  h.insert(7, 'c')
+  h.insert(1, 'd')
+  assert len(h) == 4
+  assert h.peek() == (1, 'd')
+  assert h.extract_min() == (1, 'd')
+  assert h.extract_min() == (3, 'b')
+  assert h.extract_min() == (5, 'a')
+  assert h.extract_min() == (7, 'c')
+  assert len(h) == 0
+
+  # Extract from empty raises IndexError
+  try:
+      h.extract_min()
+      assert False, "Should raise IndexError on empty heap"
+  except IndexError:
+      pass
+
+  # Peek from empty raises IndexError
+  try:
+      h.peek()
+      assert False, "Should raise IndexError on empty heap"
+  except IndexError:
+      pass
+
+  # Decrease key
+  h2 = MinHeap()
+  h2.insert(10, 'x')
+  h2.insert(20, 'y')
+  h2.insert(30, 'z')
+  h2.decrease_key('z', 5)
+  assert h2.peek() == (5, 'z'), f"After decrease_key, min should be (5, 'z'), got {h2.peek()}"
+  assert h2.extract_min() == (5, 'z')
+  assert h2.extract_min() == (10, 'x')
+  assert h2.extract_min() == (20, 'y')
+
+  # Decrease key — invalid (new_key >= current)
+  h3 = MinHeap()
+  h3.insert(10, 'a')
+  try:
+      h3.decrease_key('a', 15)
+      assert False, "Should raise ValueError when new_key >= current key"
+  except ValueError:
+      pass
+  try:
+      h3.decrease_key('a', 10)
+      assert False, "Should raise ValueError when new_key == current key"
+  except ValueError:
+      pass
+
+  # Decrease key — missing value
+  try:
+      h3.decrease_key('missing', 1)
+      assert False, "Should raise KeyError for missing value"
+  except KeyError:
+      pass
+
+  # Contains
+  h4 = MinHeap()
+  h4.insert(1, 'present')
+  assert 'present' in h4
+  assert 'absent' not in h4
+  h4.extract_min()
+  assert 'present' not in h4
+
+  # Stress: insert many, decrease some, extract all in order
+  import random
+  h5 = MinHeap()
+  vals = list(range(200))
+  random.seed(42)
+  random.shuffle(vals)
+  for v in vals:
+      h5.insert(v + 1000, v)
+  # Decrease a few keys to very low values
+  h5.decrease_key(50, 1)
+  h5.decrease_key(100, 2)
+  h5.decrease_key(150, 3)
+  first = h5.extract_min()
+  assert first == (1, 50), f"Expected (1, 50) got {first}"
+  second = h5.extract_min()
+  assert second == (2, 100), f"Expected (2, 100) got {second}"
+  third = h5.extract_min()
+  assert third == (3, 150), f"Expected (3, 150) got {third}"
+
+  # Remaining should come out in order
+  prev_key = -float('inf')
+  while len(h5) > 0:
+      k, v = h5.extract_min()
+      assert k >= prev_key, f"Heap order violated: {k} < {prev_key}"
+      prev_key = k
+
+  # Single element heap
+  h6 = MinHeap()
+  h6.insert(99, 'solo')
+  assert h6.peek() == (99, 'solo')
+  h6.decrease_key('solo', 1)
+  assert h6.peek() == (1, 'solo')
+  assert h6.extract_min() == (1, 'solo')
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

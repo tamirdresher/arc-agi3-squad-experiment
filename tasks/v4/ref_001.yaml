@@ -1,0 +1,26 @@
+id: TASK-REF-001
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: "Refactor the calculate_total function by extracting tax and discount logic\n\
+  \    into separate functions. Must preserve exact behavior."
+context_files:
+- path: billing.py
+  content: "def calculate_total(items, customer_type):\n    subtotal = sum(item['price']\
+    \ for item in items)\n    \n    # Tax calculation\n    if customer_type == 'business':\n\
+    \        tax = 0\n    elif customer_type == 'individual':\n        tax = subtotal\
+    \ * 0.08\n    else:\n        tax = subtotal * 0.10\n    \n    # Discount calculation\n\
+    \    if len(items) > 10:\n        discount = subtotal * 0.15\n    elif len(items)\
+    \ > 5:\n        discount = subtotal * 0.10\n    else:\n        discount = 0\n\
+    \    \n    return subtotal + tax - discount"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: "exec(open('solution.py').read())\n\n# Test 1: Behavior preserved - business\
+  \ customer\nitems = [{'price': 100}, {'price': 50}]\nassert abs(calculate_total(items,\
+  \ 'business') - 150.0) < 0.01\n\n# Test 2: Individual with tax\nitems = [{'price':\
+  \ 100}]\nassert abs(calculate_total(items, 'individual') - 108.0) < 0.01\n\n# Test\
+  \ 3: Bulk discount\nitems = [{'price': 10}] * 11\nresult = calculate_total(items,\
+  \ 'business')\nassert abs(result - 93.5) < 0.01\n\n# Test 4: Functions extracted\n\
+  with open('solution.py') as f:\n    src = f.read()\n    \n# Should have separate\
+  \ functions now\nfunc_count = src.count('def ')\nassert func_count >= 3, f\"Expected\
+  \ 3+ functions, found {func_count}\"\n\nprint('ALL TESTS PASSED')"
+scoring_method: test_pass

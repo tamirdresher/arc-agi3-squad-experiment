@@ -1,0 +1,136 @@
+id: "TASK-BUG-018"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A deployment tool uses a `ConfigMerger` class to deep-merge YAML configuration
+  dicts. The base config is merged with environment-specific overrides. Users
+  report several bugs:
+
+  1. List values are silently overwritten instead of being handled correctly.
+     The tool should REPLACE lists by default (not append), but it currently
+     tries to recurse into lists as if they were dicts, crashing with an error
+     when list elements aren't dicts.
+  2. When a key exists in the override with value `None`, it should DELETE that
+     key from the result — but the code sets it to None instead.
+  3. Nested dicts are not truly deep-merged: only one level deep works correctly,
+     but three or more levels of nesting fail because the function overwrites
+     instead of recursing on the inner dicts.
+  4. The `merge_many` function has an off-by-one: it starts from index 0 and
+     merges base with configs[0], but configs[0] IS the base, so the first
+     config is effectively skipped.
+context_files:
+  - path: "code.py"
+    content: |
+      def deep_merge(base, override):
+          """Deep merge override into base. Returns new dict.
+          Rules:
+            - Dicts are recursively merged
+            - Lists in override REPLACE lists in base entirely
+            - None values in override DELETE the key from result
+            - Scalar values in override replace base
+          """
+          result = dict(base)
+          for key, value in override.items():
+              if key in result and isinstance(result[key], dict) and isinstance(value, dict):
+                  result[key] = deep_merge(result[key], value)
+              elif key in result and isinstance(result[key], list) and isinstance(value, list):
+                  # BUG: tries to merge list elements as dicts
+                  merged_list = []
+                  for i in range(max(len(result[key]), len(value))):
+                      if i < len(result[key]) and i < len(value):
+                          merged_list.append(deep_merge(result[key][i], value[i]))
+                      elif i < len(value):
+                          merged_list.append(value[i])
+                      else:
+                          merged_list.append(result[key][i])
+                  result[key] = merged_list
+              else:
+                  result[key] = value
+          return result
+
+      def merge_many(*configs):
+          """Merge multiple configs left to right."""
+          if not configs:
+              return {}
+          result = configs[0]
+          for cfg in configs:
+              result = deep_merge(result, cfg)
+          return result
+
+      class ConfigMerger:
+          def __init__(self, base_config):
+              self.base = base_config
+
+          def merge_env(self, env_overrides):
+              return deep_merge(self.base, env_overrides)
+
+          def merge_layers(self, *layers):
+              return merge_many(self.base, *layers)
+expected_output_description: |
+  1. When both base and override have lists for the same key, the override list
+     should REPLACE the base list entirely — do not try to element-wise merge.
+  2. When override has a key with value None, DELETE that key from the result
+     (use `del result[key]` or skip it).
+  3. The deep_merge function's dict recursion is actually fine for nested dicts,
+     but the list-merging branch intercepts and breaks things — fixing #1 fixes #3.
+  4. In `merge_many`, start the loop from `configs[1]` not `configs[0]` (since
+     result is already initialized to configs[0]).
+test_script: |
+  exec(open('solution.py').read())
+
+  # Test 1: basic scalar merge
+  base = {'a': 1, 'b': 2}
+  over = {'b': 3, 'c': 4}
+  result = deep_merge(base, over)
+  assert result == {'a': 1, 'b': 3, 'c': 4}
+
+  # Test 2: nested dict deep merge
+  base2 = {'db': {'host': 'localhost', 'port': 5432, 'options': {'timeout': 30, 'retries': 3}}}
+  over2 = {'db': {'port': 3306, 'options': {'timeout': 60}}}
+  r2 = deep_merge(base2, over2)
+  assert r2['db']['host'] == 'localhost', "host should be preserved"
+  assert r2['db']['port'] == 3306, "port should be overridden"
+  assert r2['db']['options']['timeout'] == 60
+  assert r2['db']['options']['retries'] == 3, "retries should be preserved"
+
+  # Test 3: list replacement (NOT element-wise merge)
+  base3 = {'tags': ['web', 'prod'], 'ports': [80, 443]}
+  over3 = {'tags': ['api', 'staging']}
+  r3 = deep_merge(base3, over3)
+  assert r3['tags'] == ['api', 'staging'], f"Tags should be replaced, got {r3['tags']}"
+  assert r3['ports'] == [80, 443], "Ports should be unchanged"
+
+  # Test 4: list of non-dict elements (strings, ints) must not crash
+  base4 = {'items': [1, 2, 3]}
+  over4 = {'items': [4, 5]}
+  r4 = deep_merge(base4, over4)
+  assert r4['items'] == [4, 5], f"Expected [4, 5], got {r4['items']}"
+
+  # Test 5: None value deletes key
+  base5 = {'feature_a': True, 'feature_b': True, 'name': 'app'}
+  over5 = {'feature_a': None}
+  r5 = deep_merge(base5, over5)
+  assert 'feature_a' not in r5, f"feature_a should be deleted, got {r5}"
+  assert r5['feature_b'] == True
+  assert r5['name'] == 'app'
+
+  # Test 6: merge_many applies in order
+  c1 = {'a': 1, 'b': 1}
+  c2 = {'b': 2, 'c': 2}
+  c3 = {'c': 3, 'd': 3}
+  r6 = merge_many(c1, c2, c3)
+  assert r6 == {'a': 1, 'b': 2, 'c': 3, 'd': 3}, f"Got {r6}"
+
+  # Test 7: ConfigMerger.merge_layers
+  cm = ConfigMerger({'base': True, 'level': 0})
+  r7 = cm.merge_layers({'level': 1, 'extra': 'yes'}, {'level': 2})
+  assert r7 == {'base': True, 'level': 2, 'extra': 'yes'}, f"Got {r7}"
+
+  # Test 8: base is not mutated
+  orig_base = {'x': {'y': 1}}
+  deep_merge(orig_base, {'x': {'y': 2}})
+  assert orig_base['x']['y'] == 1, "Base must not be mutated"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

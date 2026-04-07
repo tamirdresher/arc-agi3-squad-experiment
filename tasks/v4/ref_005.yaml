@@ -1,0 +1,178 @@
+id: TASK-REF-005
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: |
+  Refactor this ReportGenerator class that mixes business logic (data aggregation,
+  calculations, filtering) with I/O operations (file reading, printing). Separate into
+  at least two classes: one for pure data processing and one for I/O. All public methods
+  must still be accessible and return identical results.
+context_files:
+  - path: code.py
+    content: |
+      class ReportGenerator:
+          def __init__(self, data=None):
+              self._data = data or []
+              self._cache = {}
+
+          def load_from_list(self, records):
+              self._data = []
+              for r in records:
+                  if not isinstance(r, dict):
+                      print(f"WARN: skipping non-dict: {r}")
+                      continue
+                  if 'amount' not in r or 'category' not in r:
+                      print(f"WARN: skipping incomplete: {r}")
+                      continue
+                  self._data.append(r)
+              self._cache = {}
+              print(f"Loaded {len(self._data)} records")
+              return len(self._data)
+
+          def get_total(self):
+              if 'total' in self._cache:
+                  return self._cache['total']
+              total = sum(r['amount'] for r in self._data)
+              self._cache['total'] = total
+              return total
+
+          def get_average(self):
+              if not self._data:
+                  return 0.0
+              return self.get_total() / len(self._data)
+
+          def get_by_category(self):
+              if 'by_cat' in self._cache:
+                  return self._cache['by_cat']
+              result = {}
+              for r in self._data:
+                  cat = r['category']
+                  if cat not in result:
+                      result[cat] = {'total': 0, 'count': 0, 'items': []}
+                  result[cat]['total'] += r['amount']
+                  result[cat]['count'] += 1
+                  result[cat]['items'].append(r)
+              self._cache['by_cat'] = result
+              return result
+
+          def get_top_n(self, n=5):
+              sorted_data = sorted(self._data, key=lambda x: x['amount'], reverse=True)
+              return sorted_data[:n]
+
+          def filter_above(self, threshold):
+              return [r for r in self._data if r['amount'] > threshold]
+
+          def filter_by_category(self, category):
+              return [r for r in self._data if r['category'] == category]
+
+          def get_percentiles(self):
+              if not self._data:
+                  return {'p25': 0, 'p50': 0, 'p75': 0}
+              amounts = sorted(r['amount'] for r in self._data)
+              n = len(amounts)
+              def _pct(p):
+                  idx = int(n * p)
+                  idx = min(idx, n - 1)
+                  return amounts[idx]
+              return {'p25': _pct(0.25), 'p50': _pct(0.50), 'p75': _pct(0.75)}
+
+          def print_summary(self):
+              print(f"Total: {self.get_total()}")
+              print(f"Average: {self.get_average():.2f}")
+              print(f"Records: {len(self._data)}")
+              cats = self.get_by_category()
+              for cat, info in sorted(cats.items()):
+                  print(f"  {cat}: {info['count']} items, total={info['total']:.2f}")
+
+          def print_top(self, n=5):
+              top = self.get_top_n(n)
+              print(f"Top {n}:")
+              for i, r in enumerate(top, 1):
+                  print(f"  {i}. {r.get('name','?')}: ${r['amount']:.2f} ({r['category']})")
+
+          def generate_text_report(self):
+              lines = []
+              lines.append("=== REPORT ===")
+              lines.append(f"Total: ${self.get_total():.2f}")
+              lines.append(f"Average: ${self.get_average():.2f}")
+              lines.append(f"Records: {len(self._data)}")
+              pcts = self.get_percentiles()
+              lines.append(f"P25: ${pcts['p25']:.2f}  P50: ${pcts['p50']:.2f}  P75: ${pcts['p75']:.2f}")
+              lines.append("--- By Category ---")
+              for cat, info in sorted(self.get_by_category().items()):
+                  lines.append(f"  {cat}: {info['count']} items, ${info['total']:.2f}")
+              lines.append("=== END ===")
+              return '\n'.join(lines)
+expected_output_description: |
+  Separate into a pure ReportData class (calculations, filtering, aggregation) and
+  a ReportGenerator that handles formatting/output and delegates computation. The
+  ReportGenerator's public API must remain compatible.
+test_script: |
+  exec(open('solution.py').read())
+
+  data = [
+      {'name': 'A', 'amount': 100, 'category': 'food'},
+      {'name': 'B', 'amount': 200, 'category': 'food'},
+      {'name': 'C', 'amount': 50, 'category': 'transport'},
+      {'name': 'D', 'amount': 300, 'category': 'food'},
+      {'name': 'E', 'amount': 75, 'category': 'transport'},
+      {'name': 'F', 'amount': 150, 'category': 'util'},
+  ]
+
+  rg = ReportGenerator()
+  rg.load_from_list(data)
+
+  # Behavioral tests
+  assert rg.get_total() == 875
+  assert abs(rg.get_average() - 145.833) < 0.01
+  cats = rg.get_by_category()
+  assert cats['food']['count'] == 3
+  assert cats['food']['total'] == 600
+  assert cats['transport']['count'] == 2
+  top3 = rg.get_top_n(3)
+  assert top3[0]['amount'] == 300
+  assert len(top3) == 3
+  above = rg.filter_above(100)
+  assert len(above) == 3
+  by_cat = rg.filter_by_category('transport')
+  assert len(by_cat) == 2
+  pcts = rg.get_percentiles()
+  assert pcts['p50'] > 0
+  report = rg.generate_text_report()
+  assert '=== REPORT ===' in report
+  assert 'food' in report
+  assert '$875.00' in report
+
+  # Skip invalid records
+  rg2 = ReportGenerator()
+  count = rg2.load_from_list([{'amount': 1, 'category': 'x'}, 'bad', {'no_amount': True}])
+  assert count == 1
+  assert rg2.get_total() == 1
+
+  # Empty
+  rg3 = ReportGenerator()
+  rg3.load_from_list([])
+  assert rg3.get_average() == 0.0
+  assert rg3.get_percentiles() == {'p25': 0, 'p50': 0, 'p75': 0}
+
+  # Structural: must have 2+ classes
+  with open('solution.py') as f:
+      code = f.read()
+  class_count = code.count('\nclass ') + (1 if code.startswith('class ') else 0)
+  assert class_count >= 2, f"Expected 2+ classes for separation of concerns, got {class_count}"
+  # ReportGenerator must still exist
+  assert 'class ReportGenerator' in code
+  # Computation class should not do print/IO directly
+  import re
+  classes = re.split(r'\nclass ', code)
+  for chunk in classes:
+      if chunk.startswith('ReportGenerator'):
+          continue
+      if 'def ' in chunk and not chunk.strip().startswith('ReportGenerator'):
+          # non-ReportGenerator class body should have no print() in computation methods
+          comp_methods = re.findall(r'def (get_\w+|filter_\w+)\(.*?\):\n((?:[ \t]+.*\n)*)', chunk)
+          for mname, mbody in comp_methods:
+              assert 'print(' not in mbody, f"Computation method {mname} should not call print()"
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

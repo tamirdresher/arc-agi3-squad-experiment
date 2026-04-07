@@ -1,0 +1,92 @@
+id: "TASK-REV-010"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following worker queue implementation for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import threading
+      import time
+      import json
+      import traceback
+      from collections import deque
+
+      class WorkerQueue:
+          def __init__(self, num_workers=4):
+              self._queue = deque()
+              self._workers = []
+              self._running = True
+              for i in range(num_workers):
+                  t = threading.Thread(target=self._worker_loop, daemon=True)
+                  t.start()
+                  self._workers.append(t)
+
+          def enqueue(self, task):
+              self._queue.append(task)
+
+          def _worker_loop(self):
+              while self._running:
+                  if self._queue:
+                      task = self._queue.popleft()
+                      self._process(task)
+                  else:
+                      time.sleep(0.1)
+
+          def _process(self, task):
+              retries = 0
+              while True:
+                  try:
+                      handler = self._get_handler(task["type"])
+                      handler(task["payload"])
+                      return
+                  except Exception as e:
+                      retries += 1
+                      wait = 2 ** retries
+                      print(f"Task {task['type']} failed (attempt {retries}): {e}")
+                      time.sleep(wait)
+
+          def _get_handler(self, task_type):
+              handlers = {
+                  "email": send_email,
+                  "webhook": call_webhook,
+                  "report": generate_report,
+              }
+              return handlers[task_type]
+
+          def get_queue_size(self):
+              return len(self._queue)
+
+          def shutdown(self):
+              self._running = False
+              for w in self._workers:
+                  w.join(timeout=5)
+expected_output_description: |
+  Issues: 1) Unbounded retries — _process retries forever with exponential backoff, never gives up
+  2) Lost messages — tasks in deque lost on crash/restart (no persistence)
+  3) No dead letter queue — permanently failing tasks block the worker forever
+  4) Race condition on deque — multiple workers calling popleft without synchronization
+  5) No task acknowledgment — if worker crashes mid-process, task is already dequeued
+  6) Shutdown loses queued tasks — remaining items in deque are discarded
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if ('unbounded' in review or 'infinite' in review or 'forever' in review or 'unlimited' in review) and ('retr' in review):
+      issues_found += 1
+  if ('lost' in review or 'persist' in review or 'durable' in review or 'crash' in review) and ('message' in review or 'task' in review or 'queue' in review):
+      issues_found += 1
+  if 'dead letter' in review or 'dead-letter' in review or 'dlq' in review or ('poison' in review and ('message' in review or 'task' in review)):
+      issues_found += 1
+  if ('race condition' in review or 'thread' in review) and ('deque' in review or 'popleft' in review or 'synchroniz' in review or 'concurrent' in review or 'safe' in review):
+      issues_found += 1
+  if ('acknowledg' in review or 'ack' in review) and ('task' in review or 'message' in review or 'process' in review):
+      issues_found += 1
+  if ('shutdown' in review or 'stop' in review or 'graceful' in review) and ('lost' in review or 'discard' in review or 'remain' in review or 'drain' in review or 'pending' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/6 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

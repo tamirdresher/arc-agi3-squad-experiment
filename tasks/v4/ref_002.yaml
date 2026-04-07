@@ -1,0 +1,165 @@
+id: TASK-REF-002
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: |
+  Refactor this god function process_order that handles validation, price calculation,
+  discount application, tax computation, inventory check, and receipt formatting all
+  in a single 80-line function. Extract into at least 5 separate single-responsibility
+  functions. Preserve exact behavior for all inputs.
+context_files:
+  - path: code.py
+    content: |
+      def process_order(items, customer, region):
+          errors = []
+          if not items:
+              errors.append("No items")
+          if not customer or not customer.get('name'):
+              errors.append("Invalid customer")
+          if not region or region not in ['US', 'EU', 'APAC']:
+              errors.append("Invalid region")
+          for item in (items or []):
+              if not item.get('sku'):
+                  errors.append(f"Missing SKU")
+              if item.get('qty', 0) <= 0:
+                  errors.append(f"Invalid qty for {item.get('sku','?')}")
+              if item.get('price', 0) <= 0:
+                  errors.append(f"Invalid price for {item.get('sku','?')}")
+          if errors:
+              return {'status': 'error', 'errors': errors}
+          subtotal = 0
+          line_items = []
+          for item in items:
+              line_total = item['price'] * item['qty']
+              subtotal += line_total
+              line_items.append({'sku': item['sku'], 'qty': item['qty'], 'price': item['price'], 'total': line_total})
+          discount = 0
+          discount_reason = None
+          if customer.get('tier') == 'gold':
+              discount = subtotal * 0.15
+              discount_reason = 'Gold member 15%'
+          elif customer.get('tier') == 'silver':
+              discount = subtotal * 0.10
+              discount_reason = 'Silver member 10%'
+          elif len(items) >= 10:
+              discount = subtotal * 0.05
+              discount_reason = 'Bulk 5%'
+          if subtotal - discount > 500:
+              discount += (subtotal - discount) * 0.02
+              if discount_reason:
+                  discount_reason += ' + loyalty 2%'
+              else:
+                  discount_reason = 'Loyalty 2%'
+          after_discount = subtotal - discount
+          tax_rate = 0
+          if region == 'US':
+              tax_rate = 0.08
+          elif region == 'EU':
+              tax_rate = 0.20
+          elif region == 'APAC':
+              tax_rate = 0.10
+          tax = after_discount * tax_rate
+          total = after_discount + tax
+          inventory_warnings = []
+          for item in items:
+              if item.get('stock', 999) < item['qty']:
+                  inventory_warnings.append(f"{item['sku']} low stock")
+              if item.get('stock', 999) < item['qty'] * 2:
+                  inventory_warnings.append(f"{item['sku']} reorder suggested")
+          receipt_lines = []
+          receipt_lines.append(f"Customer: {customer['name']}")
+          receipt_lines.append(f"Region: {region}")
+          receipt_lines.append("---")
+          for li in line_items:
+              receipt_lines.append(f"{li['sku']}: {li['qty']} x ${li['price']:.2f} = ${li['total']:.2f}")
+          receipt_lines.append("---")
+          receipt_lines.append(f"Subtotal: ${subtotal:.2f}")
+          if discount > 0:
+              receipt_lines.append(f"Discount ({discount_reason}): -${discount:.2f}")
+          receipt_lines.append(f"Tax ({tax_rate*100:.0f}%): ${tax:.2f}")
+          receipt_lines.append(f"Total: ${total:.2f}")
+          return {
+              'status': 'ok',
+              'line_items': line_items,
+              'subtotal': round(subtotal, 2),
+              'discount': round(discount, 2),
+              'discount_reason': discount_reason,
+              'tax': round(tax, 2),
+              'total': round(total, 2),
+              'receipt': '\n'.join(receipt_lines),
+              'warnings': inventory_warnings
+          }
+expected_output_description: |
+  Extract into 5+ functions: validate_order, calculate_line_items, apply_discounts,
+  calculate_tax, format_receipt. process_order orchestrates them. Same return values.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Behavioral: validation errors
+  r = process_order([], {'name': 'A'}, 'US')
+  assert r['status'] == 'error'
+  assert 'No items' in r['errors']
+
+  r2 = process_order([{'sku': 'X', 'qty': 1, 'price': 10}], None, 'US')
+  assert r2['status'] == 'error'
+
+  # Behavioral: basic order US
+  items = [{'sku': 'A1', 'qty': 2, 'price': 50.0}]
+  r3 = process_order(items, {'name': 'Bob'}, 'US')
+  assert r3['status'] == 'ok'
+  assert r3['subtotal'] == 100.0
+  assert r3['discount'] == 0
+  assert abs(r3['tax'] - 8.0) < 0.01
+  assert abs(r3['total'] - 108.0) < 0.01
+
+  # Behavioral: gold discount + loyalty
+  big = [{'sku': f'S{i}', 'qty': 1, 'price': 100.0} for i in range(5)]
+  r4 = process_order(big, {'name': 'VIP', 'tier': 'gold'}, 'EU')
+  assert r4['discount_reason'] is not None
+  assert 'Gold' in r4['discount_reason']
+  expected_disc = 500 * 0.15
+  after = 500 - expected_disc
+  # after=425, >500? No. So no loyalty.
+  assert abs(r4['discount'] - 75.0) < 0.01
+  assert abs(r4['tax'] - (425 * 0.20)) < 0.01
+
+  # Behavioral: bulk + loyalty
+  bulk = [{'sku': f'B{i}', 'qty': 1, 'price': 200.0} for i in range(10)]
+  r5 = process_order(bulk, {'name': 'Corp'}, 'APAC')
+  sub = 2000.0
+  disc = sub * 0.05  # 100
+  after5 = sub - disc  # 1900, > 500
+  disc += after5 * 0.02  # 100 + 38 = 138
+  after5b = sub - disc  # 1862
+  tax5 = after5b * 0.10
+  assert abs(r5['discount'] - round(disc, 2)) < 0.01
+  assert abs(r5['total'] - round(after5b + tax5, 2)) < 0.01
+
+  # Behavioral: receipt format
+  assert 'Customer: Bob' in r3['receipt']
+  assert 'A1:' in r3['receipt']
+
+  # Behavioral: inventory warnings
+  items_low = [{'sku': 'LO', 'qty': 5, 'price': 10, 'stock': 3}]
+  r6 = process_order(items_low, {'name': 'J'}, 'US')
+  assert any('low stock' in w for w in r6['warnings'])
+
+  # Structural checks
+  with open('solution.py') as f:
+      code = f.read()
+  func_count = code.count('def ')
+  assert func_count >= 5, f"Expected 5+ functions, got {func_count}"
+  lines = [l.strip() for l in code.split('\n') if l.strip() and not l.strip().startswith('#')]
+  func_lines = {}
+  current = None
+  for l in code.split('\n'):
+      if l.strip().startswith('def '):
+          current = l.strip().split('(')[0].replace('def ', '')
+          func_lines[current] = 0
+      elif current:
+          func_lines[current] += 1
+  for name, count in func_lines.items():
+      assert count <= 30, f"Function {name} has {count} lines, still too long"
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

@@ -1,0 +1,179 @@
+id: TASK-REF-009
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: |
+  Refactor these tightly coupled functions that pass data through module-level globals
+  instead of parameters and return values. Convert to pure functions that take explicit
+  parameters and return results. No globals. Preserve exact computational results.
+context_files:
+  - path: code.py
+    content: |
+      _raw_data = None
+      _cleaned = None
+      _stats = None
+      _outliers = None
+      _normalized = None
+      _report = None
+
+      def load_data(values):
+          global _raw_data
+          _raw_data = list(values) if values else []
+
+      def clean_data():
+          global _cleaned
+          _cleaned = []
+          for v in _raw_data:
+              if v is None:
+                  continue
+              try:
+                  n = float(v)
+                  if n != n:  # NaN check
+                      continue
+                  _cleaned.append(n)
+              except (ValueError, TypeError):
+                  continue
+
+      def compute_stats():
+          global _stats
+          if not _cleaned:
+              _stats = {'mean': 0, 'median': 0, 'std': 0, 'min': 0, 'max': 0, 'count': 0}
+              return
+          n = len(_cleaned)
+          mean = sum(_cleaned) / n
+          sorted_c = sorted(_cleaned)
+          if n % 2 == 0:
+              median = (sorted_c[n//2 - 1] + sorted_c[n//2]) / 2
+          else:
+              median = sorted_c[n//2]
+          variance = sum((x - mean) ** 2 for x in _cleaned) / n
+          std = variance ** 0.5
+          _stats = {'mean': round(mean, 4), 'median': round(median, 4), 'std': round(std, 4), 'min': min(_cleaned), 'max': max(_cleaned), 'count': n}
+
+      def detect_outliers():
+          global _outliers
+          _outliers = []
+          if not _cleaned or not _stats or _stats['std'] == 0:
+              return
+          for v in _cleaned:
+              z = abs(v - _stats['mean']) / _stats['std']
+              if z > 2.0:
+                  _outliers.append({'value': v, 'z_score': round(z, 4)})
+
+      def normalize_data():
+          global _normalized
+          if not _cleaned:
+              _normalized = []
+              return
+          mn, mx = _stats['min'], _stats['max']
+          if mn == mx:
+              _normalized = [0.5 for _ in _cleaned]
+          else:
+              _normalized = [round((v - mn) / (mx - mn), 4) for v in _cleaned]
+
+      def build_report():
+          global _report
+          _report = {
+              'stats': _stats,
+              'outlier_count': len(_outliers) if _outliers else 0,
+              'outliers': _outliers if _outliers else [],
+              'normalized_sample': _normalized[:5] if _normalized else [],
+              'data_quality': {
+                  'raw_count': len(_raw_data) if _raw_data else 0,
+                  'clean_count': len(_cleaned) if _cleaned else 0,
+                  'dropped': (len(_raw_data) if _raw_data else 0) - (len(_cleaned) if _cleaned else 0),
+              }
+          }
+
+      def run_pipeline(values):
+          load_data(values)
+          clean_data()
+          compute_stats()
+          detect_outliers()
+          normalize_data()
+          build_report()
+          return _report
+expected_output_description: |
+  Convert each function to take inputs as parameters and return outputs. run_pipeline
+  threads data through the chain. No global keyword or module-level mutable state.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Basic pipeline
+  data = [10, 20, 30, 40, 50]
+  r = run_pipeline(data)
+  assert r['stats']['mean'] == 30.0
+  assert r['stats']['median'] == 30.0
+  assert r['stats']['count'] == 5
+  assert r['stats']['min'] == 10
+  assert r['stats']['max'] == 50
+  assert r['data_quality']['raw_count'] == 5
+  assert r['data_quality']['clean_count'] == 5
+  assert r['data_quality']['dropped'] == 0
+
+  # With dirty data
+  dirty = [1, None, 'bad', 3, '', 5, None, 7, float('nan')]
+  r2 = run_pipeline(dirty)
+  assert r2['data_quality']['raw_count'] == 9
+  assert r2['data_quality']['clean_count'] == 4
+  assert r2['data_quality']['dropped'] == 5
+  assert r2['stats']['count'] == 4
+  assert abs(r2['stats']['mean'] - 4.0) < 0.01
+
+  # Outliers
+  outlier_data = [10, 10, 10, 10, 10, 10, 10, 10, 10, 100]
+  r3 = run_pipeline(outlier_data)
+  assert r3['outlier_count'] >= 1
+  assert any(o['value'] == 100 for o in r3['outliers'])
+
+  # Normalization
+  r4 = run_pipeline([0, 50, 100])
+  assert r4['normalized_sample'] == [0.0, 0.5, 1.0]
+
+  # All same values (edge case)
+  r5 = run_pipeline([5, 5, 5])
+  assert r5['stats']['std'] == 0
+  assert r5['normalized_sample'] == [0.5, 0.5, 0.5]
+  assert r5['outlier_count'] == 0
+
+  # Empty
+  r6 = run_pipeline([])
+  assert r6['stats']['count'] == 0
+  assert r6['normalized_sample'] == []
+
+  # All None/invalid
+  r7 = run_pipeline([None, 'x', float('nan')])
+  assert r7['stats']['count'] == 0
+  assert r7['data_quality']['dropped'] == 3
+
+  # Median even count
+  r8 = run_pipeline([1, 2, 3, 4])
+  assert r8['stats']['median'] == 2.5
+
+  # Normalized sample capped at 5
+  r9 = run_pipeline(list(range(20)))
+  assert len(r9['normalized_sample']) == 5
+
+  # Multiple runs should be independent (no lingering state)
+  ra = run_pipeline([100])
+  rb = run_pipeline([1, 2])
+  assert rb['stats']['count'] == 2
+  assert rb['stats']['mean'] == 1.5
+
+  # Structural: no globals
+  with open('solution.py') as f:
+      code = f.read()
+  assert 'global ' not in code, "Must not use global keyword"
+  import re
+  for var in ['_raw_data', '_cleaned', '_stats', '_outliers', '_normalized', '_report']:
+      pat = rf'^{re.escape(var)}\s*='
+      assert not re.search(pat, code, re.MULTILINE), f"Module-level global {var} still present"
+  # Functions should have parameters
+  fn_defs = re.findall(r'def (\w+)\((.*?)\)', code)
+  fn_dict = {name: params for name, params in fn_defs}
+  for fn in ['clean_data', 'compute_stats', 'detect_outliers', 'normalize_data', 'build_report']:
+      if fn in fn_dict:
+          assert fn_dict[fn].strip() not in ('', 'self'), f"{fn} should take explicit parameters, got ({fn_dict[fn]})"
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

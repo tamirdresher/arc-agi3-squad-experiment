@@ -1,0 +1,92 @@
+id: "TASK-ALG-004"
+category: "ALG"
+difficulty: "hard"
+source: "synthetic-contest"
+problem: |
+  Implement a function longest_increasing_subsequence(nums) that returns the LENGTH
+  of the longest strictly increasing subsequence in the given array of integers.
+
+  A subsequence is derived from the array by deleting some or no elements without
+  changing the order of the remaining elements. For example, [3,6,2,7] is a
+  subsequence of [0,3,1,6,2,2,7].
+
+  Your solution MUST run in O(n log n) time complexity, not O(n^2).
+  Hint: Use a patience-sorting approach with binary search.
+
+  Constraints:
+    - 1 <= len(nums) <= 100000
+    - -10^9 <= nums[i] <= 10^9
+
+  Examples:
+    longest_increasing_subsequence([10,9,2,5,3,7,101,18]) => 4
+    The LIS is [2,3,7,101] or [2,5,7,101] etc.
+
+    longest_increasing_subsequence([0,1,0,3,2,3]) => 4
+
+    longest_increasing_subsequence([7,7,7,7,7]) => 1
+context_files:
+  - path: "lis.py"
+    content: |
+      from typing import List
+
+      def longest_increasing_subsequence(nums: List[int]) -> int:
+          """
+          Return the length of the longest strictly increasing subsequence.
+          Must run in O(n log n) time.
+          Use binary search with a tails array (patience sorting).
+          """
+          # TODO: implement
+          pass
+expected_output_description: |
+  Returns an integer — the length of the longest strictly increasing subsequence.
+  Must handle arrays up to 100k elements efficiently (O(n log n)).
+test_script: |
+  exec(open('solution.py').read())
+
+  # Basic examples
+  assert longest_increasing_subsequence([10,9,2,5,3,7,101,18]) == 4
+  assert longest_increasing_subsequence([0,1,0,3,2,3]) == 4
+  assert longest_increasing_subsequence([7,7,7,7,7]) == 1
+
+  # Single element
+  assert longest_increasing_subsequence([42]) == 1
+
+  # Already sorted
+  assert longest_increasing_subsequence([1,2,3,4,5,6,7,8]) == 8
+
+  # Reverse sorted
+  assert longest_increasing_subsequence([8,7,6,5,4,3,2,1]) == 1
+
+  # Two elements
+  assert longest_increasing_subsequence([2, 1]) == 1
+  assert longest_increasing_subsequence([1, 2]) == 2
+
+  # Duplicates interspersed
+  assert longest_increasing_subsequence([1,3,5,4,7]) == 4
+  assert longest_increasing_subsequence([3,1,2,1,4,1,5]) == 4
+
+  # Negative numbers
+  assert longest_increasing_subsequence([-5, -3, -1, 0, 2]) == 5
+  assert longest_increasing_subsequence([5, -1, 3, -2, 4]) == 3
+
+  # Alternating
+  assert longest_increasing_subsequence([1,3,2,4,3,5,4,6]) == 4
+
+  # Performance check — must complete quickly for O(n log n)
+  import time
+  big = list(range(50000, 0, -1))  # worst case: descending
+  t0 = time.time()
+  result = longest_increasing_subsequence(big)
+  elapsed = time.time() - t0
+  assert result == 1, f"Descending array LIS should be 1, got {result}"
+  assert elapsed < 2.0, f"Too slow for 50k elements: {elapsed:.2f}s — must be O(n log n)"
+
+  big2 = list(range(50000))
+  t0 = time.time()
+  result2 = longest_increasing_subsequence(big2)
+  elapsed2 = time.time() - t0
+  assert result2 == 50000, f"Ascending 50k LIS should be 50000, got {result2}"
+  assert elapsed2 < 2.0, f"Too slow: {elapsed2:.2f}s"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

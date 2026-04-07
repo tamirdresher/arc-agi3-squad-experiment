@@ -1,0 +1,208 @@
+id: TASK-REF-007
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: |
+  Refactor this function that uses a long if-elif chain (10 branches) to map file
+  extensions to metadata. Replace with a dictionary-based dispatch approach. Also handle
+  the content analysis portion cleanly. Preserve exact return values for all inputs.
+context_files:
+  - path: code.py
+    content: |
+      def get_file_info(filename, content=None):
+          if not filename or not isinstance(filename, str):
+              return {'type': 'unknown', 'category': 'other', 'editable': False, 'icon': '📄', 'syntax': None, 'max_size_mb': 10}
+          ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else ''
+          if ext == 'py':
+              ftype = 'python'
+              category = 'code'
+              editable = True
+              icon = '🐍'
+              syntax = 'python'
+              max_size = 50
+          elif ext == 'js':
+              ftype = 'javascript'
+              category = 'code'
+              editable = True
+              icon = '📜'
+              syntax = 'javascript'
+              max_size = 50
+          elif ext == 'ts':
+              ftype = 'typescript'
+              category = 'code'
+              editable = True
+              icon = '📘'
+              syntax = 'typescript'
+              max_size = 50
+          elif ext == 'java':
+              ftype = 'java'
+              category = 'code'
+              editable = True
+              icon = '☕'
+              syntax = 'java'
+              max_size = 50
+          elif ext == 'go':
+              ftype = 'golang'
+              category = 'code'
+              editable = True
+              icon = '🔵'
+              syntax = 'go'
+              max_size = 50
+          elif ext == 'rs':
+              ftype = 'rust'
+              category = 'code'
+              editable = True
+              icon = '⚙️'
+              syntax = 'rust'
+              max_size = 50
+          elif ext == 'md':
+              ftype = 'markdown'
+              category = 'doc'
+              editable = True
+              icon = '📝'
+              syntax = 'markdown'
+              max_size = 20
+          elif ext == 'json':
+              ftype = 'json'
+              category = 'data'
+              editable = True
+              icon = '📋'
+              syntax = 'json'
+              max_size = 100
+          elif ext == 'csv':
+              ftype = 'csv'
+              category = 'data'
+              editable = True
+              icon = '📊'
+              syntax = None
+              max_size = 200
+          elif ext == 'png':
+              ftype = 'png_image'
+              category = 'image'
+              editable = False
+              icon = '🖼️'
+              syntax = None
+              max_size = 25
+          elif ext == 'jpg' or ext == 'jpeg':
+              ftype = 'jpeg_image'
+              category = 'image'
+              editable = False
+              icon = '🖼️'
+              syntax = None
+              max_size = 25
+          elif ext == 'pdf':
+              ftype = 'pdf'
+              category = 'doc'
+              editable = False
+              icon = '📕'
+              syntax = None
+              max_size = 100
+          else:
+              ftype = 'unknown'
+              category = 'other'
+              editable = False
+              icon = '📄'
+              syntax = None
+              max_size = 10
+          result = {'type': ftype, 'category': category, 'editable': editable, 'icon': icon, 'syntax': syntax, 'max_size_mb': max_size}
+          if content and isinstance(content, str):
+              result['line_count'] = content.count('\n') + 1
+              result['char_count'] = len(content)
+              result['has_todos'] = 'TODO' in content.upper()
+              words = content.split()
+              result['word_count'] = len(words)
+              if editable and syntax:
+                  if syntax == 'python':
+                      result['has_imports'] = 'import ' in content
+                      result['func_count'] = content.count('def ')
+                      result['class_count'] = content.count('class ')
+                  elif syntax in ('javascript', 'typescript'):
+                      result['has_imports'] = 'import ' in content or 'require(' in content
+                      result['func_count'] = content.count('function ') + content.count('=>')
+                      result['class_count'] = content.count('class ')
+                  elif syntax == 'java':
+                      result['has_imports'] = 'import ' in content
+                      result['func_count'] = len([l for l in content.split('\n') if 'void ' in l or 'public ' in l or 'private ' in l])
+                      result['class_count'] = content.count('class ')
+                  elif syntax == 'go':
+                      result['has_imports'] = 'import ' in content or 'import (' in content
+                      result['func_count'] = content.count('func ')
+                      result['class_count'] = content.count('type ') 
+                  elif syntax == 'rust':
+                      result['has_imports'] = 'use ' in content
+                      result['func_count'] = content.count('fn ')
+                      result['class_count'] = content.count('struct ') + content.count('enum ')
+          return result
+expected_output_description: |
+  Replace the if-elif chain with a dictionary mapping extensions to metadata tuples/dicts.
+  Extract content analysis into a helper. Eliminate the repetitive branch structure.
+test_script: |
+  exec(open('solution.py').read())
+
+  # All extensions produce correct results
+  cases = {
+      'script.py': ('python', 'code', True, '🐍', 'python', 50),
+      'app.js': ('javascript', 'code', True, '📜', 'javascript', 50),
+      'main.ts': ('typescript', 'code', True, '📘', 'typescript', 50),
+      'App.java': ('java', 'code', True, '☕', 'java', 50),
+      'main.go': ('golang', 'code', True, '🔵', 'go', 50),
+      'lib.rs': ('rust', 'code', True, '⚙️', 'rust', 50),
+      'README.md': ('markdown', 'doc', True, '📝', 'markdown', 20),
+      'data.json': ('json', 'data', True, '📋', 'json', 100),
+      'report.csv': ('csv', 'data', True, '📊', None, 200),
+      'photo.png': ('png_image', 'image', False, '🖼️', None, 25),
+      'pic.jpg': ('jpeg_image', 'image', False, '🖼️', None, 25),
+      'pic.jpeg': ('jpeg_image', 'image', False, '🖼️', None, 25),
+      'doc.pdf': ('pdf', 'doc', False, '📕', None, 100),
+      'file.xyz': ('unknown', 'other', False, '📄', None, 10),
+  }
+  for fname, (ft, cat, ed, ico, syn, ms) in cases.items():
+      r = get_file_info(fname)
+      assert r['type'] == ft, f"{fname}: type {r['type']} != {ft}"
+      assert r['category'] == cat, f"{fname}: category"
+      assert r['editable'] == ed, f"{fname}: editable"
+      assert r['icon'] == ico, f"{fname}: icon"
+      assert r['syntax'] == syn, f"{fname}: syntax"
+      assert r['max_size_mb'] == ms, f"{fname}: max_size"
+
+  # Invalid input
+  assert get_file_info(None)['type'] == 'unknown'
+  assert get_file_info('')['type'] == 'unknown'
+  assert get_file_info(123)['type'] == 'unknown'
+
+  # No extension
+  r0 = get_file_info('Makefile')
+  assert r0['type'] == 'unknown'
+
+  # Content analysis - Python
+  py_code = "import os\ndef foo():\n    pass\ndef bar():\n    # TODO fix\n    pass\nclass Baz:\n    pass"
+  rp = get_file_info('test.py', py_code)
+  assert rp['line_count'] == 8
+  assert rp['has_todos'] == True
+  assert rp['has_imports'] == True
+  assert rp['func_count'] == 2
+  assert rp['class_count'] == 1
+
+  # Content analysis - JS
+  js_code = "const x = require('y')\nfunction hello() {}\nconst f = () => {}"
+  rj = get_file_info('app.js', js_code)
+  assert rj['has_imports'] == True
+  assert rj['func_count'] == 2
+
+  # Content analysis - Go
+  go_code = "import \"fmt\"\nfunc main() {}\ntype Server struct{}"
+  rg = get_file_info('main.go', go_code)
+  assert rg['func_count'] == 1
+  assert rg['class_count'] == 1
+
+  # Structural: should use dict dispatch, not long if-elif
+  with open('solution.py') as f:
+      code = f.read()
+  elif_count = code.count('elif ')
+  assert elif_count <= 3, f"Still has {elif_count} elif branches; use dict dispatch"
+  assert code.count('def ') >= 2, "Should extract helper function(s)"
+  # Should have a dictionary-like structure
+  assert '{' in code.split('def ')[0] or any('= {' in line for line in code.split('\n') if 'ext' in line.lower() or 'map' in line.lower() or 'dispatch' in line.lower() or line.strip().startswith("'")), "No dispatch dictionary found"
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

@@ -1,0 +1,108 @@
+id: "TASK-BUG-011"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A scientific computing library has a `ConvergenceChecker` class that determines
+  whether an iterative algorithm has converged by comparing successive values.
+  Users report that the checker works for most inputs but fails on computations
+  involving very small residuals (e.g., 1e-15 scale) — it reports "not converged"
+  even when values are essentially identical, and sometimes reports "converged"
+  for values that differ by a meaningful relative amount when both are near zero.
+
+  The bug is in the floating-point comparison logic: the code uses exact equality
+  (==) and a fixed absolute tolerance without considering the magnitude of the
+  values being compared. The `is_converged` method and `find_fixed_point` both
+  need to use a proper approximate equality check combining relative and absolute
+  tolerance (similar to math.isclose).
+context_files:
+  - path: "code.py"
+    content: |
+      class ConvergenceChecker:
+          def __init__(self, rtol=1e-9, atol=1e-12, max_iter=1000):
+              self.rtol = rtol
+              self.atol = atol
+              self.max_iter = max_iter
+              self.history = []
+
+          def is_converged(self, current, previous):
+              """Check if current and previous values are close enough."""
+              if current == previous:
+                  return True
+              diff = abs(current - previous)
+              # BUG: only checks absolute tolerance, ignores relative
+              return diff < self.atol
+
+          def find_fixed_point(self, func, x0):
+              """Find fixed point of func starting from x0."""
+              self.history = [x0]
+              x_prev = x0
+              for i in range(self.max_iter):
+                  x_next = func(x_prev)
+                  self.history.append(x_next)
+                  if self.is_converged(x_next, x_prev):
+                      return x_next, i + 1, True
+                  x_prev = x_next
+              return x_prev, self.max_iter, False
+
+          def check_sequence(self, values):
+              """Check if a sequence of values has converged at any point.
+              Returns (converged_index, converged: bool)."""
+              for i in range(1, len(values)):
+                  if self.is_converged(values[i], values[i - 1]):
+                      return i, True
+              return len(values) - 1, False
+
+          def relative_error(self, computed, exact):
+              """Compute relative error, handling zero exact value."""
+              if exact == 0.0:
+                  return abs(computed)
+              return abs((computed - exact) / exact)
+expected_output_description: |
+  Fix `is_converged` to use a proper combined tolerance check:
+    diff <= max(rtol * max(abs(current), abs(previous)), atol)
+  or equivalently use math.isclose(current, previous, rel_tol=self.rtol, abs_tol=self.atol).
+  The `relative_error` method should also handle near-zero exact values using
+  atol rather than returning a misleadingly large number.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Test 1: identical values
+  cc = ConvergenceChecker(rtol=1e-9, atol=1e-12)
+  assert cc.is_converged(1.0, 1.0) == True
+
+  # Test 2: large values close within rtol
+  assert cc.is_converged(1e12, 1e12 + 0.5) == True, \
+      "1e12 vs 1e12+0.5 should converge (diff/value ~ 5e-13)"
+
+  # Test 3: large values NOT close
+  assert cc.is_converged(1e12, 1e12 + 1e4) == False, \
+      "1e12 vs 1e12+1e4 should NOT converge (diff/value ~ 1e-8)"
+
+  # Test 4: small values close within atol
+  assert cc.is_converged(1e-15, 2e-15) == True, \
+      "1e-15 vs 2e-15 should converge (both within atol)"
+
+  # Test 5: values near zero but meaningfully different relative to atol
+  cc2 = ConvergenceChecker(rtol=1e-9, atol=1e-20)
+  assert cc2.is_converged(1e-15, 1e-10) == False, \
+      "1e-15 vs 1e-10 should NOT converge with tight atol"
+
+  # Test 6: fixed-point iteration on sqrt via x = (x + 2/x) / 2
+  cc3 = ConvergenceChecker(rtol=1e-12, atol=1e-15)
+  result, iters, converged = cc3.find_fixed_point(lambda x: (x + 2.0/x) / 2.0, 1.0)
+  assert converged, "sqrt(2) iteration should converge"
+  assert abs(result - 2.0**0.5) < 1e-10
+
+  # Test 7: check_sequence with large-scale convergence
+  seq = [1e8, 1e8 + 100, 1e8 + 10, 1e8 + 1, 1e8 + 0.001]
+  idx, conv = cc3.check_sequence(seq)
+  assert conv, "Sequence should show convergence at large scale"
+
+  # Test 8: zero vs tiny value with default tolerances
+  cc4 = ConvergenceChecker()
+  assert cc4.is_converged(0.0, 1e-13) == True
+  assert cc4.is_converged(0.0, 1e-6) == False
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

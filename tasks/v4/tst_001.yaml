@@ -1,0 +1,27 @@
+id: TASK-TST-001
+category: TST
+difficulty: medium
+source: synthetic-test
+problem: Write comprehensive tests for a JSON parser that handles edge cases.
+context_files:
+- path: parser.py
+  content: "import json\n\ndef parse_config(json_str):\n    '''Parse JSON config with\
+    \ validation'''\n    data = json.loads(json_str)\n    if 'name' not in data:\n\
+    \        raise ValueError('Missing name')\n    if 'version' in data and not isinstance(data['version'],\
+    \ (int, float, str)):\n        raise TypeError('Invalid version type')\n    return\
+    \ data"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: "# Write test file\nwith open('parser.py', 'w') as f:\n    f.write('''import\
+  \ json\n\ndef parse_config(json_str):\n    data = json.loads(json_str)\n    if 'name'\
+  \ not in data:\n        raise ValueError('Missing name')\n    if 'version' in data\
+  \ and not isinstance(data['version'], (int, float, str)):\n        raise TypeError('Invalid\
+  \ version type')\n    return data\n''')\n\nexec(open('solution.py').read())\n\n\
+  with open('solution.py') as f:\n    src = f.read()\n\n# Must test basic functionality\n\
+  assert 'parse_config' in src\nassert src.count('assert') >= 5, \"Need at least 5\
+  \ test assertions\"\n\n# Must test error cases\nassert 'ValueError' in src or 'raise'\
+  \ in src, \"Should test ValueError\"\nassert 'TypeError' in src or 'invalid' in\
+  \ src.lower(), \"Should test TypeError\"\n\n# Should test edge cases\nkeywords =\
+  \ ['empty', 'null', 'missing', 'invalid', 'version']\nfound = sum(1 for kw in keywords\
+  \ if kw in src.lower())\nassert found >= 2, \"Should test multiple edge cases\"\n\
+  \nprint('ALL TESTS PASSED')"
+scoring_method: test_pass

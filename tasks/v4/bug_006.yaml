@@ -1,0 +1,31 @@
+id: TASK-BUG-006
+category: BUG
+difficulty: medium
+source: synthetic-swebench
+problem: "Binary search implementation has an off-by-one error that causes it to miss\n\
+  \    the last element in the array. Fix the bug in binary_search function."
+context_files:
+- path: search.py
+  content: "def binary_search(arr, target):\n    '''Find target in sorted arr, return\
+    \ index or -1'''\n    left, right = 0, len(arr) - 2  # BUG: should be len(arr)\
+    \ - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if\
+    \ arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n\
+    \            left = mid + 1\n        else:\n            right = mid - 1\n    return\
+    \ -1"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: 'exec(open(''solution.py'').read())
+
+  assert binary_search([1, 2, 3, 4, 5], 3) == 2
+
+  assert binary_search([1, 2, 3, 4, 5], 1) == 0
+
+  assert binary_search([1, 2, 3, 4, 5], 5) == 4, "BUG: doesn''t find last element!"
+
+  assert binary_search([1, 2, 3], 3) == 2
+
+  assert binary_search([10], 10) == 0
+
+  assert binary_search([1, 2, 3], 4) == -1
+
+  print(''ALL TESTS PASSED'')'
+scoring_method: test_pass

@@ -1,0 +1,166 @@
+id: TASK-TST-007
+category: TST
+difficulty: hard
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following arithmetic expression evaluator.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements that call evaluate() directly.
+  The function is already available in scope - do not import it.
+  Include at least 8 test cases covering: basic arithmetic, operator precedence
+  (* and / before + and -), nested parentheses, unary minus, division by zero,
+  floating point numbers, whitespace handling, and invalid expressions.
+context_files:
+- path: module.py
+  content: |
+    def evaluate(expression):
+        """Evaluate arithmetic expression with +, -, *, /, parentheses.
+        Supports integers, floats, unary minus, and proper operator precedence.
+        Raises ValueError for invalid expressions, ZeroDivisionError for /0.
+        """
+        if not isinstance(expression, str) or not expression.strip():
+            raise ValueError("Expression must be a non-empty string")
+
+        class Parser:
+            def __init__(self, text):
+                self.text = text.replace(' ', '')
+                self.pos = 0
+
+            def parse(self):
+                result = self.expr()
+                if self.pos < len(self.text):
+                    raise ValueError("Unexpected char: " + self.text[self.pos])
+                return result
+
+            def expr(self):
+                result = self.term()
+                while self.pos < len(self.text) and self.text[self.pos] in '+-':
+                    op = self.text[self.pos]
+                    self.pos += 1
+                    right = self.term()
+                    result = result + right if op == '+' else result - right
+                return result
+
+            def term(self):
+                result = self.factor()
+                while self.pos < len(self.text) and self.text[self.pos] in '*/':
+                    op = self.text[self.pos]
+                    self.pos += 1
+                    right = self.factor()
+                    if op == '*':
+                        result *= right
+                    else:
+                        if right == 0:
+                            raise ZeroDivisionError("Division by zero")
+                        result = result / right
+                return result
+
+            def factor(self):
+                if self.pos >= len(self.text):
+                    raise ValueError("Unexpected end of expression")
+                if self.text[self.pos] == '(':
+                    self.pos += 1
+                    result = self.expr()
+                    if self.pos >= len(self.text) or self.text[self.pos] != ')':
+                        raise ValueError("Missing closing parenthesis")
+                    self.pos += 1
+                    return result
+                if self.text[self.pos] == '-':
+                    self.pos += 1
+                    return -self.factor()
+                return self.number()
+
+            def number(self):
+                start = self.pos
+                while self.pos < len(self.text) and (self.text[self.pos].isdigit() or self.text[self.pos] == '.'):
+                    self.pos += 1
+                if start == self.pos:
+                    raise ValueError("Expected number at position " + str(self.pos))
+                return float(self.text[start:self.pos])
+
+        return Parser(expression).parse()
+expected_output_description: |
+  A thorough test suite with 8+ assertions covering basic ops (2+3, 10-4), precedence
+  (2+3*4 == 14), parentheses ((2+3)*4 == 20), nested parens, unary minus (-5, -(3+2)),
+  division returning floats (7/2 == 3.5), ZeroDivisionError, ValueError on invalid input,
+  and whitespace (" 2 + 3 " == 5).
+test_script: |
+  import sys
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  ns = {}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: uses integer division (//) instead of true division (/)
+  buggy_code = '''
+  def evaluate(expression):
+      if not isinstance(expression, str) or not expression.strip():
+          raise ValueError("Expression must be a non-empty string")
+      class Parser:
+          def __init__(self, text):
+              self.text = text.replace(" ", "")
+              self.pos = 0
+          def parse(self):
+              result = self.expr()
+              if self.pos < len(self.text):
+                  raise ValueError("Unexpected char")
+              return result
+          def expr(self):
+              result = self.term()
+              while self.pos < len(self.text) and self.text[self.pos] in "+-":
+                  op = self.text[self.pos]
+                  self.pos += 1
+                  right = self.term()
+                  result = result + right if op == "+" else result - right
+              return result
+          def term(self):
+              result = self.factor()
+              while self.pos < len(self.text) and self.text[self.pos] in "*/":
+                  op = self.text[self.pos]
+                  self.pos += 1
+                  right = self.factor()
+                  if op == "*":
+                      result *= right
+                  else:
+                      if right == 0:
+                          raise ZeroDivisionError("Division by zero")
+                      result = result // right
+              return result
+          def factor(self):
+              if self.pos >= len(self.text):
+                  raise ValueError("Unexpected end")
+              if self.text[self.pos] == "(":
+                  self.pos += 1
+                  result = self.expr()
+                  if self.pos >= len(self.text) or self.text[self.pos] != ")":
+                      raise ValueError("Missing )")
+                  self.pos += 1
+                  return result
+              if self.text[self.pos] == "-":
+                  self.pos += 1
+                  return -self.factor()
+              return self.number()
+          def number(self):
+              start = self.pos
+              while self.pos < len(self.text) and (self.text[self.pos].isdigit() or self.text[self.pos] == "."):
+                  self.pos += 1
+              if start == self.pos:
+                  raise ValueError("Expected number")
+              return float(self.text[start:self.pos])
+      return Parser(expression).parse()
+  '''
+  ns2 = {}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the integer division bug'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

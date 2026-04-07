@@ -1,0 +1,32 @@
+id: TASK-BUG-009
+category: BUG
+difficulty: medium
+source: synthetic-swebench
+problem: A slug generator fails on unicode characters and doesn't handle edge cases.
+context_files:
+- path: slugify.py
+  content: "def make_slug(text):\n    '''Convert text to URL-safe slug. BUG: fails\
+    \ on unicode!'''\n    return text.lower().replace(' ', '-')  # Too simplistic!"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: 'exec(open(''solution.py'').read())
+
+
+  assert make_slug(''Hello World'') == ''hello-world''
+
+  assert make_slug(''Hello  World'') == ''hello-world'', "Multiple spaces"
+
+  assert make_slug(''  Hello  '') == ''hello'', "Trim spaces"
+
+  assert make_slug(''Café'') == ''cafe'', "Remove accents"
+
+  assert make_slug(''Hello & World'') == ''hello-and-world'', "Special chars"
+
+  assert make_slug(''Test123'') == ''test123'', "Keep numbers"
+
+  assert make_slug(''A/B Test'') == ''a-b-test'', "Replace slashes"
+
+  assert make_slug(''---test---'') == ''test'', "Clean dashes"
+
+
+  print(''ALL TESTS PASSED'')'
+scoring_method: test_pass

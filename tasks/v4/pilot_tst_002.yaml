@@ -1,56 +1,40 @@
-id: "PILOT-TST-002"
-category: "TST"
-difficulty: "medium"
-source: "pilot-synthetic"
-title: "Write edge-case tests for string truncation utility"
-problem: |
-  Write a test suite for the truncate function below. Focus on edge cases:
+id: PILOT-TST-002
+category: TST
+difficulty: medium
+source: pilot-synthetic
+title: Write edge-case tests for string truncation utility
+problem: 'Write a test suite for the truncate function below. Focus on edge cases:
+
   empty strings, max_len shorter than suffix, unicode characters,
+
   exact boundary lengths, and type errors. Use assert statements.
+
+  '
 context_files:
-  - path: "strutils.py"
-    content: |
-      def truncate(text, max_len=50, suffix='...'):
-          """Truncate text to max_len chars, adding suffix if truncated."""
-          if not isinstance(text, str):
-              raise TypeError('text must be a string')
-          if max_len < len(suffix):
-              raise ValueError('max_len must be >= len(suffix)')
-          if len(text) <= max_len:
-              return text
-          return text[:max_len - len(suffix)] + suffix
-output_format: "code_block"
+- path: strutils.py
+  content: "def truncate(text, max_len=50, suffix='...'):\n    \"\"\"Truncate text\
+    \ to max_len chars, adding suffix if truncated.\"\"\"\n    if not isinstance(text,\
+    \ str):\n        raise TypeError('text must be a string')\n    if max_len < len(suffix):\n\
+    \        raise ValueError('max_len must be >= len(suffix)')\n    if len(text)\
+    \ <= max_len:\n        return text\n    return text[:max_len - len(suffix)] +\
+    \ suffix\n"
+output_format: code_block
 scoring:
-  method: "test_suite"
-  test_script: |
-    # Make the function available
-    with open('strutils.py', 'w') as f:
-        f.write('''
-    def truncate(text, max_len=50, suffix='...'):
-        if not isinstance(text, str):
-            raise TypeError('text must be a string')
-        if max_len < len(suffix):
-            raise ValueError('max_len must be >= len(suffix)')
-        if len(text) <= max_len:
-            return text
-        return text[:max_len - len(suffix)] + suffix
-    ''')
-    
-    exec(open('solution.py').read())
-    
-    with open('solution.py') as f:
-        src = f.read()
-    
-    # Must test: truncation, no-truncation, empty string, TypeError, ValueError
-    assert 'truncate' in src, 'Tests should call truncate'
-    checks = [
-        ('TypeError', 'Should test TypeError for non-string input'),
-        ('ValueError', 'Should test ValueError for small max_len'),
-    ]
-    for keyword, msg in checks:
-        assert keyword in src, msg
-    
-    # Must have at least 5 assertions
-    assert src.count('assert') >= 5, f'Expected >=5 assertions, found {src.count("assert")}'
-    
-    print('ALL TESTS PASSED')
+  method: test_suite
+  test_script: "# Make the function available\nwith open('strutils.py', 'w') as f:\n\
+    \    f.write(\"\"\"\ndef truncate(text, max_len=50, suffix='...'):\n    if not\
+    \ isinstance(text, str):\n        raise TypeError('text must be a string')\n \
+    \   if max_len < len(suffix):\n        raise ValueError('max_len must be >= len(suffix)')\n\
+    \    if len(text) <= max_len:\n        return text\n    return text[:max_len -\
+    \ len(suffix)] + suffix\n\"\"\")\n\nexec(open('solution.py').read())\n\nwith open('solution.py')\
+    \ as f:\n    src = f.read()\n\n# Verify solution tests the truncate function\n\
+    assert 'truncate' in src, 'Tests should call truncate function'\n\n# Must test\
+    \ error cases\nrequired_tests = [\n    ('TypeError', 'Should test TypeError for\
+    \ non-string input'),\n    ('ValueError', 'Should test ValueError for max_len\
+    \ < len(suffix)'),\n]\n\nmissing = []\nfor keyword, msg in required_tests:\n \
+    \   if keyword not in src:\n        missing.append(msg)\n\nassert not missing,\
+    \ f\"Missing tests: {', '.join(missing)}\"\n\n# Must have at least 5 test assertions\n\
+    assert_count = src.count('assert')\nassert assert_count >= 5, f'Expected >=5 assertions,\
+    \ found {assert_count}'\n\n# Should test basic truncation\nhas_truncation_test\
+    \ = ('...' in src or 'suffix' in src or 'len(truncate' in src)\nassert has_truncation_test,\
+    \ 'Should test actual truncation behavior'\n\nprint('ALL TESTS PASSED')\n"

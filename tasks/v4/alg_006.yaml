@@ -1,0 +1,141 @@
+id: "TASK-ALG-006"
+category: "ALG"
+difficulty: "hard"
+source: "synthetic-contest"
+problem: |
+  Implement two functions to serialize and deserialize a binary tree:
+    - serialize(root) -> str: Encode a binary tree to a single string.
+    - deserialize(data) -> TreeNode: Decode the string back to the original tree.
+
+  A TreeNode is defined as:
+    class TreeNode:
+        def __init__(self, val=0, left=None, right=None):
+            self.val = val
+            self.left = left
+            self.right = right
+
+  Requirements:
+    - The serialization format is up to you, but deserialize(serialize(tree)) must
+      produce an identical tree structure with identical values.
+    - Must handle None/null nodes correctly.
+    - Must handle negative values, large values, and zero.
+    - Must handle the empty tree (root is None).
+    - Must handle skewed trees (all left children or all right children).
+    - Must handle complete and sparse trees.
+
+  The functions should correctly round-trip ANY valid binary tree.
+context_files:
+  - path: "tree_codec.py"
+    content: |
+      class TreeNode:
+          def __init__(self, val=0, left=None, right=None):
+              self.val = val
+              self.left = left
+              self.right = right
+
+      def serialize(root):
+          """Encode a binary tree to a string."""
+          # TODO: implement
+          pass
+
+      def deserialize(data):
+          """Decode a string back to a binary tree."""
+          # TODO: implement
+          pass
+expected_output_description: |
+  serialize produces a string encoding of the tree.
+  deserialize reconstructs the exact same tree structure.
+  deserialize(serialize(root)) yields a structurally identical tree.
+test_script: |
+  exec(open('solution.py').read())
+
+  def trees_equal(a, b):
+      if a is None and b is None:
+          return True
+      if a is None or b is None:
+          return False
+      return a.val == b.val and trees_equal(a.left, b.left) and trees_equal(a.right, b.right)
+
+  def tree_to_list(node):
+      """Level-order traversal including None for missing nodes."""
+      if node is None:
+          return []
+      from collections import deque
+      result = []
+      q = deque([node])
+      while q:
+          n = q.popleft()
+          if n:
+              result.append(n.val)
+              q.append(n.left)
+              q.append(n.right)
+          else:
+              result.append(None)
+      while result and result[-1] is None:
+          result.pop()
+      return result
+
+  # Test 1: Standard tree [1,2,3,None,None,4,5]
+  root1 = TreeNode(1, TreeNode(2), TreeNode(3, TreeNode(4), TreeNode(5)))
+  s1 = serialize(root1)
+  assert isinstance(s1, str), "serialize must return a string"
+  d1 = deserialize(s1)
+  assert trees_equal(root1, d1), f"Round-trip failed for [1,2,3,None,None,4,5], got {tree_to_list(d1)}"
+
+  # Test 2: Empty tree
+  s2 = serialize(None)
+  d2 = deserialize(s2)
+  assert d2 is None, "Empty tree should deserialize to None"
+
+  # Test 3: Single node
+  root3 = TreeNode(42)
+  d3 = deserialize(serialize(root3))
+  assert trees_equal(root3, d3), "Single node round-trip failed"
+
+  # Test 4: Left-skewed tree
+  root4 = TreeNode(1, TreeNode(2, TreeNode(3, TreeNode(4))))
+  d4 = deserialize(serialize(root4))
+  assert trees_equal(root4, d4), "Left-skewed tree round-trip failed"
+
+  # Test 5: Right-skewed tree
+  root5 = TreeNode(1, None, TreeNode(2, None, TreeNode(3, None, TreeNode(4))))
+  d5 = deserialize(serialize(root5))
+  assert trees_equal(root5, d5), "Right-skewed tree round-trip failed"
+
+  # Test 6: Negative values and zero
+  root6 = TreeNode(0, TreeNode(-1), TreeNode(-100, None, TreeNode(999)))
+  d6 = deserialize(serialize(root6))
+  assert trees_equal(root6, d6), "Negative/zero values round-trip failed"
+
+  # Test 7: Large tree (complete binary tree of depth 6 = 63 nodes)
+  def build_complete(depth, start=1):
+      if depth == 0:
+          return None
+      node = TreeNode(start)
+      node.left = build_complete(depth - 1, start * 2)
+      node.right = build_complete(depth - 1, start * 2 + 1)
+      return node
+  root7 = build_complete(6)
+  d7 = deserialize(serialize(root7))
+  assert trees_equal(root7, d7), "Large complete tree round-trip failed"
+
+  # Test 8: Sparse tree with many None children
+  root8 = TreeNode(1)
+  root8.left = TreeNode(2)
+  root8.left.right = TreeNode(5)
+  root8.left.right.left = TreeNode(8)
+  d8 = deserialize(serialize(root8))
+  assert trees_equal(root8, d8), "Sparse tree round-trip failed"
+
+  # Test 9: String identity — serialize twice gives same string
+  s9a = serialize(root1)
+  s9b = serialize(root1)
+  assert s9a == s9b, "Serializing same tree twice should give identical strings"
+
+  # Test 10: Duplicate values in tree
+  root10 = TreeNode(5, TreeNode(5, TreeNode(5), None), TreeNode(5, None, TreeNode(5)))
+  d10 = deserialize(serialize(root10))
+  assert trees_equal(root10, d10), "Duplicate-value tree round-trip failed"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

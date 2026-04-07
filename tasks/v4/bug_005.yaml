@@ -1,0 +1,34 @@
+id: TASK-BUG-005
+category: BUG
+difficulty: hard
+source: synthetic-swebench
+problem: "An event emitter class has a memory leak. When listeners are added but never\n\
+  \    removed, they accumulate even after the listening objects are deleted. The\
+  \ issue\n    is that the emitter stores strong references to listener objects.\n\
+  \    \n    Fix the EventEmitter to use weak references so listeners can be garbage\
+  \ collected."
+context_files:
+- path: events.py
+  content: "class EventEmitter:\n    def __init__(self):\n        self.listeners =\
+    \ []  # BUG: strong references cause memory leak\n    \n    def on(self, listener):\n\
+    \        self.listeners.append(listener)\n    \n    def emit(self, data):\n  \
+    \      for listener in self.listeners:\n            listener(data)\n    \n   \
+    \ def count(self):\n        return len(self.listeners)"
+expected_output_description: See test script for acceptance criteria
+test_script: "exec(open('solution.py').read())\nimport gc\nimport weakref\n\n# Test\
+  \ 1: Basic functionality\nemitter = EventEmitter()\nresults = []\nemitter.on(lambda\
+  \ x: results.append(x))\nemitter.emit(5)\nassert results == [5]\n\n# Test 2: Multiple\
+  \ listeners\nemitter2 = EventEmitter()\nr1, r2 = [], []\nemitter2.on(lambda x: r1.append(x))\n\
+  emitter2.on(lambda x: r2.append(x))\nemitter2.emit(10)\nassert r1 == [10] and r2\
+  \ == [10]\n\n# Test 3: CRITICAL - listeners are garbage collected\nemitter3 = EventEmitter()\n\
+  \nclass Listener:\n    def __init__(self):\n        self.called = False\n    def\
+  \ __call__(self, data):\n        self.called = True\n\nlistener1 = Listener()\n\
+  listener2 = Listener()\nemitter3.on(listener1)\nemitter3.on(listener2)\n\ninitial_count\
+  \ = emitter3.count()\nassert initial_count == 2\n\n# Delete listeners - they should\
+  \ be collected\ndel listener1\ndel listener2\ngc.collect()\n\n# Count should drop\
+  \ (weak references cleaned up)\nfinal_count = emitter3.count()\nassert final_count\
+  \ < initial_count, f\"Memory leak: {initial_count} → {final_count} listeners\"\n\
+  \n# Test 4: Emit still works with remaining listeners\nemitter4 = EventEmitter()\n\
+  results = []\npermanent_listener = lambda x: results.append(x * 2)\nemitter4.on(permanent_listener)\n\
+  emitter4.emit(3)\nassert results == [6]\n\nprint('ALL TESTS PASSED')"
+scoring_method: test_pass

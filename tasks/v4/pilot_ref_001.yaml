@@ -1,63 +1,83 @@
-id: "PILOT-REF-001"
-category: "REF"
-difficulty: "easy"
-source: "pilot-synthetic"
-title: "Extract validation into a separate function"
-problem: |
-  The process_order function contains inline validation logic mixed with
+id: PILOT-REF-001
+category: REF
+difficulty: easy
+source: pilot-synthetic
+title: Extract validation into a separate function
+problem: 'The process_order function contains inline validation logic mixed with
+
   business logic. Refactor it to extract the validation into a separate
+
   validate_order(order) function that returns a list of error strings
+
   (empty list if valid). The process_order function should call
+
   validate_order and return errors if any, otherwise proceed.
+
+  '
 context_files:
-  - path: "orders.py"
-    content: |
-      def process_order(order):
-          # Validation mixed with business logic
-          errors = []
-          if not order.get('customer_id'):
-              errors.append('Missing customer_id')
-          if not order.get('items') or len(order['items']) == 0:
-              errors.append('Order must have at least one item')
-          if order.get('total', 0) <= 0:
-              errors.append('Total must be positive')
-          if errors:
-              return {'status': 'error', 'errors': errors}
-          
-          # Business logic
-          return {
-              'status': 'ok',
-              'order_id': f"ORD-{order['customer_id']}",
-              'total': order['total'],
-          }
-output_format: "code_block"
+- path: orders.py
+  content: "def process_order(order):\n    # Validation mixed with business logic\n\
+    \    errors = []\n    if not order.get('customer_id'):\n        errors.append('Missing\
+    \ customer_id')\n    if not order.get('items') or len(order['items']) == 0:\n\
+    \        errors.append('Order must have at least one item')\n    if order.get('total',\
+    \ 0) <= 0:\n        errors.append('Total must be positive')\n    if errors:\n\
+    \        return {'status': 'error', 'errors': errors}\n    \n    # Business logic\n\
+    \    return {\n        'status': 'ok',\n        'order_id': f\"ORD-{order['customer_id']}\"\
+    ,\n        'total': order['total'],\n    }\n"
+output_format: code_block
 scoring:
-  method: "test_suite"
-  test_script: |
-    exec(open('solution.py').read())
-    
+  method: test_suite
+  test_script: 'exec(open(''solution.py'').read())
+
+
     # Test 1: validate_order exists and works
+
     errors = validate_order({})
-    assert isinstance(errors, list), 'validate_order must return a list'
-    assert 'Missing customer_id' in errors
-    
+
+    assert isinstance(errors, list), ''validate_order must return a list''
+
+    assert ''Missing customer_id'' in str(errors)
+
+
     # Test 2: Valid order passes validation
-    valid = {'customer_id': 'C1', 'items': ['A'], 'total': 50}
-    assert validate_order(valid) == [], f'Valid order should have no errors: {validate_order(valid)}'
-    
+
+    valid = {''customer_id'': ''C1'', ''items'': [''A''], ''total'': 50}
+
+    assert validate_order(valid) == [], f''Valid order should have no errors: {validate_order(valid)}''
+
+
     # Test 3: process_order still works with valid order
+
     result = process_order(valid)
-    assert result['status'] == 'ok'
-    assert result['order_id'] == 'ORD-C1'
-    
+
+    assert result[''status''] == ''ok''
+
+    assert result[''order_id''] == ''ORD-C1''
+
+
     # Test 4: process_order returns errors for invalid order
-    result = process_order({'total': -1})
-    assert result['status'] == 'error'
-    assert len(result['errors']) >= 2  # missing customer_id + missing items
-    
-    # Test 5: process_order uses validate_order (not duplicated logic)
-    import inspect
-    src = inspect.getsource(process_order)
-    assert 'validate_order' in src, 'process_order should call validate_order'
-    
-    print('ALL TESTS PASSED')
+
+    result = process_order({''total'': -1})
+
+    assert result[''status''] == ''error''
+
+    assert len(result[''errors'']) >= 2
+
+
+    # Test 5: All three validation rules work
+
+    result = process_order({})
+
+    errors_set = set(result[''errors''])
+
+    assert ''Missing customer_id'' in errors_set or any(''customer'' in e for e in
+    errors_set)
+
+    assert any(''item'' in e.lower() for e in errors_set)
+
+    assert any(''total'' in e.lower() or ''positive'' in e.lower() for e in errors_set)
+
+
+    print(''ALL TESTS PASSED'')
+
+    '

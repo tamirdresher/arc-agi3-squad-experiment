@@ -1,0 +1,32 @@
+id: TASK-ALG-001
+category: ALG
+difficulty: hard
+source: synthetic-contest
+problem: "Implement longest_palindrome(s) that returns the longest palindromic substring.\n\
+  \    Must handle edge cases and run in O(n²) or better."
+context_files:
+- path: palindrome.py
+  content: "def longest_palindrome(s):\n    '''Find longest palindromic substring'''\n\
+    \    # TODO: implement\n    pass"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: 'exec(open(''solution.py'').read())
+
+
+  assert longest_palindrome("babad") in ["bab", "aba"]
+
+  assert longest_palindrome("cbbd") == "bb"
+
+  assert longest_palindrome("a") == "a"
+
+  assert longest_palindrome("ac") in ["a", "c"]
+
+  assert longest_palindrome("racecar") == "racecar"
+
+  assert longest_palindrome("abcdef") in ["a", "b", "c", "d", "e", "f"]
+
+  assert len(longest_palindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendure"))
+  >= 7
+
+
+  print(''ALL TESTS PASSED'')'
+scoring_method: test_pass

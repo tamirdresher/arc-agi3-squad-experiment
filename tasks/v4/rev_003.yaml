@@ -1,0 +1,81 @@
+id: "TASK-REV-003"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following file upload handler for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import os
+      import shutil
+      import mimetypes
+
+      UPLOAD_DIR = "/var/uploads"
+      ALLOWED_EXTENSIONS = [".jpg", ".png", ".pdf", ".docx"]
+
+      def is_allowed_file(filename):
+          _, ext = os.path.splitext(filename)
+          return ext.lower() in ALLOWED_EXTENSIONS
+
+      def sanitize_filename(filename):
+          return filename.replace(" ", "_")
+
+      def handle_upload(request):
+          uploaded_file = request.files.get("file")
+          if not uploaded_file:
+              return {"error": "No file provided"}, 400
+
+          filename = sanitize_filename(uploaded_file.filename)
+          if not is_allowed_file(filename):
+              return {"error": "File type not allowed"}, 400
+
+          dest_path = os.path.join(UPLOAD_DIR, filename)
+
+          if os.path.exists(dest_path):
+              return {"error": "File already exists"}, 409
+
+          with open(dest_path, "wb") as f:
+              shutil.copyfileobj(uploaded_file.stream, f)
+
+          mime_type = mimetypes.guess_type(filename)[0]
+          file_size = os.path.getsize(dest_path)
+
+          return {
+              "filename": filename,
+              "size": file_size,
+              "type": mime_type,
+              "url": f"/files/{filename}"
+          }, 201
+
+      def delete_upload(filename):
+          path = os.path.join(UPLOAD_DIR, filename)
+          if os.path.isfile(path):
+              os.remove(path)
+              return {"deleted": True}
+          return {"error": "Not found"}, 404
+expected_output_description: |
+  Issues: 1) Path traversal — filename not sanitized for ../ sequences
+  2) No file size limit — can exhaust disk space
+  3) TOCTOU race condition between exists check and file write
+  4) Extension-only validation — no content/magic-byte checking
+  5) delete_upload also vulnerable to path traversal
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if 'path traversal' in review or 'directory traversal' in review or '../' in review:
+      issues_found += 1
+  if ('size' in review and ('limit' in review or 'unbounded' in review or 'restrict' in review)) or 'denial of service' in review or 'disk' in review:
+      issues_found += 1
+  if 'toctou' in review or 'race condition' in review or ('time of check' in review and 'time of use' in review):
+      issues_found += 1
+  if ('content' in review or 'magic' in review or 'mime' in review) and ('validat' in review or 'verify' in review or 'check' in review or 'spoof' in review):
+      issues_found += 1
+  if 'delete' in review and ('traversal' in review or 'path' in review or 'sanitiz' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/5 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

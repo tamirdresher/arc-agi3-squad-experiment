@@ -1,0 +1,190 @@
+id: TASK-REF-010
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: |
+  Refactor this monolithic data processing function into a composable pipeline of small,
+  reusable stage functions. The single 90-line function handles CSV parsing, filtering,
+  transforming, grouping, and summary generation. Break into at least 5 composable stages.
+context_files:
+  - path: code.py
+    content: |
+      def process_sales_data(csv_text, min_amount=0, region_filter=None, year_filter=None):
+          if not csv_text or not isinstance(csv_text, str):
+              return {'error': 'no data', 'records': [], 'summary': {}}
+          lines = csv_text.strip().split('\n')
+          if len(lines) < 2:
+              return {'error': 'no data rows', 'records': [], 'summary': {}}
+          headers = [h.strip().lower() for h in lines[0].split(',')]
+          required = {'date', 'region', 'product', 'amount', 'qty'}
+          if not required.issubset(set(headers)):
+              missing = required - set(headers)
+              return {'error': f'missing columns: {missing}', 'records': [], 'summary': {}}
+          records = []
+          parse_errors = 0
+          for line in lines[1:]:
+              vals = [v.strip() for v in line.split(',')]
+              if len(vals) != len(headers):
+                  parse_errors += 1
+                  continue
+              row = dict(zip(headers, vals))
+              try:
+                  row['amount'] = float(row['amount'])
+                  row['qty'] = int(row['qty'])
+              except (ValueError, KeyError):
+                  parse_errors += 1
+                  continue
+              records.append(row)
+          filtered = []
+          for r in records:
+              if r['amount'] < min_amount:
+                  continue
+              if region_filter and r['region'] != region_filter:
+                  continue
+              if year_filter:
+                  try:
+                      yr = int(r['date'].split('-')[0])
+                      if yr != year_filter:
+                          continue
+                  except (ValueError, IndexError):
+                      continue
+              filtered.append(r)
+          for r in filtered:
+              r['revenue'] = round(r['amount'] * r['qty'], 2)
+              r['category'] = 'high' if r['revenue'] >= 1000 else 'medium' if r['revenue'] >= 100 else 'low'
+          by_region = {}
+          by_product = {}
+          by_category = {}
+          for r in filtered:
+              reg = r['region']
+              if reg not in by_region:
+                  by_region[reg] = {'revenue': 0, 'count': 0, 'qty': 0}
+              by_region[reg]['revenue'] += r['revenue']
+              by_region[reg]['count'] += 1
+              by_region[reg]['qty'] += r['qty']
+              prod = r['product']
+              if prod not in by_product:
+                  by_product[prod] = {'revenue': 0, 'count': 0, 'qty': 0}
+              by_product[prod]['revenue'] += r['revenue']
+              by_product[prod]['count'] += 1
+              by_product[prod]['qty'] += r['qty']
+              cat = r['category']
+              if cat not in by_category:
+                  by_category[cat] = {'revenue': 0, 'count': 0}
+              by_category[cat]['revenue'] += r['revenue']
+              by_category[cat]['count'] += 1
+          for d in [by_region, by_product]:
+              for k in d:
+                  d[k]['revenue'] = round(d[k]['revenue'], 2)
+          for k in by_category:
+              by_category[k]['revenue'] = round(by_category[k]['revenue'], 2)
+          total_revenue = round(sum(r['revenue'] for r in filtered), 2)
+          avg_revenue = round(total_revenue / len(filtered), 2) if filtered else 0
+          top_product = max(by_product.items(), key=lambda x: x[1]['revenue'])[0] if by_product else None
+          top_region = max(by_region.items(), key=lambda x: x[1]['revenue'])[0] if by_region else None
+          return {
+              'error': None,
+              'records': filtered,
+              'parse_errors': parse_errors,
+              'total_records': len(records),
+              'filtered_records': len(filtered),
+              'summary': {
+                  'total_revenue': total_revenue,
+                  'average_revenue': avg_revenue,
+                  'top_product': top_product,
+                  'top_region': top_region,
+                  'by_region': by_region,
+                  'by_product': by_product,
+                  'by_category': by_category,
+              }
+          }
+expected_output_description: |
+  Break into composable stages: parse_csv, filter_records, enrich_records, group_records,
+  build_summary. process_sales_data orchestrates them. Each stage is independently testable.
+test_script: |
+  exec(open('solution.py').read())
+
+  csv = """date,region,product,amount,qty
+  2024-01-15,US,Widget,50.00,10
+  2024-01-16,EU,Gadget,200.00,3
+  2024-01-17,US,Widget,30.00,5
+  2024-02-01,APAC,Gizmo,10.00,2
+  2024-02-15,EU,Widget,100.00,20
+  2023-06-01,US,Gadget,75.00,1"""
+
+  # Full pipeline
+  r = process_sales_data(csv)
+  assert r['error'] is None
+  assert r['total_records'] == 6
+  assert r['filtered_records'] == 6
+  assert r['parse_errors'] == 0
+  assert len(r['records']) == 6
+  # Revenue checks
+  assert r['summary']['total_revenue'] == round(500+600+150+20+2000+75, 2)  # 3345
+  assert r['summary']['by_region']['US']['count'] == 3
+  assert r['summary']['by_region']['EU']['count'] == 2
+  assert r['summary']['top_region'] == 'EU'  # EU: 600+2000=2600
+  assert r['summary']['top_product'] == 'Widget'  # 500+150+2000=2650
+
+  # Category assignment
+  cats = r['summary']['by_category']
+  assert 'high' in cats  # >=1000
+  assert 'low' in cats   # <100
+
+  # Filtering by amount
+  r2 = process_sales_data(csv, min_amount=50)
+  assert r2['filtered_records'] < 6
+  assert all(rec['amount'] >= 50 for rec in r2['records'])
+
+  # Filtering by region
+  r3 = process_sales_data(csv, region_filter='US')
+  assert all(rec['region'] == 'US' for rec in r3['records'])
+  assert r3['filtered_records'] == 3
+
+  # Filtering by year
+  r4 = process_sales_data(csv, year_filter=2024)
+  assert r4['filtered_records'] == 5
+  assert all('2024' in rec['date'] for rec in r4['records'])
+
+  # Combined filters
+  r5 = process_sales_data(csv, min_amount=50, region_filter='EU')
+  assert r5['filtered_records'] == 2
+
+  # Error cases
+  assert process_sales_data(None)['error'] == 'no data'
+  assert process_sales_data('')['error'] == 'no data'
+  assert process_sales_data('header_only')['error'] == 'no data rows'
+  assert 'missing' in process_sales_data('a,b\n1,2')['error']
+
+  # Parse errors (wrong column count)
+  bad_csv = "date,region,product,amount,qty\n2024-01-01,US,X,10,2\ntoo,few"
+  rb = process_sales_data(bad_csv)
+  assert rb['parse_errors'] == 1
+  assert rb['total_records'] == 1
+
+  # Empty after filter
+  r6 = process_sales_data(csv, min_amount=999999)
+  assert r6['filtered_records'] == 0
+  assert r6['summary']['total_revenue'] == 0
+  assert r6['summary']['top_product'] is None
+
+  # Structural: composable stages
+  with open('solution.py') as f:
+      code = f.read()
+  func_count = code.count('def ')
+  assert func_count >= 5, f"Expected 5+ functions for pipeline stages, got {func_count}"
+  # Main function should be short (orchestrator)
+  import re
+  main_match = re.search(r'def process_sales_data\(.*?\):\n((?:[ \t]+.*\n)*)', code)
+  if main_match:
+      body_lines = [l for l in main_match.group(1).split('\n') if l.strip() and not l.strip().startswith('#')]
+      assert len(body_lines) <= 25, f"process_sales_data still has {len(body_lines)} lines, should delegate to stages"
+  # No single function should exceed 30 lines
+  fn_bodies = re.split(r'\ndef ', code)
+  for chunk in fn_bodies[1:]:
+      fname = chunk.split('(')[0]
+      lines = [l for l in chunk.split('\n') if l.strip() and not l.strip().startswith('#')]
+      assert len(lines) <= 35, f"Function {fname} has {len(lines)} lines, too long"
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

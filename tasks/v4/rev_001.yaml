@@ -1,0 +1,23 @@
+id: TASK-REV-001
+category: REV
+difficulty: hard
+source: synthetic-review
+problem: Review this database code and identify ALL security vulnerabilities and bugs.
+context_files:
+- path: database.py
+  content: "import sqlite3\n\ndef get_user(username, password):\n    conn = sqlite3.connect('users.db')\n\
+    \    query = f\"SELECT * FROM users WHERE username='{username}' AND password='{password}'\"\
+    \n    result = conn.execute(query).fetchone()\n    return result\n\ndef update_balance(user_id,\
+    \ amount):\n    conn = sqlite3.connect('users.db')\n    query = f\"UPDATE accounts\
+    \ SET balance = balance + {amount} WHERE user_id = {user_id}\"\n    conn.execute(query)\n\
+    \    conn.commit()"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: "exec(open('solution.py').read())\n\nwith open('solution.py') as f:\n\
+  \    review = f.read().lower()\n\n# Must identify SQL injection\nassert 'sql injection'\
+  \ in review or 'injection' in review, \"Should identify SQL injection vulnerability\"\
+  \n\n# Must identify missing input validation\nassert 'validation' in review or 'sanitize'\
+  \ in review or 'parameter' in review, \"Should mention parameterized queries\"\n\
+  \n# Should identify multiple issues\nassert review.count('bug') + review.count('issue')\
+  \ + review.count('vulnerability') >= 2, \"Should identify multiple issues\"\n\n\
+  print('ALL TESTS PASSED')"
+scoring_method: test_pass

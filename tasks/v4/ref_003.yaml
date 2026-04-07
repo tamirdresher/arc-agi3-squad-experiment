@@ -1,0 +1,142 @@
+id: TASK-REF-003
+category: REF
+difficulty: medium
+source: synthetic-refactor
+problem: |
+  Refactor this deeply nested access control function (6 levels of nesting) into a flat
+  structure using early returns and guard clauses. The function checks user permissions
+  for resource access with multiple conditions. Preserve exact return values for all inputs.
+context_files:
+  - path: code.py
+    content: |
+      def check_access(user, resource, action):
+          result = {'allowed': False, 'reason': 'unknown'}
+          if user is not None:
+              if isinstance(user, dict) and 'role' in user:
+                  if user.get('active', False):
+                      if resource is not None and isinstance(resource, dict):
+                          if 'type' in resource and 'owner' in resource:
+                              if action in ('read', 'write', 'delete', 'admin'):
+                                  if user['role'] == 'superadmin':
+                                      result = {'allowed': True, 'reason': 'superadmin'}
+                                  else:
+                                      if resource['type'] == 'public':
+                                          if action == 'read':
+                                              result = {'allowed': True, 'reason': 'public read'}
+                                          elif action == 'write':
+                                              if resource['owner'] == user.get('id'):
+                                                  result = {'allowed': True, 'reason': 'owner write'}
+                                              elif user['role'] in ('admin', 'editor'):
+                                                  result = {'allowed': True, 'reason': 'role write'}
+                                              else:
+                                                  result = {'allowed': False, 'reason': 'no write permission'}
+                                          elif action == 'delete':
+                                              if resource['owner'] == user.get('id'):
+                                                  result = {'allowed': True, 'reason': 'owner delete'}
+                                              elif user['role'] == 'admin':
+                                                  result = {'allowed': True, 'reason': 'admin delete'}
+                                              else:
+                                                  result = {'allowed': False, 'reason': 'no delete permission'}
+                                          else:
+                                              if user['role'] == 'admin':
+                                                  result = {'allowed': True, 'reason': 'admin action'}
+                                              else:
+                                                  result = {'allowed': False, 'reason': 'admin only'}
+                                      elif resource['type'] == 'private':
+                                          if resource['owner'] == user.get('id'):
+                                              if action in ('read', 'write', 'delete'):
+                                                  result = {'allowed': True, 'reason': 'owner access'}
+                                              else:
+                                                  if user['role'] == 'admin':
+                                                      result = {'allowed': True, 'reason': 'admin override'}
+                                                  else:
+                                                      result = {'allowed': False, 'reason': 'owner cannot admin'}
+                                          elif user['role'] == 'admin':
+                                              result = {'allowed': True, 'reason': 'admin override'}
+                                          elif user['role'] == 'editor' and action == 'read':
+                                              if resource.get('shared', False):
+                                                  result = {'allowed': True, 'reason': 'shared read'}
+                                              else:
+                                                  result = {'allowed': False, 'reason': 'not shared'}
+                                          else:
+                                              result = {'allowed': False, 'reason': 'private resource'}
+                                      elif resource['type'] == 'restricted':
+                                          if user['role'] in ('admin', 'superadmin'):
+                                              result = {'allowed': True, 'reason': 'elevated access'}
+                                          else:
+                                              result = {'allowed': False, 'reason': 'restricted'}
+                                      else:
+                                          result = {'allowed': False, 'reason': 'unknown resource type'}
+                              else:
+                                  result = {'allowed': False, 'reason': 'invalid action'}
+                          else:
+                              result = {'allowed': False, 'reason': 'malformed resource'}
+                      else:
+                          result = {'allowed': False, 'reason': 'malformed resource'}
+                  else:
+                      result = {'allowed': False, 'reason': 'inactive user'}
+              else:
+                  result = {'allowed': False, 'reason': 'invalid user'}
+          else:
+              result = {'allowed': False, 'reason': 'no user'}
+          return result
+expected_output_description: |
+  Flatten to max 2-3 levels of nesting using early returns. Guard clauses for validation
+  at the top. No mutable result variable reassigned throughout. Same return values.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Validation edge cases
+  assert check_access(None, {}, 'read')['reason'] == 'no user'
+  assert check_access({}, {'type':'x','owner':'y'}, 'read')['reason'] == 'invalid user'
+  assert check_access({'role':'admin','active':False}, {'type':'public','owner':'a'}, 'read')['reason'] == 'inactive user'
+  assert check_access({'role':'admin','active':True}, None, 'read')['reason'] == 'malformed resource'
+  assert check_access({'role':'admin','active':True}, {'type':'x'}, 'read')['reason'] == 'malformed resource'
+  assert check_access({'role':'admin','active':True}, {'type':'x','owner':'a'}, 'hack')['reason'] == 'invalid action'
+
+  # Superadmin
+  sa = {'role':'superadmin','active':True,'id':'sa1'}
+  assert check_access(sa, {'type':'restricted','owner':'x'}, 'delete')['allowed'] == True
+  assert check_access(sa, {'type':'restricted','owner':'x'}, 'delete')['reason'] == 'superadmin'
+
+  # Public resource
+  u = {'role':'viewer','active':True,'id':'u1'}
+  assert check_access(u, {'type':'public','owner':'u1'}, 'read') == {'allowed': True, 'reason': 'public read'}
+  assert check_access(u, {'type':'public','owner':'u1'}, 'write') == {'allowed': True, 'reason': 'owner write'}
+  assert check_access(u, {'type':'public','owner':'other'}, 'write') == {'allowed': False, 'reason': 'no write permission'}
+  ed = {'role':'editor','active':True,'id':'e1'}
+  assert check_access(ed, {'type':'public','owner':'x'}, 'write')['reason'] == 'role write'
+  adm = {'role':'admin','active':True,'id':'a1'}
+  assert check_access(adm, {'type':'public','owner':'x'}, 'delete')['reason'] == 'admin delete'
+  assert check_access(u, {'type':'public','owner':'x'}, 'admin')['reason'] == 'admin only'
+  assert check_access(adm, {'type':'public','owner':'x'}, 'admin')['reason'] == 'admin action'
+
+  # Private resource
+  assert check_access(u, {'type':'private','owner':'u1'}, 'read')['allowed'] == True
+  assert check_access(u, {'type':'private','owner':'u1'}, 'admin')['reason'] == 'owner cannot admin'
+  assert check_access(adm, {'type':'private','owner':'x'}, 'write')['reason'] == 'admin override'
+  assert check_access(ed, {'type':'private','owner':'x','shared':True}, 'read')['reason'] == 'shared read'
+  assert check_access(ed, {'type':'private','owner':'x','shared':False}, 'read')['reason'] == 'not shared'
+  assert check_access(u, {'type':'private','owner':'x'}, 'read')['reason'] == 'private resource'
+
+  # Restricted
+  assert check_access(adm, {'type':'restricted','owner':'x'}, 'read')['reason'] == 'elevated access'
+  assert check_access(u, {'type':'restricted','owner':'x'}, 'read')['reason'] == 'restricted'
+
+  # Unknown type
+  assert check_access(u, {'type':'alien','owner':'x'}, 'read')['reason'] == 'unknown resource type'
+
+  # Structural: measure max indentation depth
+  with open('solution.py') as f:
+      src = f.read()
+  max_indent = 0
+  for line in src.split('\n'):
+      stripped = line.lstrip()
+      if stripped and not stripped.startswith('#'):
+          indent = len(line) - len(stripped)
+          max_indent = max(max_indent, indent)
+  assert max_indent <= 16, f"Max indent {max_indent} spaces, still too nested (max 16)"
+  assert src.count('return ') >= 8, "Should use early returns (need 8+)"
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

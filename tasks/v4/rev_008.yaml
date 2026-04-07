@@ -1,0 +1,86 @@
+id: "TASK-REV-008"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following logging module for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import logging
+      import json
+      import os
+      from datetime import datetime
+
+      LOG_FILE = "/var/log/app/application.log"
+
+      logger = logging.getLogger("app")
+      logger.setLevel(logging.DEBUG)
+      handler = logging.FileHandler(LOG_FILE)
+      formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
+      handler.setFormatter(formatter)
+      logger.addHandler(handler)
+
+      def log_request(request):
+          logger.info(
+              f"Request: {request.method} {request.path} "
+              f"from {request.remote_addr} "
+              f"headers={dict(request.headers)} "
+              f"body={request.get_data(as_text=True)}"
+          )
+
+      def log_auth_attempt(username, password, success):
+          logger.info(
+              f"Auth attempt: user={username} "
+              f"password={password} success={success}"
+          )
+
+      def log_payment(user_id, card_number, amount, status):
+          logger.info(
+              f"Payment: user={user_id} card={card_number} "
+              f"amount={amount} status={status}"
+          )
+
+      def log_error(error, context=None):
+          logger.error(
+              f"Error: {error}\n"
+              f"Context: {json.dumps(context)}\n"
+              f"Stack: {error.__traceback__}"
+          )
+
+      def log_user_action(user_input, action):
+          logger.info(f"Action: {action} input={user_input}")
+
+      def search_logs(query):
+          results = []
+          with open(LOG_FILE) as f:
+              for line in f:
+                  if query in line:
+                      results.append(line.strip())
+          return results
+expected_output_description: |
+  Issues: 1) Passwords logged in plaintext in log_auth_attempt
+  2) Credit card numbers logged in log_payment — PCI-DSS violation
+  3) Log injection — unsanitized user_input can forge log entries with newlines
+  4) No log rotation — file grows unbounded
+  5) Authorization headers logged in log_request (tokens/keys in headers)
+  6) search_logs reads entire file into memory and has no access control
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if 'password' in review and ('log' in review or 'plaintext' in review or 'plain text' in review or 'clear' in review):
+      issues_found += 1
+  if ('card' in review or 'credit' in review or 'pci' in review) and ('log' in review or 'expos' in review or 'sensitive' in review):
+      issues_found += 1
+  if 'log injection' in review or ('inject' in review and 'log' in review) or ('newline' in review and ('forg' in review or 'spoof' in review or 'inject' in review)):
+      issues_found += 1
+  if ('rotat' in review and 'log' in review) or ('unbounded' in review and ('grow' in review or 'file' in review or 'log' in review)):
+      issues_found += 1
+  if ('header' in review or 'authorization' in review or 'token' in review) and ('log' in review or 'expos' in review or 'sensitive' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/5 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

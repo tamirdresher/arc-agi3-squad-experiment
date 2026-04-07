@@ -1,0 +1,117 @@
+id: "TASK-BUG-010"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A user reports that the `prune_inactive_users` function intermittently raises a
+  RuntimeError: "dictionary changed size during iteration". The function iterates
+  over a user registry (a dict) and removes users whose `last_active` timestamp is
+  older than a given cutoff. On small datasets it seems to work, but in production
+  with hundreds of users it crashes unpredictably.
+
+  The developer insists the code is correct because "we only delete when the
+  condition is true." The real issue is that the dict is being mutated while a
+  live iterator exists over it. Fix the function so it safely removes inactive
+  users without raising RuntimeError, while preserving the original return
+  semantics (returning the list of pruned user IDs).
+context_files:
+  - path: "code.py"
+    content: |
+      from datetime import datetime, timedelta
+
+      class UserRegistry:
+          def __init__(self):
+              self._users = {}
+
+          def add_user(self, uid, name, last_active=None):
+              self._users[uid] = {
+                  'name': name,
+                  'last_active': last_active or datetime.now(),
+                  'sessions': []
+              }
+
+          def record_session(self, uid, session_id):
+              if uid in self._users:
+                  self._users[uid]['sessions'].append(session_id)
+
+          def prune_inactive_users(self, cutoff_days=30):
+              """Remove users inactive for more than cutoff_days.
+              Returns list of pruned user IDs."""
+              cutoff = datetime.now() - timedelta(days=cutoff_days)
+              pruned = []
+              for uid, data in self._users.items():
+                  if data['last_active'] < cutoff:
+                      pruned.append(uid)
+                      del self._users[uid]
+              return pruned
+
+          def get_user(self, uid):
+              return self._users.get(uid)
+
+          def count(self):
+              return len(self._users)
+
+          def all_uids(self):
+              return list(self._users.keys())
+expected_output_description: |
+  The fix must avoid mutating the dict during iteration. Acceptable approaches:
+  (1) Iterate over a snapshot — list(self._users.items()) — and delete after,
+  (2) Collect keys to delete first, then delete in a second pass, or
+  (3) Rebuild the dict with a comprehension. The function must still return
+  the list of pruned user IDs and actually remove them from self._users.
+test_script: |
+  exec(open('solution.py').read())
+  from datetime import datetime, timedelta
+
+  # --- helpers ---
+  old = datetime.now() - timedelta(days=60)
+  recent = datetime.now() - timedelta(days=5)
+
+  # Test 1: basic prune removes old users
+  r = UserRegistry()
+  r.add_user('u1', 'Alice', old)
+  r.add_user('u2', 'Bob', recent)
+  pruned = r.prune_inactive_users(cutoff_days=30)
+  assert 'u1' in pruned, "u1 should be pruned"
+  assert 'u2' not in pruned, "u2 should NOT be pruned"
+  assert r.get_user('u1') is None, "u1 should be gone"
+  assert r.get_user('u2') is not None, "u2 should remain"
+
+  # Test 2: prune on empty registry
+  r2 = UserRegistry()
+  assert r2.prune_inactive_users() == []
+
+  # Test 3: many users — triggers RuntimeError on buggy code
+  r3 = UserRegistry()
+  for i in range(200):
+      ts = old if i % 2 == 0 else recent
+      r3.add_user(f'user_{i}', f'Name{i}', ts)
+  pruned3 = r3.prune_inactive_users(cutoff_days=30)
+  assert len(pruned3) == 100, f"Expected 100 pruned, got {len(pruned3)}"
+  assert r3.count() == 100, f"Expected 100 remaining, got {r3.count()}"
+
+  # Test 4: all users inactive
+  r4 = UserRegistry()
+  for i in range(50):
+      r4.add_user(f'x{i}', f'X{i}', old)
+  pruned4 = r4.prune_inactive_users(cutoff_days=30)
+  assert len(pruned4) == 50
+  assert r4.count() == 0
+
+  # Test 5: no users inactive
+  r5 = UserRegistry()
+  for i in range(30):
+      r5.add_user(f'y{i}', f'Y{i}', recent)
+  assert r5.prune_inactive_users(cutoff_days=30) == []
+  assert r5.count() == 30
+
+  # Test 6: prune twice — second call should be no-op
+  r6 = UserRegistry()
+  r6.add_user('a', 'A', old)
+  r6.add_user('b', 'B', recent)
+  r6.prune_inactive_users(cutoff_days=30)
+  assert r6.prune_inactive_users(cutoff_days=30) == []
+  assert r6.count() == 1
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

@@ -1,0 +1,100 @@
+id: "TASK-REV-009"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following database query builder for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import psycopg2
+
+      DB_CONFIG = {
+          "host": "localhost",
+          "database": "myapp",
+          "user": "admin",
+          "password": "admin123",
+      }
+
+      def get_connection():
+          return psycopg2.connect(**DB_CONFIG)
+
+      def find_users_by_name(name):
+          conn = get_connection()
+          cursor = conn.cursor()
+          cursor.execute(
+              f"SELECT * FROM users WHERE name = '{name}'"
+          )
+          results = cursor.fetchall()
+          return results
+
+      def get_user_with_orders(user_id):
+          conn = get_connection()
+          cursor = conn.cursor()
+          cursor.execute(
+              "SELECT * FROM users WHERE id = %s", (user_id,)
+          )
+          user = cursor.fetchone()
+          if user:
+              cursor.execute(
+                  "SELECT * FROM orders WHERE user_id = %s",
+                  (user_id,),
+              )
+              orders = cursor.fetchall()
+              for order in orders:
+                  cursor.execute(
+                      "SELECT * FROM order_items WHERE order_id = %s",
+                      (order[0],),
+                  )
+                  order_items = cursor.fetchall()
+          conn.close()
+          return user, orders
+
+      def search_products(filters):
+          conn = get_connection()
+          cursor = conn.cursor()
+          query = "SELECT * FROM products WHERE 1=1"
+          for key, value in filters.items():
+              query += f" AND {key} = '{value}'"
+          cursor.execute(query)
+          return cursor.fetchall()
+
+      def bulk_insert(table, rows):
+          conn = get_connection()
+          cursor = conn.cursor()
+          for row in rows:
+              cols = ", ".join(row.keys())
+              vals = ", ".join(f"'{v}'" for v in row.values())
+              cursor.execute(
+                  f"INSERT INTO {table} ({cols}) VALUES ({vals})"
+              )
+          conn.commit()
+          conn.close()
+expected_output_description: |
+  Issues: 1) SQL injection in find_users_by_name via f-string interpolation
+  2) SQL injection in search_products — both column names and values unsanitized
+  3) N+1 query problem in get_user_with_orders — separate query per order
+  4) Connection leak — find_users_by_name and search_products never close connection
+  5) Hardcoded database credentials in source code
+  6) SQL injection in bulk_insert — table name and values unparameterized
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if ('sql injection' in review or 'injection' in review) and ('find_users' in review or 'f-string' in review or 'f"' in review or 'format' in review or 'interpolat' in review):
+      issues_found += 1
+  if ('search_products' in review or 'filter' in review) and ('injection' in review or 'unsaniti' in review or 'column' in review):
+      issues_found += 1
+  if 'n+1' in review or 'n + 1' in review or ('query' in review and ('loop' in review or 'each order' in review or 'per order' in review or 'nested' in review)):
+      issues_found += 1
+  if ('connection' in review and ('leak' in review or 'close' in review or 'never closed' in review or 'not closed' in review)) or ('resource' in review and 'leak' in review):
+      issues_found += 1
+  if 'hardcod' in review and ('password' in review or 'credential' in review):
+      issues_found += 1
+  if 'bulk_insert' in review and ('injection' in review or 'table' in review or 'unsaniti' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/6 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

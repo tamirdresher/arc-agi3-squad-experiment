@@ -1,0 +1,169 @@
+id: "TASK-BUG-019"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A dependency resolver uses graph traversal to detect build order and find
+  dependency chains. Users report two critical bugs:
+
+  1. `topological_sort` enters an infinite loop when the dependency graph has
+     cycles (e.g., A depends on B, B depends on A). It should detect cycles and
+     raise a CycleError.
+  2. `find_all_paths` also loops forever on cyclic graphs because it lacks a
+     visited-per-path check. It should find all simple (non-repeating) paths.
+  3. `shortest_path` uses BFS but doesn't track visited nodes, so on graphs
+     with cycles it exhausts memory by re-enqueueing nodes endlessly.
+
+  The root cause in all three cases: missing or incomplete cycle/visited checks.
+context_files:
+  - path: "code.py"
+    content: |
+      from collections import deque
+
+      class CycleError(Exception):
+          pass
+
+      class DependencyGraph:
+          def __init__(self):
+              self.edges = {}  # node -> list of nodes it depends on
+
+          def add_node(self, node):
+              if node not in self.edges:
+                  self.edges[node] = []
+
+          def add_edge(self, from_node, to_node):
+              """from_node depends on to_node."""
+              self.add_node(from_node)
+              self.add_node(to_node)
+              self.edges[from_node].append(to_node)
+
+          def get_dependencies(self, node):
+              return self.edges.get(node, [])
+
+          def topological_sort(self):
+              """Return nodes in dependency order (dependencies first).
+              Raises CycleError if graph has a cycle."""
+              result = []
+              visited = set()
+              for node in self.edges:
+                  if node not in visited:
+                      self._topo_visit(node, visited, result)
+              return result
+
+          def _topo_visit(self, node, visited, result):
+              visited.add(node)
+              for dep in self.edges.get(node, []):
+                  if dep not in visited:
+                      self._topo_visit(dep, visited, result)
+              result.append(node)
+
+          def find_all_paths(self, start, end):
+              """Find all simple paths from start to end."""
+              paths = []
+              self._find_paths_dfs(start, end, [start], paths)
+              return paths
+
+          def _find_paths_dfs(self, current, end, path, paths):
+              if current == end:
+                  paths.append(list(path))
+                  return
+              for neighbor in self.edges.get(current, []):
+                  path.append(neighbor)
+                  self._find_paths_dfs(neighbor, end, path, paths)
+                  path.pop()
+
+          def shortest_path(self, start, end):
+              """Find shortest path from start to end using BFS."""
+              queue = deque([(start, [start])])
+              while queue:
+                  node, path = queue.popleft()
+                  if node == end:
+                      return path
+                  for neighbor in self.edges.get(node, []):
+                      queue.append((neighbor, path + [neighbor]))
+              return None
+
+          def all_nodes(self):
+              return list(self.edges.keys())
+expected_output_description: |
+  1. `_topo_visit` needs a separate "in-stack" / "currently visiting" set. If a
+     node is encountered that is in the current recursion stack, raise CycleError.
+     The existing `visited` set prevents re-visiting but doesn't detect back-edges.
+  2. `_find_paths_dfs` must check `if neighbor not in path` (or use a set) to
+     avoid revisiting nodes in the current path — preventing infinite loops on cycles.
+  3. `shortest_path` must track visited nodes and skip already-visited ones.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Test 1: simple DAG — topological sort
+  g = DependencyGraph()
+  g.add_edge('app', 'lib')
+  g.add_edge('lib', 'core')
+  g.add_edge('app', 'core')
+  order = g.topological_sort()
+  assert order.index('core') < order.index('lib'), \
+      f"core must come before lib: {order}"
+  assert order.index('lib') < order.index('app'), \
+      f"lib must come before app: {order}"
+
+  # Test 2: cycle detection
+  g2 = DependencyGraph()
+  g2.add_edge('A', 'B')
+  g2.add_edge('B', 'C')
+  g2.add_edge('C', 'A')
+  try:
+      g2.topological_sort()
+      assert False, "Should have raised CycleError"
+  except CycleError:
+      pass
+
+  # Test 3: self-loop cycle
+  g3 = DependencyGraph()
+  g3.add_edge('X', 'X')
+  try:
+      g3.topological_sort()
+      assert False, "Self-loop should raise CycleError"
+  except CycleError:
+      pass
+
+  # Test 4: find_all_paths on DAG
+  g4 = DependencyGraph()
+  g4.add_edge('S', 'A')
+  g4.add_edge('S', 'B')
+  g4.add_edge('A', 'E')
+  g4.add_edge('B', 'E')
+  g4.add_edge('A', 'B')
+  paths = g4.find_all_paths('S', 'E')
+  assert len(paths) >= 3, f"Expected >=3 paths, got {len(paths)}: {paths}"
+
+  # Test 5: find_all_paths on cyclic graph doesn't loop forever
+  g5 = DependencyGraph()
+  g5.add_edge('A', 'B')
+  g5.add_edge('B', 'C')
+  g5.add_edge('C', 'A')
+  g5.add_edge('B', 'D')
+  paths5 = g5.find_all_paths('A', 'D')
+  assert len(paths5) >= 1, "Should find path A->B->D"
+  assert all('A' == p[0] and 'D' == p[-1] for p in paths5)
+
+  # Test 6: shortest_path works
+  g6 = DependencyGraph()
+  g6.add_edge('s', 'a')
+  g6.add_edge('a', 'b')
+  g6.add_edge('s', 'b')
+  sp = g6.shortest_path('s', 'b')
+  assert sp == ['s', 'b'], f"Shortest should be ['s','b'], got {sp}"
+
+  # Test 7: shortest_path on cyclic graph terminates
+  sp2 = g5.shortest_path('A', 'D')
+  assert sp2 is not None
+  assert sp2[0] == 'A' and sp2[-1] == 'D'
+
+  # Test 8: no path returns None
+  g7 = DependencyGraph()
+  g7.add_node('X')
+  g7.add_node('Y')
+  assert g7.shortest_path('X', 'Y') is None
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

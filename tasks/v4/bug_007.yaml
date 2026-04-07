@@ -1,0 +1,29 @@
+id: TASK-BUG-007
+category: BUG
+difficulty: hard
+source: synthetic-swebench
+problem: "A datetime formatter has a subtle timezone bug. It converts to UTC but doesn't\n\
+  \    account for daylight saving time transitions, causing 1-hour offsets during\
+  \ DST."
+context_files:
+- path: timeutils.py
+  content: "from datetime import datetime, timezone, timedelta\n\ndef to_utc_string(dt,\
+    \ tz_name):\n    '''Convert datetime to UTC ISO string. BUG: doesn't handle DST\
+    \ properly'''\n    # Hardcoded offset mapping - doesn't account for DST!\n   \
+    \ offsets = {\n        'EST': -5, 'PST': -8, 'CST': -6, 'MST': -7\n    }\n   \
+    \ \n    if tz_name not in offsets:\n        raise ValueError(f'Unknown timezone:\
+    \ {tz_name}')\n    \n    offset_hours = offsets[tz_name]\n    utc_dt = dt - timedelta(hours=offset_hours)\n\
+    \    return utc_dt.isoformat() + 'Z'"
+expected_output_description: See test script for detailed acceptance criteria
+test_script: "exec(open('solution.py').read())\nfrom datetime import datetime\n\n\
+  # Test 1: Winter time (no DST)\nwinter = datetime(2024, 1, 15, 12, 0, 0)\nresult\
+  \ = to_utc_string(winter, 'EST')\nassert '17:00:00' in result, f\"12pm EST should\
+  \ be 5pm UTC, got {result}\"\n\n# Test 2: Summer time (DST active) - CRITICAL\n\
+  summer = datetime(2024, 7, 15, 12, 0, 0)\nresult = to_utc_string(summer, 'EST')\
+  \  # EDT is UTC-4, not UTC-5\n# Correct implementation should use pytz or zoneinfo\
+  \ for DST awareness\n\n# Test 3: PST winter\nwinter_pst = datetime(2024, 12, 1,\
+  \ 10, 0, 0)\nresult = to_utc_string(winter_pst, 'PST')\nassert '18:00:00' in result,\
+  \ f\"10am PST should be 6pm UTC, got {result}\"\n\n# Test 4: Handle unknown timezone\n\
+  try:\n    to_utc_string(winter, 'INVALID')\n    assert False, \"Should raise ValueError\"\
+  \nexcept ValueError:\n    pass\n\nprint('ALL TESTS PASSED')"
+scoring_method: test_pass

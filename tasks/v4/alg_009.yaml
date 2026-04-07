@@ -1,0 +1,111 @@
+id: "TASK-ALG-009"
+category: "ALG"
+difficulty: "medium"
+source: "synthetic-contest"
+problem: |
+  Implement two functions for the word break problem:
+
+  1. word_break(s, word_dict) -> bool
+     Given a string s and a list of dictionary words, return True if s can be
+     segmented into a space-separated sequence of one or more dictionary words.
+     The same word may be reused multiple times.
+
+  2. word_break_all(s, word_dict) -> List[str]
+     Return ALL possible ways to segment s into dictionary words, as a list of
+     strings with words separated by spaces. Return an empty list if no
+     segmentation is possible. Results should be sorted lexicographically.
+
+  Requirements:
+    - word_break must use dynamic programming for efficiency.
+    - word_break_all must use backtracking/memoization to enumerate all solutions.
+    - Must handle cases where no valid segmentation exists.
+    - Dictionary words are case-sensitive.
+
+  Examples:
+    word_break("leetcode", ["leet", "code"]) => True
+    word_break("applepenapple", ["apple", "pen"]) => True
+    word_break("catsandog", ["cats", "dog", "sand", "and", "cat"]) => False
+
+    word_break_all("catsanddog", ["cat","cats","and","sand","dog"])
+      => ["cat sand dog", "cats and dog"]
+context_files:
+  - path: "word_break.py"
+    content: |
+      from typing import List
+
+      def word_break(s: str, word_dict: List[str]) -> bool:
+          """
+          Return True if s can be segmented into dictionary words.
+          Use dynamic programming.
+          """
+          # TODO: implement
+          pass
+
+      def word_break_all(s: str, word_dict: List[str]) -> List[str]:
+          """
+          Return all possible segmentations of s into dictionary words.
+          Results sorted lexicographically.
+          """
+          # TODO: implement with backtracking/memoization
+          pass
+expected_output_description: |
+  word_break returns a boolean indicating if the string can be segmented.
+  word_break_all returns a sorted list of all valid segmentation strings.
+test_script: |
+  exec(open('solution.py').read())
+
+  # --- word_break tests ---
+  assert word_break("leetcode", ["leet", "code"]) == True
+  assert word_break("applepenapple", ["apple", "pen"]) == True
+  assert word_break("catsandog", ["cats", "dog", "sand", "and", "cat"]) == False
+
+  # Empty string
+  assert word_break("", ["a", "b"]) == True, "Empty string is trivially segmentable"
+
+  # Single character
+  assert word_break("a", ["a"]) == True
+  assert word_break("b", ["a"]) == False
+
+  # Reuse words
+  assert word_break("aaaa", ["a", "aa"]) == True
+  assert word_break("aaaaaaa", ["aaa", "aaaa"]) == True  # 3+4 = 7
+
+  # No matching words
+  assert word_break("xyz", ["a", "b", "c"]) == False
+
+  # Performance: long string that can't be broken (worst case for naive recursion)
+  long_s = "a" * 100 + "b"
+  assert word_break(long_s, ["a", "aa", "aaa", "aaaa", "aaaaa"]) == False
+
+  # --- word_break_all tests ---
+  result1 = word_break_all("catsanddog", ["cat","cats","and","sand","dog"])
+  assert result1 == ["cat sand dog", "cats and dog"], f"Got {result1}"
+
+  result2 = word_break_all("pineapplepenapple", ["apple","pen","applepen","pine","pineapple"])
+  expected2 = sorted(["pine apple pen apple", "pine applepen apple", "pineapple pen apple"])
+  assert result2 == expected2, f"Got {result2}"
+
+  # No valid break
+  result3 = word_break_all("catsandog", ["cats","dog","sand","and","cat"])
+  assert result3 == [], f"Should be empty, got {result3}"
+
+  # Empty string
+  result4 = word_break_all("", ["a"])
+  assert result4 == [""], f"Empty string should give [''], got {result4}"
+
+  # Single word exact match
+  result5 = word_break_all("hello", ["hello"])
+  assert result5 == ["hello"], f"Got {result5}"
+
+  # Multiple ways to split
+  result6 = word_break_all("aaa", ["a", "aa", "aaa"])
+  expected6 = sorted(["a a a", "a aa", "aa a", "aaa"])
+  assert result6 == expected6, f"Got {result6}"
+
+  # Overlapping dictionary words
+  result7 = word_break_all("ab", ["a", "b", "ab"])
+  expected7 = sorted(["a b", "ab"])
+  assert result7 == expected7, f"Got {result7}"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

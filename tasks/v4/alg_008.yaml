@@ -1,0 +1,113 @@
+id: "TASK-ALG-008"
+category: "ALG"
+difficulty: "medium"
+source: "synthetic-contest"
+problem: |
+  Implement a function topological_sort(n, edges) that performs a topological sort
+  on a directed graph and detects cycles.
+
+  Parameters:
+    - n (int): Number of vertices, labeled 0 to n-1.
+    - edges (List[List[int]]): List of directed edges [from, to], meaning
+      there is an edge from vertex 'from' to vertex 'to'.
+
+  Returns:
+    - If the graph has no cycle: return a list of vertex labels in a valid
+      topological order (every directed edge u->v has u before v in the list).
+    - If the graph has a cycle: return the empty list [].
+
+  Requirements:
+    - Must run in O(V + E) time.
+    - You may use either Kahn's algorithm (BFS with in-degree counting) or
+      DFS-based topological sort — but must detect cycles either way.
+    - If multiple valid orderings exist, any correct one is accepted.
+    - Handle disconnected graphs.
+    - Handle graphs with no edges.
+
+  Example:
+    topological_sort(4, [[0,1],[0,2],[1,3],[2,3]]) => [0,1,2,3] or [0,2,1,3]
+    topological_sort(3, [[0,1],[1,2],[2,0]]) => []  (cycle)
+context_files:
+  - path: "topo_sort.py"
+    content: |
+      from typing import List
+
+      def topological_sort(n: int, edges: List[List[int]]) -> List[int]:
+          """
+          Return a valid topological ordering of vertices, or [] if a cycle exists.
+          Must run in O(V + E).
+          """
+          # TODO: implement with cycle detection
+          pass
+expected_output_description: |
+  Returns a valid topological ordering as a list of vertex indices,
+  or an empty list if the graph contains a cycle.
+test_script: |
+  exec(open('solution.py').read())
+
+  def is_valid_topo(n, edges, order):
+      """Check if order is a valid topological sort."""
+      if len(order) != n:
+          return False
+      if set(order) != set(range(n)):
+          return False
+      pos = {v: i for i, v in enumerate(order)}
+      for u, v in edges:
+          if pos[u] >= pos[v]:
+              return False
+      return True
+
+  # Basic DAG
+  r1 = topological_sort(4, [[0,1],[0,2],[1,3],[2,3]])
+  assert is_valid_topo(4, [[0,1],[0,2],[1,3],[2,3]], r1), f"Invalid topo sort: {r1}"
+
+  # Simple cycle
+  r2 = topological_sort(3, [[0,1],[1,2],[2,0]])
+  assert r2 == [], f"Should detect cycle, got {r2}"
+
+  # Self-loop
+  r3 = topological_sort(2, [[0,0]])
+  assert r3 == [], f"Self-loop is a cycle, got {r3}"
+
+  # No edges (every permutation is valid)
+  r4 = topological_sort(3, [])
+  assert is_valid_topo(3, [], r4), f"No edges: any permutation valid, got {r4}"
+
+  # Single node
+  r5 = topological_sort(1, [])
+  assert r5 == [0], f"Single node should return [0], got {r5}"
+
+  # Linear chain
+  r6 = topological_sort(5, [[0,1],[1,2],[2,3],[3,4]])
+  assert r6 == [0,1,2,3,4], f"Linear chain should be [0..4], got {r6}"
+
+  # Diamond shape
+  r7 = topological_sort(4, [[0,1],[0,2],[1,3],[2,3]])
+  assert is_valid_topo(4, [[0,1],[0,2],[1,3],[2,3]], r7)
+
+  # Cycle in larger graph
+  edges8 = [[0,1],[1,2],[2,3],[3,1],[0,4]]
+  r8 = topological_sort(5, edges8)
+  assert r8 == [], f"Cycle 1->2->3->1 should be detected, got {r8}"
+
+  # Disconnected DAG
+  edges9 = [[0,1],[2,3]]
+  r9 = topological_sort(4, edges9)
+  assert is_valid_topo(4, edges9, r9), f"Disconnected DAG invalid: {r9}"
+
+  # Larger DAG
+  edges10 = [[0,2],[0,3],[1,3],[1,4],[2,5],[3,5],[4,5]]
+  r10 = topological_sort(6, edges10)
+  assert is_valid_topo(6, edges10, r10), f"Larger DAG invalid: {r10}"
+
+  # Stress: long chain with no cycle
+  big_edges = [[i, i+1] for i in range(999)]
+  r11 = topological_sort(1000, big_edges)
+  assert r11 == list(range(1000)), f"Long chain topo sort failed"
+
+  # Two-node cycle
+  r12 = topological_sort(2, [[0,1],[1,0]])
+  assert r12 == [], f"Two-node cycle not detected, got {r12}"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

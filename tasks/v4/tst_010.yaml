@@ -1,0 +1,174 @@
+id: TASK-TST-010
+category: TST
+difficulty: hard
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following in-memory key-value store with TTL.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements that use KVStore directly.
+  The class is already available in scope - do not import it.
+  Include at least 8 test cases covering: set/get round-trip, TTL expiration,
+  non-existent keys returning default, delete, has() method, keys() listing,
+  len() counting, clear(), overwriting existing keys, TTL=0 (immediate expiry),
+  and invalid key types.
+  HINT: The constructor accepts an optional clock function for deterministic testing.
+  Use a mutable list like [0.0] as a fake clock to control time precisely.
+context_files:
+- path: module.py
+  content: |
+    import time
+
+    class KVStore:
+        """In-memory key-value store with TTL expiration."""
+
+        def __init__(self, clock=None):
+            self._data = {}
+            self._clock = clock or time.time
+
+        def set(self, key, value, ttl=None):
+            """Set a key-value pair with optional TTL in seconds."""
+            if not isinstance(key, str):
+                raise TypeError("Key must be a string")
+            if ttl is not None:
+                if not isinstance(ttl, (int, float)) or ttl < 0:
+                    raise ValueError("TTL must be a non-negative number")
+                expiry = self._clock() + ttl
+            else:
+                expiry = None
+            self._data[key] = (value, expiry)
+
+        def get(self, key, default=None):
+            """Get value by key. Returns default if missing or expired."""
+            if key not in self._data:
+                return default
+            value, expiry = self._data[key]
+            if expiry is not None and self._clock() >= expiry:
+                del self._data[key]
+                return default
+            return value
+
+        def delete(self, key):
+            """Delete a key. Returns True if existed and not expired."""
+            if key not in self._data:
+                return False
+            value, expiry = self._data[key]
+            if expiry is not None and self._clock() >= expiry:
+                del self._data[key]
+                return False
+            del self._data[key]
+            return True
+
+        def has(self, key):
+            """Check if key exists and is not expired."""
+            if key not in self._data:
+                return False
+            value, expiry = self._data[key]
+            if expiry is not None and self._clock() >= expiry:
+                del self._data[key]
+                return False
+            return True
+
+        def keys(self):
+            """Return all non-expired keys."""
+            self._cleanup()
+            return list(self._data.keys())
+
+        def _cleanup(self):
+            now = self._clock()
+            expired = [k for k, (v, exp) in self._data.items()
+                       if exp is not None and now >= exp]
+            for k in expired:
+                del self._data[k]
+
+        def __len__(self):
+            self._cleanup()
+            return len(self._data)
+
+        def clear(self):
+            """Remove all entries."""
+            self._data.clear()
+expected_output_description: |
+  A thorough test suite with 8+ assertions using an injectable clock for deterministic
+  TTL testing. Should cover set/get, TTL expiration when clock advances past expiry,
+  default values for missing keys, delete returning True/False, has() with expired keys,
+  keys() excluding expired, len() accuracy, clear(), TTL=0 immediate expiry,
+  overwriting keys, and TypeError on non-string keys.
+test_script: |
+  import sys, time
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  ns = {'time': time}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: uses > instead of >= for expiry, so TTL=0 never expires
+  buggy_code = '''
+  import time
+  class KVStore:
+      def __init__(self, clock=None):
+          self._data = {}
+          self._clock = clock or time.time
+      def set(self, key, value, ttl=None):
+          if not isinstance(key, str):
+              raise TypeError("Key must be a string")
+          if ttl is not None:
+              if not isinstance(ttl, (int, float)) or ttl < 0:
+                  raise ValueError("TTL must be a non-negative number")
+              expiry = self._clock() + ttl
+          else:
+              expiry = None
+          self._data[key] = (value, expiry)
+      def get(self, key, default=None):
+          if key not in self._data:
+              return default
+          value, expiry = self._data[key]
+          if expiry is not None and self._clock() > expiry:
+              del self._data[key]
+              return default
+          return value
+      def delete(self, key):
+          if key not in self._data:
+              return False
+          value, expiry = self._data[key]
+          if expiry is not None and self._clock() > expiry:
+              del self._data[key]
+              return False
+          del self._data[key]
+          return True
+      def has(self, key):
+          if key not in self._data:
+              return False
+          value, expiry = self._data[key]
+          if expiry is not None and self._clock() > expiry:
+              del self._data[key]
+              return False
+          return True
+      def keys(self):
+          self._cleanup()
+          return list(self._data.keys())
+      def _cleanup(self):
+          now = self._clock()
+          expired = [k for k, (v, exp) in self._data.items()
+                     if exp is not None and now > exp]
+          for k in expired:
+              del self._data[k]
+      def __len__(self):
+          self._cleanup()
+          return len(self._data)
+      def clear(self):
+          self._data.clear()
+  '''
+  ns2 = {'time': time}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the >= vs > expiry boundary bug'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

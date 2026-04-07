@@ -1,0 +1,104 @@
+id: "TASK-ALG-007"
+category: "ALG"
+difficulty: "hard"
+source: "synthetic-contest"
+problem: |
+  Implement a function find_bridges(n, edges) that finds all bridges in an
+  undirected graph using Tarjan's bridge-finding algorithm.
+
+  A bridge is an edge whose removal disconnects the graph (or increases
+  the number of connected components).
+
+  Parameters:
+    - n (int): Number of vertices, labeled 0 to n-1.
+    - edges (List[List[int]]): List of undirected edges [u, v].
+
+  Returns:
+    - List[List[int]]: A list of bridge edges. Each bridge [u, v] should
+      have u < v. The returned list should be sorted lexicographically.
+
+  Requirements:
+    - Must run in O(V + E) time using a DFS-based approach.
+    - Use discovery times and low-link values (Tarjan's algorithm).
+    - Handle disconnected graphs correctly.
+    - Handle graphs with no bridges (return empty list).
+    - Handle multigraphs: if there are parallel edges between two nodes,
+      those edges are NOT bridges (there's a redundant path).
+
+  Example:
+    find_bridges(5, [[0,1],[1,2],[2,0],[1,3],[3,4]])
+    => [[1,3],[3,4]]
+    Edges 1-3 and 3-4 are bridges; the triangle 0-1-2 has no bridges.
+context_files:
+  - path: "bridges.py"
+    content: |
+      from typing import List
+
+      def find_bridges(n: int, edges: List[List[int]]) -> List[List[int]]:
+          """
+          Find all bridges in an undirected graph using Tarjan's algorithm.
+          Returns sorted list of [u, v] edges where u < v.
+          Must handle parallel edges correctly.
+          """
+          # TODO: implement using DFS with discovery time and low-link values
+          pass
+expected_output_description: |
+  Returns a sorted list of bridge edges [u, v] with u < v.
+  Uses Tarjan's algorithm in O(V + E) time.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Example from problem description
+  result = find_bridges(5, [[0,1],[1,2],[2,0],[1,3],[3,4]])
+  assert result == [[1,3],[3,4]], f"Expected [[1,3],[3,4]], got {result}"
+
+  # Simple bridge: single edge
+  result2 = find_bridges(2, [[0,1]])
+  assert result2 == [[0,1]], f"Single edge is a bridge, got {result2}"
+
+  # Triangle (no bridges)
+  result3 = find_bridges(3, [[0,1],[1,2],[2,0]])
+  assert result3 == [], f"Triangle has no bridges, got {result3}"
+
+  # Linear chain: all edges are bridges
+  result4 = find_bridges(4, [[0,1],[1,2],[2,3]])
+  assert result4 == [[0,1],[1,2],[2,3]], f"Chain: all bridges, got {result4}"
+
+  # Two triangles connected by a bridge
+  #   0-1-2 (triangle) connected to 3-4-5 (triangle) via edge 2-3
+  edges5 = [[0,1],[1,2],[2,0],[2,3],[3,4],[4,5],[5,3]]
+  result5 = find_bridges(6, edges5)
+  assert result5 == [[2,3]], f"Two triangles + bridge, got {result5}"
+
+  # Empty graph (no edges, no bridges)
+  result6 = find_bridges(5, [])
+  assert result6 == [], f"No edges means no bridges, got {result6}"
+
+  # Single node
+  result7 = find_bridges(1, [])
+  assert result7 == [], f"Single node has no bridges, got {result7}"
+
+  # Disconnected graph: two components each with a bridge
+  edges8 = [[0,1],[1,2],[2,0],[0,3], [4,5],[5,6],[6,4],[6,7]]
+  result8 = find_bridges(8, edges8)
+  assert result8 == [[0,3],[6,7]], f"Disconnected with bridges, got {result8}"
+
+  # Parallel edges (multigraph): parallel edge means NOT a bridge
+  edges9 = [[0,1],[0,1],[1,2]]
+  result9 = find_bridges(3, edges9)
+  assert [0,1] not in result9, "Parallel edge 0-1 should NOT be a bridge"
+  assert [1,2] in result9, "Edge 1-2 should be a bridge"
+
+  # Star graph: all edges are bridges
+  edges10 = [[0,1],[0,2],[0,3],[0,4]]
+  result10 = find_bridges(5, edges10)
+  expected10 = [[0,1],[0,2],[0,3],[0,4]]
+  assert result10 == expected10, f"Star: all bridges, got {result10}"
+
+  # Complete graph K4: no bridges
+  edges11 = [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]]
+  result11 = find_bridges(4, edges11)
+  assert result11 == [], f"K4 has no bridges, got {result11}"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

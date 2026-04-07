@@ -1,0 +1,69 @@
+id: "TASK-BUG-001"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A Django-style URL routing function has a subtle bug when handling nested
+  path parameters. The function should extract all parameters from a URL pattern
+  like '/users/<user_id>/posts/<post_id>/' but it fails on certain edge cases.
+  
+  The bug: it doesn't properly handle consecutive parameters or parameters at
+  the start/end of the path. Fix the extract_params function so it correctly
+  extracts ALL parameters in the correct order.
+  
+  Test cases include: empty paths, no parameters, single parameter, multiple
+  parameters, consecutive parameters, and parameters with underscores.
+context_files:
+  - path: "router.py"
+    content: |
+      def extract_params(pattern):
+          """Extract parameter names from URL pattern like '/user/<id>/posts/<post_id>/'"""
+          params = []
+          parts = pattern.split('/')
+          for part in parts:
+              if part.startswith('<') and part.endswith('>'):
+                  params.append(part[1:-1])
+          return params
+      
+      # The function looks correct but has issues with edge cases
+expected_output_description: |
+  A corrected extract_params function that:
+  1. Handles empty strings and paths with no parameters
+  2. Correctly extracts all parameters even when consecutive
+  3. Handles parameters with underscores, numbers, etc.
+  4. Preserves parameter order
+  5. Handles leading/trailing slashes consistently
+test_script: |
+  exec(open('solution.py').read())
+  
+  # Test 1: Basic case
+  assert extract_params('/users/<id>/') == ['id'], f"Got {extract_params('/users/<id>/')}"
+  
+  # Test 2: Multiple parameters
+  result = extract_params('/users/<user_id>/posts/<post_id>/')
+  assert result == ['user_id', 'post_id'], f"Got {result}"
+  
+  # Test 3: No parameters
+  assert extract_params('/users/list/') == [], f"Got {extract_params('/users/list/')}"
+  
+  # Test 4: Empty string
+  assert extract_params('') == [], f"Got {extract_params('')}"
+  
+  # Test 5: Consecutive parameters (tricky case)
+  result = extract_params('/<category>/<subcategory>/')
+  assert result == ['category', 'subcategory'], f"Got {result}"
+  
+  # Test 6: Parameter at start
+  result = extract_params('<id>/users/')
+  assert result == ['id'], f"Got {result}"
+  
+  # Test 7: Complex parameter names
+  result = extract_params('/api/<api_version>/users/<user_id_123>/')
+  assert result == ['api_version', 'user_id_123'], f"Got {result}"
+  
+  # Test 8: No trailing slash
+  result = extract_params('/users/<id>')
+  assert result == ['id'], f"Got {result}"
+  
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

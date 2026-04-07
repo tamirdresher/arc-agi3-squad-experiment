@@ -1,0 +1,85 @@
+id: "TASK-BUG-003"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A Flask-style request parser has a subtle bug in how it handles query parameters
+  with multiple values. The function should support both single values (returning str)
+  and multiple values (returning list), but currently has inconsistent behavior.
+  
+  Bug: When a parameter appears once, it returns a string. When it appears multiple
+  times, it should return a list, but the current implementation has off-by-one errors
+  and doesn't properly handle mixed cases.
+  
+  Fix the parse_query_params function to handle all cases correctly.
+context_files:
+  - path: "parser.py"
+    content: |
+      def parse_query_params(query_string):
+          """Parse query string into dict. Single values are str, multiple are list."""
+          if not query_string:
+              return {}
+          
+          params = {}
+          for pair in query_string.split('&'):
+              if '=' not in pair:
+                  continue
+              key, value = pair.split('=', 1)
+              
+              if key in params:
+                  # BUG: This doesn't work correctly
+                  if isinstance(params[key], list):
+                      params[key].append(value)
+                  else:
+                      params[key] = [params[key]]
+                      params[key].append(value)
+              else:
+                  params[key] = value
+          
+          return params
+expected_output_description: |
+  Fixed parse_query_params that correctly:
+  1. Returns empty dict for empty/None input
+  2. Returns str for single-value parameters
+  3. Returns list for multi-value parameters
+  4. Handles mixed cases (some single, some multi)
+  5. Preserves order of multiple values
+  6. Handles edge cases like empty values, special chars
+test_script: |
+  exec(open('solution.py').read())
+  
+  # Test 1: Empty query string
+  assert parse_query_params('') == {}
+  assert parse_query_params(None) == {}
+  
+  # Test 2: Single parameter
+  assert parse_query_params('name=Alice') == {'name': 'Alice'}
+  
+  # Test 3: Multiple parameters (different keys)
+  result = parse_query_params('name=Alice&age=30')
+  assert result == {'name': 'Alice', 'age': '30'}
+  
+  # Test 4: Multiple values (same key) - CRITICAL TEST
+  result = parse_query_params('tag=python&tag=coding&tag=tutorial')
+  assert result == {'tag': ['python', 'coding', 'tutorial']}, f"Got {result}"
+  
+  # Test 5: Mixed single and multiple
+  result = parse_query_params('name=Alice&tag=python&tag=coding&age=30')
+  assert result['name'] == 'Alice'
+  assert result['age'] == '30'
+  assert result['tag'] == ['python', 'coding'], f"Got {result['tag']}"
+  
+  # Test 6: Empty value
+  result = parse_query_params('name=&age=30')
+  assert result == {'name': '', 'age': '30'}
+  
+  # Test 7: Value with equals sign
+  result = parse_query_params('formula=a=b+c')
+  assert result == {'formula': 'a=b+c'}
+  
+  # Test 8: Two values (edge case)
+  result = parse_query_params('id=1&id=2')
+  assert result == {'id': ['1', '2']}, f"Got {result}"
+  
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

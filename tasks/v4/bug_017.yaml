@@ -1,0 +1,149 @@
+id: "TASK-BUG-017"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  An event-driven system has an `EventBus` class that allows objects to subscribe
+  to named events. When components are "destroyed," they should unsubscribe from
+  all events. But the system has a memory leak: destroyed components remain
+  referenced by the EventBus because their cleanup method doesn't properly
+  remove all listeners.
+
+  Specific bugs:
+  1. `unsubscribe` compares callbacks with `is` instead of `==`, so bound methods
+     (which create a new object each time `obj.method` is referenced) are never
+     found and never removed.
+  2. `Component.destroy` tries to unsubscribe but fails silently due to bug #1,
+     so the EventBus retains references to destroyed components.
+  3. `emit` does not handle the case where a callback raises an exception —
+     one failing listener prevents subsequent listeners from being notified.
+  4. There is no way to unsubscribe all listeners for a given subscriber object.
+context_files:
+  - path: "code.py"
+    content: |
+      class EventBus:
+          def __init__(self):
+              self._listeners = {}  # event_name -> list of callbacks
+
+          def subscribe(self, event, callback):
+              if event not in self._listeners:
+                  self._listeners[event] = []
+              self._listeners[event].append(callback)
+
+          def unsubscribe(self, event, callback):
+              if event in self._listeners:
+                  self._listeners[event] = [
+                      cb for cb in self._listeners[event] if cb is not callback
+                  ]
+
+          def emit(self, event, *args, **kwargs):
+              results = []
+              if event in self._listeners:
+                  for cb in self._listeners[event]:
+                      results.append(cb(*args, **kwargs))
+              return results
+
+          def listener_count(self, event):
+              return len(self._listeners.get(event, []))
+
+          def all_events(self):
+              return list(self._listeners.keys())
+
+      class Component:
+          def __init__(self, name, bus):
+              self.name = name
+              self.bus = bus
+              self.alive = True
+              self.received = []
+
+          def on_update(self, data):
+              if self.alive:
+                  self.received.append(('update', data))
+
+          def on_error(self, data):
+              if self.alive:
+                  self.received.append(('error', data))
+
+          def start(self):
+              """Subscribe to events."""
+              self.bus.subscribe('update', self.on_update)
+              self.bus.subscribe('error', self.on_error)
+
+          def destroy(self):
+              """Unsubscribe and mark as dead."""
+              self.alive = False
+              self.bus.unsubscribe('update', self.on_update)
+              self.bus.unsubscribe('error', self.on_error)
+expected_output_description: |
+  1. Fix `unsubscribe` to use `==` instead of `is` for callback comparison,
+     OR store callbacks with an identifier that allows reliable removal
+     (e.g., store (id(obj), method_name) tuples, or use weakref).
+  2. Fix `emit` to catch exceptions from individual callbacks so one failure
+     doesn't prevent others from being called.
+  3. Ensure `Component.destroy` actually removes all its listeners from the bus
+     (listener_count should decrease after destroy).
+test_script: |
+  exec(open('solution.py').read())
+
+  # Test 1: basic subscribe and emit
+  bus = EventBus()
+  results = []
+  def handler(data):
+      results.append(data)
+  bus.subscribe('click', handler)
+  bus.emit('click', 'hello')
+  assert results == ['hello'], f"Expected ['hello'], got {results}"
+
+  # Test 2: unsubscribe with plain function works
+  bus.unsubscribe('click', handler)
+  bus.emit('click', 'world')
+  assert results == ['hello'], "Handler should be unsubscribed"
+
+  # Test 3: Component destroy actually removes listeners
+  bus2 = EventBus()
+  comp = Component('A', bus2)
+  comp.start()
+  assert bus2.listener_count('update') == 1
+  assert bus2.listener_count('error') == 1
+  bus2.emit('update', 'data1')
+  assert len(comp.received) == 1
+
+  comp.destroy()
+  assert bus2.listener_count('update') == 0, \
+      f"Expected 0 update listeners after destroy, got {bus2.listener_count('update')}"
+  assert bus2.listener_count('error') == 0, \
+      f"Expected 0 error listeners after destroy, got {bus2.listener_count('error')}"
+
+  # Test 4: destroyed component does not receive events
+  bus2.emit('update', 'data2')
+  assert len(comp.received) == 1, \
+      f"Destroyed component should not receive events, got {len(comp.received)}"
+
+  # Test 5: multiple components — destroying one doesn't affect others
+  bus3 = EventBus()
+  c1 = Component('C1', bus3)
+  c2 = Component('C2', bus3)
+  c1.start()
+  c2.start()
+  assert bus3.listener_count('update') == 2
+  c1.destroy()
+  assert bus3.listener_count('update') == 1
+  bus3.emit('update', 'ping')
+  assert len(c2.received) == 1
+  assert len(c1.received) == 0
+
+  # Test 6: emit resilience — one bad listener doesn't block others
+  bus4 = EventBus()
+  ok_results = []
+  def good_handler(data):
+      ok_results.append(data)
+  def bad_handler(data):
+      raise ValueError("I crash")
+  bus4.subscribe('evt', bad_handler)
+  bus4.subscribe('evt', good_handler)
+  bus4.emit('evt', 'test')
+  assert ok_results == ['test'], \
+      f"Good handler should still fire despite bad handler, got {ok_results}"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

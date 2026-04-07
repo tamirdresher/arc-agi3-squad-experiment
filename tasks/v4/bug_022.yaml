@@ -1,0 +1,107 @@
+id: "TASK-BUG-022"
+category: "BUG"
+difficulty: "hard"
+source: "synthetic-swebench"
+problem: |
+  A retry decorator has a bug in its exponential backoff calculation. The current
+  implementation doesn't properly calculate the wait time, leading to either too
+  short or too long waits between retries.
+  
+  Bug: The exponential backoff formula is incorrect and doesn't account for the
+  base delay multiplier. Fix the retry decorator.
+context_files:
+  - path: "retry.py"
+    content: |
+      import time
+      
+      def retry_with_backoff(max_attempts=3, base_delay=1.0):
+          '''Retry with exponential backoff. BUG: incorrect backoff calculation'''
+          def decorator(func):
+              def wrapper(*args, **kwargs):
+                  for attempt in range(max_attempts):
+                      try:
+                          return func(*args, **kwargs)
+                      except Exception as e:
+                          if attempt == max_attempts - 1:
+                              raise
+                          # BUG: should be base_delay * (2 ** attempt)
+                          wait = base_delay * attempt  # Linear, not exponential!
+                          time.sleep(wait)
+              return wrapper
+          return decorator
+expected_output_description: |
+  Fixed retry decorator that:
+  - Uses true exponential backoff (2^attempt)
+  - Multiplies by base_delay correctly
+  - Handles max_attempts properly
+  - Re-raises exception on final failure
+test_script: |
+  exec(open('solution.py').read())
+  import time
+  
+  # Test 1: Successful on first try
+  call_count = [0]
+  
+  @retry_with_backoff(max_attempts=3, base_delay=0.1)
+  def success_first():
+      call_count[0] += 1
+      return "success"
+  
+  result = success_first()
+  assert result == "success"
+  assert call_count[0] == 1
+  
+  # Test 2: Success on second try
+  call_count = [0]
+  
+  @retry_with_backoff(max_attempts=3, base_delay=0.1)
+  def success_second():
+      call_count[0] += 1
+      if call_count[0] < 2:
+          raise ValueError("fail")
+      return "success"
+  
+  result = success_second()
+  assert result == "success"
+  assert call_count[0] == 2
+  
+  # Test 3: All attempts fail
+  call_count = [0]
+  
+  @retry_with_backoff(max_attempts=3, base_delay=0.05)
+  def always_fails():
+      call_count[0] += 1
+      raise RuntimeError("always fails")
+  
+  try:
+      always_fails()
+      assert False, "Should have raised RuntimeError"
+  except RuntimeError as e:
+      assert str(e) == "always fails"
+      assert call_count[0] == 3, f"Should try 3 times, tried {call_count[0]}"
+  
+  # Test 4: Verify exponential backoff timing (critical)
+  call_times = []
+  
+  @retry_with_backoff(max_attempts=4, base_delay=0.1)
+  def timing_test():
+      call_times.append(time.time())
+      if len(call_times) < 4:
+          raise ValueError("retry")
+      return "done"
+  
+  result = timing_test()
+  assert result == "done"
+  assert len(call_times) == 4
+  
+  # Check delays are exponential (approximately)
+  delay1 = call_times[1] - call_times[0]
+  delay2 = call_times[2] - call_times[1]
+  delay3 = call_times[3] - call_times[2]
+  
+  # Delays should roughly double each time (with tolerance)
+  assert delay1 < delay2 < delay3, f"Delays not exponential: {delay1:.3f}, {delay2:.3f}, {delay3:.3f}"
+  assert delay2 > delay1 * 1.5, "Second delay should be ~2x first"
+  
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

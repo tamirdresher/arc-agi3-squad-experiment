@@ -1,0 +1,141 @@
+id: TASK-TST-006
+category: TST
+difficulty: medium
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following URL shortener class.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements that use URLShortener directly.
+  The class is already available in scope - do not import it.
+  Include at least 8 test cases covering: shorten/resolve round-trip, duplicate URLs
+  return same code, resolving unknown codes, invalid inputs (empty, non-string, None),
+  multiple URLs produce different codes, len() tracking, and min_length validation.
+context_files:
+- path: module.py
+  content: |
+    import hashlib
+    import string
+
+    class URLShortener:
+        """In-memory URL shortener using base62 encoding."""
+        CHARS = string.ascii_letters + string.digits
+
+        def __init__(self, min_length=6):
+            if min_length < 1:
+                raise ValueError("min_length must be at least 1")
+            self.min_length = min_length
+            self.url_to_code = {}
+            self.code_to_url = {}
+
+        def _hash_url(self, url):
+            h = hashlib.md5(url.encode('utf-8')).hexdigest()
+            num = int(h[:12], 16)
+            return self._to_base62(num)
+
+        def _to_base62(self, num):
+            if num == 0:
+                return self.CHARS[0] * self.min_length
+            result = []
+            while num > 0:
+                result.append(self.CHARS[num % 62])
+                num //= 62
+            result.reverse()
+            while len(result) < self.min_length:
+                result.insert(0, self.CHARS[0])
+            return ''.join(result)
+
+        def shorten(self, url):
+            """Shorten a URL. Returns the short code."""
+            if not url or not isinstance(url, str):
+                raise ValueError("URL must be a non-empty string")
+            if url in self.url_to_code:
+                return self.url_to_code[url]
+            code = self._hash_url(url)
+            attempt = 0
+            while code in self.code_to_url and self.code_to_url[code] != url:
+                attempt += 1
+                code = self._hash_url(url + str(attempt))
+            self.url_to_code[url] = code
+            self.code_to_url[code] = url
+            return code
+
+        def resolve(self, code):
+            """Resolve a short code to the original URL."""
+            if not code or not isinstance(code, str):
+                raise ValueError("Code must be a non-empty string")
+            if code not in self.code_to_url:
+                raise KeyError("Unknown short code: " + code)
+            return self.code_to_url[code]
+
+        def __len__(self):
+            return len(self.url_to_code)
+expected_output_description: |
+  A thorough test suite with 8+ assertions covering round-trip shorten/resolve,
+  idempotent shortening (same URL returns same code), different URLs get different codes,
+  KeyError on unknown codes, ValueError on invalid inputs, __len__ accuracy,
+  min_length validation, and codes meeting minimum length.
+test_script: |
+  import sys
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  import hashlib, string
+  ns = {'hashlib': hashlib, 'string': string}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: does NOT check if URL already shortened (duplicates each call)
+  buggy_code = '''
+  import hashlib, string
+  class URLShortener:
+      CHARS = string.ascii_letters + string.digits
+      def __init__(self, min_length=6):
+          if min_length < 1:
+              raise ValueError("min_length must be at least 1")
+          self.min_length = min_length
+          self.url_to_code = {}
+          self.code_to_url = {}
+      def _hash_url(self, url):
+          h = hashlib.md5(url.encode("utf-8")).hexdigest()
+          num = int(h[:12], 16)
+          return self._to_base62(num)
+      def _to_base62(self, num):
+          if num == 0:
+              return self.CHARS[0] * self.min_length
+          result = []
+          while num > 0:
+              result.append(self.CHARS[num % 62])
+              num //= 62
+          result.reverse()
+          while len(result) < self.min_length:
+              result.insert(0, self.CHARS[0])
+          return "".join(result)
+      def shorten(self, url):
+          if not url or not isinstance(url, str):
+              raise ValueError("URL must be a non-empty string")
+          code = self._hash_url(url)
+          self.url_to_code[url] = code
+          self.code_to_url[code] = url
+          return code
+      def resolve(self, code):
+          if not code or not isinstance(code, str):
+              raise ValueError("Code must be a non-empty string")
+          if code not in self.code_to_url:
+              raise KeyError("Unknown short code: " + code)
+          return self.code_to_url[code]
+      def __len__(self):
+          return len(self.url_to_code)
+  '''
+  ns2 = {'hashlib': hashlib, 'string': string}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the missing dedup check in shorten'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

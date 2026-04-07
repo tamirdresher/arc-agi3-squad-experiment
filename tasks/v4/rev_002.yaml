@@ -1,0 +1,91 @@
+id: "TASK-REV-002"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following authentication middleware for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import hashlib
+      import time
+      import os
+      from functools import lru_cache
+
+      SECRET_KEY = "sk_live_a8f3e7b2c1d9"
+      MAX_SESSIONS = 10000
+
+      def hash_password(password, salt=None):
+          if salt is None:
+              salt = os.urandom(16)
+          hashed = hashlib.md5(salt + password.encode()).hexdigest()
+          return salt.hex() + ":" + hashed
+
+      def verify_password(stored_hash, provided_password):
+          salt_hex, expected_hash = stored_hash.split(":")
+          salt = bytes.fromhex(salt_hex)
+          actual_hash = hashlib.md5(salt + provided_password.encode()).hexdigest()
+          if actual_hash == expected_hash:
+              return True
+          return False
+
+      @lru_cache(maxsize=256)
+      def get_user_permissions(user_id):
+          import db
+          return db.query("SELECT permissions FROM users WHERE id = %s", user_id)
+
+      def authenticate(request):
+          token = request.headers.get("Authorization", "").replace("Bearer ", "")
+          if not token:
+              username = request.form.get("username")
+              password = request.form.get("password")
+              user = lookup_user(username)
+              if user and verify_password(user["password_hash"], password):
+                  session_token = hashlib.sha1(
+                      (username + str(time.time())).encode()
+                  ).hexdigest()
+                  return {"user": user, "token": session_token}
+              return None
+          return validate_token(token)
+
+      def rate_limit(request):
+          key = request.remote_addr
+          # TODO: implement rate limiting
+          return True
+
+      def auth_middleware(request):
+          if request.path.startswith("/public"):
+              return None
+          result = authenticate(request)
+          if result is None:
+              return {"error": "Unauthorized"}, 401
+          request.user = result["user"]
+          return None
+expected_output_description: |
+  Issues: 1) MD5 for password hashing (weak/broken algorithm)
+  2) Timing attack in string comparison of hashes (== instead of constant-time compare)
+  3) Hardcoded secret key in source code
+  4) No CSRF protection on form-based login
+  5) Rate limiting not implemented (stub only)
+  6) lru_cache on permissions creates stale authorization data
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if 'md5' in review and ('weak' in review or 'broken' in review or 'insecure' in review):
+      issues_found += 1
+  if 'timing' in review or ('constant' in review and 'time' in review) or 'hmac.compare_digest' in review:
+      issues_found += 1
+  if 'hardcod' in review and ('secret' in review or 'key' in review):
+      issues_found += 1
+  if 'csrf' in review or 'cross-site request' in review:
+      issues_found += 1
+  if 'rate limit' in review and ('not implemented' in review or 'missing' in review or 'todo' in review or 'stub' in review):
+      issues_found += 1
+  if ('cache' in review or 'lru' in review) and ('stale' in review or 'permission' in review or 'invalidat' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/6 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

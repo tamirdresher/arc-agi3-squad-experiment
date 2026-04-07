@@ -1,0 +1,119 @@
+id: "TASK-BUG-013"
+category: "BUG"
+difficulty: "medium"
+source: "synthetic-swebench"
+problem: |
+  A UI framework has a `ButtonBar` class that creates a row of buttons, each
+  bound to a callback. When users click the buttons, they expect button index 0
+  to print "Button 0 clicked", index 1 to print "Button 1 clicked", etc.
+  Instead, EVERY button reports the last index. For a bar with 5 buttons,
+  clicking any button says "Button 4 clicked".
+
+  The developer also built a `create_validators` function that generates a list
+  of range-checking validators from a config. The same bug appears: all validators
+  behave like the last one created. A `build_multipliers` utility shows the same
+  pattern.
+
+  The root cause is the classic Python closure-over-loop-variable bug: lambdas
+  and inner functions capture the variable *by reference*, not by value. By the
+  time the callback runs, the loop variable has its final value.
+context_files:
+  - path: "code.py"
+    content: |
+      class Button:
+          def __init__(self, label, callback):
+              self.label = label
+              self.callback = callback
+          def click(self):
+              return self.callback()
+
+      class ButtonBar:
+          def __init__(self, labels):
+              self.buttons = []
+              for i, label in enumerate(labels):
+                  btn = Button(label, lambda: f"Button {i} clicked")
+                  self.buttons.append(btn)
+
+          def click_button(self, index):
+              return self.buttons[index].click()
+
+      def create_validators(configs):
+          """Create validator functions from config dicts.
+          Each config has 'name', 'min_val', 'max_val'.
+          Returns dict mapping name -> validator function."""
+          validators = {}
+          for cfg in configs:
+              name = cfg['name']
+              lo = cfg['min_val']
+              hi = cfg['max_val']
+              validators[name] = lambda x: lo <= x <= hi
+          return validators
+
+      def build_multipliers(factors):
+          """Return a list of functions that multiply input by each factor."""
+          result = []
+          for f in factors:
+              result.append(lambda x: x * f)
+          return result
+
+      def make_counter_callbacks(n):
+          """Create n callbacks that return their creation index."""
+          callbacks = []
+          for i in range(n):
+              callbacks.append(lambda: i)
+          return callbacks
+expected_output_description: |
+  Fix all four functions to capture loop variables by value. The standard
+  Python fix is to use a default argument to bind the current value:
+    lambda x, lo=lo, hi=hi: lo <= x <= hi
+  or equivalently use functools.partial, or a factory function. Each lambda/
+  closure must capture the value at creation time, not a reference to the
+  loop variable.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Test 1: ButtonBar — each button reports its own index
+  bar = ButtonBar(['A', 'B', 'C', 'D', 'E'])
+  for i in range(5):
+      result = bar.click_button(i)
+      assert result == f"Button {i} clicked", \
+          f"Button {i}: expected 'Button {i} clicked', got '{result}'"
+
+  # Test 2: single button bar
+  bar1 = ButtonBar(['Only'])
+  assert bar1.click_button(0) == "Button 0 clicked"
+
+  # Test 3: validators use their own ranges
+  cfgs = [
+      {'name': 'temp', 'min_val': -40, 'max_val': 50},
+      {'name': 'humidity', 'min_val': 0, 'max_val': 100},
+      {'name': 'pressure', 'min_val': 900, 'max_val': 1100},
+  ]
+  vs = create_validators(cfgs)
+  assert vs['temp'](25) == True
+  assert vs['temp'](60) == False, "temp validator should reject 60"
+  assert vs['humidity'](50) == True
+  assert vs['humidity'](-1) == False
+  assert vs['pressure'](950) == True
+  assert vs['pressure'](25) == False, \
+      "pressure validator should reject 25"
+
+  # Test 4: multipliers
+  mults = build_multipliers([2, 3, 10])
+  assert mults[0](5) == 10, f"Expected 10, got {mults[0](5)}"
+  assert mults[1](5) == 15, f"Expected 15, got {mults[1](5)}"
+  assert mults[2](5) == 50, f"Expected 50, got {mults[2](5)}"
+
+  # Test 5: counter callbacks
+  cbs = make_counter_callbacks(4)
+  for i in range(4):
+      assert cbs[i]() == i, f"Callback {i} returned {cbs[i]()}, expected {i}"
+
+  # Test 6: large button bar
+  bar_big = ButtonBar([str(i) for i in range(20)])
+  assert bar_big.click_button(0) == "Button 0 clicked"
+  assert bar_big.click_button(19) == "Button 19 clicked"
+  assert bar_big.click_button(10) == "Button 10 clicked"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

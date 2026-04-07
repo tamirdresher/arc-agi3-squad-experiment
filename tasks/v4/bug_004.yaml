@@ -1,0 +1,30 @@
+id: TASK-BUG-004
+category: BUG
+difficulty: hard
+source: synthetic-swebench
+problem: "A thread-safe counter has a race condition bug. Multiple threads incrementing\n\
+  \    the counter sometimes lose counts due to improper synchronization. The current\n\
+  \    implementation uses a lock but releases it too early, before the increment\
+  \ completes.\n    \n    Fix the Counter class so it's truly thread-safe with no\
+  \ lost increments."
+context_files:
+- path: counter.py
+  content: "import threading\n\nclass Counter:\n    def __init__(self):\n        self.value\
+    \ = 0\n        self.lock = threading.Lock()\n    \n    def increment(self):\n\
+    \        self.lock.acquire()\n        temp = self.value\n        self.lock.release()\
+    \  # BUG: released too early!\n        temp += 1\n        self.value = temp\n\
+    \    \n    def get_value(self):\n        return self.value"
+expected_output_description: See test script for acceptance criteria
+test_script: "exec(open('solution.py').read())\nimport threading\nimport time\n\n\
+  # Test 1: Single-threaded works\nc = Counter()\nc.increment()\nc.increment()\nassert\
+  \ c.get_value() == 2\n\n# Test 2: Multi-threaded stress test (CRITICAL)\nc2 = Counter()\n\
+  threads = []\nfor _ in range(10):\n    def work():\n        for _ in range(100):\n\
+  \            c2.increment()\n    t = threading.Thread(target=work)\n    threads.append(t)\n\
+  \    t.start()\n\nfor t in threads:\n    t.join()\n\n# Should be exactly 1000 (10\
+  \ threads * 100 increments)\nassert c2.get_value() == 1000, f\"Expected 1000, got\
+  \ {c2.get_value()} (race condition!)\"\n\n# Test 3: Rapid concurrent increments\n\
+  c3 = Counter()\nthreads = []\nfor _ in range(50):\n    t = threading.Thread(target=lambda:\
+  \ c3.increment())\n    threads.append(t)\n    t.start()\n\nfor t in threads:\n \
+  \   t.join()\n\nassert c3.get_value() == 50, f\"Expected 50, got {c3.get_value()}\"\
+  \n\nprint('ALL TESTS PASSED')"
+scoring_method: test_pass

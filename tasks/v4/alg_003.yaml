@@ -1,0 +1,110 @@
+id: "TASK-ALG-003"
+category: "ALG"
+difficulty: "hard"
+source: "synthetic-contest"
+problem: |
+  Implement an LRU (Least Recently Used) cache with O(1) time complexity
+  for both get and put operations.
+
+  Design a data structure that follows the constraints of a Least Recently Used cache.
+  Implement the LRUCache class:
+    - LRUCache(capacity): Initialize the cache with a positive integer capacity.
+    - get(key): Return the value associated with key if it exists, otherwise return -1.
+      Accessing a key makes it the most recently used.
+    - put(key, value): Update the value of the key if it exists, or add the key-value pair.
+      If the number of keys exceeds capacity, evict the least recently used key.
+
+  Constraints:
+    - 1 <= capacity <= 3000
+    - 0 <= key <= 10000
+    - 0 <= value <= 100000
+    - All operations must be O(1) average time complexity.
+
+  You must implement this WITHOUT using collections.OrderedDict or functools.lru_cache.
+  Use a doubly-linked list combined with a hash map.
+context_files:
+  - path: "lru_cache.py"
+    content: |
+      class LRUCache:
+          """
+          Implement an LRU Cache with O(1) get and put.
+          Must use a doubly-linked list + hash map approach.
+          Do NOT use OrderedDict or functools.lru_cache.
+          """
+          def __init__(self, capacity: int):
+              # TODO: initialize your data structures
+              pass
+
+          def get(self, key: int) -> int:
+              # TODO: return value if exists, else -1
+              pass
+
+          def put(self, key: int, value: int) -> None:
+              # TODO: insert or update, evict LRU if over capacity
+              pass
+expected_output_description: |
+  A correct LRUCache implementation where get/put both run in O(1).
+  The cache correctly evicts the least recently used item when capacity is exceeded.
+  Both get and put operations update the recency of the accessed key.
+test_script: |
+  exec(open('solution.py').read())
+
+  # Basic operations
+  cache = LRUCache(2)
+  cache.put(1, 1)
+  cache.put(2, 2)
+  assert cache.get(1) == 1, "get(1) should return 1"
+  cache.put(3, 3)
+  assert cache.get(2) == -1, "key 2 should be evicted (LRU)"
+  cache.put(4, 4)
+  assert cache.get(1) == -1, "key 1 should be evicted"
+  assert cache.get(3) == 3, "key 3 should still exist"
+  assert cache.get(4) == 4, "key 4 should still exist"
+
+  # Update existing key
+  cache2 = LRUCache(2)
+  cache2.put(1, 10)
+  cache2.put(2, 20)
+  cache2.put(1, 15)
+  cache2.put(3, 30)
+  assert cache2.get(2) == -1, "key 2 should be evicted, not key 1 (1 was updated)"
+  assert cache2.get(1) == 15, "key 1 should have updated value 15"
+
+  # Capacity 1
+  cache3 = LRUCache(1)
+  cache3.put(1, 1)
+  cache3.put(2, 2)
+  assert cache3.get(1) == -1, "key 1 evicted in cap-1 cache"
+  assert cache3.get(2) == 2, "key 2 should exist"
+
+  # Get refreshes recency
+  cache4 = LRUCache(2)
+  cache4.put(1, 1)
+  cache4.put(2, 2)
+  cache4.get(1)
+  cache4.put(3, 3)
+  assert cache4.get(2) == -1, "key 2 should be evicted after get(1) refreshed key 1"
+  assert cache4.get(1) == 1
+  assert cache4.get(3) == 3
+
+  # Larger capacity stress
+  cache5 = LRUCache(3)
+  for i in range(100):
+      cache5.put(i, i * 10)
+  assert cache5.get(99) == 990
+  assert cache5.get(98) == 980
+  assert cache5.get(97) == 970
+  assert cache5.get(96) == -1, "key 96 should have been evicted"
+
+  # Miss on empty
+  cache6 = LRUCache(5)
+  assert cache6.get(42) == -1, "empty cache returns -1"
+
+  # Verify no use of OrderedDict
+  import inspect
+  src = inspect.getsource(LRUCache)
+  assert 'OrderedDict' not in src, "Must not use OrderedDict"
+  assert 'lru_cache' not in src, "Must not use functools.lru_cache"
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

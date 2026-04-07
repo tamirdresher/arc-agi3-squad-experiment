@@ -1,0 +1,87 @@
+id: "TASK-REV-005"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following REST API endpoint for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      from flask import Flask, request, jsonify
+      from models import User, db
+
+      app = Flask(__name__)
+
+      @app.route("/api/users/<int:user_id>", methods=["GET"])
+      def get_user(user_id):
+          user = User.query.get(user_id)
+          if not user:
+              return jsonify({"error": "User not found"}), 404
+          return jsonify({
+              "id": user.id,
+              "username": user.username,
+              "email": user.email,
+              "password_hash": user.password_hash,
+              "ssn": user.ssn,
+              "role": user.role,
+              "created_at": str(user.created_at),
+          })
+
+      @app.route("/api/users/<int:user_id>", methods=["PUT"])
+      def update_user(user_id):
+          user = User.query.get(user_id)
+          if not user:
+              return jsonify({"error": "User not found"}), 404
+          data = request.get_json()
+          for key, value in data.items():
+              setattr(user, key, value)
+          db.session.commit()
+          return jsonify({"status": "updated"})
+
+      @app.route("/api/users", methods=["GET"])
+      def list_users():
+          page = request.args.get("page", 1, type=int)
+          per_page = request.args.get("per_page", 100, type=int)
+          users = User.query.paginate(page=page, per_page=per_page)
+          return jsonify({
+              "users": [{"id": u.id, "username": u.username,
+                          "email": u.email} for u in users.items],
+              "total": users.total,
+          })
+
+      @app.route("/api/users/<int:user_id>", methods=["DELETE"])
+      def delete_user(user_id):
+          user = User.query.get(user_id)
+          if user:
+              db.session.delete(user)
+              db.session.commit()
+          return jsonify({"status": "deleted"})
+
+      @app.errorhandler(Exception)
+      def handle_error(e):
+          return jsonify({"error": str(e), "type": type(e).__name__}), 500
+expected_output_description: |
+  Issues: 1) Mass assignment — update_user sets any attribute from user input including role
+  2) Information leakage — get_user exposes password_hash and SSN
+  3) No authentication/authorization — any user can modify/delete any other user
+  4) Error handler leaks internal exception details and type names
+  5) No per_page upper bound — client can request unlimited records
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if 'mass assignment' in review or ('setattr' in review and ('arbitrary' in review or 'any' in review or 'role' in review)):
+      issues_found += 1
+  if ('password' in review or 'ssn' in review or 'sensitive' in review) and ('expos' in review or 'leak' in review or 'return' in review):
+      issues_found += 1
+  if ('auth' in review and ('missing' in review or 'no ' in review or 'without' in review or 'check' in review)) or 'broken access control' in review or 'idor' in review:
+      issues_found += 1
+  if ('error' in review or 'exception' in review) and ('leak' in review or 'expos' in review or 'internal' in review or 'detail' in review):
+      issues_found += 1
+  if 'per_page' in review and ('limit' in review or 'bound' in review or 'unbounded' in review or 'max' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/5 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

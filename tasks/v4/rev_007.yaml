@@ -1,0 +1,92 @@
+id: "TASK-REV-007"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following payment processing module for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import uuid
+      import logging
+      from datetime import datetime
+
+      TAX_RATE = 0.0825
+      DISCOUNT_TIERS = {100: 0.05, 500: 0.10, 1000: 0.15}
+
+      def calculate_total(items):
+          subtotal = 0.0
+          for item in items:
+              price = item["price"] * item["quantity"]
+              subtotal += price
+          discount = 0.0
+          for threshold, rate in DISCOUNT_TIERS.items():
+              if subtotal >= threshold:
+                  discount = rate
+          discounted = subtotal * (1 - discount)
+          tax = discounted * TAX_RATE
+          total = discounted + tax
+          return round(total, 2)
+
+      def process_payment(user_id, items, payment_method):
+          total = calculate_total(items)
+          if total <= 0:
+              return {"error": "Invalid total"}
+
+          transaction = {
+              "id": str(uuid.uuid4()),
+              "user_id": user_id,
+              "amount": total,
+              "currency": "USD",
+              "status": "pending",
+              "created_at": datetime.now().isoformat(),
+          }
+
+          charge_result = payment_gateway.charge(
+              payment_method, total
+          )
+
+          if charge_result["success"]:
+              transaction["status"] = "completed"
+              update_inventory(items)
+              send_receipt(user_id, transaction)
+          else:
+              transaction["status"] = "failed"
+
+          save_transaction(transaction)
+          return transaction
+
+      def refund(transaction_id, amount=None):
+          txn = get_transaction(transaction_id)
+          if not txn:
+              return {"error": "Transaction not found"}
+          refund_amount = amount or txn["amount"]
+          payment_gateway.refund(txn["payment_method"], refund_amount)
+          txn["status"] = "refunded"
+          save_transaction(txn)
+          return txn
+expected_output_description: |
+  Issues: 1) Floating point arithmetic for money — rounding errors accumulate
+  2) No idempotency key — retry can double-charge customer
+  3) No validation of negative prices or quantities in items
+  4) Inventory updated before transaction saved — crash loses payment record
+  5) Refund amount not validated against original — can refund more than charged
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if ('float' in review and ('precision' in review or 'rounding' in review or 'arithmetic' in review or 'money' in review or 'decimal' in review)) or 'floating point' in review:
+      issues_found += 1
+  if 'idempoten' in review or ('retry' in review and ('duplicate' in review or 'double' in review or 'charge' in review)):
+      issues_found += 1
+  if 'negative' in review and ('price' in review or 'quantity' in review or 'amount' in review or 'validat' in review):
+      issues_found += 1
+  if ('inventory' in review and ('before' in review or 'order' in review or 'crash' in review or 'transaction' in review)) or 'atomicity' in review:
+      issues_found += 1
+  if 'refund' in review and ('amount' in review or 'exceed' in review or 'more' in review or 'validat' in review or 'original' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/5 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

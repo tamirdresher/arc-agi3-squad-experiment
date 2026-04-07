@@ -1,0 +1,128 @@
+id: TASK-TST-004
+category: TST
+difficulty: hard
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following token-bucket rate limiter.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements that use RateLimiter directly.
+  The class is already available in scope - do not import it.
+  Include at least 8 test cases covering: basic consume/deny, capacity limits,
+  token refill after time passes, negative/zero args, consuming more than capacity,
+  the available property, and the reset method.
+  HINT: The constructor accepts an optional clock function for deterministic testing.
+  Use a mutable list like [0.0] as a fake clock to control time precisely.
+context_files:
+- path: module.py
+  content: |
+    import time
+
+    class RateLimiter:
+        """Token bucket rate limiter with injectable clock."""
+
+        def __init__(self, rate, capacity, clock=None):
+            """rate: tokens per second, capacity: max tokens, clock: callable returning time."""
+            if rate <= 0 or capacity <= 0:
+                raise ValueError("Rate and capacity must be positive")
+            if not isinstance(rate, (int, float)) or not isinstance(capacity, (int, float)):
+                raise TypeError("Rate and capacity must be numbers")
+            self.rate = float(rate)
+            self.capacity = float(capacity)
+            self.tokens = float(capacity)
+            self._clock = clock or time.monotonic
+            self._last_refill = self._clock()
+
+        def _refill(self):
+            now = self._clock()
+            elapsed = now - self._last_refill
+            if elapsed > 0:
+                self.tokens = min(self.capacity, self.tokens + elapsed * self.rate)
+                self._last_refill = now
+
+        def consume(self, n=1):
+            """Try to consume n tokens. Returns True if successful."""
+            if n < 0:
+                raise ValueError("Cannot consume negative tokens")
+            if n > self.capacity:
+                return False
+            self._refill()
+            if self.tokens >= n:
+                self.tokens -= n
+                return True
+            return False
+
+        @property
+        def available(self):
+            """Return currently available tokens."""
+            self._refill()
+            return self.tokens
+
+        def reset(self):
+            """Reset to full capacity."""
+            self.tokens = self.capacity
+            self._last_refill = self._clock()
+expected_output_description: |
+  A thorough test suite with 8+ assertions using the injectable clock for deterministic
+  tests. Should cover initial capacity, draining tokens, refill over time, capacity cap,
+  invalid args, consuming more than capacity, reset behavior, and partial refills.
+test_script: |
+  import sys
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  import time
+  ns = {'time': time}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: does NOT cap tokens at capacity (unlimited accumulation)
+  buggy_code = '''
+  import time
+  class RateLimiter:
+      def __init__(self, rate, capacity, clock=None):
+          if rate <= 0 or capacity <= 0:
+              raise ValueError("Rate and capacity must be positive")
+          if not isinstance(rate, (int, float)) or not isinstance(capacity, (int, float)):
+              raise TypeError("Rate and capacity must be numbers")
+          self.rate = float(rate)
+          self.capacity = float(capacity)
+          self.tokens = float(capacity)
+          self._clock = clock or time.monotonic
+          self._last_refill = self._clock()
+      def _refill(self):
+          now = self._clock()
+          elapsed = now - self._last_refill
+          if elapsed > 0:
+              self.tokens = self.tokens + elapsed * self.rate
+              self._last_refill = now
+      def consume(self, n=1):
+          if n < 0:
+              raise ValueError("Cannot consume negative tokens")
+          if n > self.capacity:
+              return False
+          self._refill()
+          if self.tokens >= n:
+              self.tokens -= n
+              return True
+          return False
+      @property
+      def available(self):
+          self._refill()
+          return self.tokens
+      def reset(self):
+          self.tokens = self.capacity
+          self._last_refill = self._clock()
+  '''
+  ns2 = {'time': time}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the missing capacity cap in refill'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

@@ -1,0 +1,86 @@
+id: "TASK-REV-006"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following session management module for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import hashlib
+      import time
+      import random
+
+      sessions = {}
+
+      def generate_session_id(user_id):
+          seed = str(user_id) + str(int(time.time()))
+          random.seed(seed)
+          token = hashlib.md5(str(random.random()).encode()).hexdigest()
+          return token
+
+      def create_session(user_id, request):
+          session_id = generate_session_id(user_id)
+          sessions[session_id] = {
+              "user_id": user_id,
+              "created_at": time.time(),
+              "ip": request.remote_addr,
+              "data": {},
+          }
+          response = make_response()
+          response.set_cookie(
+              "session_id",
+              session_id,
+              max_age=86400 * 30,
+          )
+          return response
+
+      def get_session(request):
+          session_id = request.cookies.get("session_id")
+          if session_id and session_id in sessions:
+              session = sessions[session_id]
+              return session
+          return None
+
+      def logout(request):
+          session_id = request.cookies.get("session_id")
+          if session_id in sessions:
+              del sessions[session_id]
+          response = make_response()
+          response.delete_cookie("session_id")
+          return response
+
+      def cleanup_sessions():
+          now = time.time()
+          max_age = 86400 * 30
+          for sid in list(sessions.keys()):
+              if now - sessions[sid]["created_at"] > max_age:
+                  del sessions[sid]
+expected_output_description: |
+  Issues: 1) Predictable session IDs — deterministic seed from user_id + truncated time
+  2) Cookie missing Secure flag — sent over plain HTTP
+  3) Cookie missing HttpOnly flag — accessible to JavaScript/XSS
+  4) No session rotation after login — session fixation attack
+  5) In-memory sessions — lost on restart, no horizontal scaling
+  6) 30-day session with no activity timeout — sessions never expire on idle
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if 'predictable' in review or ('session' in review and ('determin' in review or 'seed' in review or 'guessable' in review or 'random' in review)):
+      issues_found += 1
+  if 'secure' in review and ('flag' in review or 'http' in review or 'cookie' in review or 'missing' in review):
+      issues_found += 1
+  if 'httponly' in review or ('http' in review and 'only' in review and ('flag' in review or 'cookie' in review)):
+      issues_found += 1
+  if 'session fixation' in review or ('rotat' in review and 'session' in review) or 'regenerat' in review:
+      issues_found += 1
+  if ('in-memory' in review or 'memory' in review) and ('restart' in review or 'scal' in review or 'persist' in review or 'lost' in review):
+      issues_found += 1
+  if ('idle' in review or 'inactiv' in review or 'activity' in review) and ('timeout' in review or 'expir' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/6 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

@@ -1,0 +1,135 @@
+id: TASK-TST-005
+category: TST
+difficulty: hard
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following CSV parsing function.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements that call parse_csv() directly.
+  The function is already available in scope - do not import it.
+  Include at least 8 test cases covering: simple rows, quoted fields containing
+  delimiters, escaped quotes (doubled), multiline values inside quotes, empty fields,
+  custom delimiters, Unicode content, and type errors.
+context_files:
+- path: module.py
+  content: |
+    def parse_csv(text, delimiter=',', quotechar='"'):
+        """Parse CSV text into a list of rows (each row is a list of strings).
+        Handles quoted fields, escaped quotes, multiline values, and empty fields.
+        """
+        if not isinstance(text, str):
+            raise TypeError("Input must be a string")
+        rows = []
+        current_row = []
+        current_field = []
+        in_quotes = False
+        i = 0
+        while i < len(text):
+            c = text[i]
+            if in_quotes:
+                if c == quotechar:
+                    if i + 1 < len(text) and text[i + 1] == quotechar:
+                        current_field.append(quotechar)
+                        i += 2
+                        continue
+                    else:
+                        in_quotes = False
+                        i += 1
+                        continue
+                else:
+                    current_field.append(c)
+            else:
+                if c == quotechar:
+                    in_quotes = True
+                elif c == delimiter:
+                    current_row.append(''.join(current_field))
+                    current_field = []
+                elif c == '\n':
+                    current_row.append(''.join(current_field))
+                    rows.append(current_row)
+                    current_row = []
+                    current_field = []
+                elif c == '\r':
+                    if i + 1 < len(text) and text[i + 1] == '\n':
+                        i += 1
+                    current_row.append(''.join(current_field))
+                    rows.append(current_row)
+                    current_row = []
+                    current_field = []
+                else:
+                    current_field.append(c)
+            i += 1
+        current_row.append(''.join(current_field))
+        rows.append(current_row)
+        return rows
+expected_output_description: |
+  A thorough test suite with 8+ assertions covering simple CSV, quoted fields with
+  embedded commas, escaped quotes (""), multiline values inside quotes, empty fields,
+  CRLF line endings, custom delimiters (tab, semicolon), Unicode, and type errors.
+test_script: |
+  import sys
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  ns = {}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: does NOT handle escaped quotes (doubled quotechar)
+  # Instead, the first quote always closes the field
+  buggy_code = '''
+  def parse_csv(text, delimiter=',', quotechar='"'):
+      if not isinstance(text, str):
+          raise TypeError("Input must be a string")
+      rows = []
+      current_row = []
+      current_field = []
+      in_quotes = False
+      i = 0
+      while i < len(text):
+          c = text[i]
+          if in_quotes:
+              if c == quotechar:
+                  in_quotes = False
+                  i += 1
+                  continue
+              else:
+                  current_field.append(c)
+          else:
+              if c == quotechar:
+                  in_quotes = True
+              elif c == delimiter:
+                  current_row.append(''.join(current_field))
+                  current_field = []
+              elif c == chr(10):
+                  current_row.append(''.join(current_field))
+                  rows.append(current_row)
+                  current_row = []
+                  current_field = []
+              elif c == chr(13):
+                  if i + 1 < len(text) and text[i + 1] == chr(10):
+                      i += 1
+                  current_row.append(''.join(current_field))
+                  rows.append(current_row)
+                  current_row = []
+                  current_field = []
+              else:
+                  current_field.append(c)
+          i += 1
+      current_row.append(''.join(current_field))
+      rows.append(current_row)
+      return rows
+  '''
+  ns2 = {}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the broken escaped-quote handling'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

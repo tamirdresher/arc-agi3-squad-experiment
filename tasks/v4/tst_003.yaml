@@ -1,0 +1,97 @@
+id: TASK-TST-003
+category: TST
+difficulty: medium
+source: synthetic-test
+problem: |
+  Write a comprehensive test suite for the following date parsing function.
+  Your tests must cover: normal cases, edge cases, error handling, and boundary conditions.
+  Write the tests as a series of assert statements that call parse_date() directly.
+  The function and datetime/timedelta are already available in scope - do not import them.
+  Include at least 8 test cases covering: ISO format, US format (MM/DD/YYYY),
+  EU format (DD.MM.YYYY), relative dates, named months, invalid inputs, and whitespace.
+context_files:
+- path: module.py
+  content: |
+    from datetime import datetime, timedelta
+
+    def parse_date(text):
+        """Parse a date string in various formats. Returns a datetime object.
+        Supported formats:
+          - ISO: YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS
+          - US: MM/DD/YYYY
+          - EU: DD.MM.YYYY
+          - Relative: 'today', 'yesterday', 'tomorrow'
+          - Named month: 'January 15, 2024' or 'Jan 15, 2024'
+        Raises ValueError for unparseable or empty input.
+        """
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("Input must be a non-empty string")
+        text = text.strip()
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        relative_map = {
+            "today": today,
+            "yesterday": today - timedelta(days=1),
+            "tomorrow": today + timedelta(days=1),
+        }
+        if text.lower() in relative_map:
+            return relative_map[text.lower()]
+        formats = ["%Y-%m-%d", "%Y-%m-%dT%H:%M:%S", "%m/%d/%Y",
+                  "%d.%m.%Y", "%B %d, %Y", "%b %d, %Y"]
+        for fmt in formats:
+            try:
+                return datetime.strptime(text, fmt)
+            except ValueError:
+                continue
+        raise ValueError("Cannot parse date: " + text)
+expected_output_description: |
+  A thorough test suite with 8+ assertions covering each format (ISO, US, EU,
+  relative, named month), case-insensitive relative dates ('TODAY', 'Yesterday'),
+  whitespace handling, invalid inputs (empty, None, integers, nonsense strings),
+  and boundary dates like Feb 29 on leap years.
+test_script: |
+  import sys
+  from datetime import datetime, timedelta
+  with open('solution.py') as f:
+      test_code = f.read()
+  assert test_code.count('assert') >= 8, 'Need at least 8 assertions'
+
+  # Run against correct implementation
+  ns = {'datetime': datetime, 'timedelta': timedelta}
+  exec(open('module.py').read(), ns)
+  exec(test_code, ns)
+
+  # Buggy version: 'yesterday' returns TOMORROW (wrong direction)
+  buggy_code = '''
+  from datetime import datetime, timedelta
+  def parse_date(text):
+      if not isinstance(text, str) or not text.strip():
+          raise ValueError("Input must be a non-empty string")
+      text = text.strip()
+      today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+      relative_map = {
+          "today": today,
+          "yesterday": today + timedelta(days=1),
+          "tomorrow": today + timedelta(days=1),
+      }
+      if text.lower() in relative_map:
+          return relative_map[text.lower()]
+      formats = ["%Y-%m-%d", "%Y-%m-%dT%H:%M:%S", "%m/%d/%Y",
+                "%d.%m.%Y", "%B %d, %Y", "%b %d, %Y"]
+      for fmt in formats:
+          try:
+              return datetime.strptime(text, fmt)
+          except ValueError:
+              continue
+      raise ValueError("Cannot parse date: " + text)
+  '''
+  ns2 = {'datetime': datetime, 'timedelta': timedelta}
+  exec(buggy_code, ns2)
+  caught = False
+  try:
+      exec(test_code, ns2)
+  except (AssertionError, Exception):
+      caught = True
+  assert caught, 'Tests must detect the yesterday/tomorrow bug'
+
+  print('ALL TESTS PASSED')
+scoring_method: test_pass

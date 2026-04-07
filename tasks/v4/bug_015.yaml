@@ -1,0 +1,156 @@
+id: "TASK-BUG-015"
+category: "BUG"
+difficulty: "hard"
+source: "synthetic-swebench"
+problem: |
+  A configuration service uses the Singleton pattern with lazy initialization.
+  The `ConfigService.get_instance()` class method checks if `_instance` is None
+  and creates a new instance if so. In single-threaded tests it works perfectly.
+  In production with multiple threads, users report:
+
+  1. Multiple ConfigService instances are created (verified by differing id()s)
+  2. Configuration loaded by one thread is invisible to another
+  3. Occasionally, `_config` is partially initialized when read by a concurrent thread
+
+  The bug is a classic TOCTOU race in the lazy init: two threads both see
+  `_instance is None`, both create a new instance, and one overwrites the other.
+  There is also a race between setting `_instance` and populating `_config`.
+
+  Fix the singleton to be thread-safe using proper locking, while keeping the
+  lazy initialization semantic. The `reload_config` method must also be
+  thread-safe.
+context_files:
+  - path: "code.py"
+    content: |
+      import threading
+      import time
+
+      class ConfigService:
+          _instance = None
+
+          def __init__(self):
+              self._config = {}
+              self._loaded = False
+
+          @classmethod
+          def get_instance(cls):
+              """Lazy singleton accessor — NOT thread-safe."""
+              if cls._instance is None:
+                  # Simulate slow initialization
+                  cls._instance = cls()
+                  cls._instance._load_defaults()
+              return cls._instance
+
+          @classmethod
+          def reset(cls):
+              """Reset for testing."""
+              cls._instance = None
+
+          def _load_defaults(self):
+              """Load default configuration (simulates I/O delay)."""
+              time.sleep(0.01)  # simulate file/network read
+              self._config = {
+                  'debug': False,
+                  'log_level': 'INFO',
+                  'max_connections': 100,
+                  'timeout': 30,
+              }
+              self._loaded = True
+
+          def get(self, key, default=None):
+              return self._config.get(key, default)
+
+          def set(self, key, value):
+              self._config[key] = value
+
+          def reload_config(self, new_config):
+              """Replace config atomically — also not thread-safe."""
+              self._config.clear()
+              time.sleep(0.005)  # simulate I/O
+              for k, v in new_config.items():
+                  self._config[k] = v
+
+          def is_loaded(self):
+              return self._loaded
+
+          def all_config(self):
+              return dict(self._config)
+expected_output_description: |
+  1. Add a class-level `threading.Lock` (e.g., `_lock = threading.Lock()`).
+  2. In `get_instance`, use double-checked locking: check _instance, acquire lock,
+     check again, then create. Ensure _load_defaults completes BEFORE _instance
+     is visible to other threads.
+  3. In `reload_config`, hold the lock during the entire clear-and-repopulate
+     sequence so readers don't see a partially-cleared config.
+  4. `get` and `set` should be safe to call concurrently.
+test_script: |
+  exec(open('solution.py').read())
+  import threading, time
+
+  # Test 1: basic singleton identity
+  ConfigService.reset()
+  a = ConfigService.get_instance()
+  b = ConfigService.get_instance()
+  assert a is b, "get_instance must return the same object"
+
+  # Test 2: config is loaded
+  assert a.is_loaded(), "Config should be loaded after get_instance"
+  assert a.get('log_level') == 'INFO'
+
+  # Test 3: thread-safety — many threads all get the same instance
+  ConfigService.reset()
+  instances = []
+  barrier = threading.Barrier(20)
+  def grab_instance():
+      barrier.wait()
+      instances.append(id(ConfigService.get_instance()))
+  threads = [threading.Thread(target=grab_instance) for _ in range(20)]
+  for t in threads: t.start()
+  for t in threads: t.join()
+  unique_ids = set(instances)
+  assert len(unique_ids) == 1, \
+      f"Expected 1 unique instance, got {len(unique_ids)}: {unique_ids}"
+
+  # Test 4: instance is fully initialized (not partially constructed)
+  ConfigService.reset()
+  results = []
+  barrier2 = threading.Barrier(10)
+  def check_loaded():
+      barrier2.wait()
+      inst = ConfigService.get_instance()
+      results.append(inst.is_loaded() and inst.get('timeout') == 30)
+  threads2 = [threading.Thread(target=check_loaded) for _ in range(10)]
+  for t in threads2: t.start()
+  for t in threads2: t.join()
+  assert all(results), f"Some threads saw uninitialized config: {results}"
+
+  # Test 5: reload_config is atomic — readers don't see empty config
+  ConfigService.reset()
+  svc = ConfigService.get_instance()
+  errors = []
+  stop = threading.Event()
+  def reader():
+      while not stop.is_set():
+          cfg = svc.all_config()
+          if len(cfg) == 0:
+              errors.append('empty config seen')
+          time.sleep(0.001)
+  def reloader():
+      for _ in range(5):
+          svc.reload_config({'debug': True, 'log_level': 'DEBUG',
+                             'max_connections': 50, 'timeout': 10})
+  rt = threading.Thread(target=reader)
+  wt = threading.Thread(target=reloader)
+  rt.start(); wt.start()
+  wt.join(); stop.set(); rt.join()
+  assert len(errors) == 0, f"Reader saw empty config during reload: {errors}"
+
+  # Test 6: reset and re-init works
+  ConfigService.reset()
+  c = ConfigService.get_instance()
+  assert c.get('debug') == False
+  c.set('debug', True)
+  assert c.get('debug') == True
+
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"

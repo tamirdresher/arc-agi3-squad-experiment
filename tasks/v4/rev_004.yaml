@@ -1,0 +1,83 @@
+id: "TASK-REV-004"
+category: "REV"
+difficulty: "hard"
+source: "synthetic-review"
+problem: |
+  Review the following in-memory cache implementation for bugs, security vulnerabilities,
+  and performance issues. Write a review identifying ALL issues found. For each issue,
+  describe: 1) What the issue is 2) Where it occurs 3) Why it's a problem 4) How to fix it
+context_files:
+  - path: "code.py"
+    content: |
+      import time
+      import threading
+
+      class Cache:
+          def __init__(self, default_ttl=300):
+              self._store = {}
+              self._ttl = default_ttl
+              self._lock = threading.Lock()
+
+          def get(self, key):
+              entry = self._store.get(key)
+              if entry is None:
+                  return None
+              if entry["expires_at"] < time.time():
+                  del self._store[key]
+                  return None
+              return entry["value"]
+
+          def set(self, key, value, ttl=None):
+              ttl = ttl or self._ttl
+              self._store[key] = {
+                  "value": value,
+                  "expires_at": time.time() + ttl,
+              }
+
+          def delete(self, key):
+              if key in self._store:
+                  del self._store[key]
+
+          def get_or_set(self, key, factory, ttl=None):
+              value = self.get(key)
+              if value is None:
+                  value = factory()
+                  self.set(key, value, ttl)
+              return value
+
+          def clear_expired(self):
+              now = time.time()
+              for key in list(self._store.keys()):
+                  if self._store[key]["expires_at"] < now:
+                      del self._store[key]
+
+          def stats(self):
+              return {
+                  "total_keys": len(self._store),
+                  "memory": sum(
+                      len(str(v["value"])) for v in self._store.values()
+                  ),
+              }
+expected_output_description: |
+  Issues: 1) Lock defined but never used — all methods are not thread-safe
+  2) Unbounded cache growth — no max size or eviction policy
+  3) get_or_set has a race condition — factory can be called multiple times
+  4) TTL only checked on read — expired entries persist in memory (lazy expiry only)
+  5) clear_expired iterates dict while values could be modified concurrently
+test_script: |
+  with open('solution.py') as f:
+      review = f.read().lower()
+  issues_found = 0
+  if ('lock' in review and ('not used' in review or 'never' in review or 'unused' in review or 'acquired' in review)) or ('thread' in review and 'safe' in review):
+      issues_found += 1
+  if 'unbounded' in review or ('max' in review and 'size' in review) or 'eviction' in review or ('memory' in review and ('grow' in review or 'leak' in review or 'limit' in review)):
+      issues_found += 1
+  if 'race condition' in review or ('get_or_set' in review and ('concurrent' in review or 'atomic' in review or 'factory' in review)):
+      issues_found += 1
+  if ('expir' in review and ('lazy' in review or 'passive' in review or 'persist' in review or 'only on read' in review or 'background' in review)) or ('ttl' in review and ('enforc' in review or 'check' in review)):
+      issues_found += 1
+  if ('clear' in review or 'iterat' in review) and ('concurrent' in review or 'modif' in review or 'thread' in review):
+      issues_found += 1
+  assert issues_found >= 3, f"Found only {issues_found}/5 issues"
+  print('ALL TESTS PASSED')
+scoring_method: "test_pass"
