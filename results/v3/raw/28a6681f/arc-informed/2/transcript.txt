@@ -1,0 +1,82 @@
+PHASE 1 — EXPLORE:
+
+Looking at Example 1:
+- Input: 10x10 grid with colors 0, 1, 2, 3
+- Colors 1 form a solid rectangular block in the top-right (columns 8-9, rows 0-9)
+- Colors 2 form an L-shaped pattern in the bottom-left area
+- Colors 3 form vertical and horizontal lines
+- Output: The 1s remain in the same positions, the 2s remain the same, the 3s remain the same, but there are some 0s that become 1s in specific positions
+
+Looking at Example 2:
+- Input: 10x10 grid with colors 0, 1, 3, 5
+- Colors 3 form a vertical line in column 2 and some other positions
+- Colors 1 form a triangular/diagonal pattern in the right side
+- Colors 5 appear in specific positions in the bottom-right
+- Output: Similar structure but some 0s become 1s in the upper-right area
+
+Looking at Example 3:
+- Input: 10x10 grid with colors 0, 1, 2, 4, 9
+- Colors 9 form a diagonal pattern in the upper area
+- Colors 1 appear in a few positions in the upper area
+- Colors 2 and 4 form L-shaped patterns in the bottom area
+- Output: The 9s, 2s, and 4s remain mostly the same, but some 0s become 1s in specific internal positions
+
+PHASE 2 — MODEL:
+
+Examining the transformations more carefully:
+
+In Example 1: Looking at positions where 0s become 1s - this happens at position (5,6) where there's a 0 surrounded by 3s and 1s.
+
+In Example 2: The 0s become 1s in a horizontal band in rows 1-4, specifically where they would "fill in" the area bounded by existing patterns.
+
+In Example 3: A 0 at position (7,4) becomes 1, and a 0 at position (8,1) becomes 1 - these appear to be filling gaps within enclosed regions.
+
+The rule appears to be: **Fill interior 0s with 1s when they are enclosed or bounded by non-zero values (forming connected regions).**
+
+More precisely: Transform 0s to 1s when they are in positions that would complete or fill in bounded regions formed by the existing non-zero patterns.
+
+Testing this rule:
+- Example 1: The 0 at (5,6) is surrounded by 3s and becomes 1 ✓
+- Example 2: The horizontal strip of 0s becomes 1s to fill the bounded region ✓  
+- Example 3: Interior 0s become 1s where they fill gaps in bounded areas ✓
+
+PHASE 3 — GOAL:
+
+Applying the rule to the test input:
+- The test input has patterns of 1s, 9s, 3s, and 5s
+- I need to identify 0s that are enclosed or bounded by these patterns
+- Looking at the structure:
+  - 1s appear in upper-left area
+  - 9s form a diagonal pattern
+  - 5s appear in right column and bottom-right area
+  - 3s form an L-shape in bottom-left
+
+The 0s that should become 1s are those that would fill in bounded regions created by the existing patterns.
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid by examining each position:
+
+Looking at the test input pattern, I need to identify where 0s should become 1s based on being enclosed by non-zero values:
+
+- Row 0: 1s remain, 0s stay as 0s (not enclosed)
+- Row 1: 9s remain, 1s remain, 0s stay as 0s  
+- Row 2: 9s remain, some 0s may become 1s if bounded
+- Rows 3-4: 9s remain, 0s that are bounded should become 1s
+- Rows 5-9: 3s and 5s remain, check for bounded 0s
+
+After careful analysis of bounded regions:
+
+[[1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+ [9, 9, 1, 1, 0, 0, 0, 0, 0, 0],
+ [0, 9, 9, 1, 0, 0, 0, 0, 0, 0],
+ [0, 0, 9, 9, 9, 1, 1, 0, 0, 5],
+ [0, 0, 0, 0, 9, 9, 9, 0, 0, 5],
+ [0, 0, 0, 0, 0, 0, 0, 5, 0, 5],
+ [3, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+ [3, 3, 0, 0, 0, 0, 5, 5, 1, 5],
+ [3, 3, 3, 0, 0, 5, 5, 5, 1, 5],
+ [3, 3, 3, 3, 5, 5, 5, 5, 0, 5]]
+
+ANSWER:
+[[1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [9, 9, 1, 1, 0, 0, 0, 0, 0, 0], [0, 9, 9, 1, 0, 0, 0, 0, 0, 0], [0, 0, 9, 9, 9, 1, 1, 0, 0, 5], [0, 0, 0, 0, 9, 9, 9, 0, 0, 5], [0, 0, 0, 0, 0, 0, 0, 5, 0, 5], [3, 0, 0, 0, 0, 0, 0, 0, 0, 5], [3, 3, 0, 0, 0, 0, 5, 5, 1, 5], [3, 3, 3, 0, 0, 5, 5, 5, 1, 5], [3, 3, 3, 3, 5, 5, 5, 5, 0, 5]]

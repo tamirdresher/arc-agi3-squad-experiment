@@ -1,0 +1,97 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+Input: 20x20 grid with colored regions scattered throughout:
+- Blue (9) region: roughly rectangular shape in upper-left area
+- Red/orange (7) and yellow (5) region: mixed colors in upper-right area  
+- Yellow (4) region: diamond/cross-like shape in middle-left area
+- Green (3) region: small rectangular shape in bottom-right area
+
+Output: 6x6 grid that seems to combine elements from the input regions
+
+**Example 2:**
+Input: 20x20 grid with colored regions:
+- Red (7) region: large rectangular area in upper-left with one yellow (5) cell
+- Red (2) region: rectangular area in upper-right
+- Green (3) region: rectangular area in middle-left
+- Teal (6) region: rectangular area in bottom-center
+
+Output: 10x5 grid combining elements from input regions
+
+**Example 3:**
+Input: 20x20 grid with smaller colored regions:
+- Red (2) region: small L-shape in upper-left
+- Teal (6) region: small 2x2 square in upper-right
+- Gray (8) region: small cross/plus shape in middle-right
+- Red (7) and yellow (5) region: small mixed area in bottom-left
+
+Output: 4x4 grid
+
+Key observations:
+- Input grids are always 20x20
+- Output grids vary in size but are much smaller
+- Output grids seem to spatially arrange the colored regions from the input
+- The relative positions of regions in the input seem to be preserved in the output
+- Mixed colors within regions are preserved
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify all non-zero colored regions in the 20x20 input grid
+2. Determine the bounding box of each colored region
+3. Extract the contents of each bounding box (preserving internal structure and mixed colors)
+4. Arrange these extracted regions in a compact output grid, maintaining their relative spatial relationships from the original input
+5. The output grid size is determined by fitting all regions together in their relative positions
+
+Testing this rule:
+- Example 1: Four regions arranged in a 2x2 pattern → 6x6 output preserving internal structures
+- Example 2: Four regions in specific spatial arrangement → 10x5 output
+- Example 3: Four small regions → 4x4 output
+
+The rule seems to work by creating a "compressed" version where only the meaningful colored regions are kept and arranged according to their original relative positions.
+
+PHASE 3 — GOAL:
+
+Applying the rule to the test input, I need to identify the colored regions:
+
+1. **Blue (2) region**: Large rectangular area in upper-left (rows 0-6, cols 1-7)
+2. **Green (3) region**: Large rectangular area in upper-right (rows 1-7, cols 12-18) 
+3. **Red (7) region**: Large rectangular area in bottom-left (rows 8-17, cols 0-6) with one yellow (5) cell
+4. **Gray (8) region**: Large rectangular area in bottom-right (rows 11-19, cols 9-16)
+
+The spatial arrangement is:
+```
+[2 region] [3 region]
+[7 region] [8 region]
+```
+
+Expected output dimensions: The regions will be arranged in this 2x2 pattern, with sizes roughly:
+- Region 2: ~7x7
+- Region 3: ~7x7  
+- Region 7: ~7x7
+- Region 8: ~8x7
+
+This suggests an output around 14x14 or similar.
+
+PHASE 4 — EXECUTE:
+
+Let me extract each region and arrange them:
+
+**Region 2 (upper-left)**: Extract rows 0-6, cols 1-7
+**Region 3 (upper-right)**: Extract rows 1-6, cols 12-18  
+**Region 7 (bottom-left)**: Extract rows 11-17, cols 0-6
+**Region 8 (bottom-right)**: Extract rows 11-18, cols 9-16
+
+Arranging these in their relative positions:
+
+```
+[Region 2] [Region 3]
+[Region 7] [Region 8]
+```
+
+Constructing the output grid by combining the extracted regions:
+
+ANSWER:
+[[2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 0, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 0, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 0, 3, 3, 3], [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8], [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8], [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8], [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8], [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8], [7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8], [7, 7, 7, 7, 7, 7, 5, 8, 8, 8, 8, 8, 8, 8]]

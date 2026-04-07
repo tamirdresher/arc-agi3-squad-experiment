@@ -1,0 +1,95 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 5×5 grid with values 0, 1, 2, 8
+- Pattern: Top row has [1, 2, 8, 8, 8], other rows have scattered 1s and 0s
+- Output: 5×5 grid with only 0s and 2s
+- The 2s appear to form a pattern related to where 1s were in the input
+- Grid dimensions stay the same
+
+**Example 2:**
+- Input: 15×15 grid with values 0, 2, 4, 6, 7, 8
+- Row 1 has alternating pattern [0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0]
+- Output: 15×15 grid with values 0, 2, 4, 6, 7
+- Top rows show alternating pattern with 7s instead of 6s
+- Some regions are completely cleared (filled with 0s)
+- Grid dimensions stay the same
+
+**Example 3:**
+- Input: 20×20 grid with values 0, 1, 2, 4, 7, 8
+- Output: 20×20 grid with values 0, 2, 7
+- Pattern appears in different regions of the grid
+- Some areas are completely cleared
+- Grid dimensions stay the same
+
+**Example 4:**
+- Input: 8×8 grid with values 0, 1, 2, 8
+- Column 5 (index 5) has all 2s
+- Top row has multiple 1s
+- Output: 8×8 grid with values 0, 1, 2
+- Column 5 now has all 1s instead of 2s
+- Top row has 2s where 1s were before
+- Grid dimensions stay the same
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I notice:
+1. Grid dimensions always stay the same
+2. Certain values seem to get swapped or transformed
+3. The number 8 appears in inputs but never in outputs
+4. There seems to be a relationship between specific non-zero values
+
+Let me analyze the value transformations more carefully:
+
+In Example 4, the clearest pattern emerges:
+- Values 1 and 2 appear to swap positions
+- The column of 2s becomes a column of 1s
+- The row of 1s gets 2s in those positions
+- Other values (8) disappear (become 0)
+
+Testing this rule on other examples:
+- The transformation appears to involve swapping specific pairs of values
+- Values like 8 act as "noise" and get removed
+- The swapping preserves the spatial structure
+
+**Refined Rule:** The transformation swaps pairs of specific non-zero values while removing certain "noise" values (like 8). The most consistent pattern is that certain value pairs (like 1↔2, 4↔7, etc.) get swapped in their positions, while values like 8 get converted to 0.
+
+PHASE 3 — GOAL:
+
+Applying to the test input (20×20 grid):
+- Values present: 0, 1, 2, 4, 5, 6, 7, 8
+- Based on the pattern, I expect:
+  - Value 8 to be removed (becomes 0)
+  - Potential swaps between other value pairs
+  - Looking at the examples, it seems like there might be specific pairing rules
+
+From the examples, I can infer:
+- 1↔2 swap (Example 4)
+- 4↔7 might swap (Example 3 suggests this)
+- 6 might have a specific transformation
+- 5 behavior needs to be determined
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the examples, I see a clearer pattern:
+- In each example, there are "template" or "reference" regions that define how values should be transformed
+- The 8s seem to mark regions or act as separators
+- The transformation creates patterns based on the reference regions
+
+Let me re-examine Example 4 more carefully:
+- Column 5 is filled with 2s in input, becomes filled with 1s in output
+- Row 0 has 1s in input, those positions get 2s in output
+- This suggests a swap between 1 and 2
+
+For the test input, I need to identify the key transformation. Looking at the structure and comparing with examples, it appears that:
+- 8s get removed (become 0)
+- Other values follow specific transformation rules based on their context
+
+After careful analysis, the pattern seems to be that certain values get swapped systematically while 8s are removed.
+
+Constructing the output grid by applying the transformation rule:
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 7, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0], [0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0], [0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]

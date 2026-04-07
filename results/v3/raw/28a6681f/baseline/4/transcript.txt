@@ -1,0 +1,40 @@
+Looking at the examples, I need to identify the pattern of transformation.
+
+Let me analyze each example:
+
+**Example 1:**
+- Input has regions of 1s, 2s, and 3s
+- In the output, some 0s are replaced with 1s in specific locations
+- The 2s and 3s remain unchanged
+
+**Example 2:**
+- Input has regions of 1s, 3s, and 5s
+- In the output, some 0s are replaced with 1s
+- The 3s and 5s remain unchanged
+
+**Example 3:**
+- Input has regions of 1s, 2s, 4s, and 9s
+- In the output, some 0s are replaced with 1s
+- The 2s, 4s, and 9s remain unchanged
+
+The pattern appears to be:
+1. Identify regions of different colored numbers (non-zero values)
+2. Where there are 0s that are "between" or "connecting" regions of the same non-1 color, replace those 0s with 1s
+3. All other non-zero values remain unchanged
+
+Let me trace through the test input:
+
+The test input has:
+- Region of 1s in the top-left
+- Region of 9s forming a diagonal pattern
+- Region of 3s in the bottom-left
+- Region of 5s in the right side
+
+Looking for 0s that should be replaced with 1s:
+- Between the 9 regions: there are some 0s that connect the 9s
+- Between other regions where 0s act as connectors
+
+Applying the pattern systematically:
+
+ANSWER:
+[[1, 1, 0, 0, 0, 0, 0, 0, 0, 0], [9, 9, 1, 1, 0, 0, 0, 0, 0, 0], [0, 9, 9, 1, 0, 0, 0, 0, 0, 0], [0, 0, 9, 9, 9, 0, 0, 0, 0, 5], [0, 0, 0, 1, 9, 9, 9, 0, 0, 5], [0, 0, 0, 0, 1, 1, 1, 5, 0, 5], [3, 0, 0, 0, 0, 0, 1, 1, 0, 5], [3, 3, 0, 0, 0, 1, 5, 5, 0, 5], [3, 3, 3, 0, 1, 5, 5, 5, 0, 5], [3, 3, 3, 3, 5, 5, 5, 5, 0, 5]]

@@ -1,0 +1,62 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 10x12 grid with values 2 and 4
+- Output: Same dimensions, same values except some 4s become 8s
+- Changes: In rows 4-6, columns 8-10, some 4s changed to 8s
+- Pattern: There appears to be a rectangular region where 4s are converted to 8s
+
+**Example 2:**
+- Input: 15x17 grid with values 2 and 4
+- Output: Same dimensions, some 4s become 8s
+- Changes: Multiple rectangular regions where 4s changed to 8s
+- Pattern: The grid appears to have repeating structure, and certain 4s in specific positions become 8s
+
+**Example 3:**
+- Input: 12x12 grid with values 2 and 4
+- Output: Same dimensions, some 4s become 8s
+- Changes: Various scattered positions where 4s changed to 8s
+- Pattern: The changes seem to follow some spatial logic
+
+Looking more carefully at the patterns:
+
+In Example 1: The 4s that become 8s form a roughly rectangular cluster in the middle-right area.
+
+In Example 2: There's a clear repeating pattern in the input, and 4s in certain positions within this pattern become 8s systematically.
+
+In Example 3: The 4s that change to 8s seem to be in positions where they form certain configurations with surrounding cells.
+
+PHASE 2 — MODEL:
+
+After careful analysis, I notice that the transformation appears to identify specific 4s that should become 8s based on their local context or position within larger patterns.
+
+Looking more systematically:
+- The grids contain background 2s and structural 4s
+- Some 4s are converted to 8s while others remain 4s
+- The conversion seems to follow a rule about which 4s are "special" in some way
+
+Testing a hypothesis: 4s become 8s when they are part of certain configurations or when they appear in specific positions within repeating patterns.
+
+After closer inspection, I believe the rule is: **4s become 8s when they are part of connected components of 4s that form specific shapes or meet certain criteria within the overall pattern structure.**
+
+Let me verify this against the examples... Actually, let me look for a simpler pattern.
+
+Revised hypothesis: **4s become 8s when they are in positions that would create or are part of certain rectangular or cross-like formations of 4s.**
+
+PHASE 3 — GOAL:
+
+Applying to the test input (22x22 grid):
+I need to identify which 4s should become 8s based on the transformation rule. Looking at the test input, I can see it has a complex pattern with 2s and 4s.
+
+The test input appears to have some regularity and structure. I need to identify which 4s are in positions that match the criteria from the examples.
+
+PHASE 4 — EXECUTE:
+
+Looking at the test input more carefully and comparing with the pattern from the examples, I notice that certain 4s in specific structural positions should be converted to 8s.
+
+After analyzing the spatial relationships and patterns, I'll construct the output by converting specific 4s to 8s while keeping all other values unchanged.
+
+ANSWER:
+[[4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 2, 2, 2, 2], [4, 4, 8, 4, 4, 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 2, 2, 4, 2], [2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 2, 2, 8, 2, 4, 2, 2, 8, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 4, 2, 8, 2, 4, 4, 2, 8, 2, 2, 4, 2], [2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2], [4, 4, 8, 4, 2, 4, 4, 2, 4, 2, 4, 4, 8, 4, 4, 4, 4, 2, 2, 4, 4, 4], [2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 4, 2, 4, 4, 2, 2, 2, 2, 4, 2, 4, 2, 4, 4, 2], [2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 2, 4, 4, 2, 4, 2, 4, 2, 2], [2, 2, 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2], [4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 4, 2, 8, 4, 4, 4, 4, 4, 4, 2, 4, 2], [2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 4, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 2, 4, 4, 2], [2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 8, 2, 2, 2, 2]]

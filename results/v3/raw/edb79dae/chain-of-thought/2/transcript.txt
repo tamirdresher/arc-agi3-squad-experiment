@@ -1,0 +1,72 @@
+Let me analyze the examples step by step to understand the pattern.
+
+**Analyzing Example 1:**
+
+Looking at the input, I notice:
+- There's a rectangular border made of 5's (rows 8-22, columns 3-21)
+- Inside this border, there are repeating 3x3 blocks with values 3 and 1
+- Outside the border, there are some 2x2 blocks with different values in the top-left corner
+
+Looking at the output:
+- It's a 15x19 grid bordered by 5's
+- Inside, there are 3x3 blocks with values 2 and 4
+- The pattern seems to transform the values: 3→2, 1→4
+
+**Analyzing Example 2:**
+
+Input observations:
+- There's a rectangular border made of 5's (rows 8-20, columns 5-22)
+- Inside this border, there are 4x4 blocks with values 2, 6, and 3
+- Outside the border, there are 2x2 blocks in the top-left corner
+
+Output observations:
+- Bordered by 5's
+- Inside, there are 4x4 blocks with transformed values
+- The mapping appears to be: 2→4, 6→7, 3→8
+
+**Pattern Recognition:**
+
+1. The algorithm identifies a rectangular region bounded by 5's in the input
+2. It extracts this bounded region as the main working area
+3. It looks at the top-left corner of the input (outside the 5-bordered region) to find 2x2 blocks with unique value pairs
+4. It creates a mapping from the values found inside the 5-bordered region to the values found in the top-left 2x2 blocks
+5. It applies this mapping to transform the content inside the 5-bordered region
+6. The output maintains the 5-border structure
+
+**Applying to Test Input:**
+
+1. First, I identify the 5-bordered region: rows 9-29, columns 0-20
+2. Looking at the top-left corner (rows 0-6, columns 0-9), I can identify these 2x2 blocks:
+   - (0,0)-(1,1): 3,3,3,3 → value 3
+   - (0,2)-(1,3): 9,9,3,9 → value 9
+   - (4,0)-(5,1): 1,1,1,1 → value 1  
+   - (4,2)-(5,3): 6,6,1,6 → value 6
+
+3. Inside the 5-bordered region, I see blocks with values 3, 9, 2, 1, 8
+4. The mapping should be: 3→3, 9→9, 1→1, 6→6, and I need to find what maps to 2 and 8
+5. Looking more carefully at the top-left 2x2 blocks:
+   - (0,6)-(1,7): 2,2,9,2 → value 2
+   - (0,8)-(1,9): 2,2,2,2 → value 2
+   - (0,26)-(1,27): 2,2,2,2 → value 2
+   - (0,28)-(1,29): 1,1,1,1 → value 1
+   - (4,6)-(5,7): 7,7,8,7 → value 7
+   - (4,8)-(5,9): 7,7,7,7 → value 7
+
+Let me re-examine this more systematically...
+
+Looking at the 2x2 blocks in the top-left area:
+- 3→9 (from blocks at (0,0) and (0,2))
+- 1→6 (from blocks at (4,0) and (4,2)) 
+- 2→7 (from blocks at (0,6)/(0,26) and (4,6))
+- And checking what corresponds to 8 and 9...
+
+After careful analysis, the mapping appears to be:
+- 3 → 9
+- 1 → 6  
+- 2 → 7
+- 8 → (need to determine)
+- 9 → (need to determine)
+
+Let me extract the 5-bordered region and apply the transformations:
+
+ANSWER: [[5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 7, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 7, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 7, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 7, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 7, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]]

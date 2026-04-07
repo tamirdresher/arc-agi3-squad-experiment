@@ -1,0 +1,235 @@
+{
+  "summaries": {
+    "arc-informed": {
+      "easy": {
+        "n_runs": 83,
+        "exact_match_rate": 0.0,
+        "cell_accuracy_mean": 0.7090381325301205,
+        "cell_accuracy_std": 0.30986566272603533,
+        "extraction_success_rate": 0.963855421686747,
+        "mean_tokens": 8124.686746987952,
+        "n_tasks": 17
+      },
+      "hard": {
+        "n_runs": 77,
+        "exact_match_rate": 0.03896103896103896,
+        "cell_accuracy_mean": 0.5578170779220777,
+        "cell_accuracy_std": 0.35258551518401654,
+        "extraction_success_rate": 0.974025974025974,
+        "mean_tokens": 12229.961038961039,
+        "n_tasks": 16
+      },
+      "medium": {
+        "n_runs": 84,
+        "exact_match_rate": 0.023809523809523808,
+        "cell_accuracy_mean": 0.6585539166666667,
+        "cell_accuracy_std": 0.2763948473962915,
+        "extraction_success_rate": 0.9880952380952381,
+        "mean_tokens": 10112.988095238095,
+        "n_tasks": 17
+      }
+    },
+    "baseline": {
+      "easy": {
+        "n_runs": 85,
+        "exact_match_rate": 0.023529411764705882,
+        "cell_accuracy_mean": 0.7545812235294116,
+        "cell_accuracy_std": 0.2647634681994867,
+        "extraction_success_rate": 1.0,
+        "mean_tokens": 7299.494117647058,
+        "n_tasks": 17
+      },
+      "hard": {
+        "n_runs": 76,
+        "exact_match_rate": 0.05263157894736842,
+        "cell_accuracy_mean": 0.5457051710526315,
+        "cell_accuracy_std": 0.3423487581880189,
+        "extraction_success_rate": 0.9736842105263158,
+        "mean_tokens": 11506.868421052632,
+        "n_tasks": 16
+      },
+      "medium": {
+        "n_runs": 84,
+        "exact_match_rate": 0.011904761904761904,
+        "cell_accuracy_mean": 0.6565080952380953,
+        "cell_accuracy_std": 0.28014158836660147,
+        "extraction_success_rate": 0.9523809523809523,
+        "mean_tokens": 9128.5,
+        "n_tasks": 17
+      }
+    },
+    "chain-of-thought": {
+      "easy": {
+        "n_runs": 83,
+        "exact_match_rate": 0.024096385542168676,
+        "cell_accuracy_mean": 0.7460505542168675,
+        "cell_accuracy_std": 0.2820886976334504,
+        "extraction_success_rate": 1.0,
+        "mean_tokens": 7569.349397590361,
+        "n_tasks": 17
+      },
+      "hard": {
+        "n_runs": 79,
+        "exact_match_rate": 0.0379746835443038,
+        "cell_accuracy_mean": 0.5620992531645569,
+        "cell_accuracy_std": 0.3477990781953437,
+        "extraction_success_rate": 0.9873417721518988,
+        "mean_tokens": 11570.645569620254,
+        "n_tasks": 16
+      },
+      "medium": {
+        "n_runs": 83,
+        "exact_match_rate": 0.0,
+        "cell_accuracy_mean": 0.6296680361445783,
+        "cell_accuracy_std": 0.29981515278650656,
+        "extraction_success_rate": 0.9518072289156626,
+        "mean_tokens": 9393.072289156626,
+        "n_tasks": 17
+      }
+    }
+  },
+  "fisher_h1": {
+    "test": "Fisher's exact (one-sided)",
+    "condition_a": "arc-informed",
+    "condition_b": "baseline",
+    "a_accuracy": 0.020491803278688523,
+    "b_accuracy": 0.02857142857142857,
+    "odds_ratio": 0.7112970711297071,
+    "p_value": 0.8071707703559157,
+    "table": [
+      [
+        5,
+        239
+      ],
+      [
+        7,
+        238
+      ]
+    ]
+  },
+  "fisher_h2": {
+    "test": "Fisher's exact (one-sided)",
+    "condition_a": "arc-informed",
+    "condition_b": "chain-of-thought",
+    "a_accuracy": 0.020491803278688523,
+    "b_accuracy": 0.02040816326530612,
+    "odds_ratio": 1.00418410041841,
+    "p_value": 0.6217835279352879,
+    "table": [
+      [
+        5,
+        239
+      ],
+      [
+        5,
+        240
+      ]
+    ]
+  },
+  "mcnemar_h1": {
+    "test": "McNemar's (exact binomial)",
+    "condition_a": "arc-informed",
+    "condition_b": "baseline",
+    "a_only": 0,
+    "b_only": 0,
+    "p_value": 1.0,
+    "note": "No discordant pairs"
+  },
+  "mcnemar_h2": {
+    "test": "McNemar's (exact binomial)",
+    "condition_a": "arc-informed",
+    "condition_b": "chain-of-thought",
+    "a_only": 0,
+    "b_only": 0,
+    "p_value": 1.0,
+    "note": "No discordant pairs"
+  },
+  "ttest_h3": {
+    "test": "Paired t-test (tokens)",
+    "condition_a": "arc-informed",
+    "condition_b": "baseline",
+    "mean_a": 10113.025,
+    "mean_b": 9233.886,
+    "mean_overhead_pct": 11.776124366534603,
+    "t_statistic": 25.008311509360897,
+    "p_value": 1.4839455358450076e-29,
+    "n_pairs": 50
+  },
+  "glmm": {
+    "model": "GLMM (LMM approximation via mixedlm)",
+    "n_observations": 734,
+    "n_tasks": 50,
+    "summary": "            Mixed Linear Model Regression Results\n=============================================================\nModel:            MixedLM Dependent Variable: exact_match_int\nNo. Observations: 734     Method:             ML             \nNo. Groups:       50      Scale:              0.0127         \nMin. group size:  13      Log-Likelihood:     499.8540       \nMax. group size:  15      Converged:          Yes            \nMean group size:  14.7                                       \n--------------------------------------------------------------\n               Coef.   Std.Err.    z     P>|z|  [0.025  0.975]\n--------------------------------------------------------------\nIntercept       0.021     0.025   0.829  0.407  -0.029   0.071\ncond_cot       -0.008     0.010  -0.807  0.420  -0.028   0.012\ncond_arc       -0.008     0.010  -0.804  0.421  -0.028   0.012\ndiff_medium    -0.004     0.035  -0.111  0.912  -0.073   0.065\ndiff_hard       0.026     0.036   0.735  0.462  -0.044   0.096\nGroup Var       0.010     0.019                               \n=============================================================\n",
+    "params": {
+      "Intercept": 0.02112423701164688,
+      "cond_cot": -0.008204216327869341,
+      "cond_arc": -0.008183152011760439,
+      "diff_medium": -0.0038926386347773578,
+      "diff_hard": 0.026182364601735196,
+      "Group Var": 0.7584319191861553
+    },
+    "pvalues": {
+      "Intercept": 0.40694035957207475,
+      "cond_cot": 0.4198422866492506,
+      "cond_arc": 0.4213485796390478,
+      "diff_medium": 0.9116191125620892,
+      "diff_hard": 0.46242654591942245,
+      "Group Var": 9.145115660180468e-06
+    },
+    "converged": true
+  },
+  "lmm_cell_accuracy": {
+    "model": "LMM (cell accuracy)",
+    "n_observations": 734,
+    "summary": "           Mixed Linear Model Regression Results\n===========================================================\nModel:            MixedLM Dependent Variable: cell_accuracy\nNo. Observations: 734     Method:             ML           \nNo. Groups:       50      Scale:              0.0224       \nMin. group size:  13      Log-Likelihood:     255.5062     \nMax. group size:  15      Converged:          Yes          \nMean group size:  14.7                                     \n------------------------------------------------------------\n             Coef.   Std.Err.    z     P>|z|  [0.025  0.975]\n------------------------------------------------------------\nIntercept     0.744     0.066  11.255  0.000   0.615   0.874\ncond_cot     -0.010     0.014  -0.759  0.448  -0.037   0.016\ncond_arc     -0.013     0.014  -0.964  0.335  -0.040   0.013\ndiff_medium  -0.091     0.093  -0.975  0.330  -0.273   0.091\ndiff_hard    -0.177     0.094  -1.873  0.061  -0.361   0.008\nGroup Var     0.072     0.101                               \n===========================================================\n",
+    "params": {
+      "Intercept": 0.7440951593106742,
+      "cond_cot": -0.010280741803198415,
+      "cond_arc": -0.013057516233228804,
+      "diff_medium": -0.09052286722183599,
+      "diff_hard": -0.1766251556508418,
+      "Group Var": 3.2004194628538976
+    },
+    "pvalues": {
+      "Intercept": 2.18304534531564e-29,
+      "cond_cot": 0.4476493934671728,
+      "cond_arc": 0.3351421193358345,
+      "diff_medium": 0.3295938730710647,
+      "diff_hard": 0.0610679655505247,
+      "Group Var": 2.2796771999580933e-06
+    },
+    "converged": true
+  },
+  "holm_bonferroni": {
+    "H3 (Token overhead)": {
+      "p_value": 1.4839455358450076e-29,
+      "rank": 1,
+      "adjusted_alpha": 0.01,
+      "significant": true
+    },
+    "H4-LMM (ARC cell acc)": {
+      "p_value": 0.3351421193358345,
+      "rank": 2,
+      "adjusted_alpha": 0.0125,
+      "significant": false
+    },
+    "H1-GLMM (ARC effect)": {
+      "p_value": 0.4213485796390478,
+      "rank": 3,
+      "adjusted_alpha": 0.016666666666666666,
+      "significant": false
+    },
+    "H2 (ARC > CoT)": {
+      "p_value": 0.6217835279352879,
+      "rank": 4,
+      "adjusted_alpha": 0.025,
+      "significant": "False"
+    },
+    "H1 (ARC > Baseline)": {
+      "p_value": 0.8071707703559157,
+      "rank": 5,
+      "adjusted_alpha": 0.05,
+      "significant": "False"
+    }
+  }
+}

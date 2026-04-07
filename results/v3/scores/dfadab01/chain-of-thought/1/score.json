@@ -1,0 +1,17 @@
+{
+  "task_id": "dfadab01",
+  "condition": "chain-of-thought",
+  "run_number": 1,
+  "timestamp": "2026-04-06T17:34:48.809331+00:00",
+  "tokens_used": 9328,
+  "wall_clock_seconds": 19.55,
+  "response_hash": "f21f00d3fa05ae4b8452c26436312487b0ae01a9dcd5b31b561d6043de429ba7",
+  "extraction_success": true,
+  "exact_match": false,
+  "cell_accuracy": 0.96,
+  "dimension_match": true,
+  "predicted_rows": 20,
+  "predicted_cols": 20,
+  "ground_truth_rows": 20,
+  "ground_truth_cols": 20
+}

@@ -1,0 +1,64 @@
+## PHASE 1 — EXPLORE
+
+**Example 1 Analysis:**
+- Input: 20×15 grid with various colored regions (0=background, 2=gray rectangular region top-left, 8=orange squares, 1=blue squares, 3=green squares, 7=red scattered dots)
+- Output: 12×12 grid filled mostly with 2s (gray), with colored rectangular regions embedded within
+- Key objects in input: Large gray (2) region in top-left, orange (8) rectangles, small blue (1) square, green (3) rectangles, scattered red (7) dots
+- The output appears to be a compressed/reorganized version focusing on the solid colored regions
+
+**Example 2 Analysis:**
+- Input: 19×30 grid with colored regions (0=background, 3=green large region, 1=blue rectangles, 4=red rectangles, 5=yellow squares, 6=purple rectangles, 8=orange scattered dots)
+- Output: 28×20 grid filled mostly with 3s (green), with other colored rectangular regions embedded within
+- The dominant color (3) fills the background, and other solid regions are preserved in their relative positions
+
+**Key observations:**
+1. Both outputs are smaller than inputs
+2. The most prevalent non-zero color becomes the background fill
+3. Solid rectangular regions of other colors are preserved
+4. Scattered individual dots (like 7s and 8s) are eliminated
+5. The spatial relationships between solid regions are maintained
+
+## PHASE 2 — MODEL
+
+**Transformation Rule:**
+1. Identify all solid rectangular regions of non-zero colors in the input
+2. Find the color that appears most frequently in solid rectangular form
+3. Create an output grid that encompasses all solid rectangular regions with minimal padding
+4. Fill the entire output grid with the most prevalent rectangular color
+5. Place all other solid rectangular regions in their relative positions within this background
+6. Ignore scattered individual pixels that don't form solid rectangles
+
+**Testing against examples:**
+- Example 1: Color 2 has the largest rectangular region, becomes background. Rectangles of 8, 1, 3 are preserved. ✓
+- Example 2: Color 3 has the largest rectangular area, becomes background. Rectangles of 1, 4, 5, 6 are preserved. ✓
+
+## PHASE 3 — GOAL
+
+**Analyzing test input:**
+- Solid rectangular regions identified:
+  - 8 (orange): Multiple rectangles in top portion
+  - 4 (red): Large complex region bottom-left
+  - 3 (green): Small rectangles
+  - 5 (yellow): Multiple rectangles right side
+  - 6 (purple): Rectangles bottom-center
+  - 9 (teal): Rectangles bottom-right
+  - 2 (gray): Scattered individual pixels (ignore)
+
+- Color 4 appears to have the largest total rectangular area
+- Output should use 4 as background, preserve other rectangular regions
+- Estimated output dimensions: Need to encompass all solid regions
+
+## PHASE 4 — EXECUTE
+
+Mapping solid rectangular regions and their bounding areas:
+- 8 regions: rows 0-9, cols 1-9 (with gaps)
+- 4 regions: rows 10-19, cols 0-9 (main area)
+- 3 regions: rows 7-9, cols 13-15 and rows 21-23, cols 1-3
+- 5 regions: rows 9-17, cols 18-26
+- 6 regions: rows 21-29, cols 7-15
+- 9 regions: rows 20-28, cols 18-26
+
+Creating output grid approximately 20×18 to contain all regions:
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 3, 3, 3, 4, 4], [4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 3, 3, 3, 4, 4], [4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 3, 3, 3, 4, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5]]

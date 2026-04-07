@@ -1,0 +1,83 @@
+PHASE 1 — EXPLORE:
+
+Example 1:
+Input: 16x16 grid mostly filled with 8s (background), with several colored patterns:
+- Blue (1): L-shaped pattern in upper left area
+- Green (3): horizontal line pattern in middle area
+- Red (2): horizontal line pattern below green
+- Purple (4): horizontal line pattern below red
+- Cyan (6): horizontal line pattern at bottom
+
+Output: 22x1 grid (single column) containing sequences of colors: [1,1,1,1,1,3,3,3,3,2,2,2,2,2,4,4,4,4,4,6,6,6]
+
+Example 2:
+Input: 16x16 grid mostly filled with 1s (background), with several colored patterns:
+- Gray (8): L-shaped pattern in upper left area
+- Red (2): L-shaped pattern in middle area
+- Green (3): L-shaped pattern in lower right area
+
+Output: 24x1 grid containing sequences: [8,8,8,8,8,8,8,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3]
+
+Key observations:
+- Input grids are 16x16, outputs are single columns of varying lengths
+- Each non-background color appears as a connected shape/pattern in input
+- Output contains sequences of each non-background color
+- The sequence lengths seem related to the area or extent of each pattern
+
+PHASE 2 — MODEL:
+
+Looking at the relationship between input patterns and output sequences:
+
+Example 1:
+- Color 1 appears in 5 cells → 5 ones in output
+- Color 3 appears in 4 cells → 4 threes in output  
+- Color 2 appears in 5 cells → 5 twos in output
+- Color 4 appears in 5 cells → 5 fours in output
+- Color 6 appears in 3 cells → 3 sixes in output
+
+Example 2:
+- Color 8 appears in 7 cells → 7 eights in output
+- Color 2 appears in 8 cells → 8 twos in output
+- Color 3 appears in 9 cells → 9 threes in output
+
+Transformation Rule: 
+1. Count the number of cells of each non-background color in the input grid
+2. Create a single-column output where each non-background color appears consecutively for a number of rows equal to its cell count in the input
+3. Colors appear in the output in the order they first appear when scanning the input grid from top to bottom, left to right
+
+PHASE 3 — GOAL:
+
+Applying the rule to the test input:
+Background color is 2. Need to identify non-background colors and count their occurrences:
+
+Scanning the test input:
+- Color 1: appears in positions creating an L-shape (5 cells total)
+- Color 3: appears in positions creating patterns (4 cells total) 
+- Color 8: appears in positions creating an L-shape (6 cells total)
+- Color 4: appears in positions creating a pattern (5 cells total)
+
+Order of first appearance: 1, 3, 8, 4
+
+Expected output: Single column with 5 ones, then 4 threes, then 6 eights, then 5 fours
+Total length: 5 + 4 + 6 + 5 = 20 rows
+
+PHASE 4 — EXECUTE:
+
+Let me count the exact occurrences of each non-background color (2) in the test input:
+
+Color 1 occurrences: (2,1), (2,2), (2,3), (2,4), (3,4), (11,10), (12,9), (12,10) = 8 cells
+Color 3 occurrences: (4,4), (4,5), (5,5), (10,10), (10,11) = 5 cells  
+Color 8 occurrences: (6,5), (7,4), (7,5), (8,4), (9,4), (10,4) = 6 cells
+Color 4 occurrences: (10,5), (10,6), (10,7), (11,7), (12,7), (12,8) = 6 cells
+
+Order of first appearance: 1 (row 2), 3 (row 4), 8 (row 6), 4 (row 10)
+
+Output construction:
+- 8 ones (for color 1)
+- 5 threes (for color 3) 
+- 6 eights (for color 8)
+- 6 fours (for color 4)
+
+Total length: 25 rows
+
+ANSWER: [[1], [1], [1], [1], [1], [1], [1], [1], [3], [3], [3], [3], [3], [8], [8], [8], [8], [8], [8], [4], [4], [4], [4], [4], [4]]

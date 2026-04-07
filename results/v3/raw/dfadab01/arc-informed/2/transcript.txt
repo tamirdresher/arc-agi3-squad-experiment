@@ -1,0 +1,67 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 20x20 grid with scattered colored numbers (2, 3, 5, 6) and a 2x2 block of 6s
+- Key objects: 2x2 block of 6s at positions (1-2, 1-2) and (3-4, 3-4), scattered 2s, 3s, and 5s
+- Output: The 2x2 blocks of 6s are replaced/transformed into larger rectangular patterns with different colors (1s, 4s, 6s). The scattered individual numbers seem to create rectangular regions filled with specific patterns.
+
+**Example 2:**
+- Input: 10x10 grid with scattered 2s, 3s, and a 2x2 block of 1s
+- Key objects: 2x2 block of 1s at positions (5-8, 6-8), scattered 2s and 3s
+- Output: The 2x2 block of 1s remains, but rectangular regions appear around scattered numbers, filled with 4s and 1s in specific patterns.
+
+**Example 3:**
+- Input: 10x10 grid with a 4x4 block of 4s in top-left and scattered 2s
+- Key objects: 4x4 block of 4s at (0-3, 0-3), scattered 2s
+- Output: The original 4x4 block disappears, and new 4x4 blocks of 4s appear at positions corresponding to the scattered 2s.
+
+**Example 4:**
+- Input: 20x20 grid with scattered numbers (2, 3, 5, 8)
+- Output: Complex rectangular patterns with different colors (1s, 4s, 6s, 7s) appear in regions defined by the scattered numbers.
+
+PHASE 2 — MODEL:
+
+After analyzing all examples, I can see the transformation rule:
+
+1. **Identify reference patterns**: Look for existing rectangular blocks of non-zero numbers in the input
+2. **Identify marker positions**: Find scattered individual numbers (not part of blocks)
+3. **Transform**: For each marker number, place a copy of the reference pattern at that location, but with a color mapping based on the marker's value
+4. **Color mapping**: Different marker values get mapped to different colors in a consistent way
+5. **Original patterns**: The original reference patterns are removed/cleared
+
+The key insight is that scattered individual numbers act as "placement markers" that indicate where to place transformed copies of existing rectangular patterns.
+
+PHASE 3 — GOAL:
+
+For the test input:
+- I can see a 2x2 block of 7s at positions (5-8, 5-7)
+- There are scattered 8s throughout the grid
+- The 8s appear to be markers indicating where to place transformed versions of the 7-block
+
+The scattered 8s are at positions:
+- Row 1: columns 0, 4, 8, 12, 16
+- Row 5: columns 0, 16
+- Row 9: columns 0, 8, 16
+- Row 13: columns 0, 12, 16
+- Row 17: columns 0, 4, 8, 12, 16
+
+Based on the pattern, I need to place 2x2 blocks at each 8 position, with the 8s transformed to a different color (likely 4s based on the pattern in other examples).
+
+PHASE 4 — EXECUTE:
+
+The 2x2 pattern from the 7s should be replicated at each 8 position. Looking at the original 7-block structure:
+```
+0 7 7 0
+7 0 0 7
+7 0 0 7  
+0 7 7 0
+```
+
+This should be placed centered on each 8 position, with 7s converted to 4s.
+
+Let me construct the output grid:
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4], [4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4], [4, 0, 0, 4, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4], [4, 4, 4, 4, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4], [4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4], [4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4], [4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4], [4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4], [4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4], [4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 4, 0, 0, 4], [4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 4, 0, 0, 4], [4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4]]

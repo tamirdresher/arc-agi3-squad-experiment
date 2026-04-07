@@ -1,0 +1,43 @@
+Looking at the examples, I need to identify the pattern for extracting a rectangular region from the input grid.
+
+Let me analyze each example:
+
+**Example 1:**
+- The input has a rectangular region bounded by 3s (forming a border)
+- Inside this border are 8s and 6s forming a pattern
+- The output extracts this bordered rectangular region
+- The border of 3s is included in the output
+
+**Example 2:**
+- There's a rectangular region with 3s forming an inner border
+- Around this are 5s forming an outer pattern
+- The output captures the rectangular area that encompasses both the 5s and 3s patterns
+
+**Example 3:**
+- There's a checkerboard-like pattern of 4s
+- Inside this pattern are 1s and 2s
+- The output extracts the rectangular region containing this entire pattern
+
+The pattern seems to be: **Extract the minimal rectangular region that contains all the non-zero elements that form a coherent structured pattern.**
+
+**For the test input:**
+Looking at the non-zero elements, I can see:
+- 5s forming vertical and horizontal lines
+- 3s forming a bordered rectangular region  
+- A 4 inside the 3s region
+
+The structured pattern appears to be in rows 10-14, columns 7-19, where:
+- 5s form an outer border pattern
+- 3s form an inner rectangular border
+- There's a 4 inside the 3s region
+
+Let me extract this region:
+
+Rows 10-14, Columns 7-19:
+- Row 10: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]
+- Row 11: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5]  
+- Row 12: [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5, 5]
+- Row 13: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5]
+- Row 14: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]
+
+ANSWER: [[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]]

@@ -1,0 +1,41 @@
+Looking at the examples, I need to identify the pattern of transformation.
+
+Let me analyze each example:
+
+**Example 1:**
+- Input has columns with mixed values (2s and 5s in columns 2, 4, and 7)
+- Output shows that in each column, the non-zero values are replaced with the "boundary" value (the first or last non-zero value in that column)
+- Column 2: starts with 2, ends with 2 → all become 2
+- Column 4: starts with 2, ends with 2 → all become 2  
+- Column 7: starts with 2, ends with 2 → all become 2
+
+**Example 2:**
+- Column 2: starts with 2, ends with 2 → all become 2
+- Column 6: starts with 2, ends with 2 → all become 2
+
+**Example 3:**
+- Column 2: starts with 1, ends with 1 → all become 1
+- Column 5: starts with 1, ends with 1 → all become 1
+- Column 7: starts with 1, ends with 1 → all become 1
+- Column 10: starts with 3, ends with 3 → all become 3
+- Column 13: starts with 3, ends with 3 → all become 3
+
+The pattern is: For each column that contains non-zero values, replace all non-zero values in that column with the boundary value (which appears to be determined by the first/last non-zero value, and they're the same in all examples).
+
+**Test Input Analysis:**
+Looking at columns with non-zero values:
+- Column 0: has values 1,1,0,0,0,0,0,0,0,0 → boundary is 1
+- Column 1: has values 2,0,0,0,2,5,5,5,5,2 → boundary is 2
+- Column 2: has values 3,3,3,0,0,0,0,0,0,0 → boundary is 3
+- Column 3: has values 4,0,0,0,0,4,5,5,5,4 → boundary is 4
+- Column 6: has values 0,0,0,0,0,0,3,0,5,3 → boundary is 3
+- Column 8: has values 0,0,0,3,5,5,5,5,5,3 → boundary is 3
+- Column 10: has values 0,0,0,0,0,0,3,5,5,3 → boundary is 3
+- Column 13: has values 0,0,0,0,0,0,0,2,5,2 → boundary is 2
+- Column 15: has values 0,0,0,0,0,4,5,5,5,4 → boundary is 4
+- Column 16: has values 0,1,5,5,5,5,5,5,5,1 → boundary is 1
+- Column 18: has values 0,0,0,0,1,5,5,5,5,1 → boundary is 1
+- Column 19: has values 0,0,0,0,0,0,1,5,5,1 → boundary is 1
+
+ANSWER:
+[[1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0], [0, 2, 0, 4, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 4, 1, 0, 1, 0], [0, 2, 0, 4, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 0, 4, 1, 0, 1, 1], [0, 2, 0, 4, 0, 0, 3, 0, 3, 0, 3, 0, 0, 2, 0, 4, 1, 0, 1, 1], [0, 2, 0, 4, 0, 0, 3, 0, 3, 0, 3, 0, 0, 2, 0, 4, 1, 0, 1, 1], [0, 2, 0, 4, 0, 0, 3, 0, 3, 0, 3, 0, 0, 2, 0, 4, 1, 0, 1, 1]]

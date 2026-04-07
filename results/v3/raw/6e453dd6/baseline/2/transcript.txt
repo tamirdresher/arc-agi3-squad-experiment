@@ -1,0 +1,32 @@
+Looking at the examples, I need to identify the pattern of transformation.
+
+Let me analyze the structure:
+1. Each grid has a vertical line of 5s that acts as a divider
+2. The left side of the 5s contains patterns of 0s and 6s
+3. The right side starts as all 6s but gets modified based on the left side patterns
+
+Pattern analysis:
+- When there's a rectangular pattern of 0s on the left that forms a specific shape (like a cross or rectangle with internal structure), certain rows on the right side get filled with 2s
+- The key seems to be identifying rows that contain patterns with 0s that have 6s inside them (forming enclosed shapes)
+
+Looking at the examples:
+1. In Example 1, rows with patterns like "0 6 0" (where 6 is enclosed by 0s) get their right side filled with 2s
+2. In Example 2, similar pattern - rows with "0 6 0" get 2s on the right
+3. In Example 3, rows with patterns like "0 6 6 6 0" or "0 6 0 6 0" get 2s on the right
+
+For the test input, I need to:
+1. Keep the 5s column as is
+2. Mirror/shift the left side patterns to create the new left side
+3. Fill rows with 2s on the right side where the left side has 0-6-0 type patterns
+
+Analyzing the test input patterns:
+- Row 3: "0 6 0 6" - has enclosed 6s
+- Row 13: "0 6 6 0" - has enclosed 6s  
+- Row 17: "0 6 0" - has enclosed 6
+- Row 19: "0 6 0" - has enclosed 6
+- Row 23: "0 6 0" - has enclosed 6
+
+These rows should get 2s on the right side in the output.
+
+ANSWER:
+[[6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 0, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 0, 6, 0, 6, 6, 6, 5, 2, 2, 2], [6, 6, 0, 0, 0, 0, 0, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 0, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 0, 6, 6, 0, 5, 2, 2, 2], [6, 6, 6, 6, 0, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 6, 0, 6, 6, 5, 2, 2, 2], [6, 6, 0, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 6, 0, 6, 6, 5, 2, 2, 2], [6, 6, 6, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 0, 0, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 6, 0, 2, 2, 2], [6, 6, 6, 6, 6, 6, 0, 0, 0, 6, 6, 6]]

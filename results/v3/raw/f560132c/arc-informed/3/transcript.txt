@@ -1,0 +1,76 @@
+PHASE 1 — EXPLORE:
+
+**Example 1 Analysis:**
+Input grid: 20x20, contains several distinct colored regions:
+- A red (2) L-shaped region in upper left with internal cells containing 1, 5, 8, 9
+- A yellow (7) rectangular block in upper right (4x3)
+- A blue (4) irregular L-shaped region in lower left
+- A green (3) small rectangular region in lower right
+
+Output grid: 8x8, appears to be a combination/fusion of the internal elements from the red region (1, 5, 8, 9) arranged in a specific pattern.
+
+**Example 2 Analysis:**
+Input grid: 20x20, contains several distinct colored regions:
+- A cyan (6) irregular region in middle-left with internal cells containing 2, 4, 8, 3
+- A magenta (5) irregular region in upper right
+- A purple (9) rectangular region in lower left
+- A white (1) rectangular region in lower right
+
+Output grid: 10x6, again appears to combine the internal elements from the cyan region (2, 4, 8, 3) in a structured arrangement.
+
+**Key observations:**
+1. Both outputs are much smaller than inputs
+2. The output seems to focus on one specific colored region that contains non-zero, non-background internal elements
+3. The internal elements get arranged in some systematic pattern
+4. Other colored regions in the input appear to influence the output dimensions or arrangement
+
+PHASE 2 — MODEL:
+
+**Proposed Rule:**
+1. Identify the colored region that contains multiple different non-zero internal values (not just the region's own color)
+2. Extract these internal values: their types and positions within that region
+3. The output grid dimensions seem to be influenced by other colored regions in the input
+4. Arrange the extracted internal values in a specific pattern that fills the output grid
+
+**Refinement after closer analysis:**
+Looking more carefully, I notice the output seems to create a rectangular grid where:
+- The internal elements from the "source" region are distributed
+- The arrangement follows some spatial logic related to their original positions
+- The dimensions appear to be related to the bounding boxes of other colored regions
+
+**Final Rule:**
+1. Find the colored region containing multiple distinct internal non-zero values
+2. Extract these values and their relative positions
+3. Create an output grid whose dimensions are determined by the largest rectangular regions of other colors
+4. Fill this grid by expanding/distributing the internal elements in a pattern that preserves their relative spatial relationships
+
+PHASE 3 — GOAL:
+
+**Test Input Analysis:**
+- Purple (9) region in upper-middle-left contains internal values: 3, 6, 4, 8
+- Yellow (5) region forms an irregular shape on the right side  
+- Orange (7) region in lower-left
+- Red (2) region in lower-right
+
+The purple region at positions around (5,4) contains: 3 at (5,4), 6 at (5,5), 4 at (6,4), 8 at (6,5)
+
+Looking at other regions to determine output dimensions:
+- The yellow (5) region spans roughly 10 columns and 6-8 rows when considering its full extent
+- This suggests an output around 10x8 or similar
+
+The internal 2x2 pattern from purple region: [[3,6],[4,8]]
+
+PHASE 4 — EXECUTE:
+
+Based on the pattern analysis, I need to create a grid that expands the 2x2 internal pattern [[3,6],[4,8]] found in the purple region.
+
+Looking at the examples more carefully:
+- Example 1: 2x2 internal pattern [[1,5],[8,9]] expanded to 8x8
+- Example 2: 2x2 internal pattern [[2,4],[8,3]] expanded to 10x6
+
+The expansion seems to create regions where each of the 4 values dominates certain areas of the output grid.
+
+For the test input with pattern [[3,6],[4,8]], creating an approximately 10x8 grid:
+
+ANSWER:
+[[3, 3, 3, 3, 3, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 6, 6, 6, 6, 6], [3, 3, 3, 3, 6, 6, 6, 6, 6, 6], [3, 3, 3, 6, 6, 6, 6, 6, 6, 6], [4, 4, 4, 4, 6, 6, 6, 6, 8, 8], [4, 4, 4, 4, 4, 8, 8, 8, 8, 8], [4, 4, 4, 4, 8, 8, 8, 8, 8, 8], [4, 4, 4, 8, 8, 8, 8, 8, 8, 8]]

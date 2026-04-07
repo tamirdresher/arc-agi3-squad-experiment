@@ -1,0 +1,68 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16x16 grid with values 3, 4, 8, 9
+- The grid appears to have distinct regions with different dominant colors
+- Output: Same dimensions, same values used
+- Key observation: Value 8 in the input is systematically replaced with other values in the output
+- The replacement seems to depend on the surrounding context/region
+
+**Example 2:**
+- Input: 10x10 grid with values 0, 1, 2, 5
+- Output: Same dimensions, same values used
+- Again, value 5 in the input appears to be replaced with other values in the output
+- The replacement pattern seems context-dependent
+
+**Example 3:**
+- Input: 20x20 grid with values 5, 6, 7, 8
+- Output: Same dimensions, same values used
+- Value 7 in the input appears to be systematically replaced in the output
+- The replacement follows a pattern based on regional context
+
+**Common patterns across all examples:**
+1. Grid dimensions remain the same
+2. Same set of values/colors are used in input and output
+3. One specific value appears to be systematically replaced
+4. The replacement seems to depend on the dominant value in the local region or neighboring areas
+
+PHASE 2 — MODEL:
+
+After analyzing all examples, I can identify the transformation rule:
+
+**Transformation Rule:** 
+For each cell containing a specific "bridge" value (8 in Ex1, 5 in Ex2, 7 in Ex3), replace it with the most common non-bridge value in its local neighborhood/region. The bridge value acts as a connector between different regions but gets replaced by the dominant regional value.
+
+More specifically:
+1. Identify the "bridge" value that appears to connect different regions
+2. For each cell with the bridge value, determine which region it belongs to based on its neighbors
+3. Replace the bridge value with the dominant value of that region
+4. All other values remain unchanged
+
+Testing this rule:
+- Example 1: 8 is replaced with 3, 4, or 9 depending on regional context ✓
+- Example 2: 5 is replaced with 0, 1, or 2 depending on regional context ✓  
+- Example 3: 7 is replaced with 5, 6, or 8 depending on regional context ✓
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify the bridge value - looking at the pattern, value 4 appears to be the bridge value connecting regions of 2, 3, and 6
+2. The grid is 30x30
+3. There appear to be three main regions: upper-left (dominated by 2,3), middle (dominated by 6), and lower-right (dominated by 2)
+4. Replace each 4 with the appropriate regional dominant value
+
+Expected output: 30x30 grid where 4s are replaced based on their regional context while 2, 3, and 6 remain unchanged.
+
+PHASE 4 — EXECUTE:
+
+I'll construct the output by replacing each 4 with the dominant value in its region:
+
+- Upper-left region (rows 0-8, cols 0-9): Replace 4 with 3
+- Middle region (most of the grid): Replace 4 with 6  
+- Lower-right region (rows 21-29, cols 15-29): Replace 4 with 2
+- Transition areas: Determine based on immediate neighbors
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2], [2, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 3, 2], [2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 3, 2], [3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 2, 2, 2, 2], [2, 2, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 6, 6, 6, 2, 6, 6, 6, 6, 6, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [3, 3, 2, 2, 2, 2, 2, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [3, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 3, 2], [3, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2], [2, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]]

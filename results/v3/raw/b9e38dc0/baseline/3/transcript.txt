@@ -1,0 +1,36 @@
+Looking at the examples, I need to identify the pattern for how the input transforms to the output.
+
+Let me analyze each example:
+
+**Example 1:**
+- Input has a shape made of 3s, with a 9 inside it, and some 5s below
+- Output: The 9 "floods" or expands outward from its original position, filling areas bounded by 3s and extending beyond
+
+**Example 2:**
+- Input has a shape made of 5s with a 4 inside it
+- Output: The 4 expands/floods outward, filling a triangular region in the upper-left and areas within the 5-bounded shape
+
+**Example 3:**
+- Input has a shape made of 9s with 3s inside it, plus scattered 6s and an 8
+- Output: The 3s expand to fill the area bounded by 9s and extend upward
+
+The pattern appears to be:
+1. Identify a "seed" value that appears inside a bounded shape
+2. The seed value floods/expands outward from its original position
+3. The flooding respects certain boundaries (the outline shapes) but can also extend beyond them
+4. Other scattered values (like isolated numbers) remain unchanged
+
+**For the test input:**
+- There's a shape made of 4s
+- Inside this shape, there's a 2 at position (8,14)
+- There are also scattered values: 3 at (6,4), another 3 at (9,6), and 8 at (8,2)
+
+Following the pattern, the 2 should flood outward from its position, filling the area bounded by 4s and potentially extending beyond.
+
+Let me trace the flooding pattern:
+- Start from the 2 at (8,14)
+- Fill the interior of the 4-bounded shape
+- Extend outward in a pattern similar to the previous examples
+
+ANSWER:
+[[1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1], [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 4, 4, 4, 2, 2], [2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 2, 4, 2, 2, 4, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 4, 2, 2], [2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2], [2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 2, 2, 4, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 4, 4, 4, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1], [1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1], [1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1]]

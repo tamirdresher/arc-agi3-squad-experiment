@@ -1,0 +1,110 @@
+## PHASE 1 — EXPLORE
+
+**Example 1:**
+- Input: 16x16 grid with background 7s, containing scattered values 1, 2, and 9
+- Non-7 values form diagonal-like patterns:
+  - Value 2: appears in upper-left area in diagonal formations
+  - Value 9: appears in middle area in diagonal formations  
+  - Value 1: appears in lower-right area in diagonal formations
+- Output: Same grid but with some changes - certain diagonal patterns appear to be extended or completed
+- The 1s, 2s, and 9s seem to form more complete diagonal lines in the output
+
+**Example 2:**
+- Input: 16x16 grid with background 7s, containing horizontal lines of values 5, 9, and 3
+- Value 5: short horizontal line (2 cells) at row 2, columns 3-4
+- Value 9: longer horizontal line (7 cells) at row 6, columns 3-9
+- Value 3: longest horizontal line (12 cells) at row 8, columns 3-14
+- Output: The short line of 5s is extended to match the length of the 9s line (7 cells)
+- The 3s line is shortened to match the length of the 9s line (7 cells)
+- All three lines now have the same length and alignment
+
+**Example 3:**
+- Input: 16x16 grid with background 7s, containing vertical columns of 8s
+- Multiple vertical columns of 8s of varying heights in rows 2-7
+- Output: All vertical columns of 8s are extended to the same height (rows 2-5, 4 rows tall)
+- The columns maintain their horizontal positions but are normalized in height
+
+## PHASE 2 — MODEL
+
+The transformation rule appears to be: **Normalize the length/size of similar geometric patterns to match a reference pattern.**
+
+More specifically:
+1. Identify distinct non-background values (not 7s)
+2. For each value, identify the geometric pattern it forms (horizontal lines, vertical lines, or diagonal lines)
+3. Within each pattern type, find a reference length (often the middle-length pattern or most complete one)
+4. Extend or truncate other patterns of the same type to match the reference length
+5. Maintain the starting positions and orientations of the original patterns
+
+Testing against examples:
+- Example 1: Diagonal patterns of different values are extended/completed to form consistent diagonal lines
+- Example 2: Horizontal lines are normalized to the middle length (7 cells)
+- Example 3: Vertical columns are normalized to a consistent height (4 rows)
+
+## PHASE 3 — GOAL
+
+Analyzing the test input:
+- Background: 7s
+- Non-background values: 8 and 6
+- Value 8: Forms diagonal patterns in upper-left area
+- Value 6: Forms diagonal patterns in lower-right area
+
+The 8s appear to form a diagonal line going from upper-left to lower-right, but it's incomplete.
+The 6s appear to form diagonal patterns in the lower portion, also incomplete.
+
+Based on the rule, I need to:
+1. Complete/normalize the diagonal patterns
+2. The 8s seem to start around (2,5) and go diagonally down-left
+3. The 6s form diagonal patterns in the lower area
+
+Looking more carefully at the 8s: they form a diagonal from (2,5) going down and to the left, then another section from (4,7) going down and to the left.
+
+The 6s form diagonal patterns in rows 6-15, appearing to go in various diagonal directions.
+
+I should normalize these diagonal patterns to create consistent, complete diagonal lines.
+
+## PHASE 4 — EXECUTE
+
+Looking at the diagonal patterns more systematically:
+
+For the 8s: They appear in positions that suggest a diagonal line pattern. I need to complete this pattern consistently.
+
+For the 6s: They form diagonal patterns in the lower portion. I need to identify the main diagonal direction and complete it.
+
+Examining the 8 positions: (2,5), (3,4), (4,3), (5,2), (4,7), (6,5)
+This suggests two diagonal lines going down-left.
+
+Examining the 6 positions: They form various diagonal patterns in the lower area.
+
+I'll complete the diagonal patterns to create consistent lines:
+
+```python
+output = [[7 for _ in range(16)] for _ in range(16)]
+
+# Complete the 8 diagonal patterns
+# First diagonal: from (2,5) going down-left
+for i in range(4):
+    row, col = 2+i, 5-i
+    if 0 <= row < 16 and 0 <= col < 16:
+        output[row][col] = 8
+
+# Second diagonal: from (4,7) going down-left  
+for i in range(4):
+    row, col = 4+i, 7-i
+    if 0 <= row < 16 and 0 <= col < 16:
+        output[row][col] = 8
+
+# Complete the 6 diagonal patterns based on observed positions
+# Main diagonal patterns for 6s
+diagonal_6_positions = [
+    (6,9), (7,8), (8,7), (9,6), (9,12), (10,11), (11,10), (11,14), 
+    (12,9), (12,13), (13,8), (13,12), (14,11), (15,10)
+]
+
+for row, col in diagonal_6_positions:
+    output[row][col] = 6
+```
+
+Let me construct this more systematically by analyzing the actual diagonal patterns:
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7]]

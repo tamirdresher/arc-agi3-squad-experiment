@@ -1,0 +1,54 @@
+Let me analyze the patterns in the examples step by step.
+
+## Analysis of Example 1:
+
+**Input observations:**
+- The input has a rectangular border made of 5's (rows 8-22, columns 3-21)
+- Inside this border, there are repeating patterns of 3x3 blocks containing values 3 and 1
+- Outside the border, there are small 2x2 or similar blocks with values like 1, 4, 3, 2, 8
+
+**Output observations:**
+- The output is smaller than the input
+- It has a border of 5's
+- Inside the border, there are repeating patterns with values 2, 4, and 8
+- The internal structure seems to be organized in a grid pattern
+
+## Analysis of Example 2:
+
+**Input observations:**
+- Again, there's a rectangular border made of 5's (rows 8-20, columns 5-22)
+- Inside this border, there are 4x4 blocks with values 2, 3, and 6
+- Outside the border, there are small blocks with various values
+
+**Output observations:**
+- Smaller output with 5's border
+- Internal pattern uses values 4, 7, 8, and 1
+- The blocks are arranged in a systematic grid
+
+## Pattern Recognition:
+
+1. The input contains a large rectangular region bordered by 5's
+2. Inside this region, there are repeating rectangular blocks of the same size
+3. Outside the border region, there are smaller blocks in the corners/edges
+4. The output extracts and transforms the pattern from inside the bordered region
+5. The small blocks from outside the border seem to determine what values replace the repeated blocks inside
+
+## Applying to Test Input:
+
+Looking at the test input:
+- There's a border of 5's from rows 9-29, columns 0-20
+- Inside this border, I can see repeating patterns
+- Outside the border, there are small blocks in the upper portion
+
+Let me identify the small blocks outside the border:
+- Top-left: 3x3 block with mostly 3's and 9's
+- Top area: 2x2 block with 2's and 1's  
+- Top area: 1x2 block with 1's and 6's
+- And others with values like 8, 7, etc.
+
+The bordered region contains repeating 5x5 blocks. Looking at the pattern inside, I need to map the repeating blocks to the values from the small exterior blocks.
+
+After careful analysis of the interior pattern and the mapping rules from the examples:
+
+ANSWER:
+[[5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]]

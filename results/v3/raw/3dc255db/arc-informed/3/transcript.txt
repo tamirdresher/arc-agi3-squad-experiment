@@ -1,0 +1,85 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input has two distinct regions: upper-left with 4s and 6s, lower region with 3s and 7s
+- The 4s form a connected blob, 6s are scattered around it
+- The 3s form a connected blob, 7s are scattered within/around it
+- Output: The scattered colors (6s and 7s) are moved to extend along the boundaries of their respective main blobs
+- Grid: 12x12, colors used: 0,3,4,6,7
+
+**Example 2:**
+- Input has two regions: left with 3s and 9s, right with 6s and 9s
+- 3s form vertical lines, 9s are scattered
+- 6s form a rectangular pattern, 9s are scattered
+- Output: The 9s are repositioned - they extend upward from their original positions in vertical lines
+- Grid: 10x10, colors used: 0,3,6,9
+
+**Example 3:**
+- Input has one main region with 6s forming a diamond/house shape and 7s scattered inside
+- Output: The 7s are moved to extend upward in a vertical line from the top of the 6s structure
+- Grid: 12x12, colors used: 0,6,7
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I can identify a consistent transformation rule:
+
+**Rule:** For each connected region of a "primary" color, identify any "secondary" colors that appear within or adjacent to that region. Move all instances of the secondary colors to form vertical extensions (lines) that project upward from the topmost points of the primary color region. The secondary colors maintain their relative horizontal positions but extend vertically upward from the boundary of the primary region.
+
+Testing this rule:
+- Example 1: 4s (primary) with 6s (secondary) → 6s extend upward; 3s (primary) with 7s (secondary) → 7s extend leftward/upward
+- Example 2: 3s (primary) with 9s (secondary) → 9s extend upward; 6s (primary) with 9s (secondary) → 9s extend upward  
+- Example 3: 6s (primary) with 7s (secondary) → 7s extend upward
+
+The rule works consistently across all examples.
+
+PHASE 3 — GOAL:
+
+Applying to test input:
+- I can identify several regions:
+  1. Upper region: 2s form horizontal rectangles with 4s scattered inside
+  2. Lower-left region: 9s form a shape with 7s scattered inside
+  3. Lower-right region: 8s and 2s form a pattern
+
+For each primary color region, I need to:
+- Find the secondary colors within/adjacent
+- Move secondary colors to extend vertically upward from the top boundary
+- Keep primary colors in their original positions
+
+Expected output: 13x13 grid with:
+- 4s extending upward from the 2s region
+- 7s extending upward from the 9s region  
+- Other colors maintaining their structure
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid systematically:
+
+1. Upper region (2s with 4s): The 4s at positions around (3,6-8) should extend upward
+2. Lower region (9s with 7s): The 7s should extend upward from the 9s structure
+3. The 8s and 2s in the lower right appear to be separate structures
+
+Building the grid:
+
+```
+Row 0: [0,0,0,0,0,0,4,4,4,0,0,0,0] - 4s extend upward
+Row 1: [0,0,0,0,0,0,4,4,4,0,0,0,0] - 4s extend upward  
+Row 2: [0,0,0,0,0,2,2,2,2,2,0,0,0] - original 2s
+Row 3: [0,0,0,0,0,0,0,0,0,0,2,0,0] - original 2s
+Row 4: [0,0,0,0,0,2,2,2,2,2,0,0,0] - original 2s
+Row 5: [0,0,0,0,0,0,0,0,0,0,0,0,0] - empty
+Row 6: [0,0,0,9,0,0,0,0,0,0,0,0,0] - original 9s
+Row 7: [0,0,9,9,0,0,0,0,0,8,0,0,0] - original 9s and 8s
+Row 8: [0,9,0,0,9,0,0,0,0,0,8,0,0] - original 9s and 8s
+Row 9: [0,9,7,7,9,0,0,2,0,0,2,8,0] - 7s moved up from lower positions
+Row 10: [0,9,0,0,9,0,0,0,0,2,8,0,0] - original 9s, 2s, 8s
+Row 11: [0,9,0,0,9,0,0,0,0,8,0,0,0] - original 9s, 8s
+```
+
+Wait, let me reconsider the rule. Looking more carefully at the examples, the secondary colors seem to extend upward to form vertical lines from the top boundary of their associated primary region.
+
+Let me rebuild:
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0], [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0], [0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 9, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 2, 0, 0, 2, 8, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 2, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0]]

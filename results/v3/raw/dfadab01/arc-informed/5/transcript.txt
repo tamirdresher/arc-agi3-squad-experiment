@@ -1,0 +1,83 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 20x20 grid with scattered colored numbers (2, 3, 5, 6) and two 2x2 blocks of 6s
+- The 6s form two 2x2 blocks at positions (1-2, 1-2) and (3-4, 3-4)
+- Other numbers: 2s at (1,8), (1,13), (6,8), (6,13); 5s at (5,5), (11,8), (11,13); 3s at (11,2), (16,2), (16,8), (16,13)
+- Output: The 2x2 blocks of 6s are removed. New patterns appear where the scattered numbers were:
+  - At 2 positions: 4x4 hollow rectangles (border of 4s, hollow inside)
+  - At 5 positions: 2x2 solid blocks of 6s
+  - At 3 positions: 4x4 hollow rectangles (border of 1s, hollow inside)
+
+**Example 2:**
+- Input: 10x10 grid with a 4x4 hollow rectangle of 1s at (5-8, 6-8), and scattered 2s and 3s
+- 2s at (1,5), (5,1); 3s at (1,1), (5,5), (9,9)
+- Output: The 4x4 hollow rectangle of 1s stays in place. New patterns appear:
+  - At 2 positions: 4x4 hollow rectangles of 4s
+  - At 3 positions: 4x4 hollow rectangles of 1s (but one overlaps with existing pattern)
+
+**Example 3:**
+- Input: 10x10 grid with a 4x4 hollow rectangle of 4s at (0-3, 0-3), and scattered 2s
+- 2s at (0,6), (4,4), (6,0), (6,6)
+- Output: The original 4x4 hollow rectangle of 4s disappears. New 4x4 hollow rectangles of 4s appear at the 2 positions.
+
+**Example 4:**
+- Input: 20x20 grid with scattered numbers 2, 3, 5, 8 in a regular pattern
+- Output: Complex pattern with multiple types of shapes appearing at different number positions
+
+PHASE 2 — MODEL:
+
+After analyzing all examples, I can see the transformation rule:
+
+**TRANSFORMATION RULE:**
+1. Identify all existing rectangular patterns (solid blocks or hollow rectangles) in the input
+2. Identify all scattered single-cell numbers in the input
+3. Remove all existing rectangular patterns from the grid
+4. For each scattered number, place a new rectangular pattern at that position:
+   - The type and size of pattern depends on the number value
+   - Different numbers create different pattern types (solid blocks, hollow rectangles, etc.)
+   - The patterns are typically 2x2 or 4x4 in size
+
+Looking more specifically:
+- Number 2 creates 4x4 hollow rectangles with value 4
+- Number 3 creates 4x4 hollow rectangles with value 1  
+- Number 5 creates 2x2 solid blocks with value 6
+- Number 8 creates different patterns depending on context
+
+Let me verify this against the examples... The rule seems consistent but the exact mapping of numbers to patterns varies between examples, suggesting the rule might be more context-dependent.
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify the existing pattern: There's a 4x4 hollow rectangle made of 7s at positions (5-8, 4-7)
+2. Identify scattered 8s at positions: (1,0), (1,4), (1,8), (1,12), (1,16), (5,0), (5,16), (9,0), (9,8), (9,16), (13,0), (13,12), (13,16), (17,0), (17,4), (17,8), (17,12), (17,16)
+3. Remove the existing 7-pattern
+4. Place new patterns at each 8 position
+
+Based on the examples, 8s seem to create 4x4 hollow rectangles. The pattern should be placed with the scattered number at the top-left corner of a 4x4 hollow rectangle.
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid systematically, placing 4x4 hollow rectangles at each 8 position:
+
+The 8 positions and their corresponding 4x4 hollow rectangles:
+- (1,0): rectangle from (1,0) to (4,3)
+- (1,4): rectangle from (1,4) to (4,7)
+- (1,8): rectangle from (1,8) to (4,11)
+- (1,12): rectangle from (1,12) to (4,15)
+- (1,16): rectangle from (1,16) to (4,19)
+- And so on for all 8 positions...
+
+Each 4x4 hollow rectangle has the pattern:
+```
+X X X X
+X 0 0 X  
+X 0 0 X
+X X X X
+```
+where X represents the border value (which appears to be 4 based on the examples).
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4], [4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4], [4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4], [4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4], [4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4], [4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4], [4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 4], [4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 4, 4, 4, 4], [4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4], [4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 4, 0, 0, 4], [4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 4, 0, 0, 4], [4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4], [4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4]]

@@ -1,0 +1,29 @@
+Let me analyze the pattern in these examples.
+
+Looking at the inputs, I can see that each has a pattern made of 8s on a background of 0s. Let me examine what happens in the transformation:
+
+Example 1: The input has a small cross-like pattern of 8s. The output shows a complex maze-like structure with 8s forming walls and paths.
+
+Example 2: The input has a cross pattern (vertical and horizontal lines intersecting). The output again shows a maze-like structure.
+
+Example 3: The input has another cross pattern. The output follows the same maze pattern.
+
+The pattern seems to be:
+1. The input contains a cross or plus-sign pattern made of 8s
+2. The output transforms this into a recursive maze-like structure
+3. The maze appears to be generated using the cross pattern as a "seed" or generator
+
+Looking more closely at the outputs, I can see that:
+- The maze structures seem to follow a recursive pattern
+- The original cross pattern influences where the maze structures are placed
+- The maze fills most of the grid with a complex pattern of 8s and 0s
+
+For the test input, I can see:
+- There's a vertical line of 8s at column 10 (from rows 8-16)
+- There's a horizontal line of 8s at row 12 (from columns 6-14, with a gap at column 10)
+- This forms a cross pattern centered around position (12, 10)
+
+Based on the pattern observed in the examples, I need to generate a similar recursive maze structure. The maze appears to follow a fractal-like pattern where the cross generates nested rectangular regions filled with maze patterns.
+
+ANSWER:
+[[0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0], [8, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0], [8, 0, 0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 8, 0], [8, 0, 8, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0], [8, 0, 8, 0, 0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 8, 0, 8, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 0, 8, 0, 8, 8, 8, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 8, 8, 0, 8, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 0, 8, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 8, 0, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 8, 8, 8, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 8, 8, 8, 8, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 0, 0, 0, 0, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0], [0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0], [8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0], [0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0], [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8]]

@@ -1,0 +1,36 @@
+Looking at this puzzle, I need to identify the pattern from the examples.
+
+Let me analyze the examples:
+
+In Example 1, I can see rectangular regions bounded by 0s that contain colored cells (like 3, 4, 2, 8). In the output, these colored cells appear to be "extended" or "projected" outward from their rectangles in specific directions.
+
+In Example 2, there are similar rectangular regions with 0 boundaries, and colored cells (1, 4, 6, 3, 2, 7) get projected outward.
+
+In Example 3, the same pattern occurs with colored cells being projected from their bounded rectangles.
+
+The pattern seems to be:
+1. Identify rectangular regions bounded by 0s
+2. For each colored cell (non-background, non-0) within these rectangles
+3. Project/extend that colored cell outward from the rectangle in a specific direction
+4. The projection creates a 2x2 block of that color adjacent to the rectangle
+
+Let me trace this in the test input:
+
+I can identify several rectangular regions bounded by 0s:
+- Top-left rectangle (rows 2-7, cols 2-7)
+- Middle-right rectangle (rows 5-12, cols 13-20)  
+- Bottom-left rectangle (rows 14-18, cols 0-6)
+
+Within these rectangles, I can see:
+- Cell 4 at position (3,3) in top-left rectangle
+- Cell 1 at position (6,6) in top-left rectangle
+- Cell 2 at position (4,13) in middle-right rectangle
+- Cell 2 at position (6,14) in middle-right rectangle
+- Cell 6 at position (6,19) in middle-right rectangle
+- Cell 8 at position (11,19) in middle-right rectangle
+- Cell 5 at position (15,5) in bottom-left rectangle
+
+Following the pattern from the examples, each colored cell should be projected outward from its rectangle to form a 2x2 block.
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 4, 4, 3, 3, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 4, 4, 0, 0, 1, 1, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 4, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 2, 2, 3, 3, 3, 6, 0, 3], [3, 3, 0, 3, 3, 3, 1, 0, 3, 3, 3, 3, 3, 0, 2, 2, 3, 3, 3, 6, 0, 3], [3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 2, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 8, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 8, 8, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 3], [5, 5, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [5, 5, 3, 3, 3, 5, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

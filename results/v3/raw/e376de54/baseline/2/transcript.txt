@@ -1,0 +1,42 @@
+Looking at the examples, I need to identify the pattern for how the input transforms into the output.
+
+Let me analyze each example:
+
+**Example 1:**
+- Input has scattered 2s, 9s, and 1s on a background of 7s
+- Output shows these same values but with some modifications - certain patterns are extended or completed
+
+**Example 2:**
+- Input has horizontal lines of 5s (length 2), 9s (length 7), and 3s (length 13)
+- Output extends the 5s line to match the length of the 9s line (7), while keeping 9s and 3s unchanged
+
+**Example 3:**
+- Input has vertical columns of 8s with some gaps
+- Output fills in the gaps to make complete vertical columns where 8s appear
+
+The pattern seems to be: **Find incomplete patterns and complete them by extending or filling gaps to match the longest or most complete version of that pattern.**
+
+**Test Input Analysis:**
+Looking at the test input, I can see:
+1. Diagonal pattern of 8s in the upper left (going from upper-right to lower-left)
+2. Diagonal pattern of 6s in the middle-right area
+
+Let me trace the 8s:
+- Row 2, col 5: 8
+- Row 3, col 4: 8  
+- Row 4, col 3: 8
+- Row 5, col 2: 8
+- Row 4, col 7: 8 (separate)
+- Row 5, col 6: 8 (separate)
+- Row 6, col 5: 8
+
+For the 6s, they form diagonal patterns as well.
+
+The pattern appears to be completing diagonal lines. I need to extend the diagonal patterns to their full logical extent.
+
+For the 8s, I can see a main diagonal from (2,5) going down and left, and another shorter diagonal. I should complete these diagonals.
+
+For the 6s, there are diagonal patterns that should be completed as well.
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 8, 7, 7, 7, 8, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7]]

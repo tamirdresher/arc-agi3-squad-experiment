@@ -1,0 +1,37 @@
+Looking at the examples, I need to identify the pattern:
+
+1. There are rectangular shapes made of a non-background color (like 1, 4, or 8)
+2. There are isolated 2's scattered around the grid
+3. The transformation involves:
+   - Keeping the rectangular shapes unchanged
+   - Removing isolated 2's that are outside the rectangles
+   - For 2's that are inside rectangles, they remain as 2
+   - Creating connections from 2's inside rectangles to 2's outside by drawing lines of 0's
+   - When 2's form clusters (2x2 blocks), the entire cluster gets replaced with 0's
+
+Let me analyze the test input:
+
+I can see rectangular shapes made of 4's:
+- One rectangle around rows 3-6, columns 14-20
+- Another rectangle around rows 7-13, columns 7-10  
+- A third rectangle around rows 17-20, columns 20-26
+
+There are various 2's scattered throughout, including some 2x2 clusters.
+
+Following the pattern from the examples:
+1. Keep all 4-rectangles unchanged
+2. Find 2's that are inside rectangles
+3. Find 2x2 clusters of 2's and replace them with 0's
+4. Draw connecting lines of 0's from 2's inside rectangles to nearby 2's/clusters
+5. Remove isolated 2's that don't connect to anything
+
+The 2x2 clusters I can identify are:
+- Rows 0-1, columns 23-24
+- Rows 9-10, columns 2-3  
+- Rows 9-10, columns 22-23
+- Rows 20-21, columns 6-7
+
+These should all become 0's, and there should be connecting lines of 0's from the 2's inside the rectangles.
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 2, 3, 3, 2, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 4, 3, 4, 4, 3, 4, 3], [3, 3, 0, 0, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 0, 2, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4], [3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

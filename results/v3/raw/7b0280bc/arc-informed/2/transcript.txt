@@ -1,0 +1,88 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 18×18 grid, mostly filled with 8s (background)
+- Contains scattered 0s, 1s, and 2s in various positions
+- 2×2 blocks of 2s appear in several locations
+- 2×2 blocks of 1s appear in a few locations
+- Single 0s form various patterns
+
+- Output: Same dimensions, same background of 8s
+- 2×2 blocks of 2s are replaced with 2×2 blocks of 3s
+- 2×2 blocks of 1s remain as 1s
+- Single 0s that form vertical/diagonal lines are replaced with 5s
+- Some 0s remain as 0s
+
+**Example 2:**
+- Input: 15×14 grid, mostly filled with 9s (background)
+- Contains 4s, 6s, and 7s
+- 2×2 blocks of 7s appear in several locations
+- 2×2 blocks of 6s appear in a few locations
+- Single 4s form various patterns
+
+- Output: Same dimensions, same background of 9s
+- 2×2 blocks of 7s are replaced with 2×2 blocks of 3s
+- 2×2 blocks of 6s remain as 6s
+- Single 4s that form vertical/diagonal lines are replaced with 5s
+- Some 4s remain as 4s
+
+**Example 3:**
+- Input: 20×20 grid, mostly filled with 7s (background)
+- Contains 1s, 2s, and 6s
+- 2×2 blocks of 1s appear in several locations
+- 2×2 blocks of 2s appear in a few locations
+- Single 6s form various patterns
+
+- Output: Same dimensions, same background of 7s
+- 2×2 blocks of 1s are replaced with 2×2 blocks of 3s
+- 2×2 blocks of 2s remain as 2s
+- Single 6s that form vertical/diagonal lines are replaced with 5s
+- Some 6s remain as 6s
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I can identify a consistent transformation rule:
+
+**Transformation Rule:**
+1. The background color (most frequent value) remains unchanged
+2. Identify 2×2 blocks of the same non-background color
+3. For the most frequent type of 2×2 block, replace all instances with 2×2 blocks of 3s
+4. For single instances of one specific color that form connected vertical or diagonal lines, replace with 5s
+5. All other values remain unchanged
+
+Testing this rule:
+- Example 1: Most frequent 2×2 blocks are 2s → become 3s. Vertical/diagonal lines of 0s → become 5s ✓
+- Example 2: Most frequent 2×2 blocks are 7s → become 3s. Vertical/diagonal lines of 4s → become 5s ✓  
+- Example 3: Most frequent 2×2 blocks are 1s → become 3s. Vertical/diagonal lines of 6s → become 5s ✓
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Background: 4s (most frequent)
+- 2×2 blocks present: 9s (multiple instances) and 1s (multiple instances)
+- Single values: 0s form some patterns
+- Grid dimensions: 30×30
+
+Applying the rule:
+- 2×2 blocks of 9s should become 2×2 blocks of 3s (9s appear more frequently as 2×2 blocks)
+- Single 0s that form connected vertical/diagonal lines should become 5s
+- Everything else stays the same
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid by scanning the input and applying transformations:
+
+Looking at the test input more carefully:
+- There are several 2×2 blocks of 9s at positions like (2-3, 2-4), (12-13, 13-14), etc.
+- There are 2×2 blocks of 1s in various positions
+- There are 3×3 blocks of 0s at positions (8-10, 6-8) and (18-20, 21-23)
+
+Counting the 2×2 blocks:
+- 9s appear as 2×2 blocks more frequently
+- So 9s → 3s
+- Connected 0s in the 3×3 blocks should become 5s
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 5, 5, 5, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4], [4, 4, 4, 1, 1, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 3, 3, 3, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

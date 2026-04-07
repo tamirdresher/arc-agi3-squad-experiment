@@ -1,0 +1,73 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 22x22 grid filled mostly with 4s (background)
+- Key objects: A 3x3 pattern of 2s at rows 3-5, cols 12-14 (diamond/cross shape), and scattered 8s at positions (6,4), (8,2), (8,4), (8,6), (10,4), (12,4)
+- Output: The 2s pattern is replicated/transformed in multiple locations, and 8s are placed in specific positions
+- The original 2s pattern appears to be duplicated and moved, with 8s filling certain positions
+
+**Example 2:**
+- Input: 22x22 grid filled mostly with 3s (background)
+- Key objects: A 4x3 pattern of 1s at rows 6-9, cols 5-7, scattered 2s at (11,13), (11,15), (11,17), and isolated 1s at (13,15) and 2 at (15,15)
+- Output: The 1s pattern is replicated in multiple positions, and the scattered elements create a larger organized structure
+- The original pattern appears to tile/repeat with transformations
+
+**Example 3:**
+- Input: 22x22 grid filled mostly with 7s (background)
+- Key objects: A triangular/L-shaped pattern of 4s at rows 5-7, cols 3-5, scattered 6s at (8,13), (10,11), (10,15), (12,11), (12,15), and 4 at (10,13)
+- Output: The 4s pattern is replicated and 6s fill corresponding positions in the replicated patterns
+
+PHASE 2 — MODEL:
+
+Looking at all examples, I can identify a consistent transformation rule:
+
+**Transformation Rule:**
+1. Identify the main compact pattern (non-background color forming a connected shape)
+2. Identify scattered single cells of other colors
+3. The scattered cells define a grid/tiling structure where the main pattern should be replicated
+4. For each scattered cell position, place a copy of the main pattern centered or aligned at that position
+5. The scattered cell's color becomes the "fill" color for the interior of the replicated pattern
+6. The main pattern's original color remains for the structure/outline
+
+Let me verify this against each example:
+- Example 1: 2s pattern (3x3) gets replicated at 8s positions, with 8s filling the center
+- Example 2: 1s pattern gets replicated at 2s positions and other reference points
+- Example 3: 4s pattern gets replicated at 6s positions, with 6s filling corresponding areas
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Background: 8s
+- Main pattern: 6s forming a shape at rows 5-8, cols 8-10 (roughly 4x3)
+- Scattered elements: 4s at positions (12,8), (14,2), (14,4), (14,6), (14,8), (16,2)
+
+The main pattern appears to be:
+```
+  6 6
+6 6 6
+  6
+6 6 6
+```
+
+I need to replicate this pattern at each 4 position, with 4s replacing the 6s in the replicated patterns.
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid by placing the main pattern at each scattered 4 position:
+
+The main 6s pattern spans roughly from (5,9) to (8,10) with the shape:
+- Row 5: 6s at cols 9,10
+- Row 6: 6s at cols 8,9,10  
+- Row 7: 6 at col 9
+- Row 8: 6s at cols 8,9,10
+
+For each 4 position, I'll place this pattern but replace 6s with 4s:
+
+Positions of 4s: (12,8), (14,2), (14,4), (14,6), (14,8), (16,2)
+
+Constructing the full output grid:
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 4, 4, 8, 4, 4, 8, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 4, 8, 8, 4, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 4, 4, 8, 4, 4, 8, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 4, 8, 8, 4, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

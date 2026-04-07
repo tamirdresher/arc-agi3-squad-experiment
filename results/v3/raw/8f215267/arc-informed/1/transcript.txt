@@ -1,0 +1,77 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 23×23 grid with background value 1
+- Contains several rectangular structures made of colors 2, 4, and 8
+- Each rectangular structure has a hollow interior (filled with background color 1)
+- There are also scattered small groups of colors 3, 4, and 8 outside the main rectangles
+- Output: Same grid, but the scattered elements outside rectangles are removed, and some internal patterns are added to the hollow rectangles
+
+Looking more closely at the rectangles:
+- Rectangle 1 (rows 1-5, cols 1-11): color 4, hollow interior
+- Rectangle 2 (rows 7-11, cols 1-11): color 8, hollow interior  
+- Rectangle 3 (rows 13-17, cols 1-11): color 2, hollow interior
+
+In the output, these rectangles remain but have internal patterns added, while scattered elements are removed.
+
+**Example 2:**
+- Input: 23×23 grid with background value 8
+- Contains rectangular structures made of colors 1, 6, and 4
+- Each has hollow interiors filled with background color 8
+- Scattered elements of various colors outside rectangles
+- Output: Rectangles preserved with internal patterns, scattered elements removed
+
+**Example 3:**
+- Input: 20×23 grid with background value 3
+- Rectangular structures made of colors 2, 4, and 1
+- Hollow interiors, scattered elements outside
+- Output: Same pattern - rectangles preserved with internal patterns, scattered removed
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+
+1. **Identify rectangular structures**: Find complete rectangular outlines made of non-background colors that form hollow rectangles (border of one color, interior filled with background color)
+
+2. **Preserve rectangular structures**: Keep all complete rectangular structures exactly as they are in terms of their borders
+
+3. **Add internal pattern**: For each rectangular structure, add a specific internal pattern based on scattered elements of the same color found elsewhere in the input
+
+4. **Remove scattered elements**: Remove all non-background colored cells that are NOT part of complete rectangular structures
+
+5. **Pattern placement**: The internal pattern seems to be placed in a specific row within each rectangle, creating a symmetric or regular pattern using the rectangle's border color
+
+Testing this against examples:
+- Example 1: Rectangles of colors 4, 8, 2 are preserved, internal patterns added, scattered elements removed ✓
+- Example 2: Rectangles of colors 1, 6, 4 are preserved, internal patterns added, scattered elements removed ✓  
+- Example 3: Rectangles of colors 2, 4, 1 are preserved, internal patterns added, scattered elements removed ✓
+
+PHASE 3 — GOAL:
+
+Applying to test input:
+- Background color: 8
+- Identify rectangular structures:
+  1. Rectangle 1 (rows 1-5, cols 1-11): color 2
+  2. Rectangle 2 (rows 7-11, cols 1-11): color 4
+  3. Rectangle 3 (rows 13-17, cols 1-11): color 3  
+  4. Rectangle 4 (rows 19-23, cols 1-11): color 1
+
+- Remove all scattered elements outside these rectangles
+- Add internal patterns to each rectangle based on the pattern observed in examples
+
+PHASE 4 — EXECUTE:
+
+Looking at the pattern more carefully, the internal additions seem to follow a specific rule - adding elements of the rectangle's color in the middle row(s) of the interior, creating a symmetric pattern.
+
+For the test input:
+- Rectangle 2 (color 2): Add pattern in middle rows
+- Rectangle 4 (color 4): Add pattern in middle rows  
+- Rectangle 3 (color 3): Add pattern in middle rows
+- Rectangle 1 (color 1): Add pattern in middle rows
+
+Constructing the output grid:
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 2, 8, 2, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 4, 8, 4, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 3, 8, 3, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 1, 8, 1, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

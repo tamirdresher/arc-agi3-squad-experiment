@@ -1,0 +1,28 @@
+Looking at this pattern recognition puzzle, I need to identify how the rectangles in the input are being rearranged in the output.
+
+Let me analyze the examples:
+
+In each example, I can see rectangular regions (bounded by color 8 or color 2) that contain different colored interiors. The pattern appears to be that these rectangles are being moved to align with edges - specifically moving them as far left or as far right as possible within their row range.
+
+Let me trace through Example 1 to confirm:
+- There's a rectangle with 8 border and 5 interior at positions (1-5, 1-5) - this moves to the leftmost position (1-5, 0-4)
+- There's a rectangle with 2 border and 1 interior at positions (2-6, 9-13) - this moves to the rightmost position (3-7, 17-21)
+- And so on...
+
+The pattern seems to be:
+1. Identify all rectangular regions (either 8-bordered or 2-bordered)
+2. For each rectangle, determine if it should move left or right
+3. Move rectangles to the extreme positions (leftmost or rightmost) while maintaining their vertical position and size
+
+Looking at the test input, I can identify these rectangles:
+1. Rectangle with 2 border, 4 interior at (0-4, 1-5) - should move left to (0-4, 0-4)
+2. Rectangle with 2 border, 3 interior at (2-6, 10-14) - should move right to (2-6, 17-21)  
+3. Rectangle with 8 border, 4 interior at (3-7, 16-20) - should move right to (3-7, 17-21)
+4. Rectangle with 8 border, 1 interior at (7-11, 2-6) - should move left to (7-11, 0-4)
+5. Rectangle with 8 border, 7 interior at (8-12, 10-14) - should move left to (8-12, 5-9)
+6. Rectangle with 2 border, 6 interior at (13-17, 9-13) - should move left to (13-17, 5-9)
+7. Rectangle with 2 border, 3 interior at (15-19, 3-7) - should move left to (15-19, 0-4)
+8. Rectangle with 8 border, 3 interior at (16-20, 15-19) - should move right to (16-20, 17-21)
+
+ANSWER:
+[[2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 1, 1, 1, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 1, 1, 1, 8, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 1, 1, 1, 8, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 8, 8, 8, 8, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 2, 6, 6, 6, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 2, 2, 2, 2, 2, 6, 6, 6, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 3, 3, 3, 2, 2, 6, 6, 6, 2, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8], [2, 3, 3, 3, 2, 2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 8, 3, 3, 3, 8], [2, 3, 3, 3, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 3, 3, 3, 8], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 3, 3, 3, 8], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

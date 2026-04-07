@@ -1,0 +1,87 @@
+# PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 30x30 grid filled with 7s (background), with several cross-shaped patterns made of different colors
+- Objects found: Cross patterns made of colors 9, 0, 1, 4 in various positions, plus horizontal lines of colors 2 and 3 at the bottom
+- Output: Same grid but color 9 is replaced with color 5 throughout
+- The cross patterns maintain their shapes and positions, only the color changes from 9→5
+
+**Example 2:**
+- Input: 30x30 grid filled with 1s (background), with cross patterns of colors 0, 8, 4, 6 and horizontal lines of colors 3 and 2
+- Objects found: Multiple cross-shaped patterns in different colors
+- Output: Same structure but color 6 is replaced with color 5 throughout
+- All other colors and shapes remain unchanged
+
+**Example 3:**
+- Input: 30x30 grid filled with 6s (background), with cross patterns of colors 2, 3, 7, 0 and horizontal lines swapping 3↔2
+- Objects found: Cross patterns and horizontal reference lines
+- Output: Color 3 is replaced with color 5 throughout
+- The horizontal line at bottom shows 3s and 2s have swapped positions
+
+**Common observations:**
+- All grids are 30x30
+- Each has a uniform background color
+- Cross-shaped patterns appear in multiple colors
+- Horizontal reference lines appear at the bottom
+- In each case, exactly one color in the crosses gets replaced with color 5
+
+# PHASE 2 — MODEL
+
+Looking at the horizontal reference lines at the bottom of each grid:
+
+**Example 1:** Bottom row has line of 2s, then line of 3s
+**Example 2:** Bottom row has line of 3s, then line of 2s  
+**Example 3:** Bottom row has line of 3s, then line of 2s
+
+The pattern seems to be about the order of these reference colors:
+- When 2 comes before 3: color 9 → 5
+- When 3 comes before 2: color 6 → 5 (Ex 2), color 3 → 5 (Ex 3)
+
+Let me refine this: Looking more carefully at the cross patterns and reference lines, I notice that there's a correspondence between specific cross colors and the reference line colors.
+
+**Revised rule:** 
+1. Look at the horizontal reference lines at the bottom
+2. Identify which colors appear in these reference lines
+3. Find the color that appears in cross patterns but has a different spatial relationship to the reference pattern
+4. Replace that specific color with 5
+
+Actually, let me look more systematically:
+
+**Example 1:** Colors in crosses: 9,0,1,4. Reference: 2,3. Color 9→5
+**Example 2:** Colors in crosses: 0,8,4,6. Reference: 3,2. Color 6→5  
+**Example 3:** Colors in crosses: 2,3,7,0. Reference: 3,2. Color 3→5
+
+**Final rule:** Find the color that appears both in the cross patterns AND in the horizontal reference lines at the bottom. Replace all instances of that color with 5.
+
+# PHASE 3 — GOAL
+
+For the test input:
+- Background: 4s
+- Cross patterns contain colors: 1, 9, 6, 8
+- Bottom reference lines: color 2 appears in two horizontal lines
+- Since color 2 doesn't appear in the cross patterns, I need to reconsider...
+
+Looking again at the test input bottom rows:
+- Row 29: horizontal line of 2s, then another horizontal line of 2s, then horizontal line of 3s
+- The cross patterns have colors 1, 9, 6, 8
+
+Wait, let me look at this more carefully. In the test input, I see that color 2 appears in multiple horizontal lines at the bottom, and there are no crosses with color 2. Let me re-examine the pattern.
+
+Re-examining the examples, I think the rule is simpler:
+**Rule:** Replace one specific color in the crosses with 5, where the color to replace corresponds to a pattern in the reference lines.
+
+Looking at positions and relationships more carefully:
+- The color that gets replaced seems to be determined by the arrangement of reference colors
+- In test input: colors 1,9,6,8 in crosses; reference shows 2 and 3
+- Based on the pattern, color 6 should be replaced with 5
+
+# PHASE 4 — EXECUTE
+
+Applying the transformation to replace color 6 with color 5 throughout the grid:
+
+The output will be identical to the input except all instances of color 6 will become color 5.
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 9, 9, 9, 4, 4, 4, 5, 5, 5, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4], [4, 4, 4, 1, 1, 1, 1, 1, 4, 9, 9, 9, 9, 9, 4, 5, 5, 5, 5, 5, 4, 8, 8, 8, 8, 8, 4, 4, 4, 4], [4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 9, 9, 9, 4, 4, 4, 5, 5, 5, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 4, 4, 4, 4]]

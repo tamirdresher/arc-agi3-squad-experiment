@@ -1,0 +1,36 @@
+Looking at this pattern recognition puzzle, I need to analyze the examples to understand the transformation rule.
+
+Let me examine the structure:
+1. Each input has a top section with colored rectangles separated by 5s (like a template)
+2. Below that is a larger grid with various colored regions and a small pattern of 8s
+
+In the examples:
+- Example 1: Template shows rectangles with colors 1,6,4,2. The 8s appear in a 2x2 pattern in the lower grid.
+- Example 2: Template shows rectangles with colors 2,4,6,3. The 8s appear in a 2x2 pattern.
+- Example 3: Template shows rectangles with colors 4,6,3,2. The 8s appear in a 2x2 pattern.
+
+The transformation seems to:
+1. Use the template colors to identify where to place 8s in the output
+2. Extend the small 8 pattern both horizontally and vertically to create lines/crosses
+3. The 8s form connecting lines between the colored regions that correspond to the template
+
+For the test input:
+- Template shows rectangles with colors 1,3,2,4 (left to right)
+- The 8s appear as a 3x3 pattern at rows 13-15, columns 8-10
+- I need to extend these 8s to create connecting lines
+
+Following the pattern from examples, the 8s should:
+1. Extend vertically through the entire grid at columns 8-10
+2. Extend horizontally to connect the colored regions (1, 3, 2, 4 regions)
+3. Create intersection lines between major colored blocks
+
+Let me trace the colored regions:
+- Region 1 (color 1): columns 0-2
+- Region 3 (color 3): columns 21-23  
+- Region 2: rows 6-8 (color 2)
+- Region 4: rows 23-25, columns 7-15 (color 4)
+
+The 8s should form connecting lines between these regions while preserving the existing structure.
+
+ANSWER:
+[[2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [1, 1, 1, 8, 8, 8, 8, 8, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

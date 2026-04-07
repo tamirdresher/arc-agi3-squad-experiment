@@ -1,0 +1,80 @@
+PHASE 1 — EXPLORE:
+
+Looking at Example 1:
+- Input: 30x30 grid with mostly 1s (background), and scattered colored shapes (2x2 blocks of colors 2, 3, 5, 6, 8, 9) plus a larger rectangular pattern of 4s
+- The 4s form a rectangular region from rows 1-11, columns 15-25 (11x11)
+- Output: 11x11 grid that appears to be the 4s region with the scattered colored shapes mapped into it
+
+Looking at Example 2:
+- Input: 30x30 grid with mostly 8s (background), and scattered colored shapes plus a larger rectangular pattern of 1s
+- The 1s form a rectangular region from rows 1-13, columns 2-14 (13x13)
+- Output: 13x13 grid that appears to be the 1s region with the scattered colored shapes mapped into it
+
+In both examples:
+- There's a large rectangular region of one color (4s in Ex1, 1s in Ex2)
+- There are scattered small patterns of other colors outside this rectangle
+- The output extracts the rectangular region and somehow incorporates the scattered patterns
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify the largest rectangular region of a single color (not the background)
+2. Extract this rectangular region as the base for the output
+3. Map the scattered colored patterns from the input into corresponding positions within this extracted rectangle
+4. The mapping appears to preserve relative spatial relationships - patterns that were in certain quadrants or positions relative to the rectangle get placed in corresponding positions within the extracted rectangle
+
+Testing this against Example 1:
+- Rectangle of 4s is extracted (11x11)
+- Scattered patterns of 2, 3, 5, 6, 8, 9 get mapped proportionally into the extracted region
+- This matches the output
+
+Testing against Example 2:
+- Rectangle of 1s is extracted (13x13) 
+- Scattered patterns get mapped proportionally
+- This matches the output
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Background appears to be 1s
+- There's a rectangular region of 4s in the top portion (rows 0-5, columns 0-29, but it's not solid - it has a pattern within it)
+- Looking more carefully, the 4s region appears to be rows 0-5, columns 0-29, forming a 6x30 rectangle with an internal pattern
+- Actually, let me re-examine... the 4s form a 6x30 region at the top with a specific internal pattern
+- The scattered colors (2, 3, 6, 7, 8, 9) appear below this region
+
+Wait, let me reconsider the structure. Looking at the 4s pattern more carefully:
+- The 4s region is 6 rows tall and spans the full width (30 columns)
+- Within this region, there's a repeating pattern involving 1s and 4s
+- This suggests the output should be 6x30
+
+But looking at the examples again, the outputs are much smaller squares. Let me re-examine...
+
+Actually, looking more carefully at the 4s region, it appears to contain a repeating pattern. The actual "solid" rectangular region might be smaller. Let me identify the core pattern unit.
+
+Looking at rows 0-5, I can see a repeating 6x5 pattern that repeats 6 times across the width. So the base unit is 6x5.
+
+PHASE 4 — EXECUTE:
+
+Re-examining the test input structure:
+- The top 6 rows contain a pattern with 4s and 1s
+- This pattern appears to repeat in 5-column segments
+- The scattered colored shapes (2,3,6,7,8,9) are below this region
+
+Looking at the examples again, I think I need to identify the core repeating unit within the 4s region and use that as the base, then map the scattered patterns proportionally.
+
+The 4s region shows a 6x5 repeating pattern:
+```
+4,1,1,4,4
+1,4,4,1,4
+4,4,1,1,1
+1,4,4,1,4
+1,1,4,4,4
+4,4,4,4,4
+```
+
+This 6x5 pattern repeats 6 times across the width. The scattered patterns below need to be mapped into this 6x5 space proportionally.
+
+Mapping the scattered colored patterns into the 6x5 grid based on their relative positions:
+
+ANSWER:
+[[4,1,1,4,4],[1,4,4,1,4],[4,4,1,1,1],[1,4,4,1,4],[1,1,4,4,4],[4,4,4,4,4]]

@@ -1,0 +1,65 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+Example 1:
+- Input: 20x20 grid with a rectangular structure made of 3s (frame/border), containing 8s and 6s inside, plus some scattered elements outside
+- The main structure spans roughly from row 0-11, columns 7-17
+- Inside the 3-frame there are 8s forming a pattern and 6s forming a smaller rectangular block
+- Output: 13x13 grid that appears to be the extracted and cleaned version of the framed region
+- The 3-frame is preserved, and the internal 8s and 6s pattern is maintained
+
+Example 2:
+- Input: 20x20 grid with a rectangular region bounded by 5s (not a complete frame, more like markers), containing 3s and 4s inside
+- The main structure spans roughly rows 2-11, columns 6-15
+- 5s mark the boundaries, 3s form an inner frame, 4s are in the center
+- Output: 10x10 grid showing the extracted bounded region
+- The 5s form the outer boundary, 3s and 4s pattern is preserved inside
+
+Example 3:
+- Input: 20x20 grid with a checkerboard-like pattern of 4s forming boundaries, containing 1s and 2s inside
+- The pattern spans roughly rows 9-18, columns 0-10
+- 4s form a alternating border pattern, 1s and 2s form internal structures
+- Output: 10x10 grid preserving the 4s checkerboard border and internal 1s, 2s pattern
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify a rectangular region that contains a structured pattern (bounded by specific colors: 3s, 5s, or 4s in checkerboard)
+2. Extract this rectangular bounding region
+3. Output only this extracted region, maintaining all the internal patterns and boundary markers
+4. The output dimensions match the minimal bounding rectangle that contains the complete pattern
+
+Testing against examples:
+- Example 1: 3s form frame, extract the framed region → ✓
+- Example 2: 5s mark boundaries, extract the bounded region → ✓  
+- Example 3: 4s form checkerboard boundary, extract this region → ✓
+
+PHASE 3 — GOAL:
+
+For the test input, I need to identify the structured region:
+- I can see 5s forming boundary markers (rows 6-7, 10-14, 17-18, columns around 11-15 and 18-19)
+- There's a 3s frame structure in rows 10-14, columns 10-16
+- Inside there are 4s and the pattern continues
+- The main structured region appears to span roughly rows 10-14, columns 7-19
+
+Looking more carefully, I see:
+- 5s at positions forming boundary markers
+- 3s forming an inner rectangular frame
+- 4 inside the 3s frame
+- The complete pattern spans rows 10-14, columns 7-19 (width 13, height 5)
+
+PHASE 4 — EXECUTE:
+
+Let me extract the region from rows 10-14, columns 7-19:
+
+Row 10: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]
+Row 11: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5]
+Row 12: [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5, 5]
+Row 13: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5]
+Row 14: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]
+
+This gives us a 5x13 output grid preserving the boundary markers (5s) and internal structure (3s frame with 4 inside).
+
+ANSWER:
+[[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]]

@@ -1,0 +1,46 @@
+Let me analyze the examples step by step to understand the pattern.
+
+**Example 1 Analysis:**
+- Input: 20x20 grid with a rectangular structure made of 3s, containing 8s and 6s inside
+- Output: 13x13 grid that appears to be the extracted rectangular region
+- The rectangular region bounded by 3s is extracted and becomes the output
+
+**Example 2 Analysis:**
+- Input: 20x20 grid with a rectangular structure made of 5s on the border, 3s forming an inner rectangle, and 4s inside
+- Output: 10x10 grid showing the extracted rectangular region
+- Again, the structured region is extracted
+
+**Example 3 Analysis:**
+- Input: 20x20 grid with a rectangular pattern made of 4s in a checkerboard-like border, containing 1s and 2s inside
+- Output: 10x10 grid showing the extracted rectangular region
+
+**Pattern Recognition:**
+1. Each input contains a structured rectangular region with distinct borders
+2. The output extracts this rectangular region, preserving the internal structure
+3. The extraction includes the border elements and everything inside
+4. The output dimensions match the bounding box of the structured region
+
+**Applying to Test Input:**
+Looking at the test input, I can identify a rectangular structure:
+- There are 5s forming border elements
+- 3s forming an inner rectangular structure 
+- The main structured region appears to be around rows 10-14, columns 7-18
+- There's a 4 inside at position (12,13)
+
+The rectangular region spans:
+- Rows 10-14 (5 rows)
+- Columns 7-18 (12 columns)
+
+Let me extract this region:
+
+Row 10: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+Row 11: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+Row 12: [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5]
+Row 13: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+Row 14: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+
+Wait, let me reconsider the bounds more carefully. Looking at the pattern, I should include the complete rectangular structure with 5s as borders:
+
+The structured region appears to be from rows 10-14, columns 7-19 (including the rightmost 5s):
+
+ANSWER: [[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]]

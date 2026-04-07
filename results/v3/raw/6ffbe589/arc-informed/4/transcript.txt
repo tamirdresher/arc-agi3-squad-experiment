@@ -1,0 +1,89 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair:
+
+**Example 1:**
+- Input: 20x20 grid with a rectangular pattern made of value 3 (border), containing values 8 and 6 inside. There are also scattered 3s, 8s, and 6s outside the main pattern.
+- Output: 13x13 grid that appears to be an extracted and cleaned version of the main rectangular pattern
+- The main pattern in input spans roughly from row 1-11, columns 7-17
+- Output preserves the internal structure but removes the surrounding zeros
+
+**Example 2:**
+- Input: 20x20 grid with a rectangular pattern made of value 5 (border), value 3 (inner border), and value 4 (center). Scattered elements outside.
+- Output: 10x10 grid extracting the main pattern
+- Main pattern in input spans roughly rows 2-11, columns 6-15
+- Similar extraction and cleaning behavior
+
+**Example 3:**
+- Input: 20x20 grid with a rectangular pattern made of alternating 4s and 0s as border, containing values 1 and 2 inside. Scattered elements outside.
+- Output: 10x10 grid extracting the main pattern
+- Main pattern spans roughly rows 9-18, columns 0-9
+- Same extraction behavior
+
+**Common observations:**
+- Each input has one main rectangular pattern that's more structured/complete
+- There are scattered elements of the same colors outside the main pattern
+- The output extracts just the main rectangular pattern, removing the surrounding zeros
+- The main pattern is identified by having a clear border structure
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify the main rectangular pattern in the input (the one with the most complete/structured border)
+2. Extract this rectangular region 
+3. Output only this extracted region, removing all surrounding zeros/background
+
+To identify the main pattern:
+- Look for the largest connected rectangular structure with a clear border
+- The border is typically made of one color value forming a frame
+- Inside may contain other structured patterns
+
+Testing this rule:
+- Example 1: Main pattern is the 3-bordered rectangle containing 8s and 6s → extracted correctly
+- Example 2: Main pattern is the 5-bordered rectangle containing 3s and 4s → extracted correctly  
+- Example 3: Main pattern is the 4-bordered rectangle containing 1s and 2s → extracted correctly
+
+PHASE 3 — GOAL:
+
+Applying to test input:
+Looking at the test input, I need to identify the main rectangular pattern. I can see:
+- A vertical line of 5s in column 4 (rows 0-4)
+- A horizontal pattern of 5s around rows 6-7, columns 11-15
+- A more complete rectangular pattern around rows 10-14, with 5s as outer border, 3s as inner structure, and a 4 in the center
+- Scattered elements elsewhere
+
+The main pattern appears to be in rows 10-14, columns 7-18, which contains:
+- 5s forming an outer border structure
+- 3s forming inner rectangular borders
+- A single 4 in the center
+- This is the most complete and structured rectangular pattern
+
+Expected output dimensions: approximately 5 rows × 12 columns
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at rows 10-14, columns 7-18:
+
+Row 10: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+Row 11: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5] 
+Row 12: [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5]
+Row 13: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+Row 14: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+
+Wait, let me re-examine the pattern more carefully. Looking at the test input again, there seems to be a cleaner rectangular pattern. Let me look at rows 10-14, columns 10-16:
+
+Row 10: [3, 3, 3, 3, 3, 3, 0]
+Row 11: [0, 3, 0, 0, 0, 3, 3]
+Row 12: [3, 3, 0, 4, 0, 3, 3]
+Row 13: [0, 3, 0, 0, 0, 3, 3]
+Row 14: [3, 3, 3, 3, 3, 3, 0]
+
+Actually, let me look at the broader pattern including the 5s border from columns 7-18, rows 10-14:
+
+[[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5],
+ [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5],
+ [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5],
+ [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5],
+ [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]]
+
+ANSWER: [[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]]

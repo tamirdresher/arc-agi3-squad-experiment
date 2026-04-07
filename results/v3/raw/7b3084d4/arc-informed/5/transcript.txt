@@ -1,0 +1,96 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+Example 1:
+Input: 20x20 grid with several colored regions:
+- Blue (9) region: roughly rectangular, around rows 3-5, cols 3-6
+- Red (7) region: irregular shape, around rows 3-5, cols 13-16  
+- Yellow (4) region: diamond-like shape, around rows 11-15, cols 3-6
+- Green (3) region: small cross shape, around rows 16-19, cols 17-19
+- One orange (5) cell at position (3,15)
+
+Output: 6x6 grid containing colors 3,4,5,7,9 arranged in a specific pattern.
+
+Example 2:
+Input: 20x20 grid with colored regions:
+- Red (7) region: rectangular block, around rows 2-7, cols 3-7
+- Red (2) region: rectangular block, around rows 6-10, cols 15-19
+- Green (3) region: rectangular block, around rows 10-15, cols 0-4
+- Blue (6) region: rectangular block, around rows 13-19, cols 8-12
+- One orange (5) cell at position (7,3)
+
+Output: 10x10 grid containing colors 2,3,5,6,7 arranged in a pattern.
+
+Example 3:
+Input: 20x20 grid with colored regions:
+- Red (2) region: small L-shape, around rows 0-1, cols 0-1
+- Blue (6) region: small 2x2 square, around rows 2-3, cols 16-17
+- Gray (8) region: small cross shape, around rows 12-14, cols 13-15
+- Red (7) region: small L-shape, around rows 15-16, cols 3-4
+- One orange (5) cell at position (15,3)
+
+Output: 4x4 grid containing colors 2,5,6,7,8.
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I notice:
+1. Each input has several distinct colored regions plus one special orange (5) cell
+2. The output dimensions seem related to the bounding boxes of the colored regions
+3. The orange (5) cell appears to be a marker or reference point
+
+The transformation rule appears to be:
+1. Identify all non-zero colored regions in the input (excluding background 0s)
+2. Find the overall bounding rectangle that encompasses all these regions
+3. Create an output grid that represents this bounding rectangle
+4. Fill the output by mapping the relative positions of the colored regions within this bounding rectangle
+5. The orange (5) cell serves as a special marker that gets preserved in the output
+
+Let me verify this against the examples:
+
+Example 1: The colored regions span roughly from row 3 to row 19 and from col 3 to col 19. The output is 6x6, which could represent a compressed version of this area.
+
+Example 2: Similar pattern - output is 10x10 representing the compressed bounding area.
+
+Example 3: Output is 4x4 representing the compressed bounding area.
+
+The rule seems to be: Extract the bounding rectangle of all colored regions, then create a compressed representation where each region maintains its relative position and the orange (5) cell is preserved.
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify all colored regions: 
+   - Red (2) region in upper left
+   - Green (3) region in upper right 
+   - Red (7) region in lower left
+   - Gray (8) region in lower right
+   - Orange (5) cell at position (17,6)
+
+2. Find the overall bounding rectangle of these regions
+3. Create a compressed output that preserves the relative spatial relationships
+
+The colored regions span approximately:
+- Rows 0-19 (full height)
+- Cols 0-19 (full width)
+
+Looking at the major blocks:
+- Red (2): roughly cols 1-7, rows 0-6
+- Green (3): roughly cols 9-18, rows 1-6  
+- Red (7): roughly cols 0-6, rows 8-17
+- Gray (8): roughly cols 9-16, rows 11-19
+- Orange (5) at (17,6)
+
+PHASE 4 — EXECUTE:
+
+Based on the pattern and the spatial relationships, the output should be approximately 8x8, representing the compressed version of the four main quadrants plus the special orange cell.
+
+Looking more carefully at the structure:
+- Top-left: Red (2) region
+- Top-right: Green (3) region  
+- Bottom-left: Red (7) region with orange (5) marker
+- Bottom-right: Gray (8) region
+
+The output should be approximately 8x8:
+
+ANSWER:
+[[2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 5, 7, 8, 8, 8, 8]]

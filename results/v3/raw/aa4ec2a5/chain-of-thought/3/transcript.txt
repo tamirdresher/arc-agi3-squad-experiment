@@ -1,0 +1,41 @@
+Looking at these examples, I need to identify the transformation pattern from input to output.
+
+Let me analyze the examples systematically:
+
+**Pattern Analysis:**
+
+1. **Connected Components**: The algorithm identifies connected regions of 1s in the input (using 4-connectivity - horizontal and vertical neighbors only).
+
+2. **Component Classification**: Each connected component is classified by size:
+   - Small components (≤4 cells): Remain as 1s
+   - Medium components (5-20 cells): Become 8s, with interior cells (not on the boundary) becoming 6s
+   - Large components (>20 cells): Become 1s
+
+3. **Border Addition**: Each connected component gets surrounded by a border of 2s that extends one cell in all directions around the component's bounding rectangle.
+
+4. **Background**: All other cells remain as 4s.
+
+Let me verify this with Example 1:
+- There are several connected components of 1s
+- The large rectangular region (bottom center, >20 cells) keeps its 1s and gets a 2-border
+- Medium-sized components get converted to 8s with 6s in the interior, plus 2-borders
+- Small isolated components remain as 1s with 2-borders
+
+This pattern holds across all examples.
+
+**Applying to Test Input:**
+
+First, I'll identify all connected components of 1s:
+
+1. Large L-shaped component in upper-left area (~50+ cells) → remains 1s
+2. Small component at (10,19)-(10,22) (4 cells) → remains 1s  
+3. Small component at (11,19)-(11,22) (4 cells) → remains 1s
+4. Large rectangular component at (12,18)-(15,25) (32 cells) → remains 1s
+5. Small component at (15,10)-(16,12) (6 cells) → becomes 8s
+6. Medium component at (17,7)-(20,12) (24 cells) → remains 1s
+7. Small component at (21,20)-(23,23) with hole (7 cells) → becomes 8s with 6 in interior
+
+Now I'll add 2-borders around each component's bounding rectangle and apply the transformations.
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 4, 2, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 4, 2, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4], [4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 2, 1, 1, 1, 1, 2, 4, 4, 4], [4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 4, 4, 4, 4, 2, 1, 1, 1, 1, 2, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2], [4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2], [4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 2, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2], [4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 8, 8, 8, 2, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 4, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 1, 1, 1, 1, 1, 1, 2, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 4, 4], [4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 8, 6, 6, 8, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

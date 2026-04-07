@@ -1,0 +1,53 @@
+PHASE 1 — EXPLORE:
+
+Example 1:
+- Input: 24x14 grid filled mostly with 8s
+- Two distinct pattern regions:
+  1. Upper left area (rows 4-6): Cross-like shape made of 1s with alternating 2,3,2,3,2,3 sequence extending horizontally from row 5
+  2. Lower right area (rows 11-15): Cross-like shape made of 1s with a 4 above and 2 below the horizontal center line
+- Output: Same as input but the 4 and 2 from the lower pattern are extended upward as an alternating vertical column (4,2,4,2,4,2...) that intersects with the horizontal pattern in row 5
+
+Example 2:
+- Input: 23x13 grid filled mostly with 8s
+- Two distinct pattern regions:
+  1. Upper left area (rows 1-5): Diamond/cross shape made of 1s with vertical 2,3,2,3... pattern extending downward
+  2. Lower right area (rows 11-16): Diamond/cross shape made of 1s with 4,2 appearing above the shape
+- Output: Same as input but the 4,2 from the lower pattern are extended upward as a vertical column that intersects and continues through the entire grid height
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify all cross/diamond-shaped patterns made of 1s in the input
+2. For each 1-pattern, look for any non-8, non-1 values that appear adjacent to or near the pattern
+3. When there are multiple 1-patterns, take the non-8, non-1 values from one pattern and extend them as a vertical column that spans the entire height of the grid
+4. Specifically, values that appear above/below a 1-pattern get extended vertically in an alternating pattern
+5. The vertical extension intersects with and potentially modifies other horizontal patterns
+
+Testing against examples:
+- Example 1: 4,2 from lower pattern → vertical 4,2,4,2... column at column 10
+- Example 2: 4,2 from lower pattern → vertical 4,2,4,2... column at column 8
+
+PHASE 3 — GOAL:
+
+Analyzing test input:
+- 25x18 grid
+- Multiple 1-patterns visible:
+  1. Upper left (rows 4-6): Cross shape with 4,3 and 6,2 alternating pattern extending down
+  2. Middle right (rows 13-17): Cross shape with 2,5 and 7,3 above, then 1s below
+  3. Lower right (rows 19-23): Cross shape with 2,4 and 3,5 below
+- The alternating vertical pattern from the upper left appears to be 4,3,6,2,4,3,6,2...
+- Following the rule, this pattern should extend vertically through the entire grid height
+
+Expected output: Same as input but with the alternating 4,3,6,2 pattern extended as vertical columns through the full height.
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the test input pattern:
+- The upper left 1-cross has alternating values: row 7: 4,3; row 8: 6,2; row 9: 4,3; row 10: 6,2; etc.
+- This creates two alternating columns: column 3 alternates 4,6,4,6... and column 4 alternates 3,2,3,2...
+- These should extend through the entire grid height
+
+Constructing the output by extending these patterns vertically while keeping everything else the same:
+
+ANSWER:
+[[8, 8, 8, 4, 3, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 1, 1, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 1, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 1, 1, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 2, 5, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 2, 5, 8, 8, 8, 1, 1, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 1, 1, 1, 1, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 2, 5, 8, 8, 8, 1, 1, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 8, 2, 4, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 2, 5, 8, 8, 8, 3, 5, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 8, 8, 8, 8, 8]]

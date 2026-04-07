@@ -1,0 +1,60 @@
+Let me analyze the examples step by step to understand the pattern.
+
+## Analysis of Examples
+
+### Example 1:
+Looking at the input and output, I notice:
+- There are rectangular regions outlined by specific colors (4, 8, 2)
+- These rectangles have hollow interiors in the input
+- In the output, most scattered elements outside the rectangles are removed
+- Within each rectangle, there appears to be a specific pattern added to the interior
+
+### Example 2:
+- Similar rectangular structures (1, 6, 4) with hollow interiors
+- Scattered elements outside rectangles are mostly removed
+- Interior patterns are added to the rectangles
+
+### Example 3:
+- Rectangular structures (2, 4, 1) with hollow interiors
+- Same cleaning of scattered elements
+- Interior patterns added
+
+## Pattern Recognition
+
+The transformation rule appears to be:
+1. **Identify complete rectangular frames**: Look for rectangles made of the same color that form complete borders
+2. **Clean the background**: Remove scattered elements that are not part of complete rectangular structures
+3. **Add interior patterns**: For each complete rectangle, add a specific pattern in the interior based on the rectangle's color
+
+Looking more closely at the interior patterns:
+- The pattern seems to be placing the rectangle's border color at specific positions inside the rectangle
+- The pattern appears to be symmetrical and follows a consistent rule
+
+## Detailed Pattern Analysis
+
+Examining the interior patterns more carefully:
+- In rectangles, there seems to be a cross or plus-like pattern made of the border color
+- The pattern is placed in the interior space of the rectangle
+
+## Applying to Test Input
+
+Let me identify the complete rectangles in the test input:
+
+1. **Color 2 rectangle**: Rows 1-5, columns 1-11 (complete)
+2. **Color 4 rectangle**: Rows 7-11, columns 1-11 (complete)  
+3. **Color 3 rectangle**: Rows 13-17, columns 1-11 (complete)
+4. **Color 1 rectangle**: Rows 19-23, columns 1-11 (complete)
+
+Now I need to:
+1. Keep these complete rectangles
+2. Remove scattered elements outside these rectangles
+3. Add interior patterns to each rectangle
+
+For the interior pattern, based on the examples, it appears to be adding the border color in specific interior positions, creating a symmetrical pattern.
+
+Looking at the examples more carefully, the interior pattern seems to be:
+- A single row or column of the border color placed in the middle area of the rectangle's interior
+- The exact position varies but follows a consistent rule
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 2, 8, 2, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 4, 8, 4, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 3, 8, 3, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 1, 8, 1, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

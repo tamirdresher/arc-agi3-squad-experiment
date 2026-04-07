@@ -1,0 +1,17 @@
+{
+  "task_id": "edb79dae",
+  "condition": "arc-informed",
+  "run_number": 2,
+  "timestamp": "2026-04-06T17:37:36.566096+00:00",
+  "tokens_used": 9992,
+  "wall_clock_seconds": 29.58,
+  "response_hash": "66039176643e82f81ae0e3a6741124e1c0f2b3a9ca1b00e66eb13e25cf62e276",
+  "extraction_success": true,
+  "exact_match": false,
+  "cell_accuracy": 0.662132,
+  "dimension_match": true,
+  "predicted_rows": 21,
+  "predicted_cols": 21,
+  "ground_truth_rows": 21,
+  "ground_truth_cols": 21
+}

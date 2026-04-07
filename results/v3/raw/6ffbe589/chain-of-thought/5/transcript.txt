@@ -1,0 +1,55 @@
+Let me analyze the examples step by step to understand the pattern.
+
+## Pattern Analysis
+
+Looking at the examples, I notice:
+
+1. **Input structure**: Each input has a large 20x20 grid with scattered colored elements forming rectangular patterns
+2. **Output structure**: Each output is a smaller rectangular grid that seems to extract and consolidate the main pattern
+
+Let me examine each example more carefully:
+
+### Example 1:
+- Input has a main rectangular region bounded by 3s (forming a frame)
+- Inside this frame are 8s and 6s in a pattern
+- Output extracts this bounded region and presents it as a compact rectangle
+- The output preserves the internal structure while trimming empty space
+
+### Example 2:
+- Input has 5s forming a frame/boundary
+- Inside are 3s and 4s forming a pattern
+- Output again extracts the bounded region, maintaining the pattern structure
+
+### Example 3:
+- Input has 4s forming a checkerboard-like boundary pattern
+- Inside are 1s and 2s
+- Output extracts the region enclosed by the 4 pattern
+
+## Transformation Rule
+
+The transformation appears to:
+1. Identify the main rectangular region that contains the primary pattern
+2. Extract this region while preserving the relative positions of all non-zero elements
+3. Trim away excess empty space to create a compact output
+
+## Applying to Test Input
+
+Looking at the test input, I can see:
+- 5s forming boundary elements
+- 3s forming an inner rectangular frame
+- A 4 inside the 3-bounded region
+- The main pattern appears to be in the region around rows 10-14, columns 10-16
+
+The bounded region by 3s contains:
+- Row 10: `3, 3, 3, 3, 3, 3`
+- Row 11: `3, 0, 0, 0, 3, 3` 
+- Row 12: `3, 3, 0, 4, 0, 3, 3`
+- Row 13: `3, 0, 0, 0, 3, 3`
+- Row 14: `3, 3, 3, 3, 3, 3`
+
+But I also need to include the 5s that form the outer boundary pattern. Looking at the full pattern around this region:
+
+The active region spans approximately rows 7-18, columns 7-19, but the core pattern with 5s as boundary markers gives us:
+
+ANSWER:
+[[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5], [0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0, 0], [0, 0, 0, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0]]

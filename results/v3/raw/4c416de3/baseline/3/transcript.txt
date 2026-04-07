@@ -1,0 +1,31 @@
+Looking at the examples, I need to identify the pattern of how the input transforms to the output.
+
+Let me analyze the examples:
+
+In Example 1, I can see there are rectangular regions bounded by 0s, and within these regions there are colored cells (non-1 and non-0 values). The pattern seems to be that these colored cells get "projected" or "extended" outside their bounding rectangles in specific directions.
+
+In Example 2, similar rectangular regions exist with colored cells inside, and they appear to extend outward from their boundaries.
+
+In Example 3, the same pattern continues - colored cells within 0-bounded rectangles extend beyond their boundaries.
+
+The key insight is:
+1. Identify rectangular regions bounded by 0s
+2. Find colored cells (non-background, non-0) within these regions  
+3. Extend these colored cells outward from the rectangle in the direction they appear to be positioned
+
+Looking at the test input, I can identify several bounded rectangular regions:
+1. A rectangle in the upper left (rows 2-7, cols 2-7) containing cells 4 and 1
+2. A rectangle in the middle right (rows 5-12, cols 13-20) containing cells 2, 6, and 8
+3. A rectangle at the bottom left (rows 14-18, cols 0-6) containing cell 5
+
+For each colored cell, I need to determine its position within its rectangle and extend it outward in the corresponding direction:
+
+- Cell 4 at (3,3) is near the top-left of its rectangle → extend up and left
+- Cell 1 at (6,6) is near the bottom-right of its rectangle → extend down and right  
+- Cell 2 at (5,13) and (6,14) are near the top-left → extend up and left
+- Cell 6 at (6,19) is near the top-right → extend up and right
+- Cell 8 at (11,19) is near the bottom-right → extend down and right
+- Cell 5 at (15,5) is in the middle-left → extend left
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 4, 4, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 6, 6, 3], [3, 4, 4, 4, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 6, 6, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 6, 6, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3], [3, 3, 0, 3, 3, 3, 1, 0, 3, 3, 3, 3, 3, 0, 2, 2, 3, 3, 3, 6, 0, 3], [3, 3, 0, 0, 0, 0, 1, 1, 3, 3, 3, 3, 3, 0, 2, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 8, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 8, 8, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 3], [5, 5, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [5, 5, 3, 3, 3, 5, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

@@ -1,0 +1,36 @@
+Looking at the examples, I need to identify the pattern of transformation.
+
+Let me analyze each example:
+
+**Example 1:**
+- Input has diagonal lines of numbers 2, 9, and 1
+- Output extends these diagonal patterns to form complete rectangles/regions
+
+**Example 2:**
+- Input has horizontal lines of numbers 5, 9, and 3
+- Output extends the shorter lines (5 and 3) to match the length of the longest line (9)
+
+**Example 3:**
+- Input has vertical columns of number 8 with some gaps
+- Output fills in the gaps to create complete vertical columns
+
+The pattern seems to be: **Complete/extend partial geometric patterns by filling gaps or extending shorter segments to match the longest segment in each direction.**
+
+**Test Input Analysis:**
+I can see diagonal lines of 8 and 6:
+- Number 8: forms a diagonal pattern in the upper-left area
+- Number 6: forms diagonal patterns in the middle-right area
+
+For the 8s, I can trace two diagonal lines:
+1. One going from upper-right to lower-left: (2,5) → (3,4) → (4,3) → (5,2)
+2. Another going from upper-left to lower-right: (4,7) → (5,6) → (6,5)
+
+For the 6s, there are multiple diagonal segments that should be connected into complete lines.
+
+Following the pattern of completing diagonal lines by filling gaps and extending to form complete rectangles, I need to:
+1. Complete the diagonal patterns for 8
+2. Complete the diagonal patterns for 6
+3. Keep all other 7s unchanged
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 8, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 8, 7, 7, 8, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 6, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 6, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 6, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7]]

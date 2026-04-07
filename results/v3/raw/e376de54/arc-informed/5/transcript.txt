@@ -1,0 +1,78 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16x16 grid mostly filled with 7s, with scattered non-7 values (2, 9, 1)
+- The non-7 values form diagonal patterns:
+  - 2s appear in upper-left diagonal patterns
+  - 9s appear in middle diagonal patterns  
+  - 1s appear in lower-right diagonal patterns
+- Output: Same grid but some patterns are extended/completed
+- The 2s pattern is extended upward and leftward to form more complete diagonal lines
+- The 1s pattern is extended to form more complete diagonal lines
+- The 9s pattern remains mostly unchanged
+
+**Example 2:**
+- Input: 16x16 grid mostly filled with 7s
+- Contains horizontal lines of different colors:
+  - Row 2: partial line of 5s (positions 3-4)
+  - Row 6: complete line of 9s (positions 3-9)  
+  - Row 8: complete line of 3s (positions 3-14)
+- Output: The partial line of 5s is extended to match the length of the 9s line (positions 3-9)
+- The 3s line is shortened to match the length of the 9s line (positions 3-9)
+- All lines now have the same horizontal span
+
+**Example 3:**
+- Input: 16x16 grid mostly filled with 7s
+- Contains vertical columns of 8s in rows 2-7, but with gaps/inconsistencies
+- Output: The 8s pattern is regularized - missing 8s are filled in to complete the vertical columns consistently across rows 2-5
+- Row 6 and beyond are cleared of the pattern
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify distinct non-background patterns/objects in the input (where background is 7)
+2. For each pattern type, find the most complete or regular instance of that pattern
+3. Extend or regularize other instances of the same pattern to match the most complete version
+4. The "template" pattern seems to be the one that appears most consistently or completely
+
+More specifically:
+- Find groups of the same non-7 color that form lines or geometric patterns
+- Identify the most regular/complete instance of each pattern
+- Extend incomplete instances to match the complete template
+- Trim overly long instances to match the template length
+
+PHASE 3 — GOAL:
+
+Applying this to the test input:
+- Background is 7s
+- I see 8s forming a diagonal pattern in the upper portion
+- I see 6s forming diagonal patterns in the lower portion
+
+For the 8s: They appear to form diagonal lines, but with gaps. I need to identify the most complete diagonal pattern and extend others to match.
+
+For the 6s: They form multiple diagonal patterns. I need to find the most regular pattern and extend others to match.
+
+Looking more carefully:
+- The 8s form a diagonal pattern going from upper-left to lower-right
+- The 6s form diagonal patterns, some going from upper-right to lower-left, others following different diagonals
+
+PHASE 4 — EXECUTE:
+
+Let me trace the patterns more systematically:
+
+8s pattern: Forms a diagonal from top-right going down-left, but with gaps
+6s pattern: Forms multiple diagonal lines
+
+The most complete 8s pattern appears to be the diagonal that should be filled in consistently.
+The 6s patterns need to be regularized based on the most complete diagonal.
+
+After careful analysis, I need to:
+1. Complete the 8s diagonal pattern by filling gaps
+2. Regularize the 6s diagonal patterns
+
+Constructing the output grid:
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7]]

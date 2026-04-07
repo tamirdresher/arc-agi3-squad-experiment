@@ -1,0 +1,37 @@
+Looking at the examples, I need to identify the pattern for extracting a rectangular region from the input grid.
+
+Let me analyze each example:
+
+Example 1:
+- Input has a rectangular structure bordered by 3's 
+- The extracted region includes this bordered rectangle plus some extension
+- Looking at the coordinates, it appears to extract from rows 0-12, columns 7-19
+
+Example 2: 
+- Has a rectangular pattern with 5's as borders and 3's/4's inside
+- Extracted region seems to cover rows 2-11, columns 6-15
+
+Example 3:
+- Has a checkerboard-like pattern with 4's and some 1's/2's inside
+- Extracted region covers rows 9-18, columns 1-10
+
+The pattern seems to be:
+1. Find rectangular regions that contain non-zero structured patterns
+2. Extract a bounding box that encompasses these patterns
+3. The extracted region becomes the output
+
+For the test input, I can see:
+- A vertical line of 5's in column 4 (rows 0-4)
+- A horizontal pattern with 5's around rows 6-7, columns 11-15
+- A main rectangular structure with 3's as borders around rows 10-14, columns 10-16
+- Some 5's forming borders around this main structure
+
+The main structured region appears to be roughly from rows 10-14 and columns 7-18, but I need to be more precise about the bounding box.
+
+Looking more carefully at the test input, the main pattern with 3's and the surrounding 5's spans:
+- Rows: 10-14 (the main 3-bordered rectangle)
+- Columns: 7-18 (including the 5's on the sides)
+
+Let me extract this region:
+
+ANSWER: [[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]]

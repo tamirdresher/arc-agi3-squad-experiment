@@ -1,0 +1,2309 @@
+2026-04-06T17:30:22 | INFO    | ============================================================
+2026-04-06T17:30:22 | INFO    | ARC-AGI Squad Experiment V3.1 — Execution Harness
+2026-04-06T17:30:22 | INFO    | ============================================================
+2026-04-06T17:30:22 | INFO    | Model: claude-sonnet-4
+2026-04-06T17:30:22 | INFO    | Dry run: False
+2026-04-06T17:30:22 | INFO    | Resume: True
+2026-04-06T17:30:22 | INFO    | Loaded prompt templates for 3 conditions
+2026-04-06T17:30:22 | INFO    | Run order: 750 total runs
+2026-04-06T17:30:24 | INFO    | Copilot API warmup OK (attempt 1)
+2026-04-06T17:30:24 | INFO    | [1/750] 7b0280bc | arc-informed | run 2
+2026-04-06T17:31:02 | INFO    |   ✗ exact=False cell_acc=0.878 dim=True tokens=12593 38.5s
+2026-04-06T17:31:02 | INFO    | [2/750] 8b9c3697 | arc-informed | run 1
+2026-04-06T17:31:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:31:06 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:31:54 | INFO    |   ✗ exact=False cell_acc=0.890 dim=True tokens=12626 51.1s
+2026-04-06T17:31:54 | INFO    | [3/750] 7b0280bc | arc-informed | run 3
+2026-04-06T17:31:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:32:28 | INFO    |   ✗ exact=False cell_acc=0.878 dim=True tokens=12492 34.3s
+2026-04-06T17:32:28 | INFO    | [4/750] 67e490f4 | chain-of-thought | run 2
+2026-04-06T17:32:55 | INFO    |   ✗ exact=False cell_acc=0.619 dim=False tokens=10601 27.2s
+2026-04-06T17:32:55 | INFO    | [5/750] 8f215267 | arc-informed | run 1
+2026-04-06T17:33:22 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=14163 26.6s
+2026-04-06T17:33:22 | INFO    | [6/750] 7b3084d4 | arc-informed | run 1
+2026-04-06T17:33:22 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:33:51 | INFO    |   ✗ exact=False cell_acc=0.020 dim=True tokens=7287 29.5s
+2026-04-06T17:33:51 | INFO    | [7/750] abc82100 | arc-informed | run 4
+2026-04-06T17:33:52 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:34:17 | INFO    |   ✗ exact=False cell_acc=0.805 dim=True tokens=8037 26.2s
+2026-04-06T17:34:17 | INFO    | [8/750] e87109e9 | baseline | run 2
+2026-04-06T17:34:18 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:34:44 | INFO    |   ✗ exact=False cell_acc=0.601 dim=False tokens=13997 27.0s
+2026-04-06T17:34:44 | INFO    | [9/750] 53fb4810 | baseline | run 1
+2026-04-06T17:35:07 | INFO    |   ✗ exact=False cell_acc=0.827 dim=True tokens=7186 22.8s
+2026-04-06T17:35:07 | INFO    | [10/750] e376de54 | arc-informed | run 1
+2026-04-06T17:35:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:35:46 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=7881 38.8s
+2026-04-06T17:35:46 | INFO    | [11/750] 8f215267 | chain-of-thought | run 3
+2026-04-06T17:35:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:35:50 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:35:55 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T17:36:03 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T17:36:03 | INFO    | [12/750] 3dc255db | chain-of-thought | run 1
+2026-04-06T17:36:04 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:36:06 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:36:11 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T17:36:19 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T17:36:19 | INFO    | [13/750] 7b3084d4 | baseline | run 1
+2026-04-06T17:36:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:36:34 | INFO    |   ✗ exact=False cell_acc=0.020 dim=False tokens=6498 15.1s
+2026-04-06T17:36:34 | INFO    | [14/750] 4c416de3 | arc-informed | run 4
+2026-04-06T17:36:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:36:59 | INFO    |   ✗ exact=False cell_acc=0.868 dim=True tokens=12232 24.1s
+2026-04-06T17:36:59 | INFO    | [15/750] 2c181942 | arc-informed | run 4
+2026-04-06T17:37:35 | INFO    |   ✗ exact=False cell_acc=0.883 dim=True tokens=13238 36.4s
+2026-04-06T17:37:35 | INFO    | [16/750] e376de54 | arc-informed | run 4
+2026-04-06T17:38:09 | INFO    |   ✗ exact=False cell_acc=0.984 dim=True tokens=8253 33.6s
+2026-04-06T17:38:09 | INFO    | [17/750] e376de54 | chain-of-thought | run 5
+2026-04-06T17:38:24 | INFO    |   ✗ exact=False cell_acc=0.949 dim=True tokens=7038 15.7s
+2026-04-06T17:38:24 | INFO    | [18/750] 2c181942 | arc-informed | run 2
+2026-04-06T17:38:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:38:28 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:39:10 | INFO    |   ✗ exact=False cell_acc=0.942 dim=True tokens=13229 45.7s
+2026-04-06T17:39:10 | INFO    | [19/750] aa4ec2a5 | arc-informed | run 3
+2026-04-06T17:39:45 | INFO    |   ✗ exact=False cell_acc=0.863 dim=True tokens=14842 35.3s
+2026-04-06T17:39:45 | INFO    | [20/750] 981571dc | baseline | run 2
+2026-04-06T17:40:14 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=27587 28.9s
+2026-04-06T17:40:14 | INFO    | [21/750] db0c5428 | baseline | run 4
+2026-04-06T17:40:29 | INFO    |   ✗ exact=False cell_acc=0.696 dim=True tokens=8064 14.5s
+2026-04-06T17:40:29 | INFO    | [22/750] 7666fa5d | arc-informed | run 1
+2026-04-06T17:40:51 | INFO    |   ✗ exact=False cell_acc=0.977 dim=True tokens=6543 22.4s
+2026-04-06T17:40:51 | INFO    | [23/750] 1818057f | arc-informed | run 4
+2026-04-06T17:41:23 | INFO    |   ✗ exact=False cell_acc=0.893 dim=True tokens=7215 31.8s
+2026-04-06T17:41:23 | INFO    | [24/750] 3dc255db | baseline | run 2
+2026-04-06T17:41:39 | INFO    |   ✗ exact=False cell_acc=0.859 dim=True tokens=3876 16.4s
+2026-04-06T17:41:39 | INFO    | [25/750] 4c416de3 | baseline | run 2
+2026-04-06T17:41:57 | INFO    |   ✗ exact=False cell_acc=0.861 dim=True tokens=11620 17.5s
+2026-04-06T17:41:57 | INFO    | [26/750] 53fb4810 | arc-informed | run 3
+2026-04-06T17:41:58 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:42:31 | INFO    |   ✗ exact=False cell_acc=0.836 dim=True tokens=7865 34.0s
+2026-04-06T17:42:31 | INFO    | [27/750] b9e38dc0 | baseline | run 3
+2026-04-06T17:42:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:42:35 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:43:02 | INFO    |   ✗ exact=False cell_acc=0.439 dim=True tokens=6111 30.9s
+2026-04-06T17:43:02 | INFO    | [28/750] 7666fa5d | baseline | run 1
+2026-04-06T17:43:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:43:23 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=5272 20.9s
+2026-04-06T17:43:23 | INFO    | [29/750] 4c416de3 | baseline | run 3
+2026-04-06T17:43:40 | INFO    |   ✗ exact=False cell_acc=0.897 dim=True tokens=11630 16.9s
+2026-04-06T17:43:40 | INFO    | [30/750] b10624e5 | arc-informed | run 2
+2026-04-06T17:43:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:44:10 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=14546 30.7s
+2026-04-06T17:44:10 | INFO    | [31/750] b5ca7ac4 | arc-informed | run 3
+2026-04-06T17:44:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:44:14 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:44:19 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T17:44:27 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T17:44:27 | INFO    | [32/750] f560132c | chain-of-thought | run 1
+2026-04-06T17:44:39 | INFO    |   ✗ exact=False cell_acc=0.167 dim=False tokens=6059 11.3s
+2026-04-06T17:44:39 | INFO    | [33/750] e376de54 | arc-informed | run 2
+2026-04-06T17:45:07 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=7440 28.9s
+2026-04-06T17:45:07 | INFO    | [34/750] 28a6681f | arc-informed | run 2
+2026-04-06T17:45:26 | INFO    |   ✗ exact=False cell_acc=0.900 dim=True tokens=4108 18.3s
+2026-04-06T17:45:26 | INFO    | [35/750] 3dc255db | chain-of-thought | run 5
+2026-04-06T17:45:51 | INFO    |   ✗ exact=False cell_acc=0.897 dim=True tokens=4069 25.5s
+2026-04-06T17:45:51 | INFO    | [36/750] 6ffbe589 | arc-informed | run 4
+2026-04-06T17:45:52 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:46:13 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=7880 22.0s
+2026-04-06T17:46:13 | INFO    | [37/750] 89565ca0 | arc-informed | run 5
+2026-04-06T17:46:14 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:46:33 | INFO    |   ✗ exact=False cell_acc=0.233 dim=False tokens=9461 19.5s
+2026-04-06T17:46:33 | INFO    | [38/750] dfadab01 | arc-informed | run 4
+2026-04-06T17:46:34 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:47:01 | INFO    |   ✗ exact=False cell_acc=0.460 dim=True tokens=9873 28.1s
+2026-04-06T17:47:01 | INFO    | [39/750] 45a5af55 | chain-of-thought | run 5
+2026-04-06T17:47:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:47:05 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:47:40 | INFO    |   ✗ exact=False cell_acc=0.186 dim=False tokens=7712 39.0s
+2026-04-06T17:47:40 | INFO    | [40/750] 89565ca0 | baseline | run 5
+2026-04-06T17:47:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:47:44 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:48:02 | INFO    |   ✗ exact=False cell_acc=0.200 dim=False tokens=8539 22.3s
+2026-04-06T17:48:02 | INFO    | [41/750] 7666fa5d | baseline | run 5
+2026-04-06T17:48:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:48:06 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:48:26 | INFO    |   ✗ exact=False cell_acc=0.988 dim=True tokens=5149 23.6s
+2026-04-06T17:48:26 | INFO    | [42/750] 3dc255db | arc-informed | run 4
+2026-04-06T17:48:48 | INFO    |   ✗ exact=False cell_acc=0.910 dim=True tokens=5079 22.0s
+2026-04-06T17:48:48 | INFO    | [43/750] 7666fa5d | baseline | run 2
+2026-04-06T17:48:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:48:56 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:49:02 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T17:49:10 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T17:49:10 | INFO    | [44/750] b5ca7ac4 | arc-informed | run 2
+2026-04-06T17:49:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:49:36 | INFO    |   ✗ exact=False cell_acc=0.614 dim=True tokens=12735 25.9s
+2026-04-06T17:49:36 | INFO    | [45/750] 409aa875 | arc-informed | run 2
+2026-04-06T17:49:55 | INFO    |   ✗ exact=False cell_acc=0.941 dim=True tokens=7454 19.3s
+2026-04-06T17:49:55 | INFO    | [46/750] c7f57c3e | chain-of-thought | run 2
+2026-04-06T17:49:56 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:49:59 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:50:44 | INFO    |   ✗ exact=False cell_acc=0.931 dim=True tokens=9629 49.0s
+2026-04-06T17:50:44 | INFO    | [47/750] da515329 | arc-informed | run 2
+2026-04-06T17:51:12 | INFO    |   ✗ exact=False cell_acc=0.679 dim=False tokens=10605 28.3s
+2026-04-06T17:51:12 | INFO    | [48/750] f560132c | chain-of-thought | run 5
+2026-04-06T17:51:27 | INFO    |   ✗ exact=False cell_acc=0.389 dim=False tokens=6342 14.4s
+2026-04-06T17:51:27 | INFO    | [49/750] dfadab01 | baseline | run 4
+2026-04-06T17:51:45 | INFO    |   ✗ exact=False cell_acc=0.645 dim=True tokens=9196 18.0s
+2026-04-06T17:51:45 | INFO    | [50/750] 28a6681f | arc-informed | run 1
+2026-04-06T17:52:15 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=4082 30.1s
+2026-04-06T17:52:15 | INFO    | [51/750] 8f215267 | baseline | run 2
+2026-04-06T17:52:36 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13441 20.8s
+2026-04-06T17:52:36 | INFO    | [52/750] 97d7923e | chain-of-thought | run 1
+2026-04-06T17:52:37 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:52:57 | INFO    |   ✗ exact=False cell_acc=0.935 dim=True tokens=4891 21.2s
+2026-04-06T17:52:57 | INFO    | [53/750] 67e490f4 | chain-of-thought | run 1
+2026-04-06T17:53:11 | INFO    |   ✗ exact=False cell_acc=0.086 dim=False tokens=10254 14.3s
+2026-04-06T17:53:11 | INFO    | [54/750] 2c181942 | chain-of-thought | run 4
+2026-04-06T17:53:34 | INFO    |   ✗ exact=False cell_acc=0.886 dim=True tokens=12559 22.7s
+2026-04-06T17:53:34 | INFO    | [55/750] 8b9c3697 | chain-of-thought | run 5
+2026-04-06T17:53:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:54:05 | INFO    |   ✗ exact=False cell_acc=0.834 dim=True tokens=12138 31.0s
+2026-04-06T17:54:05 | INFO    | [56/750] 898e7135 | chain-of-thought | run 2
+2026-04-06T17:54:06 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:54:41 | INFO    |   ✗ exact=False cell_acc=0.532 dim=False tokens=10781 35.5s
+2026-04-06T17:54:41 | INFO    | [57/750] bf45cf4b | baseline | run 3
+2026-04-06T17:54:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:54:44 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T17:54:49 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T17:54:57 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T17:54:57 | INFO    | [58/750] 7666fa5d | chain-of-thought | run 5
+2026-04-06T17:55:11 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=5379 13.8s
+2026-04-06T17:55:11 | INFO    | [59/750] 6e453dd6 | arc-informed | run 1
+2026-04-06T17:55:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:55:46 | INFO    |   ✗ exact=False cell_acc=0.850 dim=True tokens=7032 35.3s
+2026-04-06T17:55:46 | INFO    | [60/750] aa4ec2a5 | chain-of-thought | run 3
+2026-04-06T17:56:17 | INFO    |   ✗ exact=False cell_acc=0.795 dim=True tokens=14069 30.2s
+2026-04-06T17:56:17 | INFO    | [61/750] 45a5af55 | arc-informed | run 3
+2026-04-06T17:56:46 | INFO    |   ✗ exact=False cell_acc=0.426 dim=False tokens=8261 29.7s
+2026-04-06T17:56:46 | INFO    | [62/750] 45a5af55 | baseline | run 4
+2026-04-06T17:56:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:57:06 | INFO    |   ✗ exact=False cell_acc=0.333 dim=False tokens=7307 20.0s
+2026-04-06T17:57:06 | INFO    | [63/750] 5545f144 | arc-informed | run 2
+2026-04-06T17:57:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T17:57:28 | INFO    |   ✗ exact=False cell_acc=0.467 dim=False tokens=5661 21.7s
+2026-04-06T17:57:28 | INFO    | [64/750] 2c181942 | chain-of-thought | run 1
+2026-04-06T17:57:57 | INFO    |   ✗ exact=False cell_acc=0.862 dim=True tokens=12619 29.2s
+2026-04-06T17:57:57 | INFO    | [65/750] f560132c | arc-informed | run 2
+2026-04-06T17:58:16 | INFO    |   ✗ exact=False cell_acc=0.076 dim=False tokens=6307 19.0s
+2026-04-06T17:58:16 | INFO    | [66/750] 5961cc34 | arc-informed | run 1
+2026-04-06T17:58:45 | INFO    |   ✗ exact=False cell_acc=0.863 dim=True tokens=16401 28.9s
+2026-04-06T17:58:45 | INFO    | [67/750] 898e7135 | arc-informed | run 1
+2026-04-06T17:59:12 | INFO    |   ✗ exact=False cell_acc=0.478 dim=False tokens=10564 27.1s
+2026-04-06T17:59:12 | INFO    | [68/750] e8686506 | chain-of-thought | run 5
+2026-04-06T17:59:29 | INFO    |   ✗ exact=False cell_acc=0.275 dim=False tokens=2859 16.4s
+2026-04-06T17:59:29 | INFO    | [69/750] 8b9c3697 | arc-informed | run 4
+2026-04-06T17:59:30 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:00:22 | INFO    |   ✗ exact=False cell_acc=0.860 dim=True tokens=14741 53.3s
+2026-04-06T18:00:22 | INFO    | [70/750] 981571dc | baseline | run 4
+2026-04-06T18:00:51 | INFO    |   ✗ exact=False cell_acc=0.996 dim=True tokens=27618 28.6s
+2026-04-06T18:00:51 | INFO    | [71/750] c4d067a0 | chain-of-thought | run 5
+2026-04-06T18:01:19 | INFO    |   ✗ exact=False cell_acc=0.790 dim=True tokens=14914 28.0s
+2026-04-06T18:01:19 | INFO    | [72/750] 6e453dd6 | baseline | run 5
+2026-04-06T18:01:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:01:38 | INFO    |   ✗ exact=False cell_acc=0.850 dim=True tokens=6297 19.1s
+2026-04-06T18:01:38 | INFO    | [73/750] 2ba387bc | baseline | run 3
+2026-04-06T18:01:56 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=10037 18.5s
+2026-04-06T18:01:56 | INFO    | [74/750] 67e490f4 | arc-informed | run 2
+2026-04-06T18:02:20 | INFO    |   ✗ exact=False cell_acc=0.057 dim=False tokens=10489 24.0s
+2026-04-06T18:02:20 | INFO    | [75/750] 6e453dd6 | baseline | run 3
+2026-04-06T18:02:34 | INFO    |   ✗ exact=False cell_acc=0.850 dim=True tokens=6065 13.6s
+2026-04-06T18:02:34 | INFO    | [76/750] e8686506 | chain-of-thought | run 2
+2026-04-06T18:02:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:02:38 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:02:59 | INFO    |   ✗ exact=False cell_acc=0.225 dim=False tokens=2825 24.6s
+2026-04-06T18:02:59 | INFO    | [77/750] 898e7135 | baseline | run 1
+2026-04-06T18:02:59 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:03:22 | INFO    |   ✗ exact=False cell_acc=0.353 dim=False tokens=9159 23.3s
+2026-04-06T18:03:22 | INFO    | [78/750] 271d71e2 | chain-of-thought | run 4
+2026-04-06T18:03:48 | INFO    |   ✗ exact=False cell_acc=0.645 dim=True tokens=7792 25.8s
+2026-04-06T18:03:48 | INFO    | [79/750] 1818057f | chain-of-thought | run 1
+2026-04-06T18:04:16 | INFO    |   ✗ exact=False cell_acc=0.888 dim=True tokens=7006 28.4s
+2026-04-06T18:04:16 | INFO    | [80/750] b10624e5 | baseline | run 4
+2026-04-06T18:04:17 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:04:42 | INFO    |   ✗ exact=False cell_acc=0.834 dim=False tokens=13805 26.0s
+2026-04-06T18:04:42 | INFO    | [81/750] b5ca7ac4 | arc-informed | run 5
+2026-04-06T18:04:43 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:04:46 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:04:51 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:04:59 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:04:59 | INFO    | [82/750] 8b9c3697 | baseline | run 3
+2026-04-06T18:05:00 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:05:28 | INFO    |   ✗ exact=False cell_acc=0.794 dim=True tokens=11904 28.6s
+2026-04-06T18:05:28 | INFO    | [83/750] 6ffbe589 | baseline | run 5
+2026-04-06T18:05:41 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=6699 13.6s
+2026-04-06T18:05:41 | INFO    | [84/750] 9aaea919 | arc-informed | run 4
+2026-04-06T18:06:18 | INFO    |   ✗ exact=False cell_acc=0.924 dim=False tokens=23484 37.0s
+2026-04-06T18:06:18 | INFO    | [85/750] b9e38dc0 | chain-of-thought | run 5
+2026-04-06T18:06:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:06:41 | INFO    |   ✗ exact=False cell_acc=0.782 dim=True tokens=6294 22.7s
+2026-04-06T18:06:41 | INFO    | [86/750] a395ee82 | arc-informed | run 2
+2026-04-06T18:07:14 | INFO    |   ✗ exact=False cell_acc=0.814 dim=True tokens=13102 32.7s
+2026-04-06T18:07:14 | INFO    | [87/750] 135a2760 | baseline | run 5
+2026-04-06T18:07:14 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:07:17 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:07:46 | INFO    |   ✗ exact=False cell_acc=0.992 dim=True tokens=8797 32.1s
+2026-04-06T18:07:46 | INFO    | [88/750] 8b9c3697 | arc-informed | run 3
+2026-04-06T18:07:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:08:24 | INFO    |   ✗ exact=False cell_acc=0.849 dim=True tokens=12625 38.5s
+2026-04-06T18:08:24 | INFO    | [89/750] e8686506 | arc-informed | run 4
+2026-04-06T18:08:39 | INFO    |   ✗ exact=False cell_acc=0.250 dim=False tokens=3458 14.8s
+2026-04-06T18:08:39 | INFO    | [90/750] 1818057f | chain-of-thought | run 2
+2026-04-06T18:09:07 | INFO    |   ✗ exact=False cell_acc=0.895 dim=True tokens=7033 27.8s
+2026-04-06T18:09:07 | INFO    | [91/750] 6ffbe589 | arc-informed | run 2
+2026-04-06T18:09:24 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=7629 16.5s
+2026-04-06T18:09:24 | INFO    | [92/750] 9aaea919 | chain-of-thought | run 5
+2026-04-06T18:09:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:09:27 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:09:32 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:09:40 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:09:40 | INFO    | [93/750] 9aaea919 | arc-informed | run 3
+2026-04-06T18:10:15 | INFO    |   ✗ exact=False cell_acc=0.922 dim=True tokens=23128 34.4s
+2026-04-06T18:10:15 | INFO    | [94/750] 97d7923e | arc-informed | run 3
+2026-04-06T18:10:43 | INFO    |   ✗ exact=False cell_acc=0.915 dim=True tokens=5681 27.8s
+2026-04-06T18:10:43 | INFO    | [95/750] 1818057f | baseline | run 5
+2026-04-06T18:10:43 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:11:04 | INFO    |   ✗ exact=False cell_acc=0.899 dim=True tokens=6519 21.0s
+2026-04-06T18:11:04 | INFO    | [96/750] b9e38dc0 | baseline | run 2
+2026-04-06T18:11:04 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:11:25 | INFO    |   ✗ exact=False cell_acc=0.656 dim=True tokens=6102 21.1s
+2026-04-06T18:11:25 | INFO    | [97/750] abc82100 | arc-informed | run 2
+2026-04-06T18:11:55 | INFO    |   ✗ exact=False cell_acc=0.843 dim=True tokens=9300 30.5s
+2026-04-06T18:11:55 | INFO    | [98/750] 97d7923e | arc-informed | run 5
+2026-04-06T18:11:56 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:11:59 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:12:30 | INFO    |   ✗ exact=False cell_acc=0.880 dim=True tokens=5201 34.5s
+2026-04-06T18:12:30 | INFO    | [99/750] 9aaea919 | chain-of-thought | run 3
+2026-04-06T18:12:30 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:13:03 | INFO    |   ✗ exact=False cell_acc=0.951 dim=True tokens=22624 32.9s
+2026-04-06T18:13:03 | INFO    | [100/750] 8b9c3697 | baseline | run 1
+2026-04-06T18:13:28 | INFO    |   ✗ exact=False cell_acc=0.834 dim=True tokens=12020 25.8s
+2026-04-06T18:13:28 | INFO    | [101/750] 89565ca0 | baseline | run 1
+2026-04-06T18:13:37 | INFO    |   ✗ exact=False cell_acc=0.233 dim=False tokens=8473 8.8s
+2026-04-06T18:13:37 | INFO    | [102/750] 58f5dbd5 | chain-of-thought | run 2
+2026-04-06T18:13:58 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8240 20.4s
+2026-04-06T18:13:58 | INFO    | [103/750] edb79dae | baseline | run 3
+2026-04-06T18:13:58 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:14:01 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:14:06 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:14:14 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:14:14 | INFO    | [104/750] b5ca7ac4 | baseline | run 4
+2026-04-06T18:14:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:14:40 | INFO    |   ✗ exact=False cell_acc=0.490 dim=True tokens=12315 26.3s
+2026-04-06T18:14:40 | INFO    | [105/750] 898e7135 | chain-of-thought | run 5
+2026-04-06T18:14:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:15:17 | INFO    |   ✗ exact=False cell_acc=0.524 dim=False tokens=10727 36.3s
+2026-04-06T18:15:17 | INFO    | [106/750] 7b0280bc | baseline | run 1
+2026-04-06T18:15:50 | INFO    |   ✗ exact=False cell_acc=0.854 dim=True tokens=11746 33.4s
+2026-04-06T18:15:50 | INFO    | [107/750] aa4ec2a5 | chain-of-thought | run 4
+2026-04-06T18:16:24 | INFO    |   ✗ exact=False cell_acc=0.927 dim=True tokens=14113 33.5s
+2026-04-06T18:16:24 | INFO    | [108/750] 6e453dd6 | chain-of-thought | run 2
+2026-04-06T18:16:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:16:27 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:16:51 | INFO    |   ✗ exact=False cell_acc=0.860 dim=True tokens=6726 27.5s
+2026-04-06T18:16:51 | INFO    | [109/750] 67e490f4 | arc-informed | run 3
+2026-04-06T18:17:17 | INFO    |   ✗ exact=False cell_acc=0.195 dim=False tokens=10763 25.9s
+2026-04-06T18:17:17 | INFO    | [110/750] e376de54 | chain-of-thought | run 4
+2026-04-06T18:17:18 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:17:35 | INFO    |   ✗ exact=False cell_acc=0.941 dim=True tokens=7045 18.3s
+2026-04-06T18:17:35 | INFO    | [111/750] 7666fa5d | baseline | run 3
+2026-04-06T18:17:36 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:17:54 | INFO    |   ✗ exact=False cell_acc=0.988 dim=True tokens=5099 18.2s
+2026-04-06T18:17:54 | INFO    | [112/750] 8698868d | chain-of-thought | run 5
+2026-04-06T18:17:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:18:10 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8653 16.6s
+2026-04-06T18:18:10 | INFO    | [113/750] 1818057f | chain-of-thought | run 4
+2026-04-06T18:18:37 | INFO    |   ✗ exact=False cell_acc=0.907 dim=True tokens=6896 26.5s
+2026-04-06T18:18:37 | INFO    | [114/750] 409aa875 | arc-informed | run 5
+2026-04-06T18:18:57 | INFO    |   ✗ exact=False cell_acc=0.934 dim=True tokens=7464 20.0s
+2026-04-06T18:18:57 | INFO    | [115/750] 135a2760 | chain-of-thought | run 5
+2026-04-06T18:19:24 | INFO    |   ✗ exact=False cell_acc=0.969 dim=True tokens=8980 27.4s
+2026-04-06T18:19:24 | INFO    | [116/750] 7b0280bc | arc-informed | run 5
+2026-04-06T18:19:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:19:28 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:20:04 | INFO    |   ✗ exact=False cell_acc=0.878 dim=True tokens=12511 39.9s
+2026-04-06T18:20:04 | INFO    | [117/750] 409aa875 | chain-of-thought | run 1
+2026-04-06T18:20:27 | INFO    |   ✗ exact=False cell_acc=0.930 dim=True tokens=7047 22.6s
+2026-04-06T18:20:27 | INFO    | [118/750] 800d221b | chain-of-thought | run 4
+2026-04-06T18:20:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:21:03 | INFO    |   ✗ exact=False cell_acc=0.262 dim=True tokens=10647 36.4s
+2026-04-06T18:21:03 | INFO    | [119/750] 8f3a5a89 | arc-informed | run 4
+2026-04-06T18:21:25 | INFO    |   ✗ exact=False cell_acc=0.778 dim=True tokens=7351 22.0s
+2026-04-06T18:21:25 | INFO    | [120/750] 6ffbe589 | arc-informed | run 3
+2026-04-06T18:21:44 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=7799 19.0s
+2026-04-06T18:21:44 | INFO    | [121/750] 4c416de3 | chain-of-thought | run 5
+2026-04-06T18:22:03 | INFO    |   ✗ exact=False cell_acc=0.919 dim=True tokens=11734 18.4s
+2026-04-06T18:22:03 | INFO    | [122/750] 9aaea919 | arc-informed | run 2
+2026-04-06T18:22:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:22:06 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:22:46 | INFO    |   ✗ exact=False cell_acc=0.922 dim=True tokens=22908 43.7s
+2026-04-06T18:22:46 | INFO    | [123/750] 2ba387bc | baseline | run 1
+2026-04-06T18:22:56 | INFO    |   ✗ exact=False cell_acc=0.125 dim=False tokens=9270 9.8s
+2026-04-06T18:22:56 | INFO    | [124/750] 1818057f | baseline | run 4
+2026-04-06T18:23:15 | INFO    |   ✗ exact=False cell_acc=0.926 dim=True tokens=6674 18.8s
+2026-04-06T18:23:15 | INFO    | [125/750] 800d221b | arc-informed | run 1
+2026-04-06T18:23:16 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:23:51 | INFO    |   ✗ exact=False cell_acc=0.909 dim=True tokens=11196 35.6s
+2026-04-06T18:23:51 | INFO    | [126/750] 45a5af55 | baseline | run 5
+2026-04-06T18:24:08 | INFO    |   ✗ exact=False cell_acc=0.482 dim=False tokens=7240 16.9s
+2026-04-06T18:24:08 | INFO    | [127/750] 53fb4810 | baseline | run 2
+2026-04-06T18:24:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:24:11 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:24:16 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:24:24 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:24:24 | INFO    | [128/750] c4d067a0 | baseline | run 3
+2026-04-06T18:24:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:24:52 | INFO    |   ✗ exact=False cell_acc=0.841 dim=True tokens=14614 27.6s
+2026-04-06T18:24:52 | INFO    | [129/750] 67e490f4 | baseline | run 2
+2026-04-06T18:24:53 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:25:12 | INFO    |   ✗ exact=False cell_acc=0.552 dim=False tokens=10212 20.1s
+2026-04-06T18:25:12 | INFO    | [130/750] bf45cf4b | chain-of-thought | run 4
+2026-04-06T18:25:31 | INFO    |   ✗ exact=False cell_acc=0.187 dim=False tokens=5125 19.0s
+2026-04-06T18:25:31 | INFO    | [131/750] 89565ca0 | chain-of-thought | run 2
+2026-04-06T18:25:51 | INFO    |   ✗ exact=False cell_acc=0.200 dim=False tokens=9142 20.4s
+2026-04-06T18:25:51 | INFO    | [132/750] bf45cf4b | baseline | run 2
+2026-04-06T18:25:52 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:26:07 | INFO    |   ✗ exact=False cell_acc=0.187 dim=False tokens=4411 15.5s
+2026-04-06T18:26:07 | INFO    | [133/750] 5961cc34 | chain-of-thought | run 5
+2026-04-06T18:26:32 | INFO    |   ✗ exact=False cell_acc=0.948 dim=True tokens=15928 25.1s
+2026-04-06T18:26:32 | INFO    | [134/750] f560132c | baseline | run 3
+2026-04-06T18:26:33 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:26:44 | INFO    |   ✗ exact=False cell_acc=0.188 dim=False tokens=5756 11.4s
+2026-04-06T18:26:44 | INFO    | [135/750] 67e490f4 | baseline | run 5
+2026-04-06T18:26:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:26:47 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:27:08 | INFO    |   ✗ exact=False cell_acc=0.133 dim=False tokens=9921 24.2s
+2026-04-06T18:27:08 | INFO    | [136/750] 89565ca0 | arc-informed | run 3
+2026-04-06T18:27:23 | INFO    |   ✗ exact=False cell_acc=0.200 dim=False tokens=9434 15.2s
+2026-04-06T18:27:23 | INFO    | [137/750] 8f215267 | chain-of-thought | run 5
+2026-04-06T18:27:49 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13590 26.3s
+2026-04-06T18:27:49 | INFO    | [138/750] 7b5033c1 | arc-informed | run 2
+2026-04-06T18:27:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:28:20 | INFO    |   ✗ exact=False cell_acc=0.320 dim=False tokens=5258 30.9s
+2026-04-06T18:28:20 | INFO    | [139/750] 7b3084d4 | chain-of-thought | run 3
+2026-04-06T18:28:33 | INFO    |   ✗ exact=False cell_acc=0.189 dim=False tokens=6495 12.5s
+2026-04-06T18:28:33 | INFO    | [140/750] e87109e9 | chain-of-thought | run 5
+2026-04-06T18:28:53 | INFO    |   ✗ exact=False cell_acc=0.616 dim=True tokens=14033 20.1s
+2026-04-06T18:28:53 | INFO    | [141/750] 7b5033c1 | chain-of-thought | run 4
+2026-04-06T18:29:08 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=3853 14.8s
+2026-04-06T18:29:08 | INFO    | [142/750] 5961cc34 | chain-of-thought | run 2
+2026-04-06T18:29:34 | INFO    |   ✗ exact=False cell_acc=0.915 dim=False tokens=16156 26.2s
+2026-04-06T18:29:34 | INFO    | [143/750] 7666fa5d | chain-of-thought | run 3
+2026-04-06T18:29:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:29:38 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:30:01 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=5369 26.7s
+2026-04-06T18:30:01 | INFO    | [144/750] 135a2760 | chain-of-thought | run 2
+2026-04-06T18:30:26 | INFO    |   ✗ exact=False cell_acc=0.895 dim=True tokens=8911 25.1s
+2026-04-06T18:30:26 | INFO    | [145/750] 898e7135 | chain-of-thought | run 4
+2026-04-06T18:30:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:31:06 | INFO    |   ✗ exact=False cell_acc=0.628 dim=True tokens=11011 40.3s
+2026-04-06T18:31:06 | INFO    | [146/750] a395ee82 | chain-of-thought | run 2
+2026-04-06T18:31:27 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=12532 21.3s
+2026-04-06T18:31:27 | INFO    | [147/750] b10624e5 | chain-of-thought | run 2
+2026-04-06T18:31:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:31:31 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:31:36 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:31:44 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:31:44 | INFO    | [148/750] 800d221b | arc-informed | run 2
+2026-04-06T18:31:45 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:32:48 | INFO    |   ✗ exact=False cell_acc=0.947 dim=True tokens=14005 63.2s
+2026-04-06T18:32:48 | INFO    | [149/750] 271d71e2 | baseline | run 5
+2026-04-06T18:33:14 | INFO    |   ✗ exact=False cell_acc=0.639 dim=True tokens=7653 26.4s
+2026-04-06T18:33:14 | INFO    | [150/750] 7b5033c1 | baseline | run 3
+2026-04-06T18:33:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:33:27 | INFO    |   ✗ exact=False cell_acc=0.680 dim=False tokens=3358 12.7s
+2026-04-06T18:33:27 | INFO    | [151/750] 53fb4810 | baseline | run 4
+2026-04-06T18:33:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:33:30 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:33:35 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:33:43 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:33:43 | INFO    | [152/750] 8f215267 | baseline | run 3
+2026-04-06T18:34:05 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13479 21.5s
+2026-04-06T18:34:05 | INFO    | [153/750] 58f5dbd5 | arc-informed | run 4
+2026-04-06T18:34:24 | INFO    |   ✗ exact=False cell_acc=0.911 dim=True tokens=8306 19.5s
+2026-04-06T18:34:24 | INFO    | [154/750] 8f3a5a89 | chain-of-thought | run 3
+2026-04-06T18:34:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:34:28 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:34:33 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:34:41 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:34:41 | INFO    | [155/750] 409aa875 | arc-informed | run 1
+2026-04-06T18:34:42 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:35:04 | INFO    |   ✗ exact=False cell_acc=0.879 dim=True tokens=7594 23.1s
+2026-04-06T18:35:04 | INFO    | [156/750] 8f215267 | chain-of-thought | run 1
+2026-04-06T18:35:33 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13761 28.9s
+2026-04-06T18:35:33 | INFO    | [157/750] 28a6681f | baseline | run 4
+2026-04-06T18:35:46 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=2954 12.1s
+2026-04-06T18:35:46 | INFO    | [158/750] 271d71e2 | arc-informed | run 4
+2026-04-06T18:35:46 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:36:14 | INFO    |   ✗ exact=False cell_acc=0.630 dim=True tokens=8131 28.3s
+2026-04-06T18:36:14 | INFO    | [159/750] 8f3a5a89 | baseline | run 2
+2026-04-06T18:36:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:36:18 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:36:33 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=6015 19.4s
+2026-04-06T18:36:33 | INFO    | [160/750] 28a6681f | chain-of-thought | run 4
+2026-04-06T18:36:45 | INFO    |   ✗ exact=False cell_acc=0.900 dim=True tokens=3221 12.0s
+2026-04-06T18:36:45 | INFO    | [161/750] 7b5033c1 | baseline | run 1
+2026-04-06T18:36:46 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:36:59 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=3329 13.5s
+2026-04-06T18:36:59 | INFO    | [162/750] c4d067a0 | baseline | run 1
+2026-04-06T18:37:24 | INFO    |   ✗ exact=False cell_acc=0.830 dim=True tokens=14554 25.5s
+2026-04-06T18:37:24 | INFO    | [163/750] 4c416de3 | arc-informed | run 1
+2026-04-06T18:37:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:37:28 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:37:58 | INFO    |   ✗ exact=False cell_acc=0.907 dim=True tokens=12724 33.7s
+2026-04-06T18:37:58 | INFO    | [164/750] 53fb4810 | baseline | run 5
+2026-04-06T18:38:21 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=7261 22.6s
+2026-04-06T18:38:21 | INFO    | [165/750] 53fb4810 | arc-informed | run 1
+2026-04-06T18:38:22 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:38:54 | INFO    |   ✗ exact=False cell_acc=0.933 dim=True tokens=7889 33.1s
+2026-04-06T18:38:54 | INFO    | [166/750] 135a2760 | arc-informed | run 5
+2026-04-06T18:39:25 | INFO    |   ✗ exact=False cell_acc=0.979 dim=True tokens=9458 30.6s
+2026-04-06T18:39:25 | INFO    | [167/750] edb79dae | chain-of-thought | run 3
+2026-04-06T18:39:49 | INFO    |   ✗ exact=False cell_acc=0.796 dim=True tokens=9595 24.7s
+2026-04-06T18:39:49 | INFO    | [168/750] b9e38dc0 | arc-informed | run 5
+2026-04-06T18:39:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:40:12 | INFO    |   ✗ exact=False cell_acc=0.646 dim=True tokens=6793 22.9s
+2026-04-06T18:40:12 | INFO    | [169/750] 800d221b | chain-of-thought | run 2
+2026-04-06T18:40:13 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:40:16 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:40:55 | INFO    |   ✗ exact=False cell_acc=0.993 dim=True tokens=10761 42.8s
+2026-04-06T18:40:55 | INFO    | [170/750] 800d221b | baseline | run 5
+2026-04-06T18:41:21 | INFO    |   ✗ exact=False cell_acc=0.912 dim=True tokens=10440 26.2s
+2026-04-06T18:41:21 | INFO    | [171/750] e87109e9 | chain-of-thought | run 4
+2026-04-06T18:41:22 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:41:25 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:41:30 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:41:38 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:41:38 | INFO    | [172/750] 45a5af55 | chain-of-thought | run 1
+2026-04-06T18:42:02 | INFO    |   ✗ exact=False cell_acc=0.348 dim=False tokens=7524 23.9s
+2026-04-06T18:42:02 | INFO    | [173/750] 89565ca0 | arc-informed | run 4
+2026-04-06T18:42:18 | INFO    |   ✗ exact=False cell_acc=0.233 dim=False tokens=9418 16.0s
+2026-04-06T18:42:18 | INFO    | [174/750] 28a6681f | arc-informed | run 3
+2026-04-06T18:42:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:42:22 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:42:26 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:42:35 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:42:35 | INFO    | [175/750] 409aa875 | baseline | run 1
+2026-04-06T18:42:48 | INFO    |   ✗ exact=False cell_acc=0.949 dim=True tokens=6787 13.6s
+2026-04-06T18:42:48 | INFO    | [176/750] f560132c | baseline | run 1
+2026-04-06T18:43:04 | INFO    |   ✗ exact=False cell_acc=0.222 dim=False tokens=5928 15.8s
+2026-04-06T18:43:04 | INFO    | [177/750] 6ffbe589 | chain-of-thought | run 4
+2026-04-06T18:43:16 | INFO    |   ✗ exact=False cell_acc=0.071 dim=False tokens=7031 12.0s
+2026-04-06T18:43:16 | INFO    | [178/750] f560132c | baseline | run 4
+2026-04-06T18:43:26 | INFO    |   ✗ exact=False cell_acc=0.264 dim=False tokens=5866 10.3s
+2026-04-06T18:43:26 | INFO    | [179/750] 135a2760 | chain-of-thought | run 4
+2026-04-06T18:43:54 | INFO    |   ✗ exact=False cell_acc=0.989 dim=True tokens=9005 27.3s
+2026-04-06T18:43:54 | INFO    | [180/750] edb79dae | arc-informed | run 4
+2026-04-06T18:43:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:44:18 | INFO    |   ✗ exact=False cell_acc=0.646 dim=False tokens=9897 24.4s
+2026-04-06T18:44:18 | INFO    | [181/750] db0c5428 | chain-of-thought | run 4
+2026-04-06T18:44:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:44:36 | INFO    |   ✗ exact=False cell_acc=0.550 dim=True tokens=8239 18.2s
+2026-04-06T18:44:36 | INFO    | [182/750] aa4ec2a5 | arc-informed | run 2
+2026-04-06T18:44:37 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:45:07 | INFO    |   ✗ exact=False cell_acc=0.863 dim=True tokens=14541 31.1s
+2026-04-06T18:45:07 | INFO    | [183/750] db0c5428 | chain-of-thought | run 2
+2026-04-06T18:45:23 | INFO    |   ✗ exact=False cell_acc=0.585 dim=True tokens=8205 15.4s
+2026-04-06T18:45:23 | INFO    | [184/750] db0c5428 | arc-informed | run 2
+2026-04-06T18:45:59 | INFO    |   ✗ exact=False cell_acc=0.626 dim=True tokens=9820 35.8s
+2026-04-06T18:45:59 | INFO    | [185/750] 8698868d | chain-of-thought | run 2
+2026-04-06T18:46:16 | INFO    |   ✗ exact=False cell_acc=0.017 dim=False tokens=8989 17.1s
+2026-04-06T18:46:16 | INFO    | [186/750] e8686506 | baseline | run 2
+2026-04-06T18:46:17 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:46:20 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:46:36 | INFO    |   ✗ exact=False cell_acc=0.375 dim=False tokens=2653 20.4s
+2026-04-06T18:46:36 | INFO    | [187/750] b10624e5 | arc-informed | run 5
+2026-04-06T18:47:14 | INFO    |   ✗ exact=False cell_acc=0.852 dim=True tokens=14375 37.5s
+2026-04-06T18:47:14 | INFO    | [188/750] dfadab01 | arc-informed | run 3
+2026-04-06T18:47:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:47:17 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:47:44 | INFO    |   ✗ exact=False cell_acc=0.665 dim=True tokens=9739 29.8s
+2026-04-06T18:47:44 | INFO    | [189/750] 7666fa5d | baseline | run 4
+2026-04-06T18:47:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:48:03 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=5097 18.9s
+2026-04-06T18:48:03 | INFO    | [190/750] 981571dc | baseline | run 3
+2026-04-06T18:48:29 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=27500 26.8s
+2026-04-06T18:48:29 | INFO    | [191/750] 8698868d | baseline | run 4
+2026-04-06T18:48:39 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8059 9.5s
+2026-04-06T18:48:39 | INFO    | [192/750] a395ee82 | baseline | run 4
+2026-04-06T18:48:56 | INFO    |   ✗ exact=False cell_acc=0.837 dim=True tokens=12179 17.6s
+2026-04-06T18:48:56 | INFO    | [193/750] 981571dc | baseline | run 5
+2026-04-06T18:49:26 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=27688 29.4s
+2026-04-06T18:49:26 | INFO    | [194/750] 2c181942 | arc-informed | run 3
+2026-04-06T18:50:12 | INFO    |   ✗ exact=False cell_acc=0.877 dim=True tokens=15020 46.4s
+2026-04-06T18:50:12 | INFO    | [195/750] 5961cc34 | chain-of-thought | run 1
+2026-04-06T18:50:13 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:50:38 | INFO    |   ✗ exact=False cell_acc=0.959 dim=True tokens=15789 25.8s
+2026-04-06T18:50:38 | INFO    | [196/750] 6ffbe589 | baseline | run 3
+2026-04-06T18:50:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:50:56 | INFO    |   ✗ exact=False cell_acc=0.207 dim=False tokens=7027 17.5s
+2026-04-06T18:50:56 | INFO    | [197/750] 7b0280bc | arc-informed | run 1
+2026-04-06T18:51:32 | INFO    |   ✗ exact=False cell_acc=0.860 dim=True tokens=12661 36.2s
+2026-04-06T18:51:32 | INFO    | [198/750] 53fb4810 | chain-of-thought | run 5
+2026-04-06T18:51:33 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:51:35 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:51:59 | INFO    |   ✗ exact=False cell_acc=0.809 dim=True tokens=7402 26.8s
+2026-04-06T18:51:59 | INFO    | [199/750] db0c5428 | chain-of-thought | run 1
+2026-04-06T18:51:59 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:52:02 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:52:24 | INFO    |   ✗ exact=False cell_acc=0.661 dim=True tokens=8243 25.2s
+2026-04-06T18:52:24 | INFO    | [200/750] aa4ec2a5 | baseline | run 1
+2026-04-06T18:52:46 | INFO    |   ✗ exact=False cell_acc=0.630 dim=True tokens=13779 22.3s
+2026-04-06T18:52:46 | INFO    | [201/750] da515329 | arc-informed | run 4
+2026-04-06T18:52:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:52:50 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:53:22 | INFO    |   ✗ exact=False cell_acc=0.675 dim=False tokens=10615 36.0s
+2026-04-06T18:53:22 | INFO    | [202/750] e87109e9 | chain-of-thought | run 1
+2026-04-06T18:53:23 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:53:26 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:54:01 | INFO    |   ✗ exact=False cell_acc=0.677 dim=True tokens=14182 38.9s
+2026-04-06T18:54:01 | INFO    | [203/750] b9e38dc0 | arc-informed | run 1
+2026-04-06T18:54:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:54:32 | INFO    |   ✗ exact=False cell_acc=0.772 dim=True tokens=7849 30.5s
+2026-04-06T18:54:32 | INFO    | [204/750] 28a6681f | baseline | run 2
+2026-04-06T18:54:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:54:35 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:54:40 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:54:48 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:54:48 | INFO    | [205/750] 58f5dbd5 | baseline | run 5
+2026-04-06T18:55:03 | INFO    |   ✗ exact=False cell_acc=0.883 dim=False tokens=7666 14.6s
+2026-04-06T18:55:03 | INFO    | [206/750] 981571dc | arc-informed | run 2
+2026-04-06T18:55:39 | INFO    |   ✗ exact=False cell_acc=0.996 dim=True tokens=28145 35.8s
+2026-04-06T18:55:39 | INFO    | [207/750] db0c5428 | arc-informed | run 3
+2026-04-06T18:56:06 | INFO    |   ✗ exact=False cell_acc=0.540 dim=True tokens=8833 27.1s
+2026-04-06T18:56:06 | INFO    | [208/750] 7b5033c1 | baseline | run 2
+2026-04-06T18:56:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:56:22 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=3686 16.5s
+2026-04-06T18:56:22 | INFO    | [209/750] f560132c | baseline | run 5
+2026-04-06T18:56:23 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:56:26 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:56:31 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:56:39 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:56:39 | INFO    | [210/750] 6e453dd6 | chain-of-thought | run 1
+2026-04-06T18:57:01 | INFO    |   ✗ exact=False cell_acc=0.920 dim=True tokens=6438 22.0s
+2026-04-06T18:57:01 | INFO    | [211/750] e87109e9 | arc-informed | run 3
+2026-04-06T18:57:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:57:40 | INFO    |   ✗ exact=False cell_acc=0.524 dim=False tokens=15036 38.6s
+2026-04-06T18:57:40 | INFO    | [212/750] 8f3a5a89 | arc-informed | run 5
+2026-04-06T18:57:40 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:58:02 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=7255 22.4s
+2026-04-06T18:58:02 | INFO    | [213/750] 898e7135 | arc-informed | run 4
+2026-04-06T18:58:29 | INFO    |   ✗ exact=False cell_acc=0.380 dim=False tokens=10511 26.8s
+2026-04-06T18:58:29 | INFO    | [214/750] 135a2760 | baseline | run 4
+2026-04-06T18:58:30 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:59:02 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=8724 33.1s
+2026-04-06T18:59:02 | INFO    | [215/750] 7b3084d4 | baseline | run 4
+2026-04-06T18:59:11 | INFO    |   ✗ exact=False cell_acc=0.082 dim=False tokens=6088 8.8s
+2026-04-06T18:59:11 | INFO    | [216/750] 7b0280bc | baseline | run 3
+2026-04-06T18:59:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:59:15 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:59:19 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:59:28 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:59:28 | INFO    | [217/750] 97d7923e | arc-informed | run 2
+2026-04-06T18:59:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:59:31 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T18:59:36 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T18:59:44 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T18:59:44 | INFO    | [218/750] 97d7923e | chain-of-thought | run 2
+2026-04-06T18:59:45 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T18:59:48 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:00:09 | INFO    |   ✗ exact=False cell_acc=0.950 dim=True tokens=4822 25.0s
+2026-04-06T19:00:09 | INFO    | [219/750] dfadab01 | arc-informed | run 1
+2026-04-06T19:00:10 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:00:35 | INFO    |   ✗ exact=False cell_acc=0.980 dim=True tokens=9820 25.7s
+2026-04-06T19:00:35 | INFO    | [220/750] 7b5033c1 | chain-of-thought | run 3
+2026-04-06T19:00:49 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=3667 14.4s
+2026-04-06T19:00:49 | INFO    | [221/750] dfadab01 | arc-informed | run 5
+2026-04-06T19:00:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:01:17 | INFO    |   ✗ exact=False cell_acc=0.340 dim=True tokens=10117 27.9s
+2026-04-06T19:01:17 | INFO    | [222/750] b10624e5 | chain-of-thought | run 5
+2026-04-06T19:01:47 | INFO    |   ✗ exact=False cell_acc=0.824 dim=True tokens=13964 30.1s
+2026-04-06T19:01:47 | INFO    | [223/750] 45a5af55 | arc-informed | run 2
+2026-04-06T19:02:19 | INFO    |   ✗ exact=False cell_acc=0.604 dim=False tokens=8412 32.2s
+2026-04-06T19:02:19 | INFO    | [224/750] a395ee82 | chain-of-thought | run 4
+2026-04-06T19:02:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:02:23 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:02:51 | INFO    |   ✗ exact=False cell_acc=0.744 dim=False tokens=12792 31.8s
+2026-04-06T19:02:51 | INFO    | [225/750] 8b9c3697 | baseline | run 5
+2026-04-06T19:03:18 | INFO    |   ✗ exact=False cell_acc=0.857 dim=True tokens=11941 26.6s
+2026-04-06T19:03:18 | INFO    | [226/750] 9aaea919 | baseline | run 4
+2026-04-06T19:03:47 | INFO    |   ✗ exact=False cell_acc=0.939 dim=True tokens=22174 29.1s
+2026-04-06T19:03:47 | INFO    | [227/750] 9aaea919 | arc-informed | run 1
+2026-04-06T19:03:48 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:04:30 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=23398 42.7s
+2026-04-06T19:04:30 | INFO    | [228/750] 271d71e2 | baseline | run 2
+2026-04-06T19:04:56 | INFO    |   ✗ exact=False cell_acc=0.636 dim=True tokens=7640 26.3s
+2026-04-06T19:04:56 | INFO    | [229/750] b5ca7ac4 | baseline | run 2
+2026-04-06T19:05:19 | INFO    |   ✗ exact=False cell_acc=0.556 dim=True tokens=12156 22.8s
+2026-04-06T19:05:19 | INFO    | [230/750] d59b0160 | baseline | run 5
+2026-04-06T19:05:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:05:23 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:05:44 | INFO    |   ✗ exact=False cell_acc=0.738 dim=True tokens=6835 25.1s
+2026-04-06T19:05:44 | INFO    | [231/750] 2ba387bc | chain-of-thought | run 2
+2026-04-06T19:05:45 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:06:00 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=9539 16.2s
+2026-04-06T19:06:00 | INFO    | [232/750] 67e490f4 | arc-informed | run 4
+2026-04-06T19:06:24 | INFO    |   ✗ exact=False cell_acc=0.086 dim=False tokens=10517 23.9s
+2026-04-06T19:06:24 | INFO    | [233/750] c7f57c3e | chain-of-thought | run 4
+2026-04-06T19:07:01 | INFO    |   ✗ exact=False cell_acc=0.908 dim=True tokens=10766 36.4s
+2026-04-06T19:07:01 | INFO    | [234/750] bf45cf4b | baseline | run 5
+2026-04-06T19:07:12 | INFO    |   ✗ exact=False cell_acc=0.166 dim=False tokens=4310 11.5s
+2026-04-06T19:07:12 | INFO    | [235/750] b10624e5 | baseline | run 3
+2026-04-06T19:07:13 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:07:16 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:07:45 | INFO    |   ✗ exact=False cell_acc=0.835 dim=True tokens=13968 32.3s
+2026-04-06T19:07:45 | INFO    | [236/750] bf45cf4b | arc-informed | run 2
+2026-04-06T19:07:45 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:07:48 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:08:10 | INFO    |   ✗ exact=False cell_acc=0.120 dim=False tokens=5066 25.2s
+2026-04-06T19:08:10 | INFO    | [237/750] 1818057f | chain-of-thought | run 5
+2026-04-06T19:08:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:08:14 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:08:18 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:08:27 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:08:27 | INFO    | [238/750] abc82100 | baseline | run 4
+2026-04-06T19:08:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:08:47 | INFO    |   ✗ exact=False cell_acc=0.805 dim=True tokens=7365 20.3s
+2026-04-06T19:08:47 | INFO    | [239/750] 409aa875 | baseline | run 4
+2026-04-06T19:09:00 | INFO    |   ✗ exact=False cell_acc=0.953 dim=True tokens=6767 13.0s
+2026-04-06T19:09:00 | INFO    | [240/750] 6ffbe589 | baseline | run 1
+2026-04-06T19:09:01 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:09:16 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=6669 16.2s
+2026-04-06T19:09:16 | INFO    | [241/750] dfadab01 | chain-of-thought | run 3
+2026-04-06T19:09:35 | INFO    |   ✗ exact=False cell_acc=0.575 dim=True tokens=9317 18.7s
+2026-04-06T19:09:35 | INFO    | [242/750] b10624e5 | arc-informed | run 1
+2026-04-06T19:09:36 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:09:39 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:09:43 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:09:52 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:09:52 | INFO    | [243/750] da515329 | chain-of-thought | run 2
+2026-04-06T19:10:18 | INFO    |   ✗ exact=False cell_acc=0.709 dim=False tokens=10191 26.5s
+2026-04-06T19:10:18 | INFO    | [244/750] da515329 | baseline | run 2
+2026-04-06T19:10:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:10:46 | INFO    |   ✗ exact=False cell_acc=0.799 dim=True tokens=9950 27.8s
+2026-04-06T19:10:46 | INFO    | [245/750] 53fb4810 | chain-of-thought | run 1
+2026-04-06T19:10:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:11:16 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=7328 30.6s
+2026-04-06T19:11:16 | INFO    | [246/750] 800d221b | chain-of-thought | run 3
+2026-04-06T19:11:50 | INFO    |   ✗ exact=False cell_acc=0.913 dim=True tokens=10715 33.5s
+2026-04-06T19:11:50 | INFO    | [247/750] 5545f144 | baseline | run 3
+2026-04-06T19:12:00 | INFO    |   ✗ exact=False cell_acc=0.422 dim=False tokens=4849 10.5s
+2026-04-06T19:12:00 | INFO    | [248/750] 135a2760 | arc-informed | run 1
+2026-04-06T19:12:01 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:12:04 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:12:09 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:12:17 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:12:17 | INFO    | [249/750] 800d221b | arc-informed | run 4
+2026-04-06T19:12:50 | INFO    |   ✗ exact=False cell_acc=0.940 dim=True tokens=11246 33.1s
+2026-04-06T19:12:50 | INFO    | [250/750] 9aaea919 | chain-of-thought | run 2
+2026-04-06T19:12:51 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:12:54 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:12:59 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:13:07 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:13:07 | INFO    | [251/750] aa4ec2a5 | arc-informed | run 4
+2026-04-06T19:13:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:13:51 | INFO    |   ✗ exact=False cell_acc=0.766 dim=True tokens=16688 43.5s
+2026-04-06T19:13:51 | INFO    | [252/750] 97d7923e | chain-of-thought | run 5
+2026-04-06T19:14:07 | INFO    |   ✗ exact=False cell_acc=0.910 dim=True tokens=4685 16.3s
+2026-04-06T19:14:07 | INFO    | [253/750] a395ee82 | baseline | run 2
+2026-04-06T19:14:25 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=12168 18.0s
+2026-04-06T19:14:25 | INFO    | [254/750] 5961cc34 | arc-informed | run 4
+2026-04-06T19:14:26 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:14:56 | INFO    |   ✗ exact=False cell_acc=0.893 dim=True tokens=16383 31.1s
+2026-04-06T19:14:56 | INFO    | [255/750] 6ffbe589 | arc-informed | run 5
+2026-04-06T19:15:14 | INFO    |   ✗ exact=False cell_acc=0.065 dim=False tokens=7524 17.3s
+2026-04-06T19:15:14 | INFO    | [256/750] abc82100 | baseline | run 5
+2026-04-06T19:15:30 | INFO    |   ✗ exact=False cell_acc=0.802 dim=True tokens=7358 15.9s
+2026-04-06T19:15:30 | INFO    | [257/750] abc82100 | chain-of-thought | run 3
+2026-04-06T19:15:30 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:15:33 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:15:38 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:15:46 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:15:46 | INFO    | [258/750] 58f5dbd5 | chain-of-thought | run 4
+2026-04-06T19:15:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:16:01 | INFO    |   ✗ exact=False cell_acc=0.251 dim=False tokens=7302 15.0s
+2026-04-06T19:16:01 | INFO    | [259/750] a395ee82 | arc-informed | run 1
+2026-04-06T19:16:30 | INFO    |   ✗ exact=False cell_acc=0.839 dim=True tokens=12920 28.8s
+2026-04-06T19:16:30 | INFO    | [260/750] 67e490f4 | baseline | run 4
+2026-04-06T19:16:31 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:16:34 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:16:39 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:16:47 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:16:47 | INFO    | [261/750] dfadab01 | chain-of-thought | run 4
+2026-04-06T19:17:09 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=9508 21.7s
+2026-04-06T19:17:09 | INFO    | [262/750] 8698868d | baseline | run 2
+2026-04-06T19:17:10 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:17:13 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:17:18 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:17:26 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:17:26 | INFO    | [263/750] 5961cc34 | arc-informed | run 5
+2026-04-06T19:17:54 | INFO    |   ✗ exact=False cell_acc=0.959 dim=True tokens=16360 28.3s
+2026-04-06T19:17:54 | INFO    | [264/750] 6e453dd6 | chain-of-thought | run 4
+2026-04-06T19:17:55 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:17:58 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:18:03 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:18:11 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:18:11 | INFO    | [265/750] 5961cc34 | baseline | run 3
+2026-04-06T19:18:35 | INFO    |   ✗ exact=False cell_acc=0.944 dim=True tokens=15676 23.7s
+2026-04-06T19:18:35 | INFO    | [266/750] 97d7923e | chain-of-thought | run 4
+2026-04-06T19:18:52 | INFO    |   ✗ exact=False cell_acc=0.935 dim=True tokens=4674 17.2s
+2026-04-06T19:18:52 | INFO    | [267/750] e87109e9 | baseline | run 5
+2026-04-06T19:19:17 | INFO    |   ✗ exact=False cell_acc=0.693 dim=True tokens=13936 25.3s
+2026-04-06T19:19:17 | INFO    | [268/750] a395ee82 | arc-informed | run 4
+2026-04-06T19:19:18 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:19:54 | INFO    |   ✗ exact=False cell_acc=0.818 dim=True tokens=13123 36.5s
+2026-04-06T19:19:54 | INFO    | [269/750] e376de54 | baseline | run 3
+2026-04-06T19:19:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:20:09 | INFO    |   ✗ exact=False cell_acc=0.945 dim=True tokens=6675 15.2s
+2026-04-06T19:20:09 | INFO    | [270/750] 67e490f4 | chain-of-thought | run 5
+2026-04-06T19:20:10 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:20:28 | INFO    |   ✗ exact=False cell_acc=0.605 dim=False tokens=10429 18.9s
+2026-04-06T19:20:28 | INFO    | [271/750] e8686506 | arc-informed | run 3
+2026-04-06T19:20:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:20:31 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:20:54 | INFO    |   ✗ exact=False cell_acc=0.400 dim=True tokens=3694 25.7s
+2026-04-06T19:20:54 | INFO    | [272/750] abc82100 | baseline | run 1
+2026-04-06T19:21:11 | INFO    |   ✗ exact=False cell_acc=0.805 dim=True tokens=7377 17.0s
+2026-04-06T19:21:11 | INFO    | [273/750] 5545f144 | arc-informed | run 3
+2026-04-06T19:21:29 | INFO    |   ✗ exact=False cell_acc=0.422 dim=False tokens=5646 18.3s
+2026-04-06T19:21:29 | INFO    | [274/750] e376de54 | chain-of-thought | run 3
+2026-04-06T19:21:30 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:21:33 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:21:51 | INFO    |   ✗ exact=False cell_acc=0.945 dim=True tokens=6928 22.4s
+2026-04-06T19:21:51 | INFO    | [275/750] da515329 | baseline | run 1
+2026-04-06T19:22:13 | INFO    |   ✗ exact=False cell_acc=0.672 dim=True tokens=9880 21.6s
+2026-04-06T19:22:13 | INFO    | [276/750] c4d067a0 | arc-informed | run 3
+2026-04-06T19:22:42 | INFO    |   ✗ exact=False cell_acc=0.833 dim=True tokens=15339 29.2s
+2026-04-06T19:22:42 | INFO    | [277/750] 981571dc | arc-informed | run 5
+2026-04-06T19:22:43 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:22:46 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:22:51 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:22:59 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:22:59 | INFO    | [278/750] 7b5033c1 | arc-informed | run 3
+2026-04-06T19:23:19 | INFO    |   ✗ exact=False cell_acc=0.360 dim=False tokens=4541 20.4s
+2026-04-06T19:23:19 | INFO    | [279/750] 8f215267 | arc-informed | run 5
+2026-04-06T19:23:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:23:23 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:23:55 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=14175 35.5s
+2026-04-06T19:23:55 | INFO    | [280/750] b5ca7ac4 | baseline | run 3
+2026-04-06T19:23:56 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:23:59 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:24:29 | INFO    |   ✗ exact=False cell_acc=0.610 dim=True tokens=12401 34.1s
+2026-04-06T19:24:29 | INFO    | [281/750] 8f3a5a89 | arc-informed | run 3
+2026-04-06T19:24:49 | INFO    |   ✗ exact=False cell_acc=0.833 dim=True tokens=7197 20.0s
+2026-04-06T19:24:49 | INFO    | [282/750] 2c181942 | arc-informed | run 5
+2026-04-06T19:25:23 | INFO    |   ✗ exact=False cell_acc=0.877 dim=True tokens=13247 33.7s
+2026-04-06T19:25:23 | INFO    | [283/750] e8686506 | arc-informed | run 2
+2026-04-06T19:25:23 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:25:26 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:25:31 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:25:39 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:25:39 | INFO    | [284/750] abc82100 | arc-informed | run 3
+2026-04-06T19:25:40 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:26:06 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=8226 27.2s
+2026-04-06T19:26:07 | INFO    | [285/750] e376de54 | baseline | run 4
+2026-04-06T19:26:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:26:22 | INFO    |   ✗ exact=False cell_acc=0.980 dim=True tokens=6742 15.3s
+2026-04-06T19:26:22 | INFO    | [286/750] 8698868d | chain-of-thought | run 1
+2026-04-06T19:26:23 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:26:25 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:26:45 | INFO    |   ✗ exact=False cell_acc=0.014 dim=False tokens=8877 23.6s
+2026-04-06T19:26:45 | INFO    | [287/750] 7666fa5d | chain-of-thought | run 1
+2026-04-06T19:27:00 | INFO    |   ✗ exact=False cell_acc=0.980 dim=True tokens=5356 14.3s
+2026-04-06T19:27:00 | INFO    | [288/750] e376de54 | baseline | run 5
+2026-04-06T19:27:12 | INFO    |   ✗ exact=False cell_acc=0.945 dim=True tokens=6685 12.2s
+2026-04-06T19:27:12 | INFO    | [289/750] e376de54 | baseline | run 1
+2026-04-06T19:27:25 | INFO    |   ✗ exact=False cell_acc=0.957 dim=True tokens=6694 12.4s
+2026-04-06T19:27:25 | INFO    | [290/750] aa4ec2a5 | baseline | run 4
+2026-04-06T19:27:47 | INFO    |   ✗ exact=False cell_acc=0.883 dim=True tokens=13853 22.1s
+2026-04-06T19:27:47 | INFO    | [291/750] f560132c | chain-of-thought | run 4
+2026-04-06T19:27:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:27:50 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:27:55 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:28:03 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:28:03 | INFO    | [292/750] 6e453dd6 | arc-informed | run 3
+2026-04-06T19:28:04 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:28:44 | INFO    |   ✗ exact=False cell_acc=0.907 dim=True tokens=7091 41.1s
+2026-04-06T19:28:44 | INFO    | [293/750] da515329 | arc-informed | run 3
+2026-04-06T19:29:13 | INFO    |   ✗ exact=False cell_acc=0.675 dim=False tokens=10611 28.7s
+2026-04-06T19:29:13 | INFO    | [294/750] db0c5428 | arc-informed | run 1
+2026-04-06T19:29:14 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:29:17 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:29:49 | INFO    |   ✗ exact=False cell_acc=0.550 dim=True tokens=8776 36.0s
+2026-04-06T19:29:49 | INFO    | [295/750] 5545f144 | chain-of-thought | run 5
+2026-04-06T19:30:07 | INFO    |   ✗ exact=False cell_acc=0.938 dim=True tokens=5771 17.8s
+2026-04-06T19:30:07 | INFO    | [296/750] 6ffbe589 | chain-of-thought | run 2
+2026-04-06T19:30:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:30:11 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:30:16 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:30:24 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:30:24 | INFO    | [297/750] 271d71e2 | arc-informed | run 2
+2026-04-06T19:30:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:30:27 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:30:32 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:30:40 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:30:40 | INFO    | [298/750] c4d067a0 | arc-informed | run 5
+2026-04-06T19:30:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:31:27 | INFO    |   ✗ exact=False cell_acc=0.805 dim=True tokens=17541 46.6s
+2026-04-06T19:31:27 | INFO    | [299/750] 8f3a5a89 | chain-of-thought | run 2
+2026-04-06T19:31:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:31:41 | INFO    |   ✗ exact=False cell_acc=0.833 dim=True tokens=6127 13.7s
+2026-04-06T19:31:41 | INFO    | [300/750] 58f5dbd5 | chain-of-thought | run 5
+2026-04-06T19:31:54 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=7560 13.4s
+2026-04-06T19:31:54 | INFO    | [301/750] edb79dae | arc-informed | run 3
+2026-04-06T19:32:17 | INFO    |   ✗ exact=False cell_acc=0.830 dim=True tokens=10123 22.9s
+2026-04-06T19:32:17 | INFO    | [302/750] 800d221b | chain-of-thought | run 1
+2026-04-06T19:32:51 | INFO    |   ✗ exact=False cell_acc=0.909 dim=True tokens=10737 33.7s
+2026-04-06T19:32:51 | INFO    | [303/750] 8f215267 | baseline | run 4
+2026-04-06T19:33:13 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13538 22.0s
+2026-04-06T19:33:13 | INFO    | [304/750] e87109e9 | arc-informed | run 2
+2026-04-06T19:33:46 | INFO    |   ✗ exact=False cell_acc=0.649 dim=True tokens=14649 33.6s
+2026-04-06T19:33:46 | INFO    | [305/750] abc82100 | baseline | run 3
+2026-04-06T19:33:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:34:06 | INFO    |   ✗ exact=False cell_acc=0.818 dim=True tokens=7464 20.0s
+2026-04-06T19:34:06 | INFO    | [306/750] fc7cae8d | chain-of-thought | run 5
+2026-04-06T19:34:26 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=9962 19.4s
+2026-04-06T19:34:26 | INFO    | [307/750] 4c416de3 | baseline | run 5
+2026-04-06T19:34:44 | INFO    |   ✗ exact=False cell_acc=0.926 dim=True tokens=11697 18.1s
+2026-04-06T19:34:44 | INFO    | [308/750] 6ffbe589 | baseline | run 4
+2026-04-06T19:34:57 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=6855 12.7s
+2026-04-06T19:34:57 | INFO    | [309/750] 1818057f | arc-informed | run 3
+2026-04-06T19:35:31 | INFO    |   ✗ exact=False cell_acc=0.940 dim=True tokens=7407 34.3s
+2026-04-06T19:35:31 | INFO    | [310/750] b9e38dc0 | chain-of-thought | run 3
+2026-04-06T19:35:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:35:56 | INFO    |   ✗ exact=False cell_acc=0.751 dim=True tokens=6223 25.1s
+2026-04-06T19:35:56 | INFO    | [311/750] abc82100 | arc-informed | run 5
+2026-04-06T19:35:57 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:36:05 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:36:37 | INFO    |   ✗ exact=False cell_acc=0.858 dim=True tokens=8380 40.5s
+2026-04-06T19:36:37 | INFO    | [312/750] c4d067a0 | chain-of-thought | run 4
+2026-04-06T19:37:03 | INFO    |   ✗ exact=False cell_acc=0.912 dim=False tokens=14913 26.3s
+2026-04-06T19:37:03 | INFO    | [313/750] 8f3a5a89 | arc-informed | run 2
+2026-04-06T19:37:21 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=6888 17.8s
+2026-04-06T19:37:21 | INFO    | [314/750] 2ba387bc | arc-informed | run 4
+2026-04-06T19:37:39 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=10338 18.4s
+2026-04-06T19:37:39 | INFO    | [315/750] e8686506 | chain-of-thought | run 1
+2026-04-06T19:38:00 | INFO    |   ✗ exact=False cell_acc=0.375 dim=True tokens=3001 20.6s
+2026-04-06T19:38:00 | INFO    | [316/750] 981571dc | arc-informed | run 1
+2026-04-06T19:38:01 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:38:04 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:38:09 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:38:17 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:38:17 | INFO    | [317/750] 6e453dd6 | chain-of-thought | run 5
+2026-04-06T19:38:18 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:38:36 | INFO    |   ✗ exact=False cell_acc=0.850 dim=True tokens=6336 19.3s
+2026-04-06T19:38:36 | INFO    | [318/750] 45a5af55 | baseline | run 2
+2026-04-06T19:38:37 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:38:59 | INFO    |   ✗ exact=False cell_acc=0.249 dim=False tokens=7713 23.1s
+2026-04-06T19:38:59 | INFO    | [319/750] 45a5af55 | baseline | run 3
+2026-04-06T19:39:00 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:39:22 | INFO    |   ✗ exact=False cell_acc=0.207 dim=False tokens=7635 22.3s
+2026-04-06T19:39:22 | INFO    | [320/750] 8f3a5a89 | baseline | run 4
+2026-04-06T19:39:33 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=5996 11.5s
+2026-04-06T19:39:33 | INFO    | [321/750] da515329 | baseline | run 4
+2026-04-06T19:40:00 | INFO    |   ✗ exact=False cell_acc=0.678 dim=False tokens=9987 26.7s
+2026-04-06T19:40:00 | INFO    | [322/750] 45a5af55 | chain-of-thought | run 4
+2026-04-06T19:40:26 | INFO    |   ✗ exact=False cell_acc=0.180 dim=False tokens=7619 26.6s
+2026-04-06T19:40:26 | INFO    | [323/750] 7b3084d4 | arc-informed | run 5
+2026-04-06T19:40:48 | INFO    |   ✗ exact=False cell_acc=0.082 dim=False tokens=6995 21.9s
+2026-04-06T19:40:48 | INFO    | [324/750] 2c181942 | arc-informed | run 1
+2026-04-06T19:40:49 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:41:24 | INFO    |   ✗ exact=False cell_acc=0.920 dim=True tokens=12981 35.3s
+2026-04-06T19:41:24 | INFO    | [325/750] 97d7923e | baseline | run 5
+2026-04-06T19:41:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:41:39 | INFO    |   ✗ exact=False cell_acc=0.895 dim=True tokens=4401 15.3s
+2026-04-06T19:41:39 | INFO    | [326/750] d59b0160 | chain-of-thought | run 4
+2026-04-06T19:41:56 | INFO    |   ✗ exact=False cell_acc=0.816 dim=True tokens=6855 17.4s
+2026-04-06T19:41:56 | INFO    | [327/750] 1818057f | baseline | run 3
+2026-04-06T19:42:15 | INFO    |   ✗ exact=False cell_acc=0.940 dim=True tokens=6674 18.2s
+2026-04-06T19:42:15 | INFO    | [328/750] b10624e5 | chain-of-thought | run 1
+2026-04-06T19:42:16 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:42:19 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:42:52 | INFO    |   ✗ exact=False cell_acc=0.840 dim=False tokens=13950 37.1s
+2026-04-06T19:42:52 | INFO    | [329/750] 271d71e2 | chain-of-thought | run 1
+2026-04-06T19:43:14 | INFO    |   ✗ exact=False cell_acc=0.604 dim=True tokens=7796 22.3s
+2026-04-06T19:43:14 | INFO    | [330/750] 898e7135 | arc-informed | run 2
+2026-04-06T19:43:45 | INFO    |   ✗ exact=False cell_acc=0.532 dim=False tokens=11273 30.9s
+2026-04-06T19:43:45 | INFO    | [331/750] c7f57c3e | chain-of-thought | run 3
+2026-04-06T19:43:46 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:44:17 | INFO    |   ✗ exact=False cell_acc=0.911 dim=True tokens=9672 31.9s
+2026-04-06T19:44:17 | INFO    | [332/750] b9e38dc0 | arc-informed | run 2
+2026-04-06T19:44:37 | INFO    |   ✗ exact=False cell_acc=0.523 dim=True tokens=6932 20.0s
+2026-04-06T19:44:37 | INFO    | [333/750] 67e490f4 | baseline | run 3
+2026-04-06T19:44:57 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=10172 20.0s
+2026-04-06T19:44:57 | INFO    | [334/750] c7f57c3e | baseline | run 5
+2026-04-06T19:44:58 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:45:30 | INFO    |   ✗ exact=False cell_acc=0.862 dim=True tokens=9167 32.3s
+2026-04-06T19:45:30 | INFO    | [335/750] 5961cc34 | chain-of-thought | run 3
+2026-04-06T19:45:54 | INFO    |   ✗ exact=False cell_acc=0.868 dim=True tokens=16016 24.9s
+2026-04-06T19:45:54 | INFO    | [336/750] 6ffbe589 | baseline | run 2
+2026-04-06T19:46:12 | INFO    |   ✗ exact=False cell_acc=0.775 dim=False tokens=7404 17.4s
+2026-04-06T19:46:12 | INFO    | [337/750] 7b5033c1 | arc-informed | run 5
+2026-04-06T19:46:27 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=4128 15.4s
+2026-04-06T19:46:27 | INFO    | [338/750] 8f3a5a89 | baseline | run 1
+2026-04-06T19:46:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:46:31 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:46:47 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=5997 19.3s
+2026-04-06T19:46:47 | INFO    | [339/750] 8698868d | baseline | run 3
+2026-04-06T19:46:59 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8463 12.1s
+2026-04-06T19:46:59 | INFO    | [340/750] 9aaea919 | arc-informed | run 5
+2026-04-06T19:47:29 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=22868 30.7s
+2026-04-06T19:47:29 | INFO    | [341/750] e87109e9 | baseline | run 3
+2026-04-06T19:47:30 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:48:02 | INFO    |   ✗ exact=False cell_acc=0.484 dim=False tokens=14268 32.1s
+2026-04-06T19:48:02 | INFO    | [342/750] 7b3084d4 | chain-of-thought | run 5
+2026-04-06T19:48:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:48:06 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:48:10 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:48:19 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:48:19 | INFO    | [343/750] 53fb4810 | baseline | run 3
+2026-04-06T19:48:43 | INFO    |   ✗ exact=False cell_acc=0.882 dim=True tokens=7235 24.7s
+2026-04-06T19:48:43 | INFO    | [344/750] b5ca7ac4 | chain-of-thought | run 3
+2026-04-06T19:48:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:48:47 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:48:52 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:49:00 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:49:00 | INFO    | [345/750] 981571dc | chain-of-thought | run 4
+2026-04-06T19:49:01 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:49:04 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:49:46 | INFO    |   ✗ exact=False cell_acc=0.996 dim=True tokens=27893 45.5s
+2026-04-06T19:49:46 | INFO    | [346/750] 135a2760 | baseline | run 1
+2026-04-06T19:49:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:50:16 | INFO    |   ✗ exact=False cell_acc=0.981 dim=True tokens=8914 30.2s
+2026-04-06T19:50:16 | INFO    | [347/750] 8698868d | arc-informed | run 1
+2026-04-06T19:50:17 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:50:43 | INFO    |   ✗ exact=False cell_acc=0.017 dim=False tokens=8996 27.2s
+2026-04-06T19:50:43 | INFO    | [348/750] 271d71e2 | arc-informed | run 1
+2026-04-06T19:50:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:51:14 | INFO    |   ✗ exact=False cell_acc=0.601 dim=True tokens=8406 31.1s
+2026-04-06T19:51:14 | INFO    | [349/750] fc7cae8d | chain-of-thought | run 1
+2026-04-06T19:51:29 | INFO    |   ✗ exact=False cell_acc=0.292 dim=False tokens=9196 14.2s
+2026-04-06T19:51:29 | INFO    | [350/750] 8f215267 | arc-informed | run 4
+2026-04-06T19:51:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:51:32 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:51:37 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:51:45 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:51:45 | INFO    | [351/750] 2ba387bc | arc-informed | run 1
+2026-04-06T19:52:06 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=10548 20.0s
+2026-04-06T19:52:06 | INFO    | [352/750] 9aaea919 | baseline | run 1
+2026-04-06T19:52:31 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=22119 25.3s
+2026-04-06T19:52:31 | INFO    | [353/750] 53fb4810 | arc-informed | run 5
+2026-04-06T19:53:01 | INFO    |   ✗ exact=False cell_acc=0.884 dim=True tokens=7772 30.1s
+2026-04-06T19:53:01 | INFO    | [354/750] 271d71e2 | baseline | run 4
+2026-04-06T19:53:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:53:29 | INFO    |   ✗ exact=False cell_acc=0.601 dim=True tokens=7598 28.3s
+2026-04-06T19:53:29 | INFO    | [355/750] 2ba387bc | arc-informed | run 3
+2026-04-06T19:53:47 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=10400 18.1s
+2026-04-06T19:53:47 | INFO    | [356/750] 58f5dbd5 | baseline | run 1
+2026-04-06T19:54:04 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8018 16.3s
+2026-04-06T19:54:04 | INFO    | [357/750] f560132c | baseline | run 2
+2026-04-06T19:54:13 | INFO    |   ✗ exact=False cell_acc=0.167 dim=False tokens=5644 8.9s
+2026-04-06T19:54:13 | INFO    | [358/750] b10624e5 | baseline | run 2
+2026-04-06T19:54:38 | INFO    |   ✗ exact=False cell_acc=0.816 dim=False tokens=13869 24.8s
+2026-04-06T19:54:38 | INFO    | [359/750] c7f57c3e | arc-informed | run 1
+2026-04-06T19:54:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:54:42 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:54:46 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:54:55 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:54:55 | INFO    | [360/750] 4c416de3 | chain-of-thought | run 1
+2026-04-06T19:54:55 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:54:58 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:55:03 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:55:11 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:55:11 | INFO    | [361/750] 5961cc34 | arc-informed | run 3
+2026-04-06T19:55:42 | INFO    |   ✗ exact=False cell_acc=0.953 dim=True tokens=16564 31.0s
+2026-04-06T19:55:42 | INFO    | [362/750] c7f57c3e | chain-of-thought | run 5
+2026-04-06T19:55:43 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:55:46 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:55:51 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:55:59 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:55:59 | INFO    | [363/750] 8b9c3697 | chain-of-thought | run 3
+2026-04-06T19:56:00 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:56:30 | INFO    |   ✗ exact=False cell_acc=0.890 dim=True tokens=12075 30.3s
+2026-04-06T19:56:30 | INFO    | [364/750] 7b3084d4 | baseline | run 2
+2026-04-06T19:56:39 | INFO    |   ✗ exact=False cell_acc=0.077 dim=False tokens=6121 9.6s
+2026-04-06T19:56:39 | INFO    | [365/750] 2ba387bc | baseline | run 5
+2026-04-06T19:56:51 | INFO    |   ✗ exact=False cell_acc=0.750 dim=True tokens=9364 11.4s
+2026-04-06T19:56:51 | INFO    | [366/750] 4c416de3 | chain-of-thought | run 2
+2026-04-06T19:56:52 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:57:16 | INFO    |   ✗ exact=False cell_acc=0.873 dim=True tokens=11749 24.8s
+2026-04-06T19:57:16 | INFO    | [367/750] 7666fa5d | chain-of-thought | run 2
+2026-04-06T19:57:29 | INFO    |   ✗ exact=False cell_acc=0.988 dim=True tokens=5293 12.9s
+2026-04-06T19:57:29 | INFO    | [368/750] e376de54 | chain-of-thought | run 2
+2026-04-06T19:57:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:57:32 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T19:57:37 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T19:57:45 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T19:57:45 | INFO    | [369/750] 3dc255db | arc-informed | run 3
+2026-04-06T19:58:06 | INFO    |   ✗ exact=False cell_acc=0.904 dim=True tokens=5026 20.3s
+2026-04-06T19:58:06 | INFO    | [370/750] 97d7923e | baseline | run 3
+2026-04-06T19:58:20 | INFO    |   ✗ exact=False cell_acc=0.895 dim=True tokens=4565 13.7s
+2026-04-06T19:58:20 | INFO    | [371/750] edb79dae | arc-informed | run 1
+2026-04-06T19:58:43 | INFO    |   ✗ exact=False cell_acc=0.871 dim=True tokens=10195 23.2s
+2026-04-06T19:58:43 | INFO    | [372/750] edb79dae | chain-of-thought | run 4
+2026-04-06T19:59:07 | INFO    |   ✗ exact=False cell_acc=0.796 dim=True tokens=9546 24.5s
+2026-04-06T19:59:07 | INFO    | [373/750] da515329 | chain-of-thought | run 5
+2026-04-06T19:59:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T19:59:34 | INFO    |   ✗ exact=False cell_acc=0.703 dim=True tokens=10063 26.7s
+2026-04-06T19:59:34 | INFO    | [374/750] 5545f144 | chain-of-thought | run 3
+2026-04-06T19:59:48 | INFO    |   ✗ exact=False cell_acc=0.422 dim=False tokens=5179 14.1s
+2026-04-06T19:59:48 | INFO    | [375/750] aa4ec2a5 | baseline | run 5
+2026-04-06T20:00:12 | INFO    |   ✗ exact=False cell_acc=0.746 dim=True tokens=13970 23.5s
+2026-04-06T20:00:12 | INFO    | [376/750] 7b0280bc | baseline | run 2
+2026-04-06T20:00:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:00:15 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:00:20 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:00:28 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:00:28 | INFO    | [377/750] edb79dae | chain-of-thought | run 2
+2026-04-06T20:00:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:01:04 | INFO    |   ✗ exact=False cell_acc=0.755 dim=True tokens=9997 35.5s
+2026-04-06T20:01:04 | INFO    | [378/750] 7b5033c1 | baseline | run 5
+2026-04-06T20:01:14 | INFO    |   ✗ exact=False cell_acc=0.480 dim=False tokens=3268 10.2s
+2026-04-06T20:01:14 | INFO    | [379/750] 981571dc | chain-of-thought | run 3
+2026-04-06T20:01:46 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=27720 31.6s
+2026-04-06T20:01:46 | INFO    | [380/750] 4c416de3 | chain-of-thought | run 3
+2026-04-06T20:01:46 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:01:49 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:02:14 | INFO    |   ✗ exact=False cell_acc=0.914 dim=True tokens=12031 28.1s
+2026-04-06T20:02:14 | INFO    | [381/750] 981571dc | chain-of-thought | run 1
+2026-04-06T20:02:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:02:58 | INFO    |   ✗ exact=False cell_acc=0.996 dim=True tokens=28183 43.9s
+2026-04-06T20:02:58 | INFO    | [382/750] 271d71e2 | arc-informed | run 5
+2026-04-06T20:03:25 | INFO    |   ✗ exact=False cell_acc=0.601 dim=True tokens=8303 26.9s
+2026-04-06T20:03:25 | INFO    | [383/750] 898e7135 | arc-informed | run 5
+2026-04-06T20:03:56 | INFO    |   ✗ exact=False cell_acc=0.151 dim=True tokens=11286 31.0s
+2026-04-06T20:03:56 | INFO    | [384/750] dfadab01 | baseline | run 2
+2026-04-06T20:04:13 | INFO    |   ✗ exact=False cell_acc=0.320 dim=True tokens=9172 17.7s
+2026-04-06T20:04:13 | INFO    | [385/750] b10624e5 | chain-of-thought | run 4
+2026-04-06T20:04:14 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:04:17 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:04:53 | INFO    |   ✗ exact=False cell_acc=0.857 dim=True tokens=14065 39.7s
+2026-04-06T20:04:53 | INFO    | [386/750] 9aaea919 | baseline | run 5
+2026-04-06T20:04:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:04:57 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:05:31 | INFO    |   ✗ exact=False cell_acc=0.922 dim=True tokens=22562 37.5s
+2026-04-06T20:05:31 | INFO    | [387/750] 67e490f4 | baseline | run 1
+2026-04-06T20:05:31 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:05:54 | INFO    |   ✗ exact=False cell_acc=0.295 dim=False tokens=10404 23.3s
+2026-04-06T20:05:54 | INFO    | [388/750] 409aa875 | baseline | run 2
+2026-04-06T20:05:55 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:05:58 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:06:16 | INFO    |   ✗ exact=False cell_acc=0.949 dim=True tokens=6909 21.5s
+2026-04-06T20:06:16 | INFO    | [389/750] a395ee82 | chain-of-thought | run 3
+2026-04-06T20:06:36 | INFO    |   ✗ exact=False cell_acc=0.793 dim=True tokens=12558 20.8s
+2026-04-06T20:06:36 | INFO    | [390/750] 58f5dbd5 | baseline | run 2
+2026-04-06T20:06:53 | INFO    |   ✗ exact=False cell_acc=0.874 dim=False tokens=7850 16.6s
+2026-04-06T20:06:53 | INFO    | [391/750] 135a2760 | baseline | run 2
+2026-04-06T20:06:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:06:57 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:07:02 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:07:10 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:07:10 | INFO    | [392/750] 7b3084d4 | chain-of-thought | run 1
+2026-04-06T20:07:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:07:14 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:07:33 | INFO    |   ✗ exact=False cell_acc=0.020 dim=False tokens=6867 23.6s
+2026-04-06T20:07:33 | INFO    | [393/750] a395ee82 | arc-informed | run 5
+2026-04-06T20:07:34 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:08:07 | INFO    |   ✗ exact=False cell_acc=0.833 dim=True tokens=12961 34.0s
+2026-04-06T20:08:07 | INFO    | [394/750] 2ba387bc | arc-informed | run 2
+2026-04-06T20:08:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:08:11 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:08:35 | INFO    |   ✗ exact=False cell_acc=0.031 dim=False tokens=10445 27.8s
+2026-04-06T20:08:35 | INFO    | [395/750] 2ba387bc | chain-of-thought | run 4
+2026-04-06T20:08:36 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:08:39 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:08:44 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:08:52 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:08:52 | INFO    | [396/750] b10624e5 | arc-informed | run 3
+2026-04-06T20:09:34 | INFO    |   ✗ exact=False cell_acc=0.831 dim=True tokens=16645 42.2s
+2026-04-06T20:09:34 | INFO    | [397/750] 8f215267 | arc-informed | run 3
+2026-04-06T20:10:13 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=15997 38.4s
+2026-04-06T20:10:13 | INFO    | [398/750] 89565ca0 | chain-of-thought | run 4
+2026-04-06T20:10:29 | INFO    |   ✗ exact=False cell_acc=0.233 dim=False tokens=8723 16.6s
+2026-04-06T20:10:29 | INFO    | [399/750] c7f57c3e | chain-of-thought | run 1
+2026-04-06T20:11:06 | INFO    |   ✗ exact=False cell_acc=0.908 dim=True tokens=9708 37.0s
+2026-04-06T20:11:06 | INFO    | [400/750] e8686506 | arc-informed | run 1
+2026-04-06T20:11:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:11:23 | INFO    |   ✗ exact=False cell_acc=0.300 dim=False tokens=3198 16.3s
+2026-04-06T20:11:23 | INFO    | [401/750] 2ba387bc | arc-informed | run 5
+2026-04-06T20:11:43 | INFO    |   ✗ exact=False cell_acc=0.500 dim=False tokens=10641 20.3s
+2026-04-06T20:11:43 | INFO    | [402/750] 8b9c3697 | baseline | run 4
+2026-04-06T20:12:07 | INFO    |   ✗ exact=False cell_acc=0.857 dim=True tokens=11853 24.4s
+2026-04-06T20:12:07 | INFO    | [403/750] 2c181942 | baseline | run 5
+2026-04-06T20:12:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:12:35 | INFO    |   ✗ exact=False cell_acc=0.877 dim=True tokens=12330 27.5s
+2026-04-06T20:12:35 | INFO    | [404/750] 7b3084d4 | baseline | run 5
+2026-04-06T20:12:36 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:12:38 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:12:57 | INFO    |   ✗ exact=False cell_acc=0.031 dim=False tokens=6548 22.3s
+2026-04-06T20:12:57 | INFO    | [405/750] 1818057f | arc-informed | run 2
+2026-04-06T20:12:58 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:13:31 | INFO    |   ✗ exact=False cell_acc=0.921 dim=True tokens=7181 34.2s
+2026-04-06T20:13:31 | INFO    | [406/750] 89565ca0 | chain-of-thought | run 1
+2026-04-06T20:13:48 | INFO    |   ✗ exact=False cell_acc=0.167 dim=False tokens=8856 16.2s
+2026-04-06T20:13:48 | INFO    | [407/750] 5961cc34 | arc-informed | run 2
+2026-04-06T20:13:48 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:13:51 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:13:56 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:14:04 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:14:04 | INFO    | [408/750] bf45cf4b | chain-of-thought | run 3
+2026-04-06T20:14:19 | INFO    |   ✗ exact=False cell_acc=0.187 dim=False tokens=4672 14.3s
+2026-04-06T20:14:19 | INFO    | [409/750] e8686506 | baseline | run 5
+2026-04-06T20:14:33 | INFO    |   ✗ exact=False cell_acc=0.350 dim=False tokens=2705 14.4s
+2026-04-06T20:14:33 | INFO    | [410/750] 8f215267 | chain-of-thought | run 4
+2026-04-06T20:15:00 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13591 26.6s
+2026-04-06T20:15:00 | INFO    | [411/750] 89565ca0 | baseline | run 2
+2026-04-06T20:15:00 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:15:03 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:15:21 | INFO    |   ✗ exact=False cell_acc=0.167 dim=False tokens=8445 20.8s
+2026-04-06T20:15:21 | INFO    | [412/750] e87109e9 | chain-of-thought | run 2
+2026-04-06T20:15:21 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:15:44 | INFO    |   ✗ exact=False cell_acc=0.781 dim=True tokens=14146 23.5s
+2026-04-06T20:15:44 | INFO    | [413/750] 58f5dbd5 | chain-of-thought | run 1
+2026-04-06T20:16:01 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=7782 17.2s
+2026-04-06T20:16:01 | INFO    | [414/750] abc82100 | baseline | run 2
+2026-04-06T20:16:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:16:05 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:16:28 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=7485 26.4s
+2026-04-06T20:16:28 | INFO    | [415/750] 97d7923e | arc-informed | run 4
+2026-04-06T20:16:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:16:57 | INFO    |   ✗ exact=False cell_acc=0.920 dim=True tokens=5248 29.0s
+2026-04-06T20:16:57 | INFO    | [416/750] 2ba387bc | baseline | run 2
+2026-04-06T20:16:57 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:17:09 | INFO    |   ✗ exact=False cell_acc=0.125 dim=False tokens=9177 12.6s
+2026-04-06T20:17:09 | INFO    | [417/750] fc7cae8d | baseline | run 5
+2026-04-06T20:17:29 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=9132 19.2s
+2026-04-06T20:17:29 | INFO    | [418/750] bf45cf4b | baseline | run 1
+2026-04-06T20:17:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:17:32 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:17:37 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:17:45 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:17:45 | INFO    | [419/750] 45a5af55 | baseline | run 1
+2026-04-06T20:17:46 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:18:06 | INFO    |   ✗ exact=False cell_acc=0.197 dim=False tokens=7436 21.0s
+2026-04-06T20:18:06 | INFO    | [420/750] b10624e5 | arc-informed | run 4
+2026-04-06T20:18:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:18:10 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:18:15 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:18:23 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:18:23 | INFO    | [421/750] 6e453dd6 | baseline | run 4
+2026-04-06T20:18:38 | INFO    |   ✗ exact=False cell_acc=0.873 dim=True tokens=6308 15.5s
+2026-04-06T20:18:38 | INFO    | [422/750] edb79dae | chain-of-thought | run 1
+2026-04-06T20:19:04 | INFO    |   ✗ exact=False cell_acc=0.227 dim=False tokens=10232 25.7s
+2026-04-06T20:19:04 | INFO    | [423/750] 45a5af55 | chain-of-thought | run 3
+2026-04-06T20:19:31 | INFO    |   ✗ exact=False cell_acc=0.188 dim=False tokens=7633 26.8s
+2026-04-06T20:19:31 | INFO    | [424/750] 8698868d | chain-of-thought | run 3
+2026-04-06T20:19:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:19:35 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:19:56 | INFO    |   ✗ exact=False cell_acc=0.051 dim=False tokens=8987 25.0s
+2026-04-06T20:19:56 | INFO    | [425/750] b5ca7ac4 | chain-of-thought | run 4
+2026-04-06T20:20:15 | INFO    |   ✗ exact=False cell_acc=0.531 dim=True tokens=12331 18.9s
+2026-04-06T20:20:15 | INFO    | [426/750] fc7cae8d | arc-informed | run 3
+2026-04-06T20:20:35 | INFO    |   ✗ exact=False cell_acc=0.246 dim=False tokens=9982 19.7s
+2026-04-06T20:20:35 | INFO    | [427/750] fc7cae8d | baseline | run 3
+2026-04-06T20:20:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:21:03 | INFO    |   ✗ exact=False cell_acc=0.279 dim=False tokens=9077 27.7s
+2026-04-06T20:21:03 | INFO    | [428/750] 2c181942 | chain-of-thought | run 3
+2026-04-06T20:21:25 | INFO    |   ✗ exact=False cell_acc=0.875 dim=True tokens=12541 22.3s
+2026-04-06T20:21:25 | INFO    | [429/750] aa4ec2a5 | baseline | run 3
+2026-04-06T20:21:26 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:21:50 | INFO    |   ✗ exact=False cell_acc=0.862 dim=True tokens=13867 25.1s
+2026-04-06T20:21:50 | INFO    | [430/750] 5545f144 | arc-informed | run 4
+2026-04-06T20:22:07 | INFO    |   ✗ exact=False cell_acc=0.422 dim=False tokens=5486 16.6s
+2026-04-06T20:22:07 | INFO    | [431/750] a395ee82 | arc-informed | run 3
+2026-04-06T20:22:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:22:11 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:22:47 | INFO    |   ✗ exact=False cell_acc=0.777 dim=True tokens=13006 40.6s
+2026-04-06T20:22:47 | INFO    | [432/750] a395ee82 | baseline | run 1
+2026-04-06T20:23:06 | INFO    |   ✗ exact=False cell_acc=0.802 dim=True tokens=12248 18.6s
+2026-04-06T20:23:06 | INFO    | [433/750] d59b0160 | baseline | run 3
+2026-04-06T20:23:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:23:27 | INFO    |   ✗ exact=False cell_acc=0.609 dim=True tokens=6841 20.7s
+2026-04-06T20:23:27 | INFO    | [434/750] 8698868d | arc-informed | run 4
+2026-04-06T20:23:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:23:54 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8827 27.0s
+2026-04-06T20:23:54 | INFO    | [435/750] 8f215267 | baseline | run 1
+2026-04-06T20:23:55 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:23:57 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:24:23 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13425 29.5s
+2026-04-06T20:24:23 | INFO    | [436/750] e87109e9 | chain-of-thought | run 3
+2026-04-06T20:24:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:24:48 | INFO    |   ✗ exact=False cell_acc=0.708 dim=True tokens=14092 24.3s
+2026-04-06T20:24:48 | INFO    | [437/750] c4d067a0 | baseline | run 5
+2026-04-06T20:24:48 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:25:14 | INFO    |   ✗ exact=False cell_acc=0.823 dim=True tokens=14597 26.2s
+2026-04-06T20:25:14 | INFO    | [438/750] 2c181942 | baseline | run 2
+2026-04-06T20:25:37 | INFO    |   ✗ exact=False cell_acc=0.859 dim=True tokens=12261 23.2s
+2026-04-06T20:25:37 | INFO    | [439/750] 28a6681f | baseline | run 3
+2026-04-06T20:25:51 | INFO    |   ✗ exact=False cell_acc=0.950 dim=True tokens=3112 14.4s
+2026-04-06T20:25:51 | INFO    | [440/750] 135a2760 | baseline | run 3
+2026-04-06T20:25:52 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:26:19 | INFO    |   ✗ exact=False cell_acc=0.981 dim=True tokens=8774 27.6s
+2026-04-06T20:26:19 | INFO    | [441/750] bf45cf4b | baseline | run 4
+2026-04-06T20:26:31 | INFO    |   ✗ exact=False cell_acc=0.187 dim=False tokens=4242 11.6s
+2026-04-06T20:26:31 | INFO    | [442/750] 58f5dbd5 | baseline | run 4
+2026-04-06T20:26:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:26:46 | INFO    |   ✗ exact=False cell_acc=0.664 dim=False tokens=7333 15.6s
+2026-04-06T20:26:46 | INFO    | [443/750] 898e7135 | baseline | run 3
+2026-04-06T20:27:14 | INFO    |   ✗ exact=False cell_acc=0.371 dim=False tokens=9671 27.9s
+2026-04-06T20:27:14 | INFO    | [444/750] 2c181942 | baseline | run 1
+2026-04-06T20:27:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:27:18 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:27:47 | INFO    |   ✗ exact=False cell_acc=0.918 dim=True tokens=12297 32.3s
+2026-04-06T20:27:47 | INFO    | [445/750] c7f57c3e | baseline | run 3
+2026-04-06T20:27:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:27:50 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:28:24 | INFO    |   ✗ exact=False cell_acc=0.936 dim=True tokens=9296 37.6s
+2026-04-06T20:28:24 | INFO    | [446/750] 53fb4810 | chain-of-thought | run 2
+2026-04-06T20:28:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:28:48 | INFO    |   ✗ exact=False cell_acc=0.809 dim=True tokens=7400 23.5s
+2026-04-06T20:28:48 | INFO    | [447/750] 58f5dbd5 | chain-of-thought | run 3
+2026-04-06T20:28:49 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:28:52 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:29:12 | INFO    |   ✗ exact=False cell_acc=0.462 dim=False tokens=7826 24.2s
+2026-04-06T20:29:12 | INFO    | [448/750] 409aa875 | baseline | run 3
+2026-04-06T20:29:25 | INFO    |   ✗ exact=False cell_acc=0.934 dim=True tokens=6787 13.0s
+2026-04-06T20:29:25 | INFO    | [449/750] a395ee82 | baseline | run 5
+2026-04-06T20:29:26 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:29:29 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:29:34 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:29:42 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:29:42 | INFO    | [450/750] d59b0160 | baseline | run 1
+2026-04-06T20:30:02 | INFO    |   ✗ exact=False cell_acc=0.652 dim=True tokens=6714 20.1s
+2026-04-06T20:30:02 | INFO    | [451/750] 7b0280bc | chain-of-thought | run 1
+2026-04-06T20:30:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:30:35 | INFO    |   ✗ exact=False cell_acc=0.878 dim=True tokens=12164 33.2s
+2026-04-06T20:30:35 | INFO    | [452/750] 409aa875 | chain-of-thought | run 2
+2026-04-06T20:30:57 | INFO    |   ✗ exact=False cell_acc=0.934 dim=True tokens=7058 21.5s
+2026-04-06T20:30:57 | INFO    | [453/750] db0c5428 | baseline | run 2
+2026-04-06T20:30:57 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:31:14 | INFO    |   ✗ exact=False cell_acc=0.685 dim=True tokens=8038 16.8s
+2026-04-06T20:31:14 | INFO    | [454/750] 8698868d | arc-informed | run 5
+2026-04-06T20:31:42 | INFO    |   ✗ exact=False cell_acc=0.024 dim=False tokens=9357 28.8s
+2026-04-06T20:31:42 | INFO    | [455/750] b5ca7ac4 | chain-of-thought | run 1
+2026-04-06T20:32:02 | INFO    |   ✗ exact=False cell_acc=0.490 dim=True tokens=12444 19.4s
+2026-04-06T20:32:02 | INFO    | [456/750] 8f3a5a89 | arc-informed | run 1
+2026-04-06T20:32:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:32:05 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:32:31 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=7332 29.3s
+2026-04-06T20:32:31 | INFO    | [457/750] 53fb4810 | chain-of-thought | run 3
+2026-04-06T20:32:52 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=7424 20.4s
+2026-04-06T20:32:52 | INFO    | [458/750] 8f3a5a89 | baseline | run 3
+2026-04-06T20:33:01 | INFO    |   ✗ exact=False cell_acc=0.819 dim=True tokens=5924 9.9s
+2026-04-06T20:33:01 | INFO    | [459/750] db0c5428 | chain-of-thought | run 5
+2026-04-06T20:33:17 | INFO    |   ✗ exact=False cell_acc=0.505 dim=True tokens=8228 15.8s
+2026-04-06T20:33:17 | INFO    | [460/750] edb79dae | baseline | run 1
+2026-04-06T20:33:38 | INFO    |   ✗ exact=False cell_acc=0.512 dim=False tokens=9345 21.2s
+2026-04-06T20:33:38 | INFO    | [461/750] 5961cc34 | baseline | run 5
+2026-04-06T20:33:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:33:42 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:33:47 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:33:55 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:33:55 | INFO    | [462/750] 981571dc | chain-of-thought | run 5
+2026-04-06T20:34:29 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=27810 33.5s
+2026-04-06T20:34:29 | INFO    | [463/750] dfadab01 | chain-of-thought | run 1
+2026-04-06T20:34:48 | INFO    |   ✗ exact=False cell_acc=0.960 dim=True tokens=9328 19.5s
+2026-04-06T20:34:48 | INFO    | [464/750] 67e490f4 | chain-of-thought | run 3
+2026-04-06T20:34:49 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:35:05 | INFO    |   ✗ exact=False cell_acc=0.110 dim=False tokens=10170 17.0s
+2026-04-06T20:35:05 | INFO    | [465/750] e8686506 | chain-of-thought | run 3
+2026-04-06T20:35:06 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:35:24 | INFO    |   ✗ exact=False cell_acc=0.475 dim=True tokens=2823 19.0s
+2026-04-06T20:35:24 | INFO    | [466/750] 3dc255db | chain-of-thought | run 2
+2026-04-06T20:35:40 | INFO    |   ✗ exact=False cell_acc=0.897 dim=True tokens=4016 15.8s
+2026-04-06T20:35:40 | INFO    | [467/750] aa4ec2a5 | chain-of-thought | run 1
+2026-04-06T20:35:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:36:11 | INFO    |   ✗ exact=False cell_acc=0.822 dim=True tokens=14021 30.7s
+2026-04-06T20:36:11 | INFO    | [468/750] 28a6681f | baseline | run 5
+2026-04-06T20:36:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:36:27 | INFO    |   ✗ exact=False cell_acc=0.870 dim=True tokens=2986 16.5s
+2026-04-06T20:36:27 | INFO    | [469/750] 3dc255db | baseline | run 3
+2026-04-06T20:36:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:36:48 | INFO    |   ✗ exact=False cell_acc=0.904 dim=True tokens=3989 20.2s
+2026-04-06T20:36:48 | INFO    | [470/750] b5ca7ac4 | chain-of-thought | run 5
+2026-04-06T20:37:06 | INFO    |   ✗ exact=False cell_acc=0.597 dim=True tokens=12409 18.8s
+2026-04-06T20:37:06 | INFO    | [471/750] edb79dae | arc-informed | run 2
+2026-04-06T20:37:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:37:10 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:37:36 | INFO    |   ✗ exact=False cell_acc=0.662 dim=True tokens=9992 29.6s
+2026-04-06T20:37:36 | INFO    | [472/750] 981571dc | arc-informed | run 3
+2026-04-06T20:38:09 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=28024 33.3s
+2026-04-06T20:38:09 | INFO    | [473/750] 8f3a5a89 | chain-of-thought | run 4
+2026-04-06T20:38:22 | INFO    |   ✗ exact=False cell_acc=0.778 dim=True tokens=6175 12.2s
+2026-04-06T20:38:22 | INFO    | [474/750] b9e38dc0 | arc-informed | run 3
+2026-04-06T20:38:41 | INFO    |   ✗ exact=False cell_acc=0.761 dim=True tokens=6785 19.5s
+2026-04-06T20:38:41 | INFO    | [475/750] 9aaea919 | baseline | run 2
+2026-04-06T20:39:11 | INFO    |   ✗ exact=False cell_acc=0.939 dim=True tokens=22470 29.7s
+2026-04-06T20:39:11 | INFO    | [476/750] 2c181942 | baseline | run 4
+2026-04-06T20:39:35 | INFO    |   ✗ exact=False cell_acc=0.880 dim=True tokens=12328 23.9s
+2026-04-06T20:39:35 | INFO    | [477/750] bf45cf4b | arc-informed | run 3
+2026-04-06T20:39:36 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:39:57 | INFO    |   ✗ exact=False cell_acc=0.166 dim=False tokens=5238 22.0s
+2026-04-06T20:39:57 | INFO    | [478/750] 5961cc34 | baseline | run 4
+2026-04-06T20:40:21 | INFO    |   ✗ exact=False cell_acc=0.959 dim=True tokens=15673 23.8s
+2026-04-06T20:40:21 | INFO    | [479/750] dfadab01 | chain-of-thought | run 5
+2026-04-06T20:40:22 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:40:42 | INFO    |   ✗ exact=False cell_acc=0.665 dim=True tokens=9253 21.4s
+2026-04-06T20:40:42 | INFO    | [480/750] c7f57c3e | arc-informed | run 5
+2026-04-06T20:40:43 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:40:46 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:41:31 | INFO    |   ✗ exact=False cell_acc=0.906 dim=True tokens=9989 49.2s
+2026-04-06T20:41:31 | INFO    | [481/750] 898e7135 | chain-of-thought | run 3
+2026-04-06T20:41:55 | INFO    |   ✗ exact=False cell_acc=0.148 dim=False tokens=9439 24.1s
+2026-04-06T20:41:55 | INFO    | [482/750] 2c181942 | chain-of-thought | run 5
+2026-04-06T20:42:21 | INFO    |   ✗ exact=False cell_acc=0.881 dim=True tokens=12532 25.4s
+2026-04-06T20:42:21 | INFO    | [483/750] 271d71e2 | baseline | run 1
+2026-04-06T20:42:48 | INFO    |   ✗ exact=False cell_acc=0.648 dim=True tokens=7640 26.9s
+2026-04-06T20:42:48 | INFO    | [484/750] edb79dae | baseline | run 2
+2026-04-06T20:43:10 | INFO    |   ✗ exact=False cell_acc=0.415 dim=False tokens=9261 22.3s
+2026-04-06T20:43:10 | INFO    | [485/750] f560132c | chain-of-thought | run 2
+2026-04-06T20:43:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:43:26 | INFO    |   ✗ exact=False cell_acc=0.125 dim=False tokens=6090 15.7s
+2026-04-06T20:43:26 | INFO    | [486/750] bf45cf4b | chain-of-thought | run 1
+2026-04-06T20:43:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:43:30 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:43:34 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:43:42 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:43:42 | INFO    | [487/750] 58f5dbd5 | baseline | run 3
+2026-04-06T20:43:54 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=7287 11.8s
+2026-04-06T20:43:54 | INFO    | [488/750] aa4ec2a5 | arc-informed | run 1
+2026-04-06T20:44:23 | INFO    |   ✗ exact=False cell_acc=0.846 dim=True tokens=14631 29.0s
+2026-04-06T20:44:23 | INFO    | [489/750] 7b0280bc | chain-of-thought | run 2
+2026-04-06T20:44:54 | INFO    |   ✗ exact=False cell_acc=0.878 dim=True tokens=12133 31.0s
+2026-04-06T20:44:54 | INFO    | [490/750] 28a6681f | chain-of-thought | run 3
+2026-04-06T20:45:08 | INFO    |   ✗ exact=False cell_acc=0.910 dim=True tokens=3530 13.4s
+2026-04-06T20:45:08 | INFO    | [491/750] 7b0280bc | baseline | run 4
+2026-04-06T20:45:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:45:41 | INFO    |   ✗ exact=False cell_acc=0.878 dim=True tokens=11709 33.5s
+2026-04-06T20:45:41 | INFO    | [492/750] 89565ca0 | baseline | run 3
+2026-04-06T20:45:49 | INFO    |   ✗ exact=False cell_acc=0.233 dim=False tokens=8396 7.8s
+2026-04-06T20:45:49 | INFO    | [493/750] 3dc255db | baseline | run 1
+2026-04-06T20:45:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:46:07 | INFO    |   ✗ exact=False cell_acc=0.917 dim=True tokens=3914 18.0s
+2026-04-06T20:46:07 | INFO    | [494/750] 28a6681f | baseline | run 1
+2026-04-06T20:46:08 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:46:23 | INFO    |   ✗ exact=False cell_acc=0.800 dim=True tokens=3019 16.2s
+2026-04-06T20:46:23 | INFO    | [495/750] 6e453dd6 | arc-informed | run 2
+2026-04-06T20:46:52 | INFO    |   ✗ exact=False cell_acc=0.917 dim=True tokens=7036 28.8s
+2026-04-06T20:46:52 | INFO    | [496/750] da515329 | chain-of-thought | run 3
+2026-04-06T20:46:53 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:47:19 | INFO    |   ✗ exact=False cell_acc=0.837 dim=True tokens=10130 27.1s
+2026-04-06T20:47:19 | INFO    | [497/750] 4c416de3 | baseline | run 4
+2026-04-06T20:47:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:47:39 | INFO    |   ✗ exact=False cell_acc=0.902 dim=True tokens=11523 19.5s
+2026-04-06T20:47:39 | INFO    | [498/750] 5961cc34 | baseline | run 2
+2026-04-06T20:47:40 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:48:03 | INFO    |   ✗ exact=False cell_acc=0.937 dim=True tokens=15612 24.6s
+2026-04-06T20:48:04 | INFO    | [499/750] fc7cae8d | arc-informed | run 4
+2026-04-06T20:48:04 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:48:07 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:48:32 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=10048 28.7s
+2026-04-06T20:48:32 | INFO    | [500/750] 5545f144 | baseline | run 4
+2026-04-06T20:48:43 | INFO    |   ✗ exact=False cell_acc=0.440 dim=False tokens=4863 11.1s
+2026-04-06T20:48:43 | INFO    | [501/750] b9e38dc0 | baseline | run 4
+2026-04-06T20:48:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:49:04 | INFO    |   ✗ exact=False cell_acc=0.782 dim=True tokens=6160 20.5s
+2026-04-06T20:49:04 | INFO    | [502/750] c4d067a0 | baseline | run 4
+2026-04-06T20:49:28 | INFO    |   ✗ exact=False cell_acc=0.822 dim=True tokens=14604 24.5s
+2026-04-06T20:49:28 | INFO    | [503/750] 135a2760 | chain-of-thought | run 1
+2026-04-06T20:49:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:50:02 | INFO    |   ✗ exact=False cell_acc=0.992 dim=True tokens=9320 33.1s
+2026-04-06T20:50:02 | INFO    | [504/750] 271d71e2 | chain-of-thought | run 5
+2026-04-06T20:50:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:50:28 | INFO    |   ✗ exact=False cell_acc=0.499 dim=True tokens=7916 26.1s
+2026-04-06T20:50:28 | INFO    | [505/750] c7f57c3e | baseline | run 4
+2026-04-06T20:50:56 | INFO    |   ✗ exact=False cell_acc=0.908 dim=True tokens=9235 27.8s
+2026-04-06T20:50:56 | INFO    | [506/750] edb79dae | baseline | run 4
+2026-04-06T20:51:18 | INFO    |   ✗ exact=False cell_acc=0.603 dim=True tokens=9394 22.7s
+2026-04-06T20:51:18 | INFO    | [507/750] c4d067a0 | baseline | run 2
+2026-04-06T20:51:43 | INFO    |   ✗ exact=False cell_acc=0.781 dim=True tokens=14665 24.9s
+2026-04-06T20:51:43 | INFO    | [508/750] b9e38dc0 | baseline | run 5
+2026-04-06T20:51:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:51:47 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:52:11 | INFO    |   ✗ exact=False cell_acc=0.751 dim=True tokens=6167 27.2s
+2026-04-06T20:52:11 | INFO    | [509/750] 58f5dbd5 | arc-informed | run 5
+2026-04-06T20:52:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:52:33 | INFO    |   ✗ exact=False cell_acc=0.818 dim=False tokens=8143 22.0s
+2026-04-06T20:52:33 | INFO    | [510/750] 7b5033c1 | chain-of-thought | run 5
+2026-04-06T20:52:46 | INFO    |   ✗ exact=False cell_acc=0.440 dim=False tokens=3596 13.8s
+2026-04-06T20:52:46 | INFO    | [511/750] 9aaea919 | chain-of-thought | run 1
+2026-04-06T20:53:20 | INFO    |   ✗ exact=False cell_acc=0.922 dim=True tokens=22759 33.2s
+2026-04-06T20:53:20 | INFO    | [512/750] 2ba387bc | chain-of-thought | run 1
+2026-04-06T20:53:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:53:23 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:53:38 | INFO    |   ✗ exact=False cell_acc=0.125 dim=False tokens=9355 18.6s
+2026-04-06T20:53:38 | INFO    | [513/750] b9e38dc0 | arc-informed | run 4
+2026-04-06T20:53:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:54:02 | INFO    |   ✗ exact=False cell_acc=0.744 dim=True tokens=6870 23.9s
+2026-04-06T20:54:02 | INFO    | [514/750] 8b9c3697 | chain-of-thought | run 2
+2026-04-06T20:54:36 | INFO    |   ✗ exact=False cell_acc=0.878 dim=True tokens=12336 34.0s
+2026-04-06T20:54:36 | INFO    | [515/750] 7666fa5d | arc-informed | run 4
+2026-04-06T20:54:55 | INFO    |   ✗ exact=False cell_acc=0.988 dim=True tokens=5776 18.5s
+2026-04-06T20:54:55 | INFO    | [516/750] 7666fa5d | arc-informed | run 5
+2026-04-06T20:54:56 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:55:15 | INFO    |   ✗ exact=False cell_acc=0.988 dim=True tokens=5801 19.9s
+2026-04-06T20:55:15 | INFO    | [517/750] fc7cae8d | chain-of-thought | run 3
+2026-04-06T20:55:16 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:55:18 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:55:41 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=9754 25.7s
+2026-04-06T20:55:41 | INFO    | [518/750] 5545f144 | arc-informed | run 5
+2026-04-06T20:55:57 | INFO    |   ✗ exact=False cell_acc=0.427 dim=False tokens=5532 16.4s
+2026-04-06T20:55:57 | INFO    | [519/750] 8f3a5a89 | baseline | run 5
+2026-04-06T20:55:58 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:56:12 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=6045 14.6s
+2026-04-06T20:56:12 | INFO    | [520/750] 7b3084d4 | baseline | run 3
+2026-04-06T20:56:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:56:15 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:56:20 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T20:56:28 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T20:56:28 | INFO    | [521/750] 9aaea919 | baseline | run 3
+2026-04-06T20:56:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:56:57 | INFO    |   ✗ exact=False cell_acc=0.934 dim=True tokens=22136 28.5s
+2026-04-06T20:56:57 | INFO    | [522/750] 28a6681f | chain-of-thought | run 1
+2026-04-06T20:56:58 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:57:13 | INFO    |   ✗ exact=False cell_acc=0.920 dim=True tokens=3421 16.2s
+2026-04-06T20:57:13 | INFO    | [523/750] 8f3a5a89 | chain-of-thought | run 5
+2026-04-06T20:57:14 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:57:17 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:57:34 | INFO    |   ✗ exact=False cell_acc=0.778 dim=True tokens=6301 20.8s
+2026-04-06T20:57:34 | INFO    | [524/750] 135a2760 | arc-informed | run 2
+2026-04-06T20:58:07 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=9763 32.9s
+2026-04-06T20:58:07 | INFO    | [525/750] 2c181942 | baseline | run 3
+2026-04-06T20:58:31 | INFO    |   ✗ exact=False cell_acc=0.894 dim=True tokens=12305 24.3s
+2026-04-06T20:58:31 | INFO    | [526/750] edb79dae | chain-of-thought | run 5
+2026-04-06T20:58:55 | INFO    |   ✗ exact=False cell_acc=0.562 dim=False tokens=9379 23.5s
+2026-04-06T20:58:55 | INFO    | [527/750] 8698868d | baseline | run 5
+2026-04-06T20:58:56 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:58:58 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T20:59:17 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8763 22.7s
+2026-04-06T20:59:17 | INFO    | [528/750] db0c5428 | arc-informed | run 5
+2026-04-06T20:59:18 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T20:59:50 | INFO    |   ✗ exact=False cell_acc=0.675 dim=True tokens=8779 32.4s
+2026-04-06T20:59:50 | INFO    | [529/750] c4d067a0 | chain-of-thought | run 2
+2026-04-06T20:59:51 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:00:20 | INFO    |   ✗ exact=False cell_acc=0.813 dim=True tokens=14897 30.1s
+2026-04-06T21:00:20 | INFO    | [530/750] b5ca7ac4 | arc-informed | run 1
+2026-04-06T21:00:42 | INFO    |   ✗ exact=False cell_acc=0.558 dim=True tokens=12946 22.5s
+2026-04-06T21:00:42 | INFO    | [531/750] 2ba387bc | chain-of-thought | run 3
+2026-04-06T21:00:43 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:01:01 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=9741 18.4s
+2026-04-06T21:01:01 | INFO    | [532/750] 3dc255db | chain-of-thought | run 4
+2026-04-06T21:01:17 | INFO    |   ✗ exact=False cell_acc=0.904 dim=True tokens=4067 16.2s
+2026-04-06T21:01:17 | INFO    | [533/750] 58f5dbd5 | arc-informed | run 1
+2026-04-06T21:01:36 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8164 19.0s
+2026-04-06T21:01:36 | INFO    | [534/750] 7666fa5d | arc-informed | run 3
+2026-04-06T21:01:37 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:01:40 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:02:01 | INFO    |   ✗ exact=False cell_acc=0.949 dim=True tokens=5835 25.2s
+2026-04-06T21:02:01 | INFO    | [535/750] 6ffbe589 | chain-of-thought | run 1
+2026-04-06T21:02:12 | INFO    |   ✗ exact=False cell_acc=0.071 dim=False tokens=6864 10.5s
+2026-04-06T21:02:12 | INFO    | [536/750] 45a5af55 | chain-of-thought | run 2
+2026-04-06T21:02:38 | INFO    |   ✗ exact=False cell_acc=0.392 dim=False tokens=7604 25.7s
+2026-04-06T21:02:38 | INFO    | [537/750] 45a5af55 | arc-informed | run 5
+2026-04-06T21:02:38 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:02:41 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:02:46 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:02:54 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:02:54 | INFO    | [538/750] 89565ca0 | arc-informed | run 1
+2026-04-06T21:03:10 | INFO    |   ✗ exact=False cell_acc=0.233 dim=False tokens=9362 15.5s
+2026-04-06T21:03:10 | INFO    | [539/750] 135a2760 | arc-informed | run 4
+2026-04-06T21:03:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:03:14 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:03:49 | INFO    |   ✗ exact=False cell_acc=0.885 dim=True tokens=9481 39.0s
+2026-04-06T21:03:49 | INFO    | [540/750] c4d067a0 | arc-informed | run 1
+2026-04-06T21:03:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:04:24 | INFO    |   ✗ exact=False cell_acc=0.824 dim=False tokens=15636 34.6s
+2026-04-06T21:04:24 | INFO    | [541/750] b9e38dc0 | chain-of-thought | run 1
+2026-04-06T21:04:44 | INFO    |   ✗ exact=False cell_acc=0.737 dim=True tokens=6296 20.3s
+2026-04-06T21:04:44 | INFO    | [542/750] 8f215267 | arc-informed | run 2
+2026-04-06T21:05:11 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=14100 27.3s
+2026-04-06T21:05:11 | INFO    | [543/750] 898e7135 | arc-informed | run 3
+2026-04-06T21:05:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:05:15 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:05:20 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:05:28 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:05:28 | INFO    | [544/750] f560132c | chain-of-thought | run 3
+2026-04-06T21:05:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:05:31 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:05:36 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:05:45 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:05:45 | INFO    | [545/750] 4c416de3 | arc-informed | run 5
+2026-04-06T21:06:07 | INFO    |   ✗ exact=False cell_acc=0.866 dim=True tokens=12461 22.8s
+2026-04-06T21:06:07 | INFO    | [546/750] 409aa875 | arc-informed | run 3
+2026-04-06T21:06:27 | INFO    |   ✗ exact=False cell_acc=0.941 dim=True tokens=7576 19.5s
+2026-04-06T21:06:27 | INFO    | [547/750] dfadab01 | baseline | run 5
+2026-04-06T21:06:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:06:30 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:06:50 | INFO    |   ✗ exact=False cell_acc=0.960 dim=True tokens=8957 23.1s
+2026-04-06T21:06:50 | INFO    | [548/750] 5545f144 | baseline | run 1
+2026-04-06T21:06:51 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:06:54 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:07:09 | INFO    |   ✗ exact=False cell_acc=0.422 dim=False tokens=4828 18.6s
+2026-04-06T21:07:09 | INFO    | [549/750] b9e38dc0 | chain-of-thought | run 2
+2026-04-06T21:07:30 | INFO    |   ✗ exact=False cell_acc=0.793 dim=True tokens=6337 21.0s
+2026-04-06T21:07:30 | INFO    | [550/750] 271d71e2 | chain-of-thought | run 3
+2026-04-06T21:07:53 | INFO    |   ✗ exact=False cell_acc=0.639 dim=True tokens=7847 23.4s
+2026-04-06T21:07:53 | INFO    | [551/750] 5545f144 | baseline | run 5
+2026-04-06T21:07:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:08:09 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=5119 15.5s
+2026-04-06T21:08:09 | INFO    | [552/750] 6e453dd6 | arc-informed | run 4
+2026-04-06T21:08:10 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:08:39 | INFO    |   ✗ exact=False cell_acc=0.860 dim=True tokens=7006 30.1s
+2026-04-06T21:08:39 | INFO    | [553/750] 97d7923e | baseline | run 1
+2026-04-06T21:08:40 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:08:58 | INFO    |   ✗ exact=False cell_acc=0.870 dim=True tokens=4768 19.2s
+2026-04-06T21:08:58 | INFO    | [554/750] 89565ca0 | chain-of-thought | run 5
+2026-04-06T21:09:14 | INFO    |   ✗ exact=False cell_acc=0.133 dim=False tokens=8818 15.5s
+2026-04-06T21:09:14 | INFO    | [555/750] 981571dc | chain-of-thought | run 2
+2026-04-06T21:09:46 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=27733 32.8s
+2026-04-06T21:09:46 | INFO    | [556/750] 89565ca0 | arc-informed | run 2
+2026-04-06T21:09:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:09:50 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:10:12 | INFO    |   ✗ exact=False cell_acc=0.300 dim=False tokens=9454 25.4s
+2026-04-06T21:10:12 | INFO    | [557/750] 2ba387bc | baseline | run 4
+2026-04-06T21:10:23 | INFO    |   ✗ exact=False cell_acc=0.125 dim=False tokens=9333 11.2s
+2026-04-06T21:10:23 | INFO    | [558/750] 6ffbe589 | chain-of-thought | run 3
+2026-04-06T21:10:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:10:27 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:10:42 | INFO    |   ✗ exact=False cell_acc=0.160 dim=False tokens=6908 18.8s
+2026-04-06T21:10:42 | INFO    | [559/750] b5ca7ac4 | baseline | run 1
+2026-04-06T21:10:43 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:11:05 | INFO    |   ✗ exact=False cell_acc=0.469 dim=True tokens=12114 22.7s
+2026-04-06T21:11:05 | INFO    | [560/750] e8686506 | baseline | run 3
+2026-04-06T21:11:06 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:11:23 | INFO    |   ✗ exact=False cell_acc=0.375 dim=False tokens=2725 18.0s
+2026-04-06T21:11:23 | INFO    | [561/750] d59b0160 | chain-of-thought | run 3
+2026-04-06T21:11:23 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:11:46 | INFO    |   ✗ exact=False cell_acc=0.797 dim=True tokens=6969 23.0s
+2026-04-06T21:11:46 | INFO    | [562/750] 7666fa5d | arc-informed | run 2
+2026-04-06T21:11:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:11:49 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:11:55 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:12:03 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:12:03 | INFO    | [563/750] db0c5428 | baseline | run 3
+2026-04-06T21:12:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:12:19 | INFO    |   ✗ exact=False cell_acc=0.689 dim=True tokens=8027 16.0s
+2026-04-06T21:12:19 | INFO    | [564/750] 3dc255db | baseline | run 4
+2026-04-06T21:12:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:12:22 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:12:43 | INFO    |   ✗ exact=False cell_acc=0.904 dim=True tokens=3980 24.3s
+2026-04-06T21:12:43 | INFO    | [565/750] 7b0280bc | chain-of-thought | run 5
+2026-04-06T21:12:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:13:13 | INFO    |   ✗ exact=False cell_acc=0.822 dim=True tokens=11828 30.4s
+2026-04-06T21:13:13 | INFO    | [566/750] 53fb4810 | chain-of-thought | run 4
+2026-04-06T21:13:35 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=7480 21.1s
+2026-04-06T21:13:35 | INFO    | [567/750] a395ee82 | chain-of-thought | run 1
+2026-04-06T21:13:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:13:38 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:13:43 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:13:51 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:13:51 | INFO    | [568/750] 3dc255db | baseline | run 5
+2026-04-06T21:14:09 | INFO    |   ✗ exact=False cell_acc=0.891 dim=True tokens=3944 17.4s
+2026-04-06T21:14:11 | INFO    | Ceiling check: 10 tasks, 50 runs, Baseline accuracy = 2.0%
+2026-04-06T21:14:11 | INFO    | [569/750] da515329 | chain-of-thought | run 4
+2026-04-06T21:14:39 | INFO    |   ✗ exact=False cell_acc=0.678 dim=False tokens=10335 27.9s
+2026-04-06T21:14:39 | INFO    | [570/750] e87109e9 | arc-informed | run 4
+2026-04-06T21:14:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:14:42 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:14:47 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:14:55 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:14:55 | INFO    | [571/750] 6e453dd6 | chain-of-thought | run 3
+2026-04-06T21:15:12 | INFO    |   ✗ exact=False cell_acc=0.880 dim=True tokens=6343 17.0s
+2026-04-06T21:15:12 | INFO    | [572/750] c4d067a0 | arc-informed | run 2
+2026-04-06T21:15:13 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:15:45 | INFO    |   ✗ exact=False cell_acc=0.819 dim=True tokens=15313 32.7s
+2026-04-06T21:15:45 | INFO    | [573/750] aa4ec2a5 | baseline | run 2
+2026-04-06T21:16:08 | INFO    |   ✗ exact=False cell_acc=0.826 dim=True tokens=13891 23.2s
+2026-04-06T21:16:08 | INFO    | [574/750] e8686506 | baseline | run 4
+2026-04-06T21:16:09 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:16:27 | INFO    |   ✗ exact=False cell_acc=0.375 dim=False tokens=2683 18.2s
+2026-04-06T21:16:27 | INFO    | [575/750] d59b0160 | baseline | run 4
+2026-04-06T21:16:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:16:48 | INFO    |   ✗ exact=False cell_acc=0.746 dim=True tokens=6864 21.8s
+2026-04-06T21:16:48 | INFO    | [576/750] 8f3a5a89 | chain-of-thought | run 1
+2026-04-06T21:17:01 | INFO    |   ✗ exact=False cell_acc=0.778 dim=True tokens=6282 12.4s
+2026-04-06T21:17:01 | INFO    | [577/750] 8698868d | baseline | run 1
+2026-04-06T21:17:01 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:17:17 | INFO    |   ✗ exact=False cell_acc=0.017 dim=False tokens=8652 15.8s
+2026-04-06T21:17:17 | INFO    | [578/750] c7f57c3e | baseline | run 1
+2026-04-06T21:17:46 | INFO    |   ✗ exact=False cell_acc=0.885 dim=True tokens=9262 29.7s
+2026-04-06T21:17:46 | INFO    | [579/750] b9e38dc0 | chain-of-thought | run 4
+2026-04-06T21:17:47 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:18:10 | INFO    |   ✗ exact=False cell_acc=0.625 dim=True tokens=6339 24.2s
+2026-04-06T21:18:10 | INFO    | [580/750] 6e453dd6 | baseline | run 2
+2026-04-06T21:18:11 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:18:28 | INFO    |   ✗ exact=False cell_acc=0.870 dim=True tokens=6128 17.2s
+2026-04-06T21:18:28 | INFO    | [581/750] abc82100 | chain-of-thought | run 4
+2026-04-06T21:18:47 | INFO    |   ✗ exact=False cell_acc=0.833 dim=True tokens=7643 19.8s
+2026-04-06T21:18:47 | INFO    | [582/750] c7f57c3e | arc-informed | run 4
+2026-04-06T21:19:39 | INFO    |   ✗ exact=False cell_acc=0.916 dim=True tokens=12234 51.3s
+2026-04-06T21:19:39 | INFO    | [583/750] 898e7135 | baseline | run 4
+2026-04-06T21:19:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:19:42 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:20:08 | INFO    |   ✗ exact=False cell_acc=0.299 dim=False tokens=9166 28.8s
+2026-04-06T21:20:08 | INFO    | [584/750] abc82100 | chain-of-thought | run 2
+2026-04-06T21:20:26 | INFO    |   ✗ exact=False cell_acc=0.805 dim=True tokens=7521 18.5s
+2026-04-06T21:20:26 | INFO    | [585/750] 800d221b | baseline | run 3
+2026-04-06T21:20:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:20:56 | INFO    |   ✗ exact=False cell_acc=0.809 dim=True tokens=10523 29.7s
+2026-04-06T21:20:56 | INFO    | [586/750] e87109e9 | baseline | run 4
+2026-04-06T21:21:23 | INFO    |   ✗ exact=False cell_acc=0.646 dim=False tokens=14134 27.0s
+2026-04-06T21:21:23 | INFO    | [587/750] da515329 | arc-informed | run 1
+2026-04-06T21:21:50 | INFO    |   ✗ exact=False cell_acc=0.678 dim=False tokens=10533 27.7s
+2026-04-06T21:21:50 | INFO    | [588/750] 135a2760 | arc-informed | run 3
+2026-04-06T21:21:51 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:22:25 | INFO    |   ✗ exact=False cell_acc=0.967 dim=True tokens=9369 34.1s
+2026-04-06T21:22:25 | INFO    | [589/750] 97d7923e | baseline | run 4
+2026-04-06T21:22:39 | INFO    |   ✗ exact=False cell_acc=0.920 dim=True tokens=4544 14.9s
+2026-04-06T21:22:39 | INFO    | [590/750] dfadab01 | chain-of-thought | run 2
+2026-04-06T21:22:59 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=9298 19.6s
+2026-04-06T21:22:59 | INFO    | [591/750] 8698868d | arc-informed | run 2
+2026-04-06T21:23:29 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=9719 30.1s
+2026-04-06T21:23:29 | INFO    | [592/750] b5ca7ac4 | arc-informed | run 4
+2026-04-06T21:23:51 | INFO    |   ✗ exact=False cell_acc=0.452 dim=True tokens=12812 21.8s
+2026-04-06T21:23:51 | INFO    | [593/750] 7b0280bc | chain-of-thought | run 3
+2026-04-06T21:24:18 | INFO    |   ✗ exact=False cell_acc=0.822 dim=True tokens=11868 27.4s
+2026-04-06T21:24:18 | INFO    | [594/750] 4c416de3 | baseline | run 1
+2026-04-06T21:24:36 | INFO    |   ✗ exact=False cell_acc=0.938 dim=True tokens=11622 17.5s
+2026-04-06T21:24:36 | INFO    | [595/750] e376de54 | arc-informed | run 5
+2026-04-06T21:24:37 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:25:05 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=7408 29.2s
+2026-04-06T21:25:05 | INFO    | [596/750] a395ee82 | chain-of-thought | run 5
+2026-04-06T21:25:06 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:25:30 | INFO    |   ✗ exact=False cell_acc=0.806 dim=True tokens=12609 25.0s
+2026-04-06T21:25:30 | INFO    | [597/750] 8b9c3697 | chain-of-thought | run 4
+2026-04-06T21:25:31 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:26:01 | INFO    |   ✗ exact=False cell_acc=0.829 dim=True tokens=12075 31.1s
+2026-04-06T21:26:01 | INFO    | [598/750] 2ba387bc | chain-of-thought | run 5
+2026-04-06T21:26:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:26:24 | INFO    |   ✗ exact=False cell_acc=0.500 dim=False tokens=10059 22.3s
+2026-04-06T21:26:24 | INFO    | [599/750] 1818057f | baseline | run 2
+2026-04-06T21:26:43 | INFO    |   ✗ exact=False cell_acc=0.926 dim=True tokens=6719 19.5s
+2026-04-06T21:26:43 | INFO    | [600/750] 5545f144 | baseline | run 2
+2026-04-06T21:26:56 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=5184 13.2s
+2026-04-06T21:26:56 | INFO    | [601/750] a395ee82 | baseline | run 3
+2026-04-06T21:26:57 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:27:18 | INFO    |   ✗ exact=False cell_acc=0.822 dim=True tokens=12221 21.1s
+2026-04-06T21:27:18 | INFO    | [602/750] 7b3084d4 | arc-informed | run 4
+2026-04-06T21:27:39 | INFO    |   ✗ exact=False cell_acc=0.082 dim=False tokens=7007 21.8s
+2026-04-06T21:27:39 | INFO    | [603/750] 7b3084d4 | arc-informed | run 3
+2026-04-06T21:28:04 | INFO    |   ✗ exact=False cell_acc=0.077 dim=False tokens=6958 24.1s
+2026-04-06T21:28:04 | INFO    | [604/750] 53fb4810 | arc-informed | run 2
+2026-04-06T21:28:36 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=7985 32.8s
+2026-04-06T21:28:36 | INFO    | [605/750] 1818057f | arc-informed | run 1
+2026-04-06T21:28:37 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:28:40 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:29:14 | INFO    |   ✗ exact=False cell_acc=0.876 dim=True tokens=7241 37.4s
+2026-04-06T21:29:14 | INFO    | [606/750] 409aa875 | chain-of-thought | run 5
+2026-04-06T21:29:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:29:38 | INFO    |   ✗ exact=False cell_acc=0.934 dim=True tokens=6961 23.8s
+2026-04-06T21:29:38 | INFO    | [607/750] 67e490f4 | chain-of-thought | run 4
+2026-04-06T21:29:38 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:29:41 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:30:01 | INFO    |   ✗ exact=False cell_acc=0.324 dim=False tokens=10521 23.8s
+2026-04-06T21:30:01 | INFO    | [608/750] 7b3084d4 | arc-informed | run 2
+2026-04-06T21:30:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:30:05 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:30:32 | INFO    |   ✗ exact=False cell_acc=0.020 dim=False tokens=7226 30.3s
+2026-04-06T21:30:32 | INFO    | [609/750] b5ca7ac4 | baseline | run 5
+2026-04-06T21:30:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:30:54 | INFO    |   ✗ exact=False cell_acc=0.690 dim=True tokens=12195 22.3s
+2026-04-06T21:30:54 | INFO    | [610/750] db0c5428 | chain-of-thought | run 3
+2026-04-06T21:31:16 | INFO    |   ✗ exact=False cell_acc=0.436 dim=True tokens=8384 22.2s
+2026-04-06T21:31:16 | INFO    | [611/750] bf45cf4b | arc-informed | run 1
+2026-04-06T21:31:17 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:31:39 | INFO    |   ✗ exact=False cell_acc=0.120 dim=False tokens=5241 22.6s
+2026-04-06T21:31:39 | INFO    | [612/750] 8b9c3697 | chain-of-thought | run 1
+2026-04-06T21:32:11 | INFO    |   ✗ exact=False cell_acc=0.862 dim=True tokens=12212 31.9s
+2026-04-06T21:32:11 | INFO    | [613/750] f560132c | arc-informed | run 4
+2026-04-06T21:32:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:32:28 | INFO    |   ✗ exact=False cell_acc=0.361 dim=False tokens=6407 17.2s
+2026-04-06T21:32:28 | INFO    | [614/750] b10624e5 | baseline | run 1
+2026-04-06T21:32:29 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:32:32 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:33:00 | INFO    |   ✗ exact=False cell_acc=0.816 dim=False tokens=13954 31.8s
+2026-04-06T21:33:00 | INFO    | [615/750] e376de54 | chain-of-thought | run 1
+2026-04-06T21:33:01 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:33:03 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:33:08 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:33:17 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:33:17 | INFO    | [616/750] 8f215267 | baseline | run 5
+2026-04-06T21:33:17 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:33:45 | INFO    |   ✗ exact=False cell_acc=0.990 dim=True tokens=13454 28.5s
+2026-04-06T21:33:45 | INFO    | [617/750] f560132c | arc-informed | run 3
+2026-04-06T21:33:46 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:34:05 | INFO    |   ✗ exact=False cell_acc=0.201 dim=False tokens=6490 19.5s
+2026-04-06T21:34:05 | INFO    | [618/750] c7f57c3e | baseline | run 2
+2026-04-06T21:34:05 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:34:08 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:34:13 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:34:21 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:34:21 | INFO    | [619/750] 898e7135 | chain-of-thought | run 1
+2026-04-06T21:34:52 | INFO    |   ✗ exact=False cell_acc=0.153 dim=False tokens=10038 30.3s
+2026-04-06T21:34:52 | INFO    | [620/750] c4d067a0 | chain-of-thought | run 1
+2026-04-06T21:34:52 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:35:23 | INFO    |   ✗ exact=False cell_acc=0.812 dim=True tokens=14975 31.3s
+2026-04-06T21:35:23 | INFO    | [621/750] 409aa875 | chain-of-thought | run 3
+2026-04-06T21:35:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:35:46 | INFO    |   ✗ exact=False cell_acc=0.949 dim=True tokens=6965 23.4s
+2026-04-06T21:35:46 | INFO    | [622/750] e87109e9 | arc-informed | run 1
+2026-04-06T21:36:21 | INFO    |   ✗ exact=False cell_acc=0.620 dim=False tokens=14778 34.8s
+2026-04-06T21:36:21 | INFO    | [623/750] abc82100 | chain-of-thought | run 1
+2026-04-06T21:36:22 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:36:44 | INFO    |   ✗ exact=False cell_acc=0.835 dim=True tokens=7677 22.8s
+2026-04-06T21:36:44 | INFO    | [624/750] c7f57c3e | arc-informed | run 3
+2026-04-06T21:37:23 | INFO    |   ✗ exact=False cell_acc=0.911 dim=True tokens=9877 39.6s
+2026-04-06T21:37:23 | INFO    | [625/750] 28a6681f | arc-informed | run 4
+2026-04-06T21:37:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:37:27 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:37:32 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:37:40 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:37:40 | INFO    | [626/750] 97d7923e | chain-of-thought | run 3
+2026-04-06T21:37:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:37:56 | INFO    |   ✗ exact=False cell_acc=0.935 dim=True tokens=4516 16.3s
+2026-04-06T21:37:56 | INFO    | [627/750] 898e7135 | baseline | run 5
+2026-04-06T21:38:28 | INFO    |   ✗ exact=False cell_acc=0.538 dim=False tokens=10626 31.2s
+2026-04-06T21:38:28 | INFO    | [628/750] e8686506 | chain-of-thought | run 4
+2026-04-06T21:38:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:38:32 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:38:36 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:38:44 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:38:44 | INFO    | [629/750] 8698868d | arc-informed | run 3
+2026-04-06T21:38:45 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:38:48 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:39:16 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8855 32.0s
+2026-04-06T21:39:16 | INFO    | [630/750] 5545f144 | chain-of-thought | run 1
+2026-04-06T21:39:17 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:39:20 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:39:38 | INFO    |   ✗ exact=False cell_acc=0.422 dim=False tokens=5233 22.0s
+2026-04-06T21:39:38 | INFO    | [631/750] 6e453dd6 | arc-informed | run 5
+2026-04-06T21:40:09 | INFO    |   ✗ exact=False cell_acc=0.907 dim=True tokens=6951 30.3s
+2026-04-06T21:40:09 | INFO    | [632/750] 981571dc | baseline | run 1
+2026-04-06T21:40:10 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:40:40 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=27616 31.4s
+2026-04-06T21:40:40 | INFO    | [633/750] c4d067a0 | chain-of-thought | run 3
+2026-04-06T21:41:06 | INFO    |   ✗ exact=False cell_acc=0.802 dim=True tokens=14771 26.1s
+2026-04-06T21:41:06 | INFO    | [634/750] db0c5428 | arc-informed | run 4
+2026-04-06T21:41:34 | INFO    |   ✗ exact=False cell_acc=0.450 dim=True tokens=8819 27.6s
+2026-04-06T21:41:34 | INFO    | [635/750] 271d71e2 | arc-informed | run 3
+2026-04-06T21:42:01 | INFO    |   ✗ exact=False cell_acc=0.601 dim=True tokens=8232 27.2s
+2026-04-06T21:42:01 | INFO    | [636/750] 7666fa5d | chain-of-thought | run 4
+2026-04-06T21:42:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:42:05 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:42:10 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:42:18 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:42:18 | INFO    | [637/750] 7b5033c1 | arc-informed | run 1
+2026-04-06T21:42:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:42:36 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=4045 17.9s
+2026-04-06T21:42:36 | INFO    | [638/750] abc82100 | arc-informed | run 1
+2026-04-06T21:43:00 | INFO    |   ✗ exact=False cell_acc=0.825 dim=True tokens=8242 23.8s
+2026-04-06T21:43:00 | INFO    | [639/750] 8b9c3697 | arc-informed | run 2
+2026-04-06T21:43:33 | INFO    |   ✗ exact=False cell_acc=0.948 dim=True tokens=12551 33.3s
+2026-04-06T21:43:33 | INFO    | [640/750] aa4ec2a5 | chain-of-thought | run 2
+2026-04-06T21:44:01 | INFO    |   ✗ exact=False cell_acc=0.866 dim=True tokens=14071 28.4s
+2026-04-06T21:44:01 | INFO    | [641/750] fc7cae8d | baseline | run 2
+2026-04-06T21:44:02 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:44:05 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:44:10 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:44:18 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:44:18 | INFO    | [642/750] dfadab01 | baseline | run 3
+2026-04-06T21:44:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:44:37 | INFO    |   ✗ exact=False cell_acc=0.900 dim=True tokens=9004 19.1s
+2026-04-06T21:44:37 | INFO    | [643/750] d59b0160 | arc-informed | run 3
+2026-04-06T21:45:02 | INFO    |   ✗ exact=False cell_acc=0.680 dim=True tokens=8419 25.3s
+2026-04-06T21:45:02 | INFO    | [644/750] d59b0160 | baseline | run 2
+2026-04-06T21:45:03 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:45:21 | INFO    |   ✗ exact=False cell_acc=0.797 dim=True tokens=6764 19.2s
+2026-04-06T21:45:21 | INFO    | [645/750] b9e38dc0 | baseline | run 1
+2026-04-06T21:45:40 | INFO    |   ✗ exact=False cell_acc=0.481 dim=True tokens=6124 18.6s
+2026-04-06T21:45:40 | INFO    | [646/750] 8f215267 | chain-of-thought | run 2
+2026-04-06T21:45:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:46:09 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13642 28.7s
+2026-04-06T21:46:09 | INFO    | [647/750] 3dc255db | arc-informed | run 1
+2026-04-06T21:46:25 | INFO    |   ✗ exact=False cell_acc=0.917 dim=True tokens=4489 15.8s
+2026-04-06T21:46:25 | INFO    | [648/750] d59b0160 | chain-of-thought | run 1
+2026-04-06T21:46:45 | INFO    |   ✗ exact=False cell_acc=0.582 dim=True tokens=6912 20.7s
+2026-04-06T21:46:45 | INFO    | [649/750] 271d71e2 | baseline | run 3
+2026-04-06T21:46:46 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:47:14 | INFO    |   ✗ exact=False cell_acc=0.701 dim=True tokens=7631 28.3s
+2026-04-06T21:47:14 | INFO    | [650/750] fc7cae8d | baseline | run 4
+2026-04-06T21:47:14 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:47:17 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:47:41 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=9738 27.2s
+2026-04-06T21:47:41 | INFO    | [651/750] 45a5af55 | arc-informed | run 4
+2026-04-06T21:48:34 | INFO    |   ✗ exact=False cell_acc=0.416 dim=False tokens=8034 53.5s
+2026-04-06T21:48:34 | INFO    | [652/750] 53fb4810 | arc-informed | run 4
+2026-04-06T21:49:04 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=7933 29.9s
+2026-04-06T21:49:04 | INFO    | [653/750] 7b5033c1 | arc-informed | run 4
+2026-04-06T21:49:22 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=4206 17.7s
+2026-04-06T21:49:22 | INFO    | [654/750] 7b5033c1 | baseline | run 4
+2026-04-06T21:49:31 | INFO    |   ✗ exact=False cell_acc=0.720 dim=False tokens=3223 9.4s
+2026-04-06T21:49:31 | INFO    | [655/750] 45a5af55 | arc-informed | run 1
+2026-04-06T21:49:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:49:35 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:50:10 | INFO    |   ✗ exact=False cell_acc=0.266 dim=False tokens=8338 38.3s
+2026-04-06T21:50:10 | INFO    | [656/750] fc7cae8d | chain-of-thought | run 2
+2026-04-06T21:50:10 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:50:33 | INFO    |   ✗ exact=False cell_acc=0.237 dim=False tokens=9961 23.1s
+2026-04-06T21:50:33 | INFO    | [657/750] 800d221b | baseline | run 2
+2026-04-06T21:50:34 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:50:36 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:50:42 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:50:50 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:50:50 | INFO    | [658/750] 409aa875 | baseline | run 5
+2026-04-06T21:51:03 | INFO    |   ✗ exact=False cell_acc=0.961 dim=True tokens=6739 13.6s
+2026-04-06T21:51:03 | INFO    | [659/750] 5961cc34 | baseline | run 1
+2026-04-06T21:51:25 | INFO    |   ✗ exact=False cell_acc=0.929 dim=True tokens=15581 21.7s
+2026-04-06T21:51:25 | INFO    | [660/750] bf45cf4b | chain-of-thought | run 2
+2026-04-06T21:51:39 | INFO    |   ✗ exact=False cell_acc=0.187 dim=False tokens=4448 13.5s
+2026-04-06T21:51:39 | INFO    | [661/750] 5545f144 | arc-informed | run 1
+2026-04-06T21:51:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:51:59 | INFO    |   ✗ exact=False cell_acc=0.436 dim=False tokens=5640 20.1s
+2026-04-06T21:51:59 | INFO    | [662/750] 6ffbe589 | arc-informed | run 1
+2026-04-06T21:52:15 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=7520 16.4s
+2026-04-06T21:52:15 | INFO    | [663/750] 7b5033c1 | chain-of-thought | run 1
+2026-04-06T21:52:27 | INFO    |   ✗ exact=False cell_acc=0.280 dim=True tokens=3755 12.1s
+2026-04-06T21:52:27 | INFO    | [664/750] c4d067a0 | arc-informed | run 4
+2026-04-06T21:52:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:52:31 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:53:05 | INFO    |   ✗ exact=False cell_acc=0.802 dim=True tokens=15347 37.4s
+2026-04-06T21:53:05 | INFO    | [665/750] 8698868d | chain-of-thought | run 4
+2026-04-06T21:53:17 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8605 12.8s
+2026-04-06T21:53:17 | INFO    | [666/750] edb79dae | baseline | run 5
+2026-04-06T21:53:40 | INFO    |   ✗ exact=False cell_acc=0.680 dim=True tokens=9430 22.0s
+2026-04-06T21:53:40 | INFO    | [667/750] 4c416de3 | arc-informed | run 3
+2026-04-06T21:53:40 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:53:43 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:54:11 | INFO    |   ✗ exact=False cell_acc=0.909 dim=True tokens=12442 31.0s
+2026-04-06T21:54:11 | INFO    | [668/750] 67e490f4 | arc-informed | run 5
+2026-04-06T21:54:40 | INFO    |   ✗ exact=False cell_acc=0.062 dim=False tokens=10797 29.6s
+2026-04-06T21:54:40 | INFO    | [669/750] 981571dc | arc-informed | run 4
+2026-04-06T21:54:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:55:23 | INFO    |   ✗ exact=False cell_acc=0.996 dim=True tokens=28337 43.1s
+2026-04-06T21:55:23 | INFO    | [670/750] 8b9c3697 | arc-informed | run 5
+2026-04-06T21:55:56 | INFO    |   ✗ exact=False cell_acc=0.862 dim=True tokens=12598 32.7s
+2026-04-06T21:55:56 | INFO    | [671/750] aa4ec2a5 | chain-of-thought | run 5
+2026-04-06T21:55:57 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:56:00 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:56:05 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:56:13 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:56:13 | INFO    | [672/750] 7b5033c1 | chain-of-thought | run 2
+2026-04-06T21:56:13 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:56:29 | INFO    |   ✗ exact=False cell_acc=0.440 dim=False tokens=3683 16.6s
+2026-04-06T21:56:29 | INFO    | [673/750] 5545f144 | chain-of-thought | run 2
+2026-04-06T21:56:43 | INFO    |   ✗ exact=False cell_acc=0.427 dim=False tokens=5175 14.1s
+2026-04-06T21:56:43 | INFO    | [674/750] 135a2760 | chain-of-thought | run 3
+2026-04-06T21:56:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:57:15 | INFO    |   ✗ exact=False cell_acc=0.861 dim=True tokens=9194 31.2s
+2026-04-06T21:57:15 | INFO    | [675/750] 58f5dbd5 | arc-informed | run 3
+2026-04-06T21:57:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:57:34 | INFO    |   ✗ exact=False cell_acc=0.611 dim=False tokens=7921 19.8s
+2026-04-06T21:57:34 | INFO    | [676/750] fc7cae8d | chain-of-thought | run 4
+2026-04-06T21:57:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:57:52 | INFO    |   ✗ exact=False cell_acc=0.025 dim=False tokens=9212 18.0s
+2026-04-06T21:57:52 | INFO    | [677/750] 409aa875 | chain-of-thought | run 4
+2026-04-06T21:57:53 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:57:56 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:58:24 | INFO    |   ✗ exact=False cell_acc=0.938 dim=True tokens=7280 31.6s
+2026-04-06T21:58:24 | INFO    | [678/750] 28a6681f | chain-of-thought | run 5
+2026-04-06T21:58:25 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:58:41 | INFO    |   ✗ exact=False cell_acc=0.890 dim=True tokens=3482 16.9s
+2026-04-06T21:58:41 | INFO    | [679/750] 1818057f | arc-informed | run 5
+2026-04-06T21:59:13 | INFO    |   ✗ exact=False cell_acc=0.919 dim=True tokens=7368 31.9s
+2026-04-06T21:59:13 | INFO    | [680/750] 28a6681f | arc-informed | run 5
+2026-04-06T21:59:36 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=4482 23.5s
+2026-04-06T21:59:36 | INFO    | [681/750] 58f5dbd5 | arc-informed | run 2
+2026-04-06T21:59:37 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T21:59:40 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T21:59:45 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T21:59:53 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T21:59:53 | INFO    | [682/750] db0c5428 | baseline | run 1
+2026-04-06T22:00:07 | INFO    |   ✗ exact=False cell_acc=0.740 dim=True tokens=7930 13.5s
+2026-04-06T22:00:07 | INFO    | [683/750] aa4ec2a5 | arc-informed | run 5
+2026-04-06T22:00:48 | INFO    |   ✗ exact=False cell_acc=0.823 dim=True tokens=16694 41.5s
+2026-04-06T22:00:48 | INFO    | [684/750] 4c416de3 | chain-of-thought | run 4
+2026-04-06T22:00:49 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T22:00:52 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-06T22:00:57 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-06T22:01:05 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-06T22:01:05 | INFO    | [685/750] 271d71e2 | chain-of-thought | run 2
+2026-04-06T22:01:06 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T22:01:29 | INFO    |   ✗ exact=False cell_acc=0.639 dim=True tokens=7751 24.6s
+2026-04-06T22:01:29 | INFO    | [686/750] dfadab01 | arc-informed | run 2
+2026-04-06T22:01:51 | INFO    |   ✗ exact=False cell_acc=0.320 dim=True tokens=9747 21.3s
+2026-04-06T22:01:51 | INFO    | [687/750] b10624e5 | chain-of-thought | run 3
+2026-04-06T22:01:51 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-06T22:02:23 | INFO    |   ✗ exact=False cell_acc=0.844 dim=True tokens=13997 31.9s
+2026-04-06T22:02:23 | INFO    | [688/750] 7b0280bc | baseline | run 5
+2026-04-06T22:02:52 | INFO    |   ✗ exact=False cell_acc=0.822 dim=True tokens=11725 29.7s
+2026-04-06T22:02:52 | INFO    | [689/750] 5545f144 | chain-of-thought | run 4
+2026-04-06T22:03:08 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=5506 16.1s
+2026-04-06T22:03:08 | INFO    | [690/750] e8686506 | baseline | run 1
+2026-04-06T22:03:23 | INFO    |   ✗ exact=False cell_acc=0.375 dim=True tokens=2725 14.6s
+2026-04-06T22:03:23 | INFO    | [691/750] 89565ca0 | baseline | run 4
+2026-04-06T22:03:31 | INFO    |   ✗ exact=False cell_acc=0.233 dim=False tokens=8481 8.4s
+2026-04-06T22:03:31 | INFO    | [692/750] d59b0160 | arc-informed | run 2
+2026-04-06T22:03:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T07:54:27 | INFO    | ============================================================
+2026-04-07T07:54:27 | INFO    | ARC-AGI Squad Experiment V3.1 — Execution Harness
+2026-04-07T07:54:27 | INFO    | ============================================================
+2026-04-07T07:54:27 | INFO    | Model: claude-sonnet-4
+2026-04-07T07:54:27 | INFO    | Dry run: False
+2026-04-07T07:54:27 | INFO    | Resume: True
+2026-04-07T07:54:27 | INFO    | Loaded prompt templates for 3 conditions
+2026-04-07T07:54:27 | INFO    | Run order: 750 total runs
+2026-04-07T07:54:29 | WARNING | Warmup 403 (attempt 1) — refreshing token
+2026-04-07T07:54:32 | WARNING | Warmup 403 (attempt 2) — refreshing token
+2026-04-07T07:54:38 | INFO    | Copilot API warmup OK (attempt 3)
+2026-04-07T07:54:38 | INFO    | [11/750] 8f215267 | chain-of-thought | run 3
+2026-04-07T07:55:04 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=13526 25.7s
+2026-04-07T07:55:07 | INFO    | Ceiling check: 23 tasks, 115 runs, Baseline accuracy = 4.3%
+2026-04-07T07:55:07 | INFO    | [12/750] 3dc255db | chain-of-thought | run 1
+2026-04-07T07:55:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T07:55:31 | INFO    |   ✗ exact=False cell_acc=0.885 dim=True tokens=4289 24.4s
+2026-04-07T07:55:31 | INFO    | [31/750] b5ca7ac4 | arc-informed | run 3
+2026-04-07T07:55:53 | INFO    |   ✗ exact=False cell_acc=0.510 dim=True tokens=12830 21.9s
+2026-04-07T07:55:53 | INFO    | [43/750] 7666fa5d | baseline | run 2
+2026-04-07T07:56:08 | INFO    |   ✗ exact=False cell_acc=0.965 dim=True tokens=5047 14.9s
+2026-04-07T07:56:08 | INFO    | [57/750] bf45cf4b | baseline | run 3
+2026-04-07T07:56:20 | INFO    |   ✗ exact=False cell_acc=0.187 dim=False tokens=4435 12.2s
+2026-04-07T07:56:20 | INFO    | [81/750] b5ca7ac4 | arc-informed | run 5
+2026-04-07T07:56:21 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T07:56:47 | INFO    |   ✗ exact=False cell_acc=0.690 dim=True tokens=12969 26.4s
+2026-04-07T07:56:47 | INFO    | [92/750] 9aaea919 | chain-of-thought | run 5
+2026-04-07T07:57:14 | INFO    |   ✗ exact=False cell_acc=0.951 dim=True tokens=22424 27.5s
+2026-04-07T07:57:14 | INFO    | [103/750] edb79dae | baseline | run 3
+2026-04-07T07:57:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T07:57:38 | INFO    |   ✗ exact=False cell_acc=0.540 dim=False tokens=9367 23.7s
+2026-04-07T07:57:38 | INFO    | [127/750] 53fb4810 | baseline | run 2
+2026-04-07T07:57:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T07:57:41 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T07:57:46 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T07:57:54 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T07:57:54 | INFO    | [147/750] b10624e5 | chain-of-thought | run 2
+2026-04-07T07:58:22 | INFO    |   ✗ exact=False cell_acc=0.840 dim=True tokens=14042 27.3s
+2026-04-07T07:58:22 | INFO    | [151/750] 53fb4810 | baseline | run 4
+2026-04-07T07:58:44 | INFO    |   ✗ exact=False cell_acc=0.853 dim=True tokens=7227 22.6s
+2026-04-07T07:58:44 | INFO    | [154/750] 8f3a5a89 | chain-of-thought | run 3
+2026-04-07T07:58:56 | INFO    |   ✗ exact=False cell_acc=0.778 dim=True tokens=6200 11.3s
+2026-04-07T07:58:56 | INFO    | [171/750] e87109e9 | chain-of-thought | run 4
+2026-04-07T07:59:16 | INFO    |   ✗ exact=False cell_acc=0.717 dim=True tokens=14271 20.5s
+2026-04-07T07:59:16 | INFO    | [174/750] 28a6681f | arc-informed | run 3
+2026-04-07T07:59:31 | INFO    |   ✗ exact=False cell_acc=0.920 dim=True tokens=3777 15.0s
+2026-04-07T07:59:31 | INFO    | [204/750] 28a6681f | baseline | run 2
+2026-04-07T07:59:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T07:59:46 | INFO    |   ✗ exact=False cell_acc=0.550 dim=True tokens=2934 14.6s
+2026-04-07T07:59:46 | INFO    | [209/750] f560132c | baseline | run 5
+2026-04-07T07:59:56 | INFO    |   ✗ exact=False cell_acc=0.257 dim=False tokens=5850 9.8s
+2026-04-07T07:59:56 | INFO    | [216/750] 7b0280bc | baseline | run 3
+2026-04-07T07:59:56 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:00:28 | INFO    |   ✗ exact=False cell_acc=0.817 dim=True tokens=11715 31.9s
+2026-04-07T08:00:28 | INFO    | [217/750] 97d7923e | arc-informed | run 2
+2026-04-07T08:00:49 | INFO    |   ✗ exact=False cell_acc=0.910 dim=True tokens=4939 20.9s
+2026-04-07T08:00:49 | INFO    | [237/750] 1818057f | chain-of-thought | run 5
+2026-04-07T08:00:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:00:53 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:00:58 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:01:06 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:01:06 | INFO    | [242/750] b10624e5 | arc-informed | run 1
+2026-04-07T08:01:35 | INFO    |   ✗ exact=False cell_acc=0.860 dim=False tokens=14764 29.8s
+2026-04-07T08:01:35 | INFO    | [248/750] 135a2760 | arc-informed | run 1
+2026-04-07T08:01:36 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:02:07 | INFO    |   ✗ exact=False cell_acc=0.966 dim=True tokens=9291 31.1s
+2026-04-07T08:02:07 | INFO    | [250/750] 9aaea919 | chain-of-thought | run 2
+2026-04-07T08:02:35 | INFO    |   ✗ exact=False cell_acc=0.939 dim=True tokens=22558 28.3s
+2026-04-07T08:02:35 | INFO    | [257/750] abc82100 | chain-of-thought | run 3
+2026-04-07T08:02:53 | INFO    |   ✗ exact=False cell_acc=0.807 dim=True tokens=7599 17.8s
+2026-04-07T08:02:53 | INFO    | [260/750] 67e490f4 | baseline | run 4
+2026-04-07T08:02:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:03:22 | INFO    |   ✗ exact=False cell_acc=0.010 dim=False tokens=11662 29.2s
+2026-04-07T08:03:22 | INFO    | [262/750] 8698868d | baseline | run 2
+2026-04-07T08:03:32 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=8297 10.2s
+2026-04-07T08:03:32 | INFO    | [264/750] 6e453dd6 | chain-of-thought | run 4
+2026-04-07T08:03:48 | INFO    |   ✗ exact=False cell_acc=0.907 dim=True tokens=6305 16.1s
+2026-04-07T08:03:48 | INFO    | [277/750] 981571dc | arc-informed | run 5
+2026-04-07T08:04:26 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=28384 37.9s
+2026-04-07T08:04:26 | INFO    | [283/750] e8686506 | arc-informed | run 2
+2026-04-07T08:04:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:04:30 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:04:35 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:04:43 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:04:43 | INFO    | [291/750] f560132c | chain-of-thought | run 4
+2026-04-07T08:04:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:04:57 | INFO    |   ✗ exact=False cell_acc=0.306 dim=False tokens=6105 14.4s
+2026-04-07T08:04:57 | INFO    | [296/750] 6ffbe589 | chain-of-thought | run 2
+2026-04-07T08:05:22 | INFO    |   ✗ exact=False cell_acc=0.178 dim=False tokens=6983 24.4s
+2026-04-07T08:05:22 | INFO    | [297/750] 271d71e2 | arc-informed | run 2
+2026-04-07T08:05:22 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:05:25 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:05:30 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:05:38 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:05:38 | INFO    | [316/750] 981571dc | arc-informed | run 1
+2026-04-07T08:06:13 | INFO    |   ✓ exact=True cell_acc=1.000 dim=True tokens=28169 35.1s
+2026-04-07T08:06:13 | INFO    | [342/750] 7b3084d4 | chain-of-thought | run 5
+2026-04-07T08:06:14 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:06:31 | INFO    |   ✗ exact=False cell_acc=0.020 dim=True tokens=6835 17.2s
+2026-04-07T08:06:31 | INFO    | [344/750] b5ca7ac4 | chain-of-thought | run 3
+2026-04-07T08:06:49 | INFO    |   ✗ exact=False cell_acc=0.525 dim=True tokens=12351 18.2s
+2026-04-07T08:06:49 | INFO    | [350/750] 8f215267 | arc-informed | run 4
+2026-04-07T08:07:14 | INFO    |   ✗ exact=False cell_acc=0.994 dim=True tokens=14183 25.5s
+2026-04-07T08:07:14 | INFO    | [359/750] c7f57c3e | arc-informed | run 1
+2026-04-07T08:07:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:07:18 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:08:01 | INFO    |   ✗ exact=False cell_acc=0.916 dim=True tokens=10159 47.0s
+2026-04-07T08:08:01 | INFO    | [360/750] 4c416de3 | chain-of-thought | run 1
+2026-04-07T08:08:20 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=11819 18.2s
+2026-04-07T08:08:20 | INFO    | [362/750] c7f57c3e | chain-of-thought | run 5
+2026-04-07T08:08:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:08:23 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:08:57 | INFO    |   ✗ exact=False cell_acc=0.934 dim=True tokens=9955 37.3s
+2026-04-07T08:08:57 | INFO    | [368/750] e376de54 | chain-of-thought | run 2
+2026-04-07T08:09:11 | INFO    |   ✗ exact=False cell_acc=0.945 dim=True tokens=6907 14.1s
+2026-04-07T08:09:11 | INFO    | [376/750] 7b0280bc | baseline | run 2
+2026-04-07T08:09:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:09:15 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:09:19 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:09:28 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:09:28 | INFO    | [391/750] 135a2760 | baseline | run 2
+2026-04-07T08:09:28 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:09:31 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:10:00 | INFO    |   ✗ exact=False cell_acc=0.922 dim=True tokens=8872 32.6s
+2026-04-07T08:10:00 | INFO    | [395/750] 2ba387bc | chain-of-thought | run 4
+2026-04-07T08:10:01 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:10:17 | INFO    |   ✗ exact=False cell_acc=0.000 dim=False tokens=9824 17.1s
+2026-04-07T08:10:17 | INFO    | [407/750] 5961cc34 | arc-informed | run 2
+2026-04-07T08:10:18 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:10:21 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:10:26 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:10:34 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:10:34 | INFO    | [418/750] bf45cf4b | baseline | run 1
+2026-04-07T08:10:46 | INFO    |   ✗ exact=False cell_acc=0.227 dim=False tokens=4405 12.1s
+2026-04-07T08:10:46 | INFO    | [420/750] b10624e5 | arc-informed | run 4
+2026-04-07T08:11:14 | INFO    |   ✗ exact=False cell_acc=0.754 dim=True tokens=14474 27.6s
+2026-04-07T08:11:14 | INFO    | [449/750] a395ee82 | baseline | run 5
+2026-04-07T08:11:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:11:17 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:11:40 | INFO    |   ✗ exact=False cell_acc=0.839 dim=True tokens=12320 25.8s
+2026-04-07T08:11:40 | INFO    | [461/750] 5961cc34 | baseline | run 5
+2026-04-07T08:11:40 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:12:07 | INFO    |   ✗ exact=False cell_acc=0.953 dim=True tokens=15756 26.9s
+2026-04-07T08:12:07 | INFO    | [486/750] bf45cf4b | chain-of-thought | run 1
+2026-04-07T08:12:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:12:10 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:12:15 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:12:23 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:12:23 | INFO    | [520/750] 7b3084d4 | baseline | run 3
+2026-04-07T08:12:33 | INFO    |   ✗ exact=False cell_acc=0.066 dim=False tokens=6182 10.3s
+2026-04-07T08:12:33 | INFO    | [537/750] 45a5af55 | arc-informed | run 5
+2026-04-07T08:12:34 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:13:07 | INFO    |   ✗ exact=False cell_acc=0.194 dim=False tokens=8247 33.2s
+2026-04-07T08:13:07 | INFO    | [543/750] 898e7135 | arc-informed | run 3
+2026-04-07T08:13:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:13:29 | INFO    |   ✗ exact=False cell_acc=0.254 dim=False tokens=9658 22.4s
+2026-04-07T08:13:29 | INFO    | [544/750] f560132c | chain-of-thought | run 3
+2026-04-07T08:13:41 | INFO    |   ✗ exact=False cell_acc=0.257 dim=False tokens=6098 12.1s
+2026-04-07T08:13:41 | INFO    | [562/750] 7666fa5d | arc-informed | run 2
+2026-04-07T08:13:56 | INFO    |   ✗ exact=False cell_acc=0.977 dim=True tokens=5652 15.1s
+2026-04-07T08:13:56 | INFO    | [567/750] a395ee82 | chain-of-thought | run 1
+2026-04-07T08:14:17 | INFO    |   ✗ exact=False cell_acc=0.773 dim=True tokens=12565 20.2s
+2026-04-07T08:14:17 | INFO    | [570/750] e87109e9 | arc-informed | run 4
+2026-04-07T08:14:48 | INFO    |   ✗ exact=False cell_acc=0.714 dim=True tokens=14743 31.7s
+2026-04-07T08:14:48 | INFO    | [615/750] e376de54 | chain-of-thought | run 1
+2026-04-07T08:15:04 | INFO    |   ✗ exact=False cell_acc=0.984 dim=True tokens=7035 15.3s
+2026-04-07T08:15:04 | INFO    | [618/750] c7f57c3e | baseline | run 2
+2026-04-07T08:15:32 | INFO    |   ✗ exact=False cell_acc=0.906 dim=True tokens=9260 27.9s
+2026-04-07T08:15:32 | INFO    | [625/750] 28a6681f | arc-informed | run 4
+2026-04-07T08:15:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:15:50 | INFO    |   ✗ exact=False cell_acc=0.950 dim=True tokens=3730 18.3s
+2026-04-07T08:15:50 | INFO    | [628/750] e8686506 | chain-of-thought | run 4
+2026-04-07T08:15:51 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:16:08 | INFO    |   ✗ exact=False cell_acc=0.375 dim=False tokens=2805 17.8s
+2026-04-07T08:16:08 | INFO    | [636/750] 7666fa5d | chain-of-thought | run 4
+2026-04-07T08:16:22 | INFO    |   ✗ exact=False cell_acc=0.984 dim=True tokens=5472 14.3s
+2026-04-07T08:16:22 | INFO    | [641/750] fc7cae8d | baseline | run 2
+2026-04-07T08:16:23 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:16:26 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:16:31 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:16:39 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:16:39 | INFO    | [657/750] 800d221b | baseline | run 2
+2026-04-07T08:16:39 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:16:42 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:16:47 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:16:55 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:16:55 | INFO    | [671/750] aa4ec2a5 | chain-of-thought | run 5
+2026-04-07T08:16:56 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:17:26 | INFO    |   ✗ exact=False cell_acc=0.839 dim=True tokens=14028 31.0s
+2026-04-07T08:17:26 | INFO    | [681/750] 58f5dbd5 | arc-informed | run 2
+2026-04-07T08:17:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:17:30 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:17:58 | INFO    |   ✗ exact=False cell_acc=0.899 dim=True tokens=9057 32.0s
+2026-04-07T08:17:58 | INFO    | [684/750] 4c416de3 | chain-of-thought | run 4
+2026-04-07T08:18:17 | INFO    |   ✗ exact=False cell_acc=0.914 dim=True tokens=11985 18.9s
+2026-04-07T08:18:17 | INFO    | [692/750] d59b0160 | arc-informed | run 2
+2026-04-07T08:18:33 | INFO    |   ✗ exact=False cell_acc=0.727 dim=True tokens=7322 16.1s
+2026-04-07T08:18:33 | INFO    | [693/750] 800d221b | arc-informed | run 3
+2026-04-07T08:18:34 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:18:37 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:18:42 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:18:50 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:18:50 | INFO    | [694/750] d59b0160 | arc-informed | run 5
+2026-04-07T08:18:51 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:18:54 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:19:15 | INFO    |   ✗ exact=False cell_acc=0.539 dim=True tokens=7407 24.8s
+2026-04-07T08:19:15 | INFO    | [695/750] f560132c | arc-informed | run 1
+2026-04-07T08:19:15 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:19:33 | INFO    |   ✗ exact=False cell_acc=0.410 dim=False tokens=6685 18.5s
+2026-04-07T08:19:33 | INFO    | [696/750] 3dc255db | arc-informed | run 5
+2026-04-07T08:19:54 | INFO    |   ✗ exact=False cell_acc=0.949 dim=True tokens=5120 20.6s
+2026-04-07T08:19:54 | INFO    | [697/750] b5ca7ac4 | chain-of-thought | run 2
+2026-04-07T08:19:55 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:19:58 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:20:03 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:20:11 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:20:11 | INFO    | [698/750] 1818057f | chain-of-thought | run 3
+2026-04-07T08:20:35 | INFO    |   ✗ exact=False cell_acc=0.851 dim=True tokens=6810 24.5s
+2026-04-07T08:20:35 | INFO    | [699/750] e87109e9 | arc-informed | run 5
+2026-04-07T08:21:08 | INFO    |   ✗ exact=False cell_acc=0.620 dim=True tokens=14748 32.9s
+2026-04-07T08:21:08 | INFO    | [700/750] 4c416de3 | arc-informed | run 2
+2026-04-07T08:21:30 | INFO    |   ✗ exact=False cell_acc=0.945 dim=True tokens=12434 21.8s
+2026-04-07T08:21:30 | INFO    | [701/750] fc7cae8d | arc-informed | run 1
+2026-04-07T08:21:52 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=10452 22.6s
+2026-04-07T08:21:52 | INFO    | [702/750] 6e453dd6 | baseline | run 1
+2026-04-07T08:22:06 | INFO    |   ✗ exact=False cell_acc=0.850 dim=True tokens=6065 13.3s
+2026-04-07T08:22:06 | INFO    | [703/750] 1818057f | baseline | run 1
+2026-04-07T08:22:23 | INFO    |   ✗ exact=False cell_acc=0.868 dim=True tokens=6546 16.8s
+2026-04-07T08:22:23 | INFO    | [704/750] 9aaea919 | chain-of-thought | run 4
+2026-04-07T08:22:23 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:22:26 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:22:31 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:22:39 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:22:39 | INFO    | [705/750] 800d221b | baseline | run 4
+2026-04-07T08:23:03 | INFO    |   ✗ exact=False cell_acc=0.854 dim=False tokens=10366 24.2s
+2026-04-07T08:23:03 | INFO    | [706/750] dfadab01 | baseline | run 1
+2026-04-07T08:23:20 | INFO    |   ✗ exact=False cell_acc=0.960 dim=True tokens=9114 17.0s
+2026-04-07T08:23:20 | INFO    | [707/750] 800d221b | chain-of-thought | run 5
+2026-04-07T08:23:52 | INFO    |   ✗ exact=False cell_acc=0.869 dim=True tokens=10686 31.2s
+2026-04-07T08:23:52 | INFO    | [708/750] 97d7923e | arc-informed | run 1
+2026-04-07T08:24:19 | INFO    |   ✗ exact=False cell_acc=0.920 dim=True tokens=5332 26.8s
+2026-04-07T08:24:19 | INFO    | [709/750] 7b0280bc | arc-informed | run 4
+2026-04-07T08:24:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:24:22 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:24:27 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:24:35 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:24:35 | INFO    | [710/750] e376de54 | arc-informed | run 3
+2026-04-07T08:25:01 | INFO    |   ✗ exact=False cell_acc=0.980 dim=True tokens=7402 26.4s
+2026-04-07T08:25:01 | INFO    | [711/750] bf45cf4b | arc-informed | run 5
+2026-04-07T08:25:19 | INFO    |   ✗ exact=False cell_acc=0.120 dim=False tokens=5193 17.7s
+2026-04-07T08:25:19 | INFO    | [712/750] 8b9c3697 | baseline | run 2
+2026-04-07T08:25:20 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:25:48 | INFO    |   ✗ exact=False cell_acc=0.862 dim=True tokens=11962 29.1s
+2026-04-07T08:25:48 | INFO    | [713/750] e376de54 | baseline | run 2
+2026-04-07T08:25:49 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:26:11 | INFO    |   ✗ exact=False cell_acc=0.984 dim=True tokens=6784 22.6s
+2026-04-07T08:26:11 | INFO    | [714/750] 800d221b | baseline | run 1
+2026-04-07T08:26:12 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:26:40 | INFO    |   ✗ exact=False cell_acc=0.917 dim=True tokens=10500 28.8s
+2026-04-07T08:26:40 | INFO    | [715/750] da515329 | baseline | run 3
+2026-04-07T08:26:41 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:27:05 | INFO    |   ✗ exact=False cell_acc=0.815 dim=True tokens=9899 25.1s
+2026-04-07T08:27:05 | INFO    | [716/750] 7b3084d4 | chain-of-thought | run 2
+2026-04-07T08:27:19 | INFO    |   ✗ exact=False cell_acc=0.020 dim=True tokens=6797 14.2s
+2026-04-07T08:27:19 | INFO    | [717/750] da515329 | chain-of-thought | run 1
+2026-04-07T08:27:42 | INFO    |   ✗ exact=False cell_acc=0.738 dim=True tokens=10078 22.4s
+2026-04-07T08:27:42 | INFO    | [718/750] c7f57c3e | arc-informed | run 2
+2026-04-07T08:28:18 | INFO    |   ✗ exact=False cell_acc=0.908 dim=True tokens=9991 36.2s
+2026-04-07T08:28:18 | INFO    | [719/750] fc7cae8d | arc-informed | run 5
+2026-04-07T08:28:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:28:21 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:28:26 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:28:34 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:28:34 | INFO    | [720/750] fc7cae8d | baseline | run 1
+2026-04-07T08:28:56 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=9155 22.1s
+2026-04-07T08:28:56 | INFO    | [721/750] d59b0160 | arc-informed | run 4
+2026-04-07T08:28:57 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:29:23 | INFO    |   ✗ exact=False cell_acc=0.574 dim=True tokens=8239 26.4s
+2026-04-07T08:29:23 | INFO    | [722/750] 67e490f4 | arc-informed | run 1
+2026-04-07T08:29:24 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:29:49 | INFO    |   ✗ exact=False cell_acc=0.062 dim=False tokens=10567 26.3s
+2026-04-07T08:29:49 | INFO    | [723/750] 89565ca0 | chain-of-thought | run 3
+2026-04-07T08:30:05 | INFO    |   ✗ exact=False cell_acc=0.167 dim=False tokens=8977 16.2s
+2026-04-07T08:30:05 | INFO    | [724/750] e87109e9 | baseline | run 1
+2026-04-07T08:30:06 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:30:34 | INFO    |   ✗ exact=False cell_acc=0.481 dim=False tokens=14362 28.7s
+2026-04-07T08:30:34 | INFO    | [725/750] 7b3084d4 | chain-of-thought | run 4
+2026-04-07T08:30:35 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:30:50 | INFO    |   ✗ exact=False cell_acc=0.031 dim=False tokens=6683 15.6s
+2026-04-07T08:30:50 | INFO    | [726/750] 97d7923e | baseline | run 2
+2026-04-07T08:30:50 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:31:07 | INFO    |   ✗ exact=False cell_acc=0.900 dim=True tokens=4470 16.9s
+2026-04-07T08:31:07 | INFO    | [727/750] 800d221b | arc-informed | run 5
+2026-04-07T08:31:07 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:31:10 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:31:45 | INFO    |   ✗ exact=False cell_acc=0.914 dim=True tokens=11160 37.9s
+2026-04-07T08:31:45 | INFO    | [728/750] d59b0160 | arc-informed | run 1
+2026-04-07T08:32:05 | INFO    |   ✗ exact=False cell_acc=0.797 dim=True tokens=7613 20.1s
+2026-04-07T08:32:05 | INFO    | [729/750] bf45cf4b | chain-of-thought | run 5
+2026-04-07T08:32:18 | INFO    |   ✗ exact=False cell_acc=0.120 dim=False tokens=4512 13.3s
+2026-04-07T08:32:18 | INFO    | [730/750] f560132c | arc-informed | run 5
+2026-04-07T08:32:34 | INFO    |   ✗ exact=False cell_acc=0.167 dim=False tokens=6536 15.5s
+2026-04-07T08:32:34 | INFO    | [731/750] 3dc255db | chain-of-thought | run 3
+2026-04-07T08:32:34 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:32:52 | INFO    |   ✗ exact=False cell_acc=0.891 dim=True tokens=4039 18.5s
+2026-04-07T08:32:52 | INFO    | [732/750] 28a6681f | chain-of-thought | run 2
+2026-04-07T08:33:06 | INFO    |   ✗ exact=False cell_acc=0.890 dim=True tokens=3642 13.4s
+2026-04-07T08:33:06 | INFO    | [733/750] d59b0160 | chain-of-thought | run 2
+2026-04-07T08:33:25 | INFO    |   ✗ exact=False cell_acc=0.609 dim=True tokens=6956 19.3s
+2026-04-07T08:33:25 | INFO    | [734/750] bf45cf4b | arc-informed | run 4
+2026-04-07T08:33:26 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:33:29 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:33:54 | INFO    |   ✗ exact=False cell_acc=0.120 dim=False tokens=5622 28.7s
+2026-04-07T08:33:54 | INFO    | [735/750] b10624e5 | baseline | run 5
+2026-04-07T08:33:54 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:34:19 | INFO    |   ✗ exact=False cell_acc=0.794 dim=True tokens=13677 25.0s
+2026-04-07T08:34:19 | INFO    | [736/750] 409aa875 | arc-informed | run 4
+2026-04-07T08:34:19 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:34:43 | INFO    |   ✗ exact=False cell_acc=0.883 dim=True tokens=7909 24.4s
+2026-04-07T08:34:43 | INFO    | [737/750] 5961cc34 | chain-of-thought | run 4
+2026-04-07T08:35:09 | INFO    |   ✗ exact=False cell_acc=0.923 dim=False tokens=16053 26.4s
+2026-04-07T08:35:09 | INFO    | [738/750] e8686506 | arc-informed | run 5
+2026-04-07T08:35:10 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:35:13 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:35:31 | INFO    |   ✗ exact=False cell_acc=0.250 dim=False tokens=3290 21.9s
+2026-04-07T08:35:31 | INFO    | [739/750] edb79dae | arc-informed | run 5
+2026-04-07T08:35:32 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:35:56 | INFO    |   ✗ exact=False cell_acc=0.685 dim=True tokens=10160 24.8s
+2026-04-07T08:35:56 | INFO    | [740/750] da515329 | arc-informed | run 5
+2026-04-07T08:36:22 | INFO    |   ✗ exact=False cell_acc=0.695 dim=True tokens=10552 26.1s
+2026-04-07T08:36:22 | INFO    | [741/750] fc7cae8d | arc-informed | run 2
+2026-04-07T08:36:43 | INFO    |   ✗ exact=False cell_acc=0.267 dim=False tokens=10071 20.4s
+2026-04-07T08:36:43 | INFO    | [742/750] db0c5428 | baseline | run 5
+2026-04-07T08:36:44 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:36:46 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:36:51 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:36:59 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:36:59 | INFO    | [743/750] 3dc255db | arc-informed | run 2
+2026-04-07T08:37:00 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:37:03 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:37:26 | INFO    |   ✗ exact=False cell_acc=0.910 dim=True tokens=5139 27.1s
+2026-04-07T08:37:26 | INFO    | [744/750] 7b0280bc | chain-of-thought | run 4
+2026-04-07T08:37:27 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:37:59 | INFO    |   ✗ exact=False cell_acc=0.830 dim=True tokens=12134 32.8s
+2026-04-07T08:37:59 | INFO    | [745/750] d59b0160 | chain-of-thought | run 5
+2026-04-07T08:38:00 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:38:03 | WARNING | API 403 (attempt 2) — refreshing token
+2026-04-07T08:38:08 | WARNING | API 403 (attempt 3) — refreshing token
+2026-04-07T08:38:16 | ERROR   |   FAILED: API failed after 3 retries: None
+2026-04-07T08:38:16 | INFO    | [746/750] da515329 | baseline | run 5
+2026-04-07T08:38:17 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:38:42 | INFO    |   ✗ exact=False cell_acc=0.679 dim=False tokens=10012 26.2s
+2026-04-07T08:38:42 | INFO    | [747/750] 898e7135 | baseline | run 2
+2026-04-07T08:38:58 | INFO    |   ✗ exact=False cell_acc=0.279 dim=False tokens=8714 15.9s
+2026-04-07T08:38:58 | INFO    | [748/750] abc82100 | chain-of-thought | run 5
+2026-04-07T08:38:59 | WARNING | API 403 (attempt 1) — refreshing token
+2026-04-07T08:39:22 | INFO    |   ✗ exact=False cell_acc=0.833 dim=True tokens=7784 23.5s
+2026-04-07T08:39:22 | INFO    | [749/750] 6ffbe589 | chain-of-thought | run 5
+2026-04-07T08:39:33 | INFO    |   ✗ exact=False cell_acc=0.302 dim=False tokens=7048 11.3s
+2026-04-07T08:39:33 | INFO    | [750/750] 2c181942 | chain-of-thought | run 2
+2026-04-07T08:39:56 | INFO    |   ✗ exact=False cell_acc=0.918 dim=True tokens=12622 22.5s
+2026-04-07T08:39:56 | INFO    | ============================================================
+2026-04-07T08:39:56 | INFO    | Done. Completed=108 Skipped=626 Failed=16 Total=750

@@ -1,0 +1,75 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 20x20 grid with scattered colored blocks (6s forming 2x2 squares at positions (1,1) and (3,3)), single cells of colors 2, 3, and 5 at various positions
+- Output: 20x20 grid where certain regions are filled with rectangular patterns made of different colors (4s, 6s, 1s) forming hollow rectangles
+- The 6s in input seem to disappear, replaced by larger rectangular structures
+- Colors 2, 3, 5 in input seem to trigger different colored rectangular patterns in output
+
+**Example 2:**
+- Input: 10x10 grid with scattered single cells (2s, 3s) and a small rectangular pattern of 1s
+- Output: 10x10 grid with hollow rectangular patterns (4s and 1s)
+- The existing 1s pattern seems to be preserved/extended
+- Single marker cells (2, 3) seem to generate hollow rectangles
+
+**Example 3:**
+- Input: 10x10 grid with a 4x4 hollow rectangle pattern of 4s in upper left, and scattered 2s
+- Output: 10x10 grid where the 4s pattern appears to be replicated at positions marked by 2s
+- The original 4s pattern is cleared from its original position
+
+**Example 4:**
+- Input: 20x20 grid with scattered single cells of various colors (2, 3, 5, 8)
+- Output: 20x20 grid with multiple hollow rectangular patterns of different colors
+- Different input colors seem to generate different output pattern colors
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I can synthesize this transformation rule:
+
+1. **Pattern Detection**: The system identifies existing rectangular patterns in the input (like the 4x4 hollow rectangle in Example 3, or the small 1s pattern in Example 2)
+2. **Marker Identification**: Single colored cells (not part of rectangular patterns) act as "markers" or "anchors"
+3. **Pattern Replication**: When markers of specific colors are found, they trigger the creation of hollow rectangular patterns at those locations
+4. **Pattern Assignment**: Different marker colors generate different pattern types:
+   - Certain colors create 4x4 hollow rectangles
+   - Others create different sized patterns
+   - The pattern color depends on the marker color
+5. **Original Clearing**: Original patterns may be moved/cleared from their initial positions
+
+More specifically:
+- Color 2 markers → 4x4 hollow rectangles with color 4
+- Color 3 markers → 4x4 hollow rectangles with color 1  
+- Color 5 markers → 2x2 filled rectangles with color 6
+- Color 8 markers → 4x4 hollow rectangles with color 7
+- Existing patterns get replicated to marker positions
+
+PHASE 3 — GOAL:
+
+For the test input, I see:
+- Multiple 8s scattered throughout the grid at positions like (1,0), (1,4), (1,8), (1,12), (1,16), etc.
+- A small pattern of 7s forming what appears to be a 2x2 filled square at positions around (5-8, 5-7)
+- Grid is 20x20
+
+Based on my rule:
+- 8 markers should generate 4x4 hollow rectangles with color 7
+- The existing 7s pattern should be replicated to the 8 marker positions
+- Each 8 should be replaced by a 4x4 hollow rectangle made of 7s
+
+PHASE 4 — EXECUTE:
+
+Looking at the 8 positions in the test input:
+Row 1: (1,0), (1,4), (1,8), (1,12), (1,16)
+Row 5: (5,0), (5,16) 
+Row 9: (9,0), (9,8), (9,16)
+Row 13: (13,0), (13,12), (13,16)
+Row 17: (17,0), (17,4), (17,8), (17,12), (17,16)
+
+Each of these should become the top-left corner of a 4x4 hollow rectangle made of 7s.
+
+The existing 7s pattern around (5-8, 4-7) forms a 2x2 filled square which should also be preserved/replicated.
+
+Let me construct the output grid:
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7], [7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7], [7, 0, 0, 7, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7], [7, 0, 0, 7, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7], [7, 7, 7, 7, 7, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7], [7, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 7], [7, 0, 0, 7, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 7, 0, 0, 7], [7, 0, 0, 7, 0, 0, 0, 0, 7, 0, 0, 7, 0, 0, 0, 0, 7, 0, 0, 7], [7, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 7, 0, 0, 0, 0, 7, 7, 7, 7], [7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 7, 7], [7, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 7, 0, 0, 7], [7, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 7, 7, 0, 0, 7], [7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7], [7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7, 7, 0, 0, 7]]

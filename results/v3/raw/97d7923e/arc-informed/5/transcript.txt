@@ -1,0 +1,65 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 10x15 grid with values 0, 2, and 5
+- Key observations: There are vertical columns with patterns. Column 4 has a sequence of 5s with 2s at top and bottom. Column 7 has 5s in the middle section with a 2 at the top and 2s at the bottom.
+- Output: Same dimensions. The main change is in column 7 - the 5s have been replaced with 2s, but the pattern structure remains the same.
+
+**Example 2:**
+- Input: 10x10 grid with values 0, 2, and 3
+- Key observations: Column 2 has 2s at top and bottom with 3s in middle. Column 6 has 2 at top, 3s in middle, 2 at bottom.
+- Output: In column 6, the 3s have been replaced with 2s, maintaining the same positions.
+
+**Example 3:**
+- Input: 10x15 grid with values 0, 1, 3, 5, and 7
+- Key observations: Multiple columns with patterns. Column 2 has 1 at top/bottom with 7s in middle. Column 5 has 1s at top/bottom with 7s in middle. Column 10 has 3 at top/bottom with 5s in middle. Column 13 has 3 at top/bottom with 5s in middle.
+- Output: In column 2, the 7s are replaced with 1s. In column 13, the 5s are replaced with 3s.
+
+PHASE 2 — MODEL:
+
+Analyzing the patterns, I notice that in each example there are vertical columns that have a specific structure:
+- A "marker" value at the top and bottom of a column
+- A different "fill" value in the middle section of that column
+
+The transformation rule appears to be:
+**For each vertical column, if it contains a pattern where there are non-zero values at the top and bottom positions that match each other, and different non-zero values in the middle section, then replace all the middle values with the top/bottom marker value.**
+
+Testing this rule:
+- Example 1: Column 7 has 2 at top (row 3), 5s in middle, 2 at bottom (row 9) → Replace 5s with 2s ✓
+- Example 2: Column 6 has 2 at top (row 3), 3s in middle, 2 at bottom (row 9) → Replace 3s with 2s ✓  
+- Example 3: Column 2 has 1 at positions with 7s between → Replace 7s with 1s ✓; Column 13 has 3 at top/bottom with 5s between → Replace 5s with 3s ✓
+
+PHASE 3 — GOAL:
+
+Applying this rule to the test input (10x20 grid):
+
+I need to identify columns that have the pattern of matching values at top and bottom with different values in between.
+
+Examining each column:
+- Column 1: Has 1s at top, 5s in middle, 2 at bottom - not matching top/bottom
+- Column 3: Has 3s at top, various values, 3 at bottom - but the middle isn't consistently one value
+- Column 8: Has 3 at row 3, 5s from rows 4-8, 3 at row 9 - this matches the pattern!
+- Column 10: Has 3 at row 6, 5 at rows 7-8, 3 at row 9 - this matches the pattern!
+- Column 16: Has 1 at row 1, 5s from rows 2-8, 1 at row 9 - this matches the pattern!
+- Column 18: Has 5s from rows 5-8, 1s at row 9 - need to check full pattern
+
+Let me be more systematic about column 16: it has 1 at row 1, 5s in rows 2-8, 1 at row 9.
+Column 18: has 5s in rows 5-8, 1s at bottom rows.
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid by applying the transformation rule:
+
+Looking more carefully at the test input, I need to identify the exact columns with the top-marker, middle-fill, bottom-marker pattern:
+
+Column 8: 3 (row 3) → 5,5,5,5,5 (rows 4-8) → 3 (row 9)
+Column 16: 1 (row 1) → 5,5,5,5,5,5,5 (rows 2-8) → 1 (row 9)
+
+So the transformation should replace:
+- Column 8: Replace 5s with 3s in rows 4-8
+- Column 16: Replace 5s with 1s in rows 2-8
+
+ANSWER:
+[[1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0], [0, 5, 0, 4, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 0], [0, 5, 0, 5, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 1, 0, 5, 1], [0, 5, 0, 5, 0, 0, 3, 0, 3, 0, 5, 0, 0, 2, 0, 4, 1, 0, 5, 5], [0, 5, 0, 5, 0, 0, 5, 0, 3, 0, 5, 0, 0, 5, 0, 5, 1, 0, 5, 5], [0, 2, 0, 4, 0, 0, 3, 0, 3, 0, 3, 0, 0, 2, 0, 4, 1, 0, 1, 1]]

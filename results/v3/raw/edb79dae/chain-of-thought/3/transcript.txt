@@ -1,0 +1,61 @@
+Let me analyze the examples step by step.
+
+**Example 1 Analysis:**
+
+Looking at the input, I notice:
+- There's a rectangular border of 5's that forms a frame
+- Inside this frame, there are various patterns with numbers 1, 3, and 8
+- Outside the frame, there are some 2x2 blocks with different numbers
+
+The output shows:
+- The same 5-border frame
+- Inside the frame, the patterns are transformed
+- The 3x3 blocks of 3's become 3x3 blocks of 2's  
+- The 3x3 blocks of 1's become 3x3 blocks of 4's
+- Some patterns are rearranged
+
+**Example 2 Analysis:**
+
+Similar structure:
+- There's a 5-border frame
+- Inside are various colored blocks
+- Outside the frame are some 2x2 patterns
+
+The output shows:
+- Same 5-border frame
+- The patterns inside are transformed according to some mapping rule
+
+**Pattern Recognition:**
+
+1. Both examples have a rectangular border made of 5's that defines a "main area"
+2. The area outside this border contains small patterns (typically 2x2 blocks)
+3. The transformation seems to:
+   - Keep the 5-border intact
+   - Transform patterns inside the border based on patterns found outside the border
+   - Map colors/numbers according to some consistent rule
+
+**Key Insight:**
+Looking more carefully, it appears that the small 2x2 blocks outside the 5-border serve as a "legend" or "key" that defines how to transform the patterns inside the border.
+
+In Example 1:
+- Outside patterns include 2x2 blocks of: [1,1,4,4], [3,3,2,2], [1,1,6,6], [6,6,7,7]
+- This suggests transformations: 1→4, 3→2, etc.
+
+**Applying to Test Input:**
+
+First, let me identify the 5-border in the test input. I can see it starts at row 9 and forms a rectangular frame.
+
+The 5-border frame appears to be from rows 9-29, columns 0-20.
+
+Looking at the patterns outside this frame (in the top-left area), I can see several 2x2 blocks that should serve as the transformation key.
+
+Let me extract the area inside the 5-border and apply the transformations based on the patterns I observe outside the border.
+
+After careful analysis of the small blocks outside the frame:
+- [3,3,9,9] suggests 3→9
+- [1,1,6,6] suggests 1→6  
+- [2,2,1,1] suggests 2→1
+- etc.
+
+ANSWER:
+[[5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 2, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 4, 1, 1, 1, 1, 1, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]]

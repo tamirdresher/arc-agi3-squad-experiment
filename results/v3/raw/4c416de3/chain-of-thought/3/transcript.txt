@@ -1,0 +1,62 @@
+Let me analyze the examples step by step to understand the pattern.
+
+## Pattern Analysis
+
+Looking at the examples, I notice:
+
+1. Each input has rectangular regions bounded by 0s that contain colored numbers inside
+2. The output shows these colored numbers "extended" or "projected" outside their original rectangular boundaries
+3. The 0-bounded rectangles themselves remain unchanged
+4. The background (1s, 8s, 2s, 3s) remains the same where not affected
+
+Let me examine how the colored numbers are extended:
+
+**Example 1:**
+- Rectangle 1 (top-left) contains: 3 at (5,5), 4 at (8,5), 2 at (8,8)
+- Rectangle 2 (bottom-right) contains: 4 at (19,15)
+- In the output:
+  - The 3 creates a 2x2 block above-left of its rectangle
+  - The 4 creates a 2x2 block below-left of its rectangle  
+  - The 2 creates a 2x2 block below-right of its rectangle
+  - The 4 from rectangle 2 creates a 2x2 block above-left of its rectangle
+
+**Example 2:**
+- Multiple rectangles with colored numbers inside
+- Each colored number creates a 2x2 block outside its rectangle in a specific direction
+
+**Example 3:**
+- Similar pattern where colored numbers project outward as 2x2 blocks
+
+## The Rule
+
+The transformation rule appears to be:
+1. Identify rectangular regions bounded by 0s
+2. For each colored number (not 0 or background) inside a rectangle:
+   - Create a 2x2 block of that same color outside the rectangle
+   - The direction seems to be towards the nearest edge/corner of the rectangle relative to the number's position
+
+Let me apply this to the test input:
+
+## Test Input Analysis
+
+I can identify these rectangles:
+1. Top-left rectangle (rows 2-7, cols 2-7) containing: 4 at (3,3), 1 at (6,6)
+2. Right rectangle (rows 5-12, cols 13-20) containing: 2 at (5,13), 2 at (6,14), 6 at (6,19), 8 at (11,19)
+3. Bottom-left rectangle (rows 14-18, cols 0-6) containing: 5 at (15,5)
+
+Applying the extension rule:
+
+For rectangle 1:
+- 4 at (3,3): extends above-left → 2x2 block at (1-2, 1-2)
+- 1 at (6,6): extends below-right → 2x2 block at (8-9, 8-9)
+
+For rectangle 2:
+- 2 at (5,13) and (6,14): extend above-left → 2x2 block at (3-4, 11-12)
+- 6 at (6,19): extends above-right → 2x2 block at (4-5, 21-22) - but col 22 is out of bounds, so just (4-5, 21)
+- 8 at (11,19): extends below-right → 2x2 block at (13-14, 21-22) - but row 14+ and col 22 are out of bounds
+
+For rectangle 3:
+- 5 at (15,5): extends above → 2x2 block at (13-14, 4-5)
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 4, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 4, 3, 3, 3, 0, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 6], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 6], [3, 3, 0, 3, 3, 3, 1, 0, 3, 3, 3, 3, 3, 0, 2, 2, 3, 3, 3, 6, 0, 3], [3, 3, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 2, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 8, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3], [3, 3, 3, 3, 5, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8], [5, 5, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8], [3, 3, 3, 3, 3, 5, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

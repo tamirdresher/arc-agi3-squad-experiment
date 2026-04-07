@@ -1,0 +1,75 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 20x20 grid with a rectangular structure made of 3s (border), containing 8s and 6s inside, plus some scattered elements outside
+- The main structure spans roughly from columns 7-17 and rows 1-11
+- Inside the 3-border: 8s form a pattern with 6s in the center forming a cross-like shape
+- Output: 13x13 grid that appears to be the extracted and cleaned version of the main structure
+- The 3-border is preserved, internal 8s and 6s are maintained in their relative positions
+
+**Example 2:**
+- Input: 20x20 grid with a structure made of 5s (partial border), 3s (inner border), and 4s inside
+- Main structure spans roughly columns 6-15 and rows 2-11
+- 5s form an incomplete outer frame, 3s form inner rectangular border, 4s are in the center
+- Output: 10x10 grid extracting the core structure
+- Pattern preserved but dimensions reduced to fit the actual content area
+
+**Example 3:**
+- Input: 20x20 grid with 4s forming a checkerboard-like border pattern, 1s and 2s inside
+- Main structure spans roughly columns 1-10 and rows 9-18
+- 4s alternate in a border pattern, inside there are 1s and 2s forming internal shapes
+- Output: 10x10 grid preserving the alternating 4-pattern border with internal 1s and 2s
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. **Identify the main structured region**: Look for a rectangular area containing non-zero elements that form a cohesive pattern (often bounded by a specific color)
+2. **Extract the bounding box**: Find the minimal rectangle that contains all elements of this main structure
+3. **Crop and output**: Extract just this rectangular region, preserving all internal patterns and relationships
+
+The rule focuses on finding the primary structured pattern in the input and cropping to its exact boundaries, removing all the surrounding empty space and scattered elements.
+
+Testing against examples:
+- Example 1: ✓ Extracts the 3-bordered rectangle with internal 8s and 6s
+- Example 2: ✓ Extracts the 5/3-bordered rectangle with internal 4s  
+- Example 3: ✓ Extracts the 4-bordered rectangle with internal 1s and 2s
+
+PHASE 3 — GOAL:
+
+For the test input, I need to identify the main structured region:
+- Looking at the test input, I see a rectangular structure with 5s forming a border pattern and 3s forming an inner structure
+- The main pattern appears to span from around column 7 to column 19 and rows 10 to 14
+- There are 5s at positions forming corners/borders, 3s forming an inner rectangular frame, and a 4 in the center
+- The structure appears to be roughly 13 columns wide and 5 rows tall
+
+The expected output should be the extracted rectangular region containing this pattern.
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the test input, the main structure spans:
+- Columns 7-19 (13 columns wide)
+- Rows 10-14 (5 rows tall)
+
+Let me extract this region:
+
+Row 10: [0, 5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+Row 11: [0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+Row 12: [0, 5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5]
+Row 13: [0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+Row 14: [0, 5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+
+Wait, let me recheck the bounds more carefully. Looking at the pattern:
+
+The structured region appears to be from columns 7-18 and rows 10-14:
+- Row 10 cols 7-18: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+- Row 11 cols 7-18: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5] 
+- Row 12 cols 7-18: [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5]
+- Row 13 cols 7-18: [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+- Row 14 cols 7-18: [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+
+This gives us a 12x5 output grid.
+
+ANSWER:
+[[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]]

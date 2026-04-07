@@ -1,0 +1,76 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+Example 1:
+- Input: 21x21 grid, mostly filled with 1s (background)
+- Contains rectangular regions bounded by 0s
+- Inside these regions: colors 3, 4, 2, 8 appear
+- There are two main rectangular regions and one smaller one
+- Output: Same grid but with additional colored squares appearing outside the rectangular regions
+- The colors that appear outside seem to mirror/extend the colors found inside the rectangles
+
+Example 2:
+- Input: 23x23 grid, mostly filled with 8s (background)
+- Contains rectangular regions bounded by 0s
+- Inside regions: colors 1, 4, 6, 3, 2, 7 appear
+- Three main rectangular regions
+- Output: Same structure but colors from inside rectangles appear as 2x2 blocks outside the rectangles
+- The 2x2 blocks seem positioned near the corners of the rectangles
+
+Example 3:
+- Input: 21x21 grid, mostly filled with 2s (background)
+- Contains rectangular regions bounded by 0s
+- Inside regions: colors 1, 3, 4, 8, 9 appear
+- Three rectangular regions
+- Output: Colors from inside rectangles appear as extensions/blocks outside the rectangles
+- Pattern similar to previous examples
+
+PHASE 2 — MODEL:
+
+Based on all examples, I can identify the transformation rule:
+
+**TRANSFORMATION RULE:** 
+1. Identify all rectangular regions that are bounded by 0s
+2. For each such rectangle, find all non-background colors (colors that aren't the dominant background color) that appear inside it
+3. For each of these colors, create a 2x2 block of that color positioned at the corner of the rectangle that is closest to where that color appears inside the rectangle
+4. The 2x2 block extends outward from the rectangle's corner into the background area
+
+Testing this rule:
+- Example 1: Colors 3, 4, 2, 8 inside rectangles → 2x2 blocks appear at appropriate corners ✓
+- Example 2: Colors 1, 4, 6, 3, 2, 7 inside rectangles → 2x2 blocks at corners ✓  
+- Example 3: Colors 1, 3, 4, 8, 9 inside rectangles → 2x2 blocks at corners ✓
+
+PHASE 3 — GOAL:
+
+Applying to test input:
+- Background color: 3
+- Identify rectangles bounded by 0s:
+  1. Rectangle at rows 2-7, cols 2-7 (contains colors 4, 1)
+  2. Rectangle at rows 5-12, cols 13-20 (contains colors 2, 6, 8)
+  3. Rectangle at rows 14-18, cols 0-6 (contains color 5)
+
+For each rectangle, I need to:
+- Find the non-background colors inside
+- Place 2x2 blocks of those colors at the appropriate corners extending outward
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid:
+
+Rectangle 1 (rows 2-7, cols 2-7): Contains colors 4 (at position 3,3) and 1 (at position 6,6)
+- Color 4: Place 2x2 block at top-left corner extending outward (rows 1-2, cols 1-2)
+- Color 1: Place 2x2 block at bottom-right corner extending outward (rows 7-8, cols 7-8)
+
+Rectangle 2 (rows 5-12, cols 13-20): Contains colors 2 (multiple positions), 6 (at 6,19), 8 (at 11,19)
+- Color 2: Place 2x2 block at top-left corner extending outward (rows 4-5, cols 12-13)
+- Color 6: Place 2x2 block at top-right corner extending outward (rows 4-5, cols 20-21)
+- Color 8: Place 2x2 block at bottom-right corner extending outward (rows 12-13, cols 20-21)
+
+Rectangle 3 (rows 14-18, cols 0-6): Contains color 5 (at 15,5)
+- Color 5: Place 2x2 block at appropriate corner extending outward
+
+Constructing the full grid with these modifications...
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 4, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 4, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 6, 6], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 0, 6, 6], [3, 3, 0, 3, 3, 3, 1, 0, 3, 3, 3, 3, 3, 0, 2, 2, 3, 3, 3, 6, 0, 3], [3, 3, 0, 0, 0, 0, 0, 1, 1, 3, 3, 3, 3, 0, 2, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 8, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 8, 8], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8], [5, 5, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [5, 5, 3, 3, 3, 5, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

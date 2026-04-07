@@ -1,0 +1,55 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example carefully:
+
+**Example 1:**
+- Input: 25x24 grid with top section having 5-bordered colored rectangles (1,6,4,2), middle section with 3s as background and colored rectangular blocks (1s, 4s, 2s, small 8s)
+- Output: 19x24 grid, removes top section, transforms the middle section with 8s creating cross-like patterns extending from the original 8 position
+- The colored blocks (1s, 4s, 2s) remain in same positions, 8s extend in lines both horizontally and vertically
+
+**Example 2:**
+- Input: 25x24 grid, similar structure with top 5-bordered section (2,4,6,3), bottom section with 1s as background and colored blocks (2s, 3s, 6s, 4s, small 8s)
+- Output: 19x24 grid, removes top section, 8s extend in cross patterns from original position, colored blocks remain positioned
+- Background changes from 1s to maintain structure
+
+**Example 3:**
+- Input: 24x24 grid, top 5-bordered section (4,6,3,2), bottom section with 7s as background, colored blocks (2s, 6s, 3s, 4s, small 8s)
+- Output: 19x24 grid, similar transformation with 8s extending in cross patterns
+- Background is 7s with colored rectangular regions preserved
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Remove the top section (rows with 5-borders and the content within)
+2. Keep the main grid section below
+3. Locate small 8-colored regions (typically 2x2 or 2x3 blocks)
+4. From each 8-region, extend 8s both horizontally and vertically to create cross-like patterns that span significant portions of the grid
+5. The extensions stop at boundaries of other colored rectangular regions or grid edges
+6. All other colored rectangular blocks remain in their original positions
+7. Background color is preserved where not overwritten by the 8-extensions
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Input is 30x24, has top 5-bordered section with colors (1,3,2,4)
+- Main section has background of 2s (top rows) and 9s (most of grid)
+- Colored blocks: 1s (left column), 3s (right column), 4s (bottom center), and 8s (small 3x3 block around row 13-15, col 8-10)
+- Expected output should remove top 6 rows, leaving ~24 rows
+- 8s should extend horizontally and vertically from their position (around row 7-9, col 8-10 in output coordinates)
+
+PHASE 4 — EXECUTE:
+
+Removing the top 6 rows (5-border section), the grid becomes 24x24.
+The 8s are located at approximately rows 7-9, columns 8-10 (3x3 block).
+They should extend horizontally across the full width and vertically across significant height.
+
+Let me construct the output:
+
+The 8s should extend:
+- Horizontally: across the entire width (columns 0-23) for the rows containing 8s
+- Vertically: from top to bottom (rows 0-23) for the columns containing 8s
+- Other colored regions (1s block at left, 3s block at right, 4s block at bottom center) remain unchanged
+- Background remains 9s where not overwritten
+
+ANSWER:
+[[2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

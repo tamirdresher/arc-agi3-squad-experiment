@@ -1,0 +1,91 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16x16 grid mostly filled with 7s, with some 9s scattered in specific locations
+- 9s appear in: (3,12), (4,12), (4,13), (14,1), (14,7), (14,14), (15,0), (15,2), (15,6), (15,8), (15,13), (15,15)
+- Output: Same as input except one change - at position (9,7) a 7 becomes a 1
+- All other values remain unchanged
+
+**Example 2:**
+- Input: 16x16 grid mostly filled with 7s, with some 0s scattered in bottom portion
+- 0s appear in rows 10-15 at various positions
+- Output: Same as input but with additional 9s placed in upper portion at positions: (5,1), (6,8), (7,4), (8,11), (9,1), (9,7)
+- All original 0s and 7s remain unchanged
+
+**Example 3:**
+- Input: 16x16 grid mostly filled with 7s, with some 2s forming patterns
+- 2s appear in structured patterns in rows 6-7 and 14-15, plus a small cluster at (11,13-14) and (12,13)
+- Output: Same as input but with 9s added at positions: (1,0), (1,3), (1,6), (1,9), (6,8-9), (7,8), (9,0), (9,3), (9,6), (9,9)
+- Some 2s at positions (6,8-9) and (7,8) are replaced by 9s
+
+## PHASE 2 — MODEL
+
+After analyzing the patterns, I can see the transformation rule:
+
+**Rule:** 
+1. Find all non-7 values (special markers) in the input grid
+2. For each special marker, calculate its "reflection point" by finding the center of the grid vertically and horizontally
+3. For vertical reflection: if a marker is at row R, place a 9 at row (15-R) in the same column
+4. For horizontal reflection: if a marker is at column C, place a 9 at column (15-C) in the same row
+5. If a reflection lands on an existing non-7 value, replace it with 9
+6. If a reflection lands on a 7, replace it with 9
+7. Keep all original non-7 values in their positions
+
+Testing this rule:
+- Example 1: The 9s in the bottom rows should reflect to create 9s in upper rows, and vice versa. The single 1 appears where reflections intersect.
+- Example 2: The 0s in bottom rows reflect to create 9s in upper rows.
+- Example 3: The 2s reflect to create 9s, with some 2s being replaced by 9s when reflections land on them.
+
+## PHASE 3 — GOAL
+
+For the test input, I need to:
+1. Identify all 6s (the non-7 values)
+2. Calculate their vertical reflections across the center line (row 7.5)
+3. Place 9s at the reflected positions
+4. If reflections land on existing 6s, replace them with 9s
+
+The 6s in the test input are at:
+- Row 2: cols 2, 8, 10
+- Row 3: cols 1, 9, 14
+- Row 4: col 13
+- Row 5: cols 9, 14
+- Row 6: cols 8, 10
+- Row 7: col 2
+- Row 8: cols 1, 3
+- Row 13: col 4
+- Row 14: cols 3, 5, 8, 9, 14
+- Row 15: cols 9, 13, 15
+
+## PHASE 4 — EXECUTE
+
+I'll create the output by reflecting each 6 vertically:
+
+For each 6 at position (r,c), place a 9 at position (15-r,c):
+- (2,2) → (13,2): place 9
+- (2,8) → (13,8): place 9
+- (2,10) → (13,10): place 9
+- (3,1) → (12,1): place 9
+- (3,9) → (12,9): place 9
+- (3,14) → (12,14): place 9
+- (4,13) → (11,13): place 9
+- (5,9) → (10,9): place 9
+- (5,14) → (10,14): place 9
+- (6,8) → (9,8): place 9
+- (6,10) → (9,10): place 9
+- (7,2) → (8,2): place 9
+- (8,1) → (7,1): place 9
+- (8,3) → (7,3): place 9
+- (13,4) → (2,4): place 9
+- (14,3) → (1,3): place 9
+- (14,5) → (1,5): place 9
+- (14,8) → (1,8): place 9
+- (14,9) → (1,9): place 9
+- (14,14) → (1,14): place 9
+- (15,9) → (0,9): place 9
+- (15,13) → (0,13): place 9
+- (15,15) → (0,15): place 9
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 9, 7, 7, 7, 9, 7, 9], [7, 7, 7, 9, 7, 9, 7, 7, 9, 9, 7, 7, 7, 7, 9, 7], [7, 7, 6, 7, 9, 7, 7, 7, 6, 7, 6, 7, 7, 7, 7, 7], [7, 6, 6, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 6, 7, 7, 7, 7, 7], [7, 9, 6, 9, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 6, 9, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 9, 7, 9, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 9, 7, 7, 7, 7, 9, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 9, 7, 7], [7, 9, 7, 7, 7, 7, 7, 7, 7, 9, 7, 7, 7, 7, 9, 7], [7, 7, 9, 7, 6, 7, 7, 7, 9, 7, 9, 7, 7, 7, 7, 7], [7, 7, 7, 6, 7, 6, 7, 7, 6, 6, 7, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 6]]

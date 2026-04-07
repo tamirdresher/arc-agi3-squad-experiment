@@ -1,0 +1,79 @@
+## PHASE 1 — EXPLORE
+
+**Example 1 Analysis:**
+- Grid dimensions: 18x18
+- Background color: 4 (dominant)
+- Input contains several distinct pattern groups:
+  1. Top-right area: Pattern with 1s, 2, and 8s around position (1-4, 12-15)
+  2. Left area: Pattern with 1s, 2, and 3s around position (5-8, 3-5)  
+  3. Center-bottom area: Larger pattern with 1s, 2s, and 3s around position (9-16, 8-13)
+
+**Changes from input to output:**
+- In top-right pattern: The 8s (originally at rows 3-4, cols 12-14) are replaced by 2 and 3s
+- In left pattern: The 3s (originally at row 8, cols 3-5) are replaced by 8s
+- In center-bottom pattern: The 3s (originally at rows 15-16, cols 8-13) are replaced by 8s
+- All 1s and 2s remain in their original positions
+- Background 4s remain unchanged
+
+**Example 2 Analysis:**
+- Grid dimensions: 18x18  
+- Background color: 3 (dominant)
+- Input contains pattern groups:
+  1. Top-left area: Pattern with 1s, 2, and 4 around position (1-4, 1-3)
+  2. Bottom-left area: Pattern with 1s, 2, and 6 around position (10-13, 1-4)
+  3. Center area: Pattern with 1s, 2s, and 4s around position (6-13, 8-13)
+
+**Changes from input to output:**
+- In top-left: The 4 (originally at row 4, col 2) moves to row 0, col 2; gets replaced by 3 (background) in original position
+- In bottom-left: The 6 (originally at row 10, col 3) disappears, replaced by 3 (background)
+- In center area: The 4s (originally at rows 12-13, cols 10-11) are replaced by 3s (background), and new 6s appear at rows 4-5, cols 10-11
+- All 1s and 2s remain in their original positions
+
+## PHASE 2 — MODEL
+
+**Transformation Rule:**
+The transformation identifies distinct pattern groups (non-background regions containing 1s, 2s, and one other color). Within each group, there's a "special color" (neither 1 nor 2 nor background). The rule swaps the positions of special colors between different pattern groups while preserving the structure and positions of 1s and 2s.
+
+More specifically:
+1. Identify all distinct pattern regions (connected components of non-background cells)
+2. For each region, identify the "special color" (the color that's not 1, 2, or background)
+3. Swap or redistribute these special colors between regions according to some spatial relationship
+4. Keep all 1s, 2s, and background cells unchanged
+
+Testing against examples:
+- Example 1: Special colors 8 and 3 swap positions between regions ✓
+- Example 2: Special colors 4 and 6 get redistributed between regions ✓
+
+## PHASE 3 — GOAL
+
+**Test Input Analysis:**
+- Grid dimensions: 28x28
+- Background color: 8
+- Pattern groups identified:
+  1. Top-left: Small pattern with 1s, 2s, and 3s around (1-4, 1-4)
+  2. Center-top: Small pattern with 1s, 6s, and 4s around (6-9, 9-12)  
+  3. Center-large: Large pattern with 1s, 2s, and 3s around (11-22, 5-13)
+  4. Right: Small pattern with 1s, 2s, and 3s around (16-19, 19-22)
+
+**Special colors identified:**
+- Top-left region: 3
+- Center-top region: 6 and 4  
+- Center-large region: 3
+- Right region: 3
+
+**Expected transformation:**
+The special colors should be redistributed between regions. Based on the pattern from examples, the special colors will swap or move between regions while maintaining the structural positions of 1s and 2s.
+
+## PHASE 4 — EXECUTE
+
+Looking more carefully at the pattern, I need to identify where special colors should move. Based on the examples, special colors tend to move between regions in a systematic way.
+
+After careful analysis:
+- The 3s from smaller regions should move to where other special colors (like 4, 6) were located
+- The 4s and 6s should move to replace 3s in other regions
+- The large central region with 3s should get different special colors
+
+Constructing the output grid:
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 6, 6, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 3, 3, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 1, 4, 4, 1, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

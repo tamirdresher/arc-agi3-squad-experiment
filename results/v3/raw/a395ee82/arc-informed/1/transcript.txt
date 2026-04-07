@@ -1,0 +1,65 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 22x22 grid filled mostly with 4s (background)
+- Key objects: A small pattern of 2s forming a cross/plus shape at rows 3-5, cols 12-14
+- Additional scattered elements: Several 8s at various positions (row 6 col 4, row 8 col 2, row 8 col 6, row 10 col 4, row 12 col 4)
+- Output: The 2-pattern is replicated in multiple locations, and some 8s are replaced with the 2-pattern while others become part of larger structures
+
+**Example 2:**
+- Input: 22x22 grid filled mostly with 3s (background)
+- Key objects: A pattern of 1s at rows 6-9, cols 5-7 forming an irregular shape
+- Additional elements: Several 2s scattered (row 11 cols 13,15,17 and row 13 col 15, row 15 col 15)
+- Output: The 1-pattern is replicated at multiple locations, and the isolated 2s are replaced by the 1-pattern
+
+**Example 3:**
+- Input: 22x22 grid filled mostly with 7s (background)
+- Key objects: A pattern of 4s at rows 5-7, cols 3-5 forming a triangular/stepped shape
+- Additional elements: Several 6s scattered (row 8 col 13, row 10 cols 11,15, row 12 cols 11,15)
+- Output: The 4-pattern is replicated at various locations, and the 6s are replaced with the 4-pattern
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify the main pattern (non-background colored shape) in the input
+2. Identify scattered individual colored cells (different from both background and main pattern)
+3. Replace each scattered individual cell with a copy of the main pattern, centered on that cell's position
+4. The main pattern itself remains in its original location
+5. The pattern replication creates a tiling effect where the pattern is copied to locations marked by the scattered cells
+
+Testing this rule:
+- Example 1: 2-pattern replicated at 8-positions ✓
+- Example 2: 1-pattern replicated at 2-positions ✓  
+- Example 3: 4-pattern replicated at 6-positions ✓
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Background: 8s
+- Main pattern: 6s at rows 5-8, cols 8-10 (forming an irregular shape)
+- Scattered elements: Several 4s at positions (12,8), (14,2), (14,4), (14,8), (16,2)
+
+The transformation should:
+1. Keep the original 6-pattern at rows 5-8, cols 8-10
+2. Replace each 4 with a copy of the 6-pattern centered on that position
+3. Output dimensions: 22x22 (same as input)
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid by:
+1. Starting with the background of 8s
+2. Placing the original 6-pattern
+3. Replicating the 6-pattern at each 4-position
+
+The 6-pattern shape (relative to center):
+- (-1,-1): 6, (-1,0): 6
+- (0,-1): 6, (0,0): 6, (0,1): 6
+- (1,0): 6
+- (2,-1): 6, (2,0): 6, (2,1): 6
+
+Applying this pattern centered at each 4-position and keeping the original pattern:
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 6, 6, 6, 8, 8, 6, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 6, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

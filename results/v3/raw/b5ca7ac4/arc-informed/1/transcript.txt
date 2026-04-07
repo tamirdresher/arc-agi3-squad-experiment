@@ -1,0 +1,82 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 22x22 grid with background of 0s
+- Contains several rectangular objects with borders (color 8 or 2) and different colored interiors (5, 1, 3, 9, 6, 4)
+- Objects appear scattered throughout the grid
+- Output: Same dimensions, same objects, but their positions have changed
+- The objects appear to have been moved to align along the left and right edges of the grid
+
+**Example 2:**
+- Input: 22x22 grid with background of 4s
+- Contains rectangular objects with borders (color 8 or 2) and different colored interiors (9, 5, 3, 6, 1)
+- Objects scattered throughout the grid
+- Output: Same dimensions, objects moved to align along the left and right edges
+- Background remains 4s
+
+**Example 3:**
+- Input: 22x22 grid with background of 1s
+- Contains rectangular objects with borders (color 8 or 2) and different colored interiors (2, 3, 6, 5, 4)
+- Objects scattered throughout the grid
+- Output: Same dimensions, objects moved to align along the left and right edges
+- Background remains 1s
+
+**Common patterns:**
+1. Grid dimensions stay the same
+2. Background color is preserved
+3. Rectangular objects with borders are moved but maintain their shape and internal structure
+4. Objects seem to be repositioned to the leftmost and rightmost available positions
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+**"Move all rectangular bordered objects to align them against the left and right edges of the grid, preserving their original shapes and maintaining vertical positions approximately, while keeping the background unchanged."**
+
+More specifically:
+1. Identify all rectangular objects (bordered regions with different interior colors)
+2. Extract these objects while preserving their exact shape and content
+3. Position them flush against the left edge or right edge of the grid
+4. Maintain roughly their original vertical positions when possible
+5. Fill remaining space with the original background color
+
+Testing this rule:
+- Example 1: Objects moved to left/right edges ✓
+- Example 2: Objects moved to left/right edges ✓  
+- Example 3: Objects moved to left/right edges ✓
+
+PHASE 3 — GOAL:
+
+For the test input:
+- 22x22 grid with background of 9s
+- I can identify several rectangular objects with borders:
+  1. Top-left: 2-bordered rectangle with 4s inside
+  2. Middle area: 2-bordered rectangle with 3s inside
+  3. Top-right: 8-bordered rectangle with 4s inside
+  4. Middle-left: 8-bordered rectangle with 1s inside
+  5. Middle-center: 8-bordered rectangle with 7s inside
+  6. Bottom-center: 2-bordered rectangle with 6s inside
+  7. Bottom-left: 2-bordered rectangle with 3s inside
+  8. Bottom-right: 8-bordered rectangle with 3s inside
+
+These should be repositioned to the left and right edges while maintaining their shapes.
+
+PHASE 4 — EXECUTE:
+
+I'll construct the output by moving the identified objects to the edges:
+
+Left edge objects (from top to bottom):
+- 2-bordered rectangle with 4s (rows 0-4)
+- 8-bordered rectangle with 1s (rows 7-11)
+- 2-bordered rectangle with 3s (rows 15-19)
+
+Right edge objects (from top to bottom):
+- 2-bordered rectangle with 3s (rows 2-6)
+- 8-bordered rectangle with 4s (rows 3-7)
+- 8-bordered rectangle with 7s (rows 8-12)
+- 2-bordered rectangle with 6s (rows 13-17)
+- 8-bordered rectangle with 3s (rows 16-20)
+
+ANSWER:
+[[2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8], [8, 1, 1, 1, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 4, 4, 4, 8], [8, 1, 1, 1, 8, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 9, 9, 8, 4, 4, 4, 8], [8, 1, 1, 1, 8, 9, 9, 9, 9, 9, 8, 7, 7, 7, 8, 9, 9, 8, 4, 4, 4, 8], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 8, 7, 7, 7, 8, 9, 9, 8, 8, 8, 8, 8], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 9, 9, 2, 2, 2, 2, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2], [2, 3, 3, 3, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2], [2, 3, 3, 3, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [2, 3, 3, 3, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 3, 3, 3, 8], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 3, 3, 3, 8], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

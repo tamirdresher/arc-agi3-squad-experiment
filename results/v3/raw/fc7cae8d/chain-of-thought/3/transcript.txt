@@ -1,0 +1,54 @@
+Let me analyze the examples step by step to understand the pattern.
+
+**Example 1 Analysis:**
+- Input: 22x22 grid
+- Output: 15x11 grid
+- I notice there's a rectangular region filled with mostly 1s in the input (around rows 4-18, cols 4-15)
+- The output seems to extract and transform this rectangular region
+- The output preserves some of the internal structure with different numbers (1, 2, 3, 8, 0)
+
+**Example 2 Analysis:**
+- Input: 22x22 grid
+- Output: 10x10 grid
+- There's a rectangular region filled with mostly 2s in the input (around rows 6-15, cols 3-13)
+- The output extracts this region and transforms it
+- Numbers like 2, 4, 8 are preserved in specific patterns
+
+**Example 3 Analysis:**
+- Input: 22x22 grid  
+- Output: 5x5 grid
+- There's a smaller rectangular region in the input (around rows 4-9, cols 4-8)
+- The output extracts this region with numbers like 8, 9, 3, 6, 0
+
+**Pattern Recognition:**
+1. Each input contains a rectangular region that stands out from the background
+2. This region is bounded by a specific color/number that forms a border
+3. The output extracts this rectangular region and removes the border
+4. The internal structure is preserved but may be rotated or flipped
+
+**Looking for the rectangular region in the test input:**
+Scanning the test input, I can see a rectangular region from approximately:
+- Rows 4-15 (12 rows)
+- Cols 4-23 (20 columns)
+- This region is bounded by 2s and 3s and contains mostly 4s with other numbers like 6, 7, 8, 9
+
+The rectangular region appears to be:
+```
+4 7 0 0 0 0 0 4 4 6 4 4 4 4 4 4 0 0 0 4 0 0 0
+4 7 4 0 0 0 4 4 4 6 4 6 6 6 6 6 4 7 4 4 0 0 0
+4 7 4 4 4 4 4 4 4 6 4 6 4 4 4 6 4 7 4 0 0 0 0
+4 7 4 4 4 4 4 4 4 6 4 4 4 4 4 6 4 7 4 0 0 0 0
+4 7 4 6 4 6 6 6 6 6 4 4 4 4 4 6 4 7 4 4 0 0 0
+4 7 4 6 6 4 4 4 4 4 4 4 4 4 6 6 4 7 4 4 0 0 0
+4 7 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 7 4 0 0 0 0
+4 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 4 4 0 0 0
+4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 0 0 0
+4 8 8 9 4 9 4 9 4 9 4 9 4 9 4 9 4 9 4 4 0 0 0
+4 8 8 9 4 9 4 9 4 9 4 9 4 9 4 9 4 9 4 4 0 0 0
+4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 0 0 0
+```
+
+Looking at the core pattern without the border columns (removing first and some last columns), and focusing on the meaningful part:
+
+ANSWER:
+[[4, 7, 0, 0, 0, 0, 0, 4, 4, 6, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4, 0], [4, 7, 4, 0, 0, 0, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4, 0], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0, 0], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0, 0], [4, 7, 4, 6, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4, 0], [4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4, 0], [4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0, 0], [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4, 0], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4, 0], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4, 0], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0]]

@@ -1,0 +1,75 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 30x30 grid with background color 7
+- Contains several colored cross-shaped patterns: green (9), black (0), cyan (1), blue (4)
+- Bottom row has horizontal stripes: purple (2) and yellow (3)
+- Output: Same structure but green (9) crosses are replaced with magenta (5)
+- All other elements remain unchanged
+
+**Example 2:**
+- Input: 30x30 grid with background color 1
+- Contains colored cross patterns: black (0), gray (8), blue (4), pink (6)
+- Bottom row has horizontal stripes: yellow (3) and red (2)
+- Output: Same structure but pink (6) crosses are replaced with magenta (5)
+- All other elements remain unchanged
+
+**Example 3:**
+- Input: 30x30 grid with background color 6
+- Contains colored cross patterns: red (2), yellow (3), brown (7), black (0)
+- Bottom row has horizontal stripes: yellow (3) and red (2)
+- Output: Same structure but yellow (3) crosses are replaced with magenta (5)
+- All other elements remain unchanged
+
+**Common observations:**
+- All grids are 30x30
+- Each has cross-shaped patterns (3x3 with extended middle row/column making it 5 cells wide)
+- Bottom row contains horizontal stripe patterns
+- One specific cross color gets replaced with magenta (5) in the output
+
+## PHASE 2 — MODEL
+
+Looking at the pattern more carefully:
+
+In each example, there's a horizontal stripe pattern at the bottom row. The transformation rule appears to be:
+- Identify which cross pattern color matches a color that appears in the bottom row stripes
+- Replace ALL instances of that cross pattern with magenta (5)
+- Keep everything else unchanged
+
+Testing this rule:
+- Example 1: Bottom has purple (2) and yellow (3). Yellow (3) doesn't appear as crosses, but there are no yellow crosses. Green (9) gets replaced... Wait, let me reconsider.
+
+Actually, looking more carefully at the bottom rows and the cross patterns:
+- The bottom row seems to contain colors that correspond to some of the cross colors
+- The transformation replaces one specific cross color with magenta (5)
+
+Let me look at which cross color gets replaced:
+- Example 1: Green (9) → Magenta (5)
+- Example 2: Pink (6) → Magenta (5) 
+- Example 3: Yellow (3) → Magenta (5)
+
+I need to find the pattern for which color gets selected. Looking at the bottom rows again and cross positions...
+
+Actually, I think the rule is: Replace the cross pattern that appears in a specific position or has a specific relationship with the bottom stripe colors.
+
+## PHASE 3 — GOAL
+
+For the test input:
+- Background color: 4
+- Cross patterns present: cyan (1), purple (9), pink (6), gray (8)
+- Bottom row contains: red (2) and yellow (3)
+
+Based on the pattern from examples, I need to determine which cross color should be replaced with magenta (5).
+
+Looking at the spatial relationships and the bottom row pattern, it seems like there might be a correspondence between cross positions and bottom stripe positions, or the rule might be based on a specific cross color that relates to the bottom stripes.
+
+## PHASE 4 — EXECUTE
+
+After careful analysis, I believe the rule is to replace a specific cross color with magenta (5). Based on the examples, it appears to be the cross color that has some relationship to the bottom stripe pattern.
+
+In the test case, looking at the cross colors (1, 9, 6, 8) and bottom stripes (2, 3), I'll apply the pattern I observed. Based on the position and the previous examples' logic, I believe the pink (6) crosses should be replaced with magenta (5).
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 9, 9, 9, 4, 4, 4, 5, 5, 5, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4], [4, 4, 4, 1, 1, 1, 1, 1, 4, 9, 9, 9, 9, 9, 4, 5, 5, 5, 5, 5, 4, 8, 8, 8, 8, 8, 4, 4, 4, 4], [4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 9, 9, 9, 4, 4, 4, 5, 5, 5, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 4, 4, 4, 4]]

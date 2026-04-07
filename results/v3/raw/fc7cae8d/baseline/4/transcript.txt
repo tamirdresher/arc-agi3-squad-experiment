@@ -1,0 +1,50 @@
+Looking at this pattern recognition puzzle, I need to identify what transformation is applied to extract the output grid from the input grid.
+
+Let me analyze the examples:
+
+Example 1:
+- Input is 22x22, output is 15x11
+- There's a rectangular region filled with 1s, 2s, 3s, and 8s in the input
+- The output appears to be this rectangular region extracted and possibly transformed
+
+Example 2:
+- Input is 22x22, output is 10x10
+- There's a rectangular region filled with 2s, 4s, and 8s
+- The output extracts this region
+
+Example 3:
+- Input is 22x22, output is 5x5
+- There's a smaller rectangular region with 8s, 9s, 3s, and 6s
+- The output extracts this region
+
+The pattern seems to be:
+1. Find a rectangular region in the input that contains non-zero, non-background values
+2. Extract that region as the output
+3. The background appears to be mostly 0s with some border patterns
+
+For the test input, I need to identify the rectangular region containing the meaningful pattern.
+
+Looking at the test input, I can see there's a rectangular region from approximately rows 4-15 and columns 4-23 that contains values 4, 6, 7, 8, and 9, while the rest is mostly 0s with some border patterns (2s, 3s, 5s).
+
+The rectangular region appears to be:
+- Rows 4-15 (12 rows)
+- Columns 4-23 (20 columns)
+
+Let me extract this region:
+
+```
+4, 7, 0, 0, 0, 0, 0, 4, 4, 6, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4
+4, 7, 4, 0, 0, 0, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4
+4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0
+4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0
+4, 7, 4, 6, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4
+4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4
+4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0
+4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4
+4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4
+4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4
+4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+```
+
+ANSWER: [[4, 7, 0, 0, 0, 0, 0, 4, 4, 6, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4], [4, 7, 4, 0, 0, 0, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0], [4, 7, 4, 6, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4], [4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4], [4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0], [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

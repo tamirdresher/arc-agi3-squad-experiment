@@ -1,0 +1,34 @@
+Looking at the examples, I need to understand the pattern of transformation from input to output.
+
+Let me analyze Example 1:
+- Input is 14x14, output is 26x26 (roughly doubled in size)
+- The input seems to have different colored regions/bands
+- The output creates a nested structure where each distinct region from the input becomes a border around inner content
+
+Let me analyze Example 2:
+- Input is 13x12, output is 24x24 
+- Similar nested border pattern
+
+The pattern appears to be:
+1. The output is roughly double the input size
+2. Each distinct horizontal band/region in the input becomes a rectangular border in the output
+3. The borders are nested, with outer borders corresponding to earlier regions in the input
+4. The borders maintain their original colors
+5. Inner regions contain the subsequent patterns
+
+For the test input (14x11):
+- Rows 0-1: color 3
+- Rows 2-4: color 8  
+- Row 5: color 2
+- Rows 6-7: color 8
+- Row 8: color 3
+- Rows 9-10: color 7
+- Row 11: color 5
+- Rows 12-13: color 8
+
+Following the pattern, I need to create nested borders in this order, with the output being approximately 22x22.
+
+The outermost border should be color 3 (from rows 0-1), then color 8, then color 2, etc., working inward with the final center being color 8.
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 3, 3, 3, 3, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 7, 7, 7, 7, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 7, 7, 7, 7, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 7, 5, 5, 7, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 7, 8, 8, 7, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 7, 8, 8, 7, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 7, 7, 7, 7, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 7, 7, 7, 7, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 3, 3, 3, 3, 3, 3, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 3, 3], [3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

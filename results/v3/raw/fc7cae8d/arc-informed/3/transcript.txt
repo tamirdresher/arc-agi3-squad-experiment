@@ -1,0 +1,74 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 22×22 grid with various colored regions
+- Key objects: A rectangular region filled mostly with 1s (rows 4-18, cols 4-15), with some 2s, 3s, and 8s inside it
+- The rectangular region has borders marked by 4s on the right and 8s vertically through the middle
+- Output: 11×15 grid that appears to be the extracted rectangular region, but rotated/transformed
+- The 8s form a vertical line in the input but horizontal line in the output
+
+**Example 2:**
+- Input: 22×22 grid
+- Key object: A rectangular region (rows 6-15, cols 4-13) filled mostly with 2s, containing some 4s and 8s
+- The region is bordered by 3s on the left
+- Output: 10×10 grid showing the extracted region with different orientation
+- The 8s and 4s maintain their relative positions but the overall orientation changes
+
+**Example 3:**
+- Input: 22×22 grid
+- Key object: A smaller rectangular region (rows 4-9, cols 4-8) with 8s, containing 9s, 6s, and other colors
+- Output: 5×5 grid showing the extracted region
+- The region appears to be rotated 180 degrees
+
+## PHASE 2 — MODEL
+
+The transformation rule appears to be:
+1. **Identify the main rectangular region**: Find a rectangular area that contains non-zero, non-background colors (not 0, 5, 1, 2, 3 border markers)
+2. **Extract the region**: Take the content within the identified rectangular boundaries
+3. **Apply 180-degree rotation**: Rotate the extracted region 180 degrees (flip both horizontally and vertically)
+4. **Output the rotated region**: The output dimensions match the extracted region size
+
+Testing this rule:
+- Example 1: The rectangular region with 1s, 2s, 3s, 8s gets extracted and rotated 180°
+- Example 2: The rectangular region with 2s, 4s, 8s gets extracted and rotated 180°  
+- Example 3: The rectangular region with 8s, 9s, 6s, 3 gets extracted and rotated 180°
+
+The rule consistently explains all examples.
+
+## PHASE 3 — GOAL
+
+For the test input:
+- I need to identify the main rectangular region containing the pattern
+- Looking at the test input, there's a rectangular region from approximately rows 4-15, cols 4-23
+- This region contains 4s as the main fill, with 6s, 7s, 8s, and 9s as special elements
+- The region appears to be bounded and contains the main pattern
+
+The expected output should be this region extracted and rotated 180 degrees.
+
+## PHASE 4 — EXECUTE
+
+Looking at the test input more carefully:
+- The main rectangular region is from rows 4-15, cols 4-23 (12 rows × 20 cols)
+- Extracting this region and rotating it 180 degrees:
+
+Original region (rows 4-15, cols 4-23):
+```
+Row 4: [4,7,0,0,0,0,0,4,4,6,4,4,4,4,4,4,0,0,0,4,0]
+Row 5: [4,7,4,0,0,0,4,4,4,6,4,6,6,6,6,6,4,7,4,4,0]
+Row 6: [4,7,4,4,4,4,4,4,4,6,4,6,4,4,4,6,4,7,4,0,0]
+Row 7: [4,7,4,4,4,4,4,4,4,6,4,4,4,4,4,6,4,7,4,0,0]
+Row 8: [4,7,4,6,4,6,6,6,6,6,4,4,4,4,4,6,4,7,4,4,0]
+Row 9: [4,7,4,6,6,4,4,4,4,4,4,4,4,4,6,6,4,7,4,4,0]
+Row 10: [4,7,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,4,0,0]
+Row 11: [4,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,4,4,0]
+Row 12: [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0]
+Row 13: [4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,4,0]
+Row 14: [4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,4,0]
+Row 15: [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0]
+```
+
+After 180-degree rotation:
+
+ANSWER: [[0,4,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,8,8,4],[0,4,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,8,8,4],[0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[0,4,4,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,4],[0,0,4,7,4,4,4,4,4,4,4,4,4,4,4,4,4,7,4,4],[0,4,4,7,4,6,6,4,4,4,4,4,4,4,6,4,7,4,4,4],[0,4,4,7,4,6,4,4,4,4,6,6,6,6,4,6,4,7,4,4],[0,0,4,7,4,6,4,4,4,4,4,6,4,4,4,4,4,7,4,4],[0,0,4,7,4,6,4,4,4,6,4,6,4,4,4,4,4,7,4,4],[0,4,4,7,4,6,6,6,6,6,4,6,4,4,4,0,4,7,4,4],[0,4,0,4,4,4,4,4,4,4,6,4,4,0,0,0,0,7,4,4],[0,4,0,4,4,4,4,4,4,4,6,4,4,0,0,0,0,7,4,4]]

@@ -1,0 +1,30 @@
+Looking at the examples, I need to understand the pattern:
+
+1. Each input has a top section with colored rectangles in a 5-bordered grid
+2. Below that is a main grid with various colored regions and a small pattern (usually 8s) somewhere in the middle
+
+The transformation appears to:
+1. Remove the top section entirely
+2. Extend the small pattern (8s) to create lines/crosses that intersect with the colored rectangular regions
+3. The 8s seem to form lines that connect or intersect with the boundaries of the colored rectangles
+
+Let me analyze the test input:
+- Top section shows rectangles with colors: 1, 3, 2, 4 (left to right)
+- Main grid has:
+  - A 2-colored region in top-left
+  - A 3-colored region in top-right  
+  - A 1-colored region in left side
+  - A 4-colored region at bottom
+  - An 8-pattern in the middle (3x3 block of 8s at rows 13-15, cols 8-10)
+
+Based on the pattern from examples, the 8s should extend to form lines that intersect with the colored regions. Looking at the positions:
+- The 8s are at approximately the center
+- They should extend horizontally and vertically to connect with the rectangular regions
+
+Let me trace the pattern:
+- Horizontal line of 8s should go across the entire width at the row level of the 8s
+- Vertical line of 8s should go up and down from the 8s position
+- The lines intersect with and modify the colored rectangular regions
+
+ANSWER:
+[[2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

@@ -1,0 +1,35 @@
+Looking at the examples, I need to identify the pattern of transformation.
+
+In each example, I can see:
+1. There are rectangular regions outlined by colored borders (different colors like 2, 4, 1, 6, 3, etc.)
+2. Inside these rectangular regions, there are mostly background cells (8 in examples 2-3, 1 in example 1) with some scattered colored cells
+3. In the output, the rectangular regions are preserved, but the scattered colored cells inside are removed and replaced with background color
+4. However, there's a special pattern added inside each rectangle: some cells are filled with the border color in a specific symmetric pattern
+
+Let me analyze the pattern more carefully:
+
+Looking at example 1:
+- The 4-bordered rectangle has a pattern where some interior cells become 4
+- The 8-bordered rectangle has alternating 8s in one row
+- The 2-bordered rectangle has some 2s placed symmetrically
+
+The pattern seems to be:
+1. Keep the rectangular borders intact
+2. Clear out any scattered colored cells inside the rectangles (replace with background)
+3. Add a symmetric pattern of the border color inside each rectangle
+
+For the test input, I can identify these rectangles:
+1. Rectangle with border color 2 (rows 1-5, cols 1-11)
+2. Rectangle with border color 4 (rows 7-11, cols 1-11)  
+3. Rectangle with border color 3 (rows 13-17, cols 1-11)
+4. Rectangle with border color 1 (rows 19-23, cols 1-11)
+
+For each rectangle, I need to:
+1. Keep the border intact
+2. Fill interior with background color 8
+3. Add a symmetric pattern using the border color
+
+Based on the pattern I see in the examples, the interior pattern appears to place the border color at specific symmetric positions inside each rectangle.
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 2, 8, 2, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 4, 8, 4, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 3, 8, 3, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 1, 8, 1, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

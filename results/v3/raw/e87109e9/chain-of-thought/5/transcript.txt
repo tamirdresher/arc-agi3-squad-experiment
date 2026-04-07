@@ -1,0 +1,39 @@
+Let me analyze the examples step by step.
+
+**Pattern Analysis:**
+
+Looking at the examples, I notice:
+
+1. **Top section**: Each input has a top section with a grid of 5s containing colored rectangles with specific numbers (like 1, 2, 3, 4, 6) in corners and 0s filling the middle.
+
+2. **Bottom section**: Below the 5s, there's a larger grid with a background color and some smaller colored rectangular regions.
+
+3. **Key insight**: In the bottom section, there are small 2x2 or 2x3 blocks of a special number (8 in examples 1&2, 8 in example 3) that seem to act as "seeds" or markers.
+
+**Transformation Rule:**
+
+The transformation appears to:
+1. Take the small colored regions from the bottom section
+2. Use the special number (8) as a marker to create cross-shaped or line-shaped extensions
+3. The extensions seem to align with the positions of the colored numbers from the top section
+4. The 8s create both horizontal and vertical lines that connect or extend the existing colored regions
+
+**Applying to Test Input:**
+
+In the test input:
+- Top section has numbers 1, 3, 2, 4 in positions
+- Bottom section has background of 9s and 2s
+- There are 1s in a rectangular region on the left
+- There are 3s in a rectangular region on the right
+- There are 4s in a horizontal rectangular region near the bottom
+- There's a small 3x3 block of 8s around position (13-15, 8-10)
+
+The 8s should create extensions that:
+1. Create vertical lines connecting to align with the top section pattern
+2. Create horizontal lines 
+3. Extend the existing colored regions
+
+Let me construct the output:
+
+ANSWER:
+[[2, 2, 2, 8, 8, 2, 2, 8, 8, 8, 8, 2, 2, 8, 8, 2, 2, 2, 2, 8, 8, 3, 3, 3], [2, 2, 2, 8, 8, 2, 2, 8, 8, 8, 8, 2, 2, 8, 8, 2, 2, 2, 2, 8, 8, 3, 3, 3], [2, 2, 2, 8, 8, 2, 2, 8, 8, 8, 8, 2, 2, 8, 8, 2, 2, 2, 2, 8, 8, 3, 3, 3], [9, 9, 9, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 8, 3, 3, 3], [9, 9, 9, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 8, 3, 3, 3], [9, 9, 9, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 9, 9, 8, 8, 8, 8, 9, 9, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

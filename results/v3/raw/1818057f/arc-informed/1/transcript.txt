@@ -1,0 +1,70 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+Example 1:
+- Input: 10×12 grid with values 2 and 4
+- Output: Same dimensions, mostly identical but some 4s changed to 8s
+- Changes: In rows 4-6, columns 9-10, some 4s become 8s
+- The 8s appear to form a small rectangular region where there were previously 4s
+
+Example 2:
+- Input: 15×17 grid with values 2 and 4
+- Output: Same dimensions, some 4s changed to 8s
+- Changes: Multiple locations where 4s become 8s, appears to be in a regular pattern
+- The 8s seem to replace 4s in specific repeating rectangular regions
+
+Example 3:
+- Input: 12×12 grid with values 2 and 4
+- Output: Same dimensions, some 4s changed to 8s
+- Changes: Several 4s become 8s, forming what looks like connected regions
+- The 8s appear in areas where there were clusters of 4s
+
+Looking more closely at the pattern of where 8s appear:
+
+In Example 1: The 8s form a small 3×3 region around coordinates (4-6, 8-10)
+In Example 2: The 8s appear in regular vertical stripes, replacing certain 4s in a repeating pattern
+In Example 3: The 8s appear to form connected regions replacing some 4s
+
+PHASE 2 — MODEL:
+
+Looking more carefully at the patterns, I need to identify what determines which 4s become 8s.
+
+Examining Example 2 more closely:
+- The input appears to have a repeating pattern
+- The 8s replace 4s in what looks like the "interior" of rectangular regions
+- Specifically, it seems like 4s that are completely surrounded by other 4s or form the interior of 4-regions become 8s
+
+Examining Example 1:
+- There's a cluster of 4s in the lower right area
+- The 4s that are in the "interior" of this cluster become 8s
+
+Examining Example 3:
+- Similar pattern where 4s in the interior of clusters become 8s
+
+The rule appears to be: **4s that are completely surrounded by other 4s (not on the border of a 4-cluster) are changed to 8s.**
+
+Let me verify this against the examples:
+- This would explain why edge 4s remain as 4s while interior 4s become 8s
+- The transformation preserves the overall structure but highlights the "core" areas
+
+PHASE 3 — GOAL:
+
+Applying this rule to the test input:
+- Look for clusters of 4s
+- Identify which 4s are completely surrounded by other 4s
+- Change those interior 4s to 8s
+- Keep all other values unchanged
+
+The test input is 22×22. I need to scan for 4-clusters and identify interior 4s.
+
+PHASE 4 — EXECUTE:
+
+Let me go through the test input systematically, checking each 4 to see if it's surrounded by other 4s in all 8 directions (including diagonals).
+
+Looking at the test input, I can see several areas with clusters of 4s. I'll check each 4 to determine if it should become an 8.
+
+After careful analysis of the neighborhoods around each 4, the 4s that are completely surrounded by other 4s (interior to clusters) should become 8s.
+
+ANSWER:
+[[4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 8, 8, 8, 4, 2, 8, 4, 2, 8, 8, 8, 4, 2, 8, 4, 2, 2, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 2, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 8, 4, 2, 4, 2, 8, 4, 2, 4, 2, 2, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 4, 2, 8, 4, 2, 4, 2, 8, 8, 8, 8, 8, 8, 4, 2, 2, 8, 8, 4], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 4, 2, 8, 4, 2, 2, 2, 2, 4, 2, 4, 2, 8, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 8, 4, 2, 2, 2, 8, 4, 2, 4, 2, 4, 2, 2], [2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 8, 8, 8, 8, 8, 4, 2, 4, 2, 8, 8, 8, 8, 8, 8, 4, 2, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 4, 2], [4, 2, 4, 2, 8, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 2, 8, 4, 2], [2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2]]

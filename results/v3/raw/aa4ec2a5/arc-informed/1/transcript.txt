@@ -1,0 +1,79 @@
+# PHASE 1 — EXPLORE
+
+## Example 1 Analysis:
+**Input:** 25x23 grid, mostly 4s (background) with regions of 1s forming rectangular patterns
+- Top-left region: Rectangle of 1s at rows 2-6, cols 3-7
+- Top-right region: Rectangle of 1s at rows 1-6, cols 16-22
+- Bottom region: Large rectangle of 1s at rows 10-16, cols 10-18
+- Some scattered 1s creating connections between regions
+
+**Output:** Same dimensions, background remains 4
+- Each rectangular region of 1s gets transformed with borders of 2s
+- Interior of rectangles becomes 8s
+- Some inner areas become 6s (appears to be where there were gaps/holes in the original 1s)
+- Scattered 1s that connected regions also get bordered by 2s
+
+## Example 2 Analysis:
+**Input:** 23x28 grid with multiple rectangular regions of 1s
+- Top-left: Large rectangle at rows 2-6, cols 1-7
+- Top-right: Rectangle at rows 1-6, cols 14-20
+- Middle: Large rectangle at rows 10-16, cols 4-17
+- Bottom-right: Rectangle at rows 17-21, cols 12-17
+- Various connecting 1s between regions
+
+**Output:** Same transformation pattern
+- Rectangular regions get 2-borders, 8-interiors, 6s where there were gaps
+- Connecting elements also get bordered by 2s
+
+## Example 3 Analysis:
+**Input:** 15x20 grid with smaller rectangular regions
+- Top region: Small rectangle at rows 3-5, cols 3-5
+- Single 1 at row 6, col 12
+- Bottom region: Rectangle at rows 12-15, cols 4-10 with a gap
+
+**Output:** Same transformation rule applies
+- Small rectangles get bordered by 2s, filled with appropriate colors
+- Single 1s get minimal 2-borders
+
+# PHASE 2 — MODEL
+
+**Transformation Rule:**
+1. Identify all connected components of 1s in the input
+2. For each connected component:
+   - Create a minimal bounding rectangle that encompasses all 1s in that component
+   - Add a border of 2s around this bounding rectangle
+   - Fill the interior (originally 1s) with 8s
+   - Where there were 4s (gaps) within the bounding rectangle of 1s, fill with 6s
+   - Single isolated 1s get bordered by 2s and remain as 1s
+3. Background 4s remain unchanged
+
+**Testing against examples:**
+- Example 1: ✓ Each rectangular region gets proper borders and fills
+- Example 2: ✓ Multiple regions handled correctly with proper color coding
+- Example 3: ✓ Small regions and isolated elements handled correctly
+
+# PHASE 3 — GOAL
+
+**Test Input Analysis:**
+Identifying connected components of 1s:
+1. Large region: rows 2-11, cols 4-16 (with some internal gaps)
+2. Small region: rows 10-11, cols 19-22
+3. Large region: rows 12-15, cols 18-25
+4. Small region: rows 15-16, cols 10-12
+5. Medium region: rows 17-20, cols 7-12
+6. Small region: rows 21-23, cols 20-23
+
+Each component needs:
+- Bounding rectangle with 2-border
+- Interior 1s become 8s
+- Interior 4s (gaps) become 6s
+- Isolated 1s remain as 1s
+
+Expected output dimensions: 27x26 (same as input)
+
+# PHASE 4 — EXECUTE
+
+Constructing the output grid by applying the transformation rule to each identified region:
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4], [4, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 2, 1, 2, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 4, 4, 4, 4, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 1, 1, 1, 2, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 4, 4], [4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 2, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 8, 6, 6, 8, 2, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 2, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

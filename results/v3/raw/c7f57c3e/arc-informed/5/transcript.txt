@@ -1,0 +1,78 @@
+PHASE 1 — EXPLORE:
+
+**Example 1:**
+- Input: 18x18 grid with background color 4
+- Contains several distinct patterns:
+  - Top-right area: small cross pattern with 1s around a 2, and below it 8s in a pattern
+  - Left side: similar cross pattern with 1s around a 2, and below it a single 2, then 3s in a row
+  - Center-bottom: larger rectangular pattern with 1s forming border around 2s in center
+  - Below that: 2x2 block of 2s, then 3s in 2 rows
+
+- Output: Same 18x18 grid, but some changes:
+  - The 8s that were below the top-right cross moved to replace the 2 in the left pattern and the 3s below it
+  - The 3s from the left pattern moved to replace the 8s in the top-right pattern
+  - The 2x2 block of 2s in center-bottom became 8s
+  - The 3s at bottom became 8s
+
+**Example 2:**
+- Input: 18x18 grid with background color 3
+- Contains patterns:
+  - Top-left: cross pattern with 1s around a 2, below it another cross, then a 4
+  - Center: rectangular pattern with 1s forming border around 2s
+  - Bottom-left: similar cross patterns with 2 and 4
+  - There's a single 6 in the middle-left area
+
+- Output: Same grid but:
+  - The 6 moved to top of the grid (above the first cross pattern)
+  - The 4 from bottom-left moved to replace 2s in center pattern
+  - The 4 from top-left area was removed/replaced with 3s
+
+PHASE 2 — MODEL:
+
+Looking at both examples, I can see a pattern emerging:
+
+**Transformation Rule:** 
+1. Identify small isolated patterns (like cross shapes with 1s around a central value)
+2. Identify larger rectangular/block patterns 
+3. There appears to be a "value exchange" or "migration" system where certain values from small patterns move to fill corresponding positions in larger patterns
+4. Specifically, it seems like:
+   - Values that appear as the center of small cross patterns (or isolated special values) migrate to replace certain values in larger block patterns
+   - The replacement follows some spatial or hierarchical logic
+
+Let me refine this: The rule seems to be that isolated special values (non-background colors that appear in small quantities) migrate to replace similar values in larger structured patterns, while maintaining the overall structure.
+
+PHASE 3 — GOAL:
+
+Applying to test input (28x28 grid with background 8):
+
+Key patterns I identify:
+- Top-left: small pattern with 2s, 1s, and 3s in cross formation
+- Center-left area: small pattern with 1s, 6s in center
+- Below that: 4s
+- Large rectangular block (rows 11-22, cols 5-10): structured pattern with 2s, 1s, and 3s
+- Right side: small pattern with 2s, 1s, 3s
+
+The migration should be:
+- The 6s from the small center pattern should migrate to replace certain values in the large block
+- The 4s should also migrate to replace values in structured patterns
+- The 3s from small patterns should migrate appropriately
+
+PHASE 4 — EXECUTE:
+
+Analyzing the test input more carefully:
+
+Small patterns:
+- Rows 1-4: 2x2 block of 2s, 2x2 block of 1s, with 3s in middle row
+- Rows 6-9: small cross with 6s in center, 1s around it, 4s below
+- Rows 16-19: small pattern with 2s, 1s, 3s on right side
+- Large block rows 11-22, cols 5-10: 6x6 structured pattern with 2s on top, 1s below, 3s in middle
+
+Based on the pattern from examples, the transformations should be:
+- 6s from small pattern migrate to large block
+- 4s migrate to replace certain values
+- Values exchange between small and large patterns
+
+Let me construct the output:
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 3, 3, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 6, 6, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 1, 4, 4, 1, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

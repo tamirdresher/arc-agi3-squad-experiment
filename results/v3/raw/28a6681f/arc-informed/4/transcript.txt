@@ -1,0 +1,76 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 10x10 grid with colors 0, 1, 2, 3
+- Colors 1 form a rectangular block in the top-right (rows 0-9, cols 8-9)
+- Colors 2 form an L-shape in the bottom-left area
+- Colors 3 form vertical and some horizontal lines
+- Colors 0 fill remaining spaces
+- Output: Same dimensions, same overall pattern structure
+- Key change: In row 5, col 6 and row 6, col 6, the 0s are replaced with 1s
+- All other cells remain the same
+
+**Example 2:**
+- Input: 10x10 grid with colors 0, 1, 3, 5
+- Colors 3 form a vertical line at col 2 and some other positions
+- Colors 1 form a triangular/diagonal pattern in the right portion
+- Colors 5 appear in specific positions in the bottom-right
+- Output: Same dimensions
+- Key change: In rows 1-3, the 1s that appeared scattered are replaced with 0s
+- Row 4 shows 1s extending further left than in input
+- Other cells remain the same
+
+**Example 3:**
+- Input: 10x10 grid with colors 0, 1, 2, 4, 9
+- Colors 9 form a diagonal/scattered pattern in upper portion
+- Colors 1 appear in a few specific positions
+- Colors 2 and 4 form patterns in the bottom portion
+- Output: Same dimensions
+- Key change: The 1s in rows 1-2 (cols 2-3) are replaced with 0s
+- New 1s appear in rows 7-8 at col 4
+- Other patterns remain the same
+
+PHASE 2 — MODEL:
+
+Looking for a consistent transformation rule across all examples:
+
+In each case, there seems to be a "relocation" of certain colored cells (specifically color 1). The pattern appears to be:
+1. Identify regions where color 1 appears in "isolated" or "disconnected" positions
+2. Remove these isolated 1s (replace with 0s)
+3. Place new 1s in positions that create better "connectivity" or fill gaps in existing structures
+
+More precisely: The rule appears to be moving color 1 from positions where it's isolated/scattered to positions where it creates better structural connectivity with existing patterns.
+
+Let me verify this against each example:
+- Example 1: 1s were already well-connected, but gaps at (5,6) and (6,6) were filled
+- Example 2: Isolated 1s in rows 1-3 were removed, more connected 1s added in row 4
+- Example 3: Isolated 1s in upper area removed, new 1s added to connect/fill gaps in lower structure
+
+PHASE 3 — GOAL:
+
+Applying the transformation rule to the test input:
+
+Test input has:
+- Color 1s in positions (0,0), (0,1), (1,2), (1,3), (2,3)
+- These form a small cluster in the upper-left
+- Color 9s form a diagonal pattern
+- Colors 3 and 5 form patterns in lower portion
+
+The 1s in the upper-left appear somewhat isolated from the main structural elements. Based on the pattern, these should be removed and 1s should appear elsewhere to create better connectivity.
+
+Looking at the structure, there appear to be gaps in the patterns that could be filled with 1s to create better connectivity.
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid by applying the transformation:
+
+The test input shows 1s in the upper portion that seem disconnected from main structures. Following the pattern from examples, these should be removed and 1s placed elsewhere.
+
+Looking at potential connection points in the existing structure, I need to identify where 1s would create better connectivity.
+
+After careful analysis:
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [9, 9, 0, 0, 0, 0, 0, 0, 0, 0], [0, 9, 9, 0, 0, 0, 0, 0, 0, 0], [0, 0, 9, 9, 9, 0, 0, 0, 0, 5], [0, 0, 0, 0, 9, 9, 9, 0, 0, 5], [0, 0, 0, 0, 0, 0, 0, 5, 1, 5], [3, 0, 0, 0, 0, 0, 0, 0, 1, 5], [3, 3, 0, 0, 0, 0, 5, 5, 1, 5], [3, 3, 3, 0, 0, 5, 5, 5, 1, 5], [3, 3, 3, 3, 5, 5, 5, 5, 0, 5]]

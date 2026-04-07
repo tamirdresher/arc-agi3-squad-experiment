@@ -1,0 +1,71 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 25x24 grid with two main sections
+  - Top section (rows 0-5): Contains 5-bordered rectangles with colored corners (1,6,4,2) and 0s filling the rest
+  - Bottom section (rows 6-24): Background of 3s with colored rectangular regions (1s, 4s, 2s) and a small 8x8 pattern at rows 13-14, cols 8-9
+- Output: 19x24 grid (smaller than input)
+  - The 5-bordered top section is removed
+  - The bottom section is transformed with 8s extending in cross/line patterns
+  - Original colored regions (1s, 4s, 2s) are preserved
+  - The small 8x8 pattern expands into lines/crosses
+
+**Example 2:**
+- Input: 25x24 grid with similar structure
+  - Top section: 5-bordered rectangles with colors (2,4,6,3)
+  - Bottom section: Background of 1s with colored regions and 8x8 pattern at rows 14-15, cols 8-9
+- Output: 19x24 grid
+  - Top section removed
+  - 8s form crossing lines extending from the original 8x8 position
+  - Colored regions preserved
+
+**Example 3:**
+- Input: 24x24 grid
+  - Top section: 5-bordered rectangles with colors (4,6,3,2)
+  - Bottom section: Background of 7s with colored regions and 8x8 pattern at rows 17-18, cols 12-13
+- Output: 19x24 grid
+  - Similar transformation pattern
+
+## PHASE 2 — MODEL
+
+The transformation rule appears to be:
+
+1. **Remove the top template section**: The input has a top section with 5-bordered rectangles containing colored corners - this entire section is removed from the output.
+
+2. **Preserve the main grid structure**: The bottom section becomes the output, maintaining its background color and existing colored rectangular regions.
+
+3. **Expand the 8-pattern**: There's a small 2x2 or 2x3 region of 8s in the input. In the output:
+   - Vertical and horizontal lines of 8s extend from this position
+   - The lines extend across the entire grid width/height
+   - The lines intersect at the original 8-pattern location
+
+4. **Maintain other colored regions**: All other colored rectangular regions remain unchanged in their positions and colors.
+
+## PHASE 3 — GOAL
+
+For the test input:
+- Input is 30x24 grid
+- Top section (rows 0-5): 5-bordered rectangles with colors (1,3,2,4)
+- Bottom section: Background of 2s and 9s with colored regions (1s, 3s) and 8-pattern at rows 13-15, cols 8-10 (3x3 region of 8s)
+- Expected output: Remove top section, expand 8-pattern into crossing lines
+
+The 8-pattern is at rows 13-15, cols 8-10 in the input. After removing the top 6 rows, this becomes rows 7-9, cols 8-10 in the output.
+
+The output should be approximately 24x24 (removing 6 rows from 30x24).
+
+## PHASE 4 — EXECUTE
+
+Constructing the output grid:
+
+1. Start with rows 6-29 from the input (background of 2s and 9s)
+2. Preserve the colored rectangular regions (1s at cols 0-2, 3s at cols 21-23)
+3. From the 8-pattern center (approximately row 8, col 9 in output coordinates), extend:
+   - Horizontal line of 8s across the entire width at rows 7-9
+   - Vertical line of 8s down the entire height at cols 8-10
+
+Let me construct this systematically:
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

@@ -1,0 +1,74 @@
+**PHASE 1 — EXPLORE:**
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 25×25 grid with two main sections
+  - Top section (rows 0-5): Contains colored rectangles (1,6,4,2) separated by 5s and 0s
+  - Bottom section (rows 6-24): Background of 3s with colored rectangular regions (1s, 4s, 2s) and a small 8×8 pattern in the middle
+- Output: 19×24 grid - the top section is removed, and the bottom section is transformed
+- Key changes: The small 8×8 pattern appears to propagate in lines/crosses throughout the grid, creating extended patterns
+
+**Example 2:**
+- Input: 25×25 grid with similar structure
+  - Top section: Colored rectangles (2,4,6,3) in 5-bordered cells
+  - Bottom section: Background of 1s with colored rectangular regions and a small 8×8 pattern
+- Output: 19×24 grid - top section removed, 8×8 pattern propagated as lines
+- The 8×8 pattern creates horizontal and vertical extensions
+
+**Example 3:**
+- Input: 24×25 grid
+  - Top section: Colored rectangles (4,6,3,2) in 5-bordered cells  
+  - Bottom section: Background of 7s with colored regions and small 8×8 pattern
+- Output: 19×24 grid - similar transformation with 8×8 propagation
+
+**Common patterns:**
+1. Top section with 5-bordered colored rectangles is removed
+2. Small 8×8 pattern in bottom section propagates as horizontal/vertical lines
+3. Colored rectangular regions remain but may be affected by the propagation
+4. Output is always smaller than input (removes top section)
+
+**PHASE 2 — MODEL:**
+
+The transformation rule appears to be:
+1. Remove the top section (everything above the main working area with background color)
+2. Identify a small rectangular pattern (always 8s in examples, typically 2×2 or 3×3)
+3. Propagate this pattern by extending it horizontally and vertically as lines that span the entire grid
+4. The propagated lines (8s) overlay/replace the background color but preserve existing colored rectangular regions
+5. Where propagation lines intersect with existing colored regions, the 8s take precedence
+
+Let me verify this against examples:
+- Example 1: 2×2 pattern of 8s extends as horizontal and vertical lines through the 3-background
+- Example 2: 2×2 pattern of 8s extends similarly through 1-background  
+- Example 3: 2×2 pattern of 8s extends through 7-background
+
+The rule seems consistent.
+
+**PHASE 3 — GOAL:**
+
+For the test input:
+- Input is 29×24 grid
+- Top section (rows 0-5): Contains 5-bordered rectangles with colors 1,3,2,4
+- Bottom section (rows 6-28): Background of 2s (rows 6-8), then 9s (rows 9+) with colored regions
+- There's a 3×3 pattern of 8s at rows 13-15, columns 8-10
+- Following the rule: remove top section, propagate the 8s pattern as lines
+
+Expected output dimensions: Should be around 23×24 (removing top 6 rows)
+The 8s should extend horizontally and vertically from their position, creating cross-lines through the grid.
+
+**PHASE 4 — EXECUTE:**
+
+Looking at the test input more carefully:
+- Rows 0-5: Top section to be removed
+- Rows 6-28: Main section (23 rows)
+- 8s pattern at (13-15, 8-10) relative to full grid, or (7-9, 8-10) relative to main section
+- Background: rows 0-2 are 2s, rows 3+ are 9s in main section
+- Colored regions: 1s at (6-12, 0-2), 3s at (3-12, 21-23), 4s at (17-19, 7-15)
+
+Propagating 8s:
+- Horizontal lines at rows 7-9 (spanning full width)  
+- Vertical lines at columns 8-10 (spanning full height)
+- These lines should replace 9s and 2s but interaction with colored regions needs consideration
+
+ANSWER:
+[[2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

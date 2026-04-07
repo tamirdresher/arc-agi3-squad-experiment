@@ -1,0 +1,76 @@
+Let me analyze the examples step by step to understand the pattern.
+
+**Example 1 Analysis:**
+- Input has a 5x5 grid with values 1, 2, 8, and 0
+- The input has 1s forming a pattern in positions where there are 1s in the grid
+- Output replaces certain areas with 2s, specifically where the 1s were in the input
+- The 8s in the input seem to be ignored in the output
+
+**Example 2 Analysis:**
+- Much larger grid (15x15)
+- Input has various numbers: 0, 2, 4, 6, 7, 8
+- Looking at the output, I notice:
+  - Row 0-1: Pattern with 7s in a checkerboard-like arrangement
+  - Rows 2-8: Pattern with 2s and 4s on the edges
+  - Bottom rows: Pattern with 6s
+
+**Example 3 Analysis:**
+- 20x20 grid
+- Input has numbers 0, 1, 2, 4, 7, 8
+- Output shows:
+  - Top section: Pattern with 2s
+  - Bottom section: Pattern with 7s
+  - Middle section: Mostly 0s
+
+**Example 4 Analysis:**
+- 8x8 grid
+- Input has a vertical line of 2s in column 5, and 1s in the top row
+- Output: The 1s become 2s, and the 2s become 1s - it's like a swap!
+
+**Pattern Recognition:**
+Looking more carefully at Example 4, I see a clear pattern: there's a **swap** happening between two specific values. Let me verify this across other examples:
+
+In Example 4:
+- The 1s in the input become 2s in the output
+- The 2s in the input become 1s in the output
+- Other values become 0
+
+This suggests the rule is: **Find two prominent non-zero values and swap them, while setting other non-zero values to 0.**
+
+Let me verify this with other examples:
+
+**Example 1:** 
+- Main values seem to be 1 and 2
+- 1s become 0s, but 2 appears in output where 1s were in input
+- This fits the swap pattern
+
+**Re-examining all examples:**
+The pattern appears to be:
+1. Identify the two most significant non-zero values in the input
+2. Swap these values' positions
+3. Set all other non-zero values to 0
+4. Keep 0s as 0s
+
+**Applying to Test Input:**
+Looking at the test input, I need to identify the two most prominent non-zero values. Scanning through:
+- Value 2 appears multiple times
+- Value 6 appears multiple times  
+- Values 1, 4, 5, 7, 8 appear less frequently
+
+The most frequent non-zero values appear to be 2 and 6. However, let me look more carefully at the structure...
+
+Actually, looking at the examples again, I think the pattern is about identifying **structural elements** - like lines, borders, or prominent shapes formed by specific values.
+
+In the test input, I can see:
+- Several 2s scattered throughout
+- Several 6s in various positions
+- A column of 8s around column 3-4
+
+Let me try a different approach: **swap the two most structurally significant values**.
+
+Looking at column 3 in the test input, there are many 8s forming a vertical line. Looking at other positions, 2s and 6s appear to be the next most significant.
+
+Based on the pattern analysis, I believe the transformation swaps 2↔6 and sets other non-zero values to 0.
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0], [6, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 6, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 2], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]

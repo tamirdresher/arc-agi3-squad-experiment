@@ -1,0 +1,61 @@
+PHASE 1 — EXPLORE:
+
+Looking at each example pair:
+
+**Example 1:**
+- Input: 22x22 grid with background 0, contains rectangular structures with colored borders (8) and colored fills (5,1,3,9,6,4), and some structures with border 2
+- Output: Same dimensions, same structures but repositioned - structures appear to have been moved to align with grid edges (left or right sides)
+- The rectangular structures maintain their shape and internal colors but change position
+
+**Example 2:**
+- Input: 22x22 grid with background 4, contains rectangular structures with borders (8,2) and various colored fills (9,5,3,6,1)
+- Output: Same dimensions, structures moved to align with grid edges (left or right sides)
+- Structures maintain their internal composition but are repositioned
+
+**Example 3:**
+- Input: 22x22 grid with background 1, contains rectangular structures with borders (8,2) and colored fills (2,3,6,5,4)
+- Output: Same dimensions, structures repositioned to align with edges
+- Pattern consistent with previous examples
+
+**Common observations:**
+- All grids are 22x22
+- Rectangular structures with distinct borders and fills
+- Structures get repositioned but maintain their internal structure
+- Movement appears to be toward the left or right edges of the grid
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+**"Move each rectangular structure (defined by a border color enclosing a different fill color) to align with the nearest edge of the grid (left or right side), while maintaining the structure's shape and internal composition."**
+
+Testing this rule:
+- Example 1: Structures move left or right to align with edges ✓
+- Example 2: Structures move left or right to align with edges ✓  
+- Example 3: Structures move left or right to align with edges ✓
+
+More precisely: Each bordered rectangular structure moves horizontally to touch either the leftmost or rightmost position possible while maintaining its vertical position and internal structure.
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify all rectangular structures (bordered regions with distinct fills)
+2. Determine which edge (left or right) each should move toward
+3. Move each structure to align with that edge
+4. Maintain the background (9) and all internal structure details
+
+The structures I can identify:
+- Structure with border 2 and fill 4 (top-left area)
+- Structure with border 2 and fill 3 (middle area) 
+- Structure with border 8 and fill 4 (right side)
+- Structure with border 8 and fill 1 (left-middle)
+- Structure with border 8 and fill 7 (center)
+- Structure with border 2 and fill 6 (bottom-center)
+- Structure with border 2 and fill 3 (bottom-left)
+- Structure with border 8 and fill 3 (bottom-right)
+
+PHASE 4 — EXECUTE:
+
+Constructing the output by moving each structure to align with edges:
+
+ANSWER:
+[[2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8], [8, 1, 1, 1, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 4, 4, 4, 8], [8, 1, 1, 1, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 8, 4, 4, 4, 8], [8, 1, 1, 1, 8, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9, 8, 4, 4, 4, 8], [8, 8, 8, 8, 8, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8], [9, 9, 9, 9, 9, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2, 9, 9], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2, 9, 9], [2, 3, 3, 3, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2, 8, 8], [2, 3, 3, 3, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2, 8, 3], [2, 3, 3, 3, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 3], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

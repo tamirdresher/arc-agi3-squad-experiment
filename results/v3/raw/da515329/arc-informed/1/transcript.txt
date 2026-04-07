@@ -1,0 +1,54 @@
+PHASE 1 — EXPLORE:
+
+Example 1:
+- Input: 12x12 grid, mostly 0s with a few 8s forming a cross-like pattern at positions (3,5), (4,4), (4,6), (5,5)
+- Output: 12x12 grid with complex maze-like pattern of 8s and 0s
+- The original 8s seem to act as seed points for generating the pattern
+
+Example 2:
+- Input: 22x22 grid, mostly 0s with 8s forming a cross pattern centered around column 9: vertical line at column 9 from rows 6-12, horizontal line at row 9 from columns 6-12
+- Output: 22x22 grid with intricate maze-like pattern of 8s and 0s
+- Again, the cross pattern seems to generate a complex recursive structure
+
+Example 3:
+- Input: 16x16 grid, mostly 0s with 8s forming a cross pattern: vertical line at column 6 from rows 5-9, horizontal line at row 7 from columns 4-8
+- Output: 16x16 grid with maze-like pattern
+- Similar transformation from cross to complex pattern
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify the cross pattern formed by 8s in the input (vertical and horizontal lines intersecting)
+2. Use this cross as a seed to generate a recursive fractal-like maze pattern
+3. The pattern seems to follow a recursive subdivision where:
+   - The grid is divided into regions
+   - Each region contains a smaller version of the cross pattern
+   - The subdivision continues recursively
+   - Some regions are filled with 8s, others remain 0s
+   - The pattern creates corridors and walls in a maze-like structure
+
+Testing this against examples:
+- All examples start with a cross pattern of 8s
+- All outputs show recursive, self-similar maze structures
+- The complexity scales with grid size
+- The pattern maintains the original cross structure but expands it fractally
+
+PHASE 3 — GOAL:
+
+For the test input (26x26 grid):
+- Input has a cross pattern: vertical line at column 10 from rows 8-16, horizontal line at row 12 from columns 6-14
+- Expected output: 26x26 grid with recursive maze pattern based on this cross
+- The pattern should create a fractal structure with corridors and walls
+- The cross center is at (12,10), which will influence the recursive subdivision
+
+PHASE 4 — EXECUTE:
+
+Based on the recursive pattern observed, I need to generate a maze structure that:
+1. Starts with the cross pattern as the base structure
+2. Recursively subdivides the space
+3. Creates corridors (0s) and walls (8s) following the fractal pattern
+
+Looking at the patterns more carefully, I notice the maze creates alternating paths and barriers in a systematic way. The pattern seems to follow a specific recursive algorithm that creates corridors at regular intervals.
+
+ANSWER:
+[[0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0], [8, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0], [8, 0, 0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 8, 0], [8, 0, 8, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0], [8, 0, 8, 0, 0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 8, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 0, 8, 0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 8, 0, 8, 0, 0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 0, 8, 0, 8, 8, 8, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 8, 8, 0, 8, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 0, 8, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 8, 0, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 8, 8, 8, 8, 0, 8, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 8, 8, 8, 8, 8, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 0, 0, 0, 0, 0, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0, 8, 0], [8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0, 8, 0], [0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0, 8, 0], [8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0, 8, 0], [0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0, 8, 0], [8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0, 8, 0], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0, 8, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8, 8, 0], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 8, 8]]

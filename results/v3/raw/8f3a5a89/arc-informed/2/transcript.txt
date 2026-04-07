@@ -1,0 +1,76 @@
+**PHASE 1 — EXPLORE:**
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16x16 grid with mostly 8s, some 1s scattered in patterns, and one 6 at position (15,0)
+- The 1s form: a vertical line at column 6, some 2x2 blocks at positions (0-2, 10-11), (6-8, 9-10), and (12-15, 12-15)
+- Output: The 6 remains at (15,0), the 1s remain unchanged, but 8s are replaced with 7s in specific regions
+- The 7s form rectangular borders/frames around certain areas, with 8s preserved inside these frames
+
+**Example 2:**
+- Input: 10x10 grid with 8s, 1s, and one 6 at (9,0)
+- 1s form patterns: 2x2 block at (0-1, 4-5), vertical line fragments, and other small clusters
+- Output: Similar to Example 1 - 6 stays, 1s stay, but 8s become 7s in border-like patterns around regions
+
+**Example 3:**
+- Input: 20x20 grid with 8s, 1s in various patterns including triangular shapes and blocks, and 6 at (19,0)
+- Output: Same principle - 6 and 1s preserved, 8s become 7s forming rectangular borders
+
+**Common observations:**
+- The 6 always stays in its original position
+- All 1s remain unchanged in position and value
+- 8s are selectively changed to 7s
+- The 7s appear to form rectangular border/frame structures
+
+**PHASE 2 — MODEL:**
+
+The transformation rule appears to be:
+1. Keep the 6 in its original position
+2. Keep all 1s unchanged
+3. Create rectangular "frames" or borders using 7s that enclose regions of the grid
+4. The frames seem to connect or encompass the areas around 1-patterns and extend to the edges
+5. 8s inside the frames remain as 8s, while 8s that become part of the border structure become 7s
+
+More specifically, it looks like the algorithm:
+- Identifies the bounding regions that would naturally connect the 1-patterns
+- Creates rectangular frames (using 7s) that encompass these regions and extend to grid boundaries
+- The frames form a kind of "minimum bounding rectangle" system that organizes the space around the 1-patterns
+
+**PHASE 3 — GOAL:**
+
+For the test input (12x12 grid):
+- 6 at position (11,0) - will remain
+- 1s form patterns: vertical line at column 10, blocks at (4-6, 7-10), (9-11, 9-11), and (11, 2-5)
+- I need to identify how to create rectangular frames that encompass these 1-patterns
+
+The 1-patterns suggest natural rectangular regions that should be framed with 7s.
+
+**PHASE 4 — EXECUTE:**
+
+Looking at the 1-patterns in the test input:
+- Vertical line of 1s at column 10 (rows 0-8)
+- Block of 1s at (4-6, 7-10) 
+- Block of 1s at (9-11, 9-11)
+- Horizontal line of 1s at (11, 2-5)
+
+Following the pattern from examples, I need to create rectangular frames that organize these regions:
+
+```
+Row 0: [7,7,7,7,7,7,7,7,7,7,1,7]
+Row 1: [7,8,8,8,8,8,8,8,8,7,1,7] 
+Row 2: [7,8,8,8,8,8,8,8,8,7,1,7]
+Row 3: [7,8,8,8,8,8,8,8,8,7,1,7]
+Row 4: [7,8,8,8,8,8,8,1,1,1,1,7]
+Row 5: [7,8,8,8,8,8,8,1,1,1,1,7]
+Row 6: [7,8,8,8,8,8,8,8,1,1,1,7]
+Row 7: [7,8,8,8,8,8,8,8,8,7,1,7]
+Row 8: [7,8,8,8,8,8,8,8,8,7,1,7]
+Row 9: [7,8,8,8,8,8,8,8,8,1,1,1]
+Row 10: [7,8,8,8,8,8,8,8,8,1,1,1]
+Row 11: [6,7,1,1,1,1,7,7,7,1,1,1]
+```
+
+This creates rectangular frames with 7s that organize the space around the 1-patterns while preserving the 6 and all 1s.
+
+ANSWER: [[7,7,7,7,7,7,7,7,7,7,1,7],[7,8,8,8,8,8,8,8,8,7,1,7],[7,8,8,8,8,8,8,8,8,7,1,7],[7,8,8,8,8,8,8,8,8,7,1,7],[7,8,8,8,8,8,8,1,1,1,1,7],[7,8,8,8,8,8,8,1,1,1,1,7],[7,8,8,8,8,8,8,8,1,1,1,7],[7,8,8,8,8,8,8,8,8,7,1,7],[7,8,8,8,8,8,8,8,8,7,1,7],[7,8,8,8,8,8,8,8,8,1,1,1],[7,8,8,8,8,8,8,8,8,1,1,1],[6,7,1,1,1,1,7,7,7,1,1,1]]

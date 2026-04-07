@@ -1,0 +1,91 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 23x23 grid with background color 1
+- Contains rectangular frames made of colors 4, 8, and 2 in the left portion
+- Scattered small patches of colors 3, 4, 8 in the right portion
+- Output: Same dimensions, same background color 1
+- The rectangular frames remain intact but are "cleaned up"
+- The scattered patches in the right portion are removed
+- Some internal cells within the frames show a specific pattern
+
+**Example 2:**
+- Input: 23x23 grid with background color 8
+- Contains rectangular frames made of colors 1, 6, and 4 in the left portion
+- Scattered small patches of colors 4, 2, 3, 1, 6 in the right portion
+- Output: Same dimensions, same background color 8
+- The rectangular frames remain intact but are "cleaned up"
+- The scattered patches in the right portion are removed
+- Some internal cells within the frames show a specific pattern
+
+**Example 3:**
+- Input: 20x23 grid with background color 3
+- Contains rectangular frames made of colors 2, 4, and 1 in the left portion
+- Scattered small patches of colors 1, 8, 4 in the right portion
+- Output: Same dimensions, same background color 3
+- The rectangular frames remain intact but are "cleaned up"
+- The scattered patches in the right portion are removed
+- Some internal cells within the frames show a specific pattern
+
+Key observations:
+1. All examples have rectangular frames in the left portion
+2. All have scattered color patches in the right portion
+3. The frames are preserved but modified internally
+4. The scattered patches are completely removed
+5. There's a specific pattern added inside the preserved frames
+
+PHASE 2 — MODEL:
+
+Looking at the internal modifications to the frames, I notice:
+- In each frame, there are specific cells that get filled with the frame's border color
+- The pattern appears to be placing the frame color at specific interior positions
+
+Let me analyze the exact pattern more carefully:
+
+In Example 1:
+- Frame with color 4: Interior gets 4s at positions that seem to follow a pattern
+- Frame with color 8: Interior gets 8s at specific positions
+- Frame with color 2: Interior gets 2s at specific positions
+
+The pattern appears to be: For each rectangular frame, add the frame's border color at specific interior positions while removing all scattered patches outside the main frame structures.
+
+More specifically, the pattern seems to be placing the border color in a cross or symmetric pattern within each frame's interior.
+
+**Transformation Rule:**
+1. Identify all complete rectangular frames (borders of same color forming closed rectangles)
+2. Remove all scattered color patches that are not part of complete rectangular frames
+3. For each rectangular frame, add the frame's border color at specific symmetric interior positions (appears to be a cross-like pattern in the middle regions)
+4. Keep the background color unchanged in all other areas
+
+PHASE 3 — GOAL:
+
+Applying this rule to the test input:
+- Background color is 8
+- I need to identify complete rectangular frames
+- Remove scattered patches
+- Add the symmetric pattern inside frames
+
+Looking at the test input, I can identify rectangular frames made of:
+- Color 2 (top-left area)
+- Color 4 (middle-left area) 
+- Color 3 (lower-left area)
+- Color 1 (bottom-left area)
+
+All scattered patches outside these frames should be removed.
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid systematically:
+
+The rectangular frames I can identify:
+1. Color 2 frame: rows 1-5, cols 1-11
+2. Color 4 frame: rows 7-11, cols 1-11  
+3. Color 3 frame: rows 13-17, cols 1-11
+4. Color 1 frame: rows 19-23, cols 1-11
+
+For each frame, I'll add the border color in a symmetric pattern in the interior, and remove all scattered patches elsewhere.
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 2, 8, 2, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 4, 8, 4, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 3, 8, 3, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 1, 8, 1, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

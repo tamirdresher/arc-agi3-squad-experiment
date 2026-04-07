@@ -1,0 +1,78 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 10x12 grid with values 2 and 4
+- Output: Same dimensions, mostly identical but some 4s changed to 8s
+- The 8s appear in a small rectangular region around rows 4-6, columns 9-11
+- Looking at the pattern, it seems like there's a specific rectangular area where 4s become 8s
+
+**Example 2:**
+- Input: 15x17 grid with values 2 and 4
+- Output: Same dimensions, some 4s changed to 8s
+- The 8s appear in multiple rectangular regions, forming a pattern
+- Looking closer, there seem to be repeating blocks, and certain 4s within these blocks become 8s
+- The pattern appears to be systematic across the grid
+
+**Example 3:**
+- Input: 12x12 grid with values 2 and 4
+- Output: Same dimensions, some 4s changed to 8s
+- The 8s appear in a specific region, again replacing certain 4s
+- The transformation seems to target a particular rectangular area
+
+**Common observations:**
+1. Grid dimensions remain unchanged
+2. Only values 2, 4, and 8 are used (8 only in outputs)
+3. Value 2 never changes
+4. Some 4s change to 8s in specific regions
+5. The regions where 4s become 8s appear to be rectangular areas
+
+## PHASE 2 — MODEL
+
+Looking more carefully at the patterns, I need to identify what determines which 4s become 8s.
+
+In Example 2, I notice the grid has a repeating pattern structure. Let me look for blocks or tiles.
+
+After closer examination, I see that:
+- The grids appear to have repeating structural patterns
+- Within certain rectangular regions or blocks, specific 4s are converted to 8s
+- The conversion seems to follow a rule about identifying rectangular regions where 4s form certain patterns
+
+Let me refine this: The rule appears to be identifying rectangular regions that are internally bounded by 4s and converting the 4s within those bounded regions to 8s.
+
+Actually, looking more carefully at Example 1: The region where 4s become 8s appears to be a rectangular area that is somehow "enclosed" or "bordered" by the existing pattern.
+
+**Refined Model:** 
+The transformation identifies rectangular regions that are enclosed or bounded by existing patterns, and within these regions, converts 4s to 8s. The key is identifying which rectangular areas qualify as "enclosed" regions based on the surrounding pattern structure.
+
+Let me test this against the examples... This is getting complex. Let me try a different approach.
+
+**Alternative Model:**
+Looking at the coordinates where 8s appear, it seems like the transformation identifies specific rectangular "islands" or "boxes" within the pattern and converts 4s to 8s within those boxes. The boxes seem to be defined by the existing pattern structure.
+
+## PHASE 3 — GOAL
+
+For the test input (22x22 grid), I need to:
+1. Identify the rectangular regions that should be transformed
+2. Within those regions, convert 4s to 8s while leaving 2s unchanged
+3. Keep all other areas identical to the input
+
+Looking at the test input, I need to identify patterns that match the transformation logic from the examples. The grid appears to have some structural regularity that should help identify the target regions.
+
+## PHASE 4 — EXECUTE
+
+Given the complexity of determining the exact rule from the examples, let me analyze the test input for rectangular regions that appear to be "enclosed" or form distinct patterns that might qualify for transformation.
+
+Looking at the test input structure, I can see some repeating patterns and potential rectangular regions. However, without being completely certain of the exact rule, I'll make my best assessment based on the patterns I observed.
+
+After careful analysis of the test input and comparing with the transformation patterns from the examples, I'll identify the regions where 4s should become 8s.
+
+The most likely rectangular regions for transformation appear to be around:
+- Rows 1-3, columns 1-6 (a rectangular region with specific pattern)
+- Similar patterns in other parts of the grid
+
+However, given the uncertainty in the exact rule, let me provide the most conservative transformation based on the clearest patterns I can identify.
+
+ANSWER:
+[[4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 8, 4, 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 2, 2, 4, 2], [2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 2, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 2, 4, 2], [2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 8, 2, 4, 4, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 2, 2, 4, 4, 4], [2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 4, 2, 4, 4, 2, 2, 2, 2, 4, 2, 4, 2, 4, 4, 2], [2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 8, 2, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 2, 4, 4, 2, 4, 2, 4, 2, 2], [2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 8, 4, 4, 4, 4, 4, 2, 4, 2, 4, 4, 4, 4, 4, 4, 4, 2, 4, 2], [2, 2, 8, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 4, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 2, 4, 4, 2], [2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2]]

@@ -1,0 +1,45 @@
+I need to analyze the pattern in the given examples to understand how the input grid transforms into the output grid.
+
+Let me examine Example 1:
+- Input is a 13x13 grid with mostly 8s as background
+- There are patterns made of 3s forming rectangular shapes
+- There are scattered 4s, 1s, and 6s
+- Output is a 5x5 grid
+
+Let me examine Example 2:
+- Input is a 13x15 grid with mostly 3s as background
+- There are patterns made of different numbers (1s, 2s, etc.)
+- There are scattered other numbers (4, 5, 6, 8)
+- Output is an 8x5 grid
+
+Looking more carefully at the patterns:
+
+In Example 1:
+- There's a rectangular pattern made of 3s in the middle-left area
+- There are 1s forming a small rectangle
+- There are scattered 4s and a 6
+- The output seems to combine these elements in a compressed format
+
+In Example 2:
+- There are rectangular patterns made of 1s and 2s
+- There are scattered other numbers
+- The output combines these patterns
+
+Let me analyze the test input:
+- 15x15 grid with mostly 4s as background
+- There's a pattern of 8s forming a rectangular shape around rows 2-9, columns 5-8
+- There are 3s in a vertical line on the left side (column 1, rows 2-6 and column 1, rows 10-13)
+- There are 6s forming a pattern in the upper right (rows 2-4, columns 12-14) and lower right (rows 12-13, columns 10-12)
+- There are scattered 1s
+- There are 9s in column 7, rows 11-12
+
+The pattern seems to be extracting and combining the non-background elements into a compact grid. Let me trace the key patterns:
+
+1. The 8s form a rectangular border pattern
+2. The 3s form vertical lines on the left
+3. The 6s form rectangular patterns on the right
+4. The 1s and 9s are scattered elements
+
+Based on the structure and comparing with the examples, the output should capture the essential pattern elements in a compressed format.
+
+ANSWER: [[6, 8, 8, 8, 6], [3, 8, 4, 8, 6], [3, 8, 4, 8, 4], [3, 8, 4, 8, 4], [3, 8, 4, 8, 4], [4, 8, 4, 8, 4], [4, 8, 8, 8, 1], [3, 4, 9, 4, 4], [3, 1, 9, 6, 6]]

@@ -1,0 +1,67 @@
+PHASE 1 — EXPLORE:
+
+Example 1:
+Input: 20x20 grid with several colored regions:
+- Blue (2) region in upper left forming an L-shape with numbers 1, 5, 8, 9 inside
+- Yellow (7) rectangular block in upper right (4x3)
+- Blue (4) irregular shape in lower left
+- Green (3) small rectangular region in lower right
+
+Output: 8x8 grid containing numbers 1, 5, 8, 9 arranged in specific patterns
+
+Example 2:
+Input: 20x20 grid with colored regions:
+- Green (5) rectangular regions in upper right
+- Teal (6) irregular shape in middle left with numbers 2, 4, 8, 3 inside
+- Blue (9) rectangular region in lower left
+- White (1) rectangular region in lower right
+
+Output: 10x10 grid containing numbers 2, 4, 8, 3 arranged in patterns
+
+Key observations:
+- Input grids contain colored boundary regions with some containing special numbers
+- Output grids are much smaller than input grids
+- Output grids contain only the special numbers found inside the colored regions
+- The arrangement seems to follow some spatial relationship to the original colored regions
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify colored regions that contain special numbers (non-zero, non-boundary-color numbers)
+2. Extract these special numbers and their relative positions within their containing regions
+3. Create an output grid whose dimensions correspond to the bounding rectangle of all colored regions
+4. Fill the output grid by mapping each colored region's area to its corresponding special number(s)
+5. The spatial relationships between colored regions in the input are preserved in the output
+
+Testing this rule:
+- Example 1: The blue region contains 1,5,8,9. The output shows these numbers filling areas proportional to the colored regions' positions
+- Example 2: The teal region contains 2,4,8,3. The output shows these numbers filling areas based on the spatial arrangement of all colored regions
+
+PHASE 3 — GOAL:
+
+For the test input, I identify:
+- Blue (9) region in upper left with numbers 3, 6, 4, 8 inside at positions corresponding to a 2x2 arrangement
+- Yellow (5) regions in upper right and lower right
+- Purple (7) region in lower left  
+- Red (2) region in lower right
+
+The special numbers are: 3, 6, 4, 8 from the blue region.
+
+The output should be a grid where these numbers fill areas corresponding to the spatial arrangement of all the colored regions. Based on the bounding rectangle of all colored regions and their relative positions, I expect roughly a 10x12 output grid.
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the spatial relationships and the pattern from the examples:
+
+The blue region contains a 2x2 pattern:
+```
+3 6
+4 8
+```
+
+The colored regions span from roughly (4,3) to (24,25) in the input, creating areas that should be filled with these numbers based on their relative positions.
+
+Analyzing the exact mapping based on the examples' patterns:
+
+ANSWER:
+[[3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 6, 6], [4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8], [4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8], [4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8], [4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8], [4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8]]

@@ -1,0 +1,41 @@
+Looking at this puzzle, I need to identify the pattern from the examples.
+
+In both examples, I can see:
+1. There's a rectangular border made of 5s that contains a regular pattern
+2. The area outside this border contains some irregular patterns in the upper left
+3. The output extracts and transforms the content within the 5-bordered rectangle
+
+Let me analyze the test input:
+
+I can see a rectangular border of 5s from row 9 to row 29, columns 0 to 20. This creates a 21×21 bordered rectangle.
+
+Looking at the pattern within the 5-bordered area (rows 10-28, columns 1-19), I can see it's organized in a 3×3 grid of 6×6 blocks, with each block containing a 4×4 pattern surrounded by 4s.
+
+The blocks contain these 4×4 patterns:
+- Top-left: 3s (5×5 block)
+- Top-middle: Empty (all 4s)
+- Top-right: 9s (5×4 block)
+- Middle-left: 3s (5×5 block)  
+- Middle-middle: 2s and 1s (2×2 each, arranged vertically)
+- Middle-right: 2s (5×4 block)
+- Bottom-left: Empty (all 4s)
+- Bottom-middle: 8s and 2s (arranged in 5×3 blocks)
+- Bottom-right: 1s (partial pattern)
+
+Now I need to look at the upper-left irregular patterns to determine the mapping:
+- Position (0,0)-(2,3): 3s and 9s → maps to 6s and 9s  
+- Position (0,7)-(2,8): 2s → maps to 7s
+- Position (0,27)-(2,29): 1s → maps to 6s
+- Position (4,0)-(6,3): 1s and 6s → maps to 9s and 1s
+- Position (4,5)-(6,8): 8s and 7s → maps to 6s and 1s
+
+From this analysis, the mapping appears to be:
+- 3 → 6
+- 2 → 7  
+- 1 → 6
+- 8 → 6
+- 9 → 9 (stays the same)
+
+Applying this transformation to the 19×19 inner content:
+
+ANSWER: [[5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9], [5, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9], [5, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9], [5, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9], [5, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [5, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6], [5, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6], [5, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6], [5, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6], [5, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 6], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [5, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7], [5, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7], [5, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7], [5, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7], [5, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 4, 7, 7, 7, 7, 7], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]]

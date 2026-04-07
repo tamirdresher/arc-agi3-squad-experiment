@@ -1,0 +1,66 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 18x22 grid, background is 4s, contains structures made of 1s and scattered 2s
+- The 1s form rectangular/cross-like structures in two main areas
+- Scattered 2s appear at various positions: (1,2), (1,13), (6,15), (14,2), (17,11), (17,12), (18,11), (18,12)
+- Output: Same dimensions, background still 4s, 1-structures preserved
+- Key change: 2s are removed/replaced with 4s in most places, but some 2s remain and there's a line of 0s appearing horizontally at row 6, columns 7-15
+
+**Example 2:**
+- Input: 19x22 grid, background is 3s, contains structures made of 4s and scattered 2s
+- The 4s form rectangular structures in two main areas
+- Scattered 2s appear at various positions including some 2x2 blocks
+- Output: Same dimensions, background still 3s, 4-structures preserved
+- Key change: Some 2s are replaced with 0s, creating vertical and horizontal lines of 0s that seem to connect certain regions
+
+**Example 3:**
+- Input: 19x22 grid, background is 4s, contains structures made of 8s and scattered 2s
+- The 8s form rectangular structures in two main areas
+- Scattered 2s appear at various positions including some blocks
+- Output: Same dimensions, background still 4s, 8-structures preserved
+- Key change: Some 2s remain, others are replaced with 0s, creating connecting lines between structures
+
+PHASE 2 — MODEL:
+
+Looking at all examples, I can identify a pattern:
+1. The grid has a background color (4, 3, 4 in the examples)
+2. There are structural elements (1s, 4s, 8s) forming rectangular/cross patterns
+3. There are scattered marker elements (2s)
+4. The transformation preserves the background and structural elements
+5. The key transformation involves the 2s: some are preserved, others are replaced with 0s to create connecting lines between structural regions
+
+The rule appears to be:
+- Identify rectangular structural regions made of non-background, non-2 elements
+- For each pair of such structural regions, if there are 2s that can form a straight line (horizontal or vertical) connecting them, replace those 2s with 0s to create a connection path
+- 2s that are part of these connection paths become 0s
+- 2s that are not part of connection paths may be removed (replaced with background) or preserved in specific cases
+- The structural elements and background remain unchanged
+
+PHASE 3 — GOAL:
+
+Applying this to the test input (23x27 grid, background 3s):
+- Identify structural regions made of 4s
+- I can see 4-structures at multiple locations
+- Look for 2s that could form connecting lines between these structures
+- Replace connecting 2s with 0s, remove isolated 2s
+
+The main 4-structures appear to be:
+- Around rows 3-6, columns 14-20
+- Around rows 7-14, columns 7-10
+- Around rows 17-20, columns 20-26
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid systematically:
+
+Looking at the 2s in the test input and the 4-structures, I need to identify which 2s form connection paths and replace them with 0s, while removing isolated 2s.
+
+The key 2s that appear to form connecting paths:
+- The 2s at positions that align with structural regions should become connection lines (0s)
+- Isolated 2s should be removed (become 3s)
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 2, 3, 3, 2, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 0, 0, 3, 4, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 0, 0, 3, 4, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 4, 3, 4, 3], [3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4], [3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

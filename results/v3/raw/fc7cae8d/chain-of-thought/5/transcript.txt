@@ -1,0 +1,61 @@
+Let me analyze the examples to understand the pattern.
+
+Looking at Example 1:
+- Input is a 22x22 grid
+- Output is a 11x15 grid
+- The input seems to have a rectangular region filled with numbers (mostly 1s, with some 2s, 3s, 8s)
+- This region appears to be extracted and forms the output
+
+Looking at Example 2:
+- Input is a 22x22 grid  
+- Output is a 10x10 grid
+- Again, there's a rectangular region in the input (filled with 2s and some 4s, 8s)
+- This region is extracted to form the output
+
+Looking at Example 3:
+- Input is a 22x22 grid
+- Output is a 5x5 grid
+- There's a small rectangular region with 8s, 9s, 3s, 6s
+- This region becomes the output
+
+Pattern Analysis:
+1. Each input contains a rectangular region filled with non-zero values (not 0)
+2. This rectangular region is surrounded by mostly 0s and some border values
+3. The rectangular region is extracted to form the output
+4. The borders seem to be marked by specific values that form a frame around the target region
+
+Let me identify the target region in the test input:
+
+Looking at the test input, I can see a rectangular region from approximately:
+- Rows 4-15 (12 rows)
+- Columns 4-23 (20 columns)
+
+This region contains values 4, 6, 7, 8, 9 and is surrounded by 0s and border markers.
+
+Let me extract this region more precisely:
+
+The rectangular region appears to be from:
+- Row 4, column 4 to row 15, column 23
+- This gives us a 12x20 region
+
+Looking more carefully at the boundaries, the actual content region seems to be:
+- Rows 4-15 (indices 4 to 15, so 12 rows)
+- Columns 4-23 (indices 4 to 23, so 20 columns)
+
+Let me extract this region:
+
+Row 4: [4, 7, 0, 0, 0, 0, 0, 4, 4, 6, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4]
+Row 5: [4, 7, 4, 0, 0, 0, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4]
+Row 6: [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0]
+Row 7: [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0]
+Row 8: [4, 7, 4, 6, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4]
+Row 9: [4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4]
+Row 10: [4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0]
+Row 11: [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4]
+Row 12: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Row 13: [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4]
+Row 14: [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4]
+Row 15: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+
+ANSWER:
+[[4, 7, 0, 0, 0, 0, 0, 4, 4, 6, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4], [4, 7, 4, 0, 0, 0, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0], [4, 7, 4, 6, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4], [4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4], [4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0], [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

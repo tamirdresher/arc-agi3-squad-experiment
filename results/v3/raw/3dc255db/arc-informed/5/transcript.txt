@@ -1,0 +1,89 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 12x12 grid with two distinct regions containing non-zero values
+  - Upper region: Contains 4s (forming a rough triangular/irregular shape) and scattered 6s
+  - Lower region: Contains 3s (forming an irregular shape) and scattered 7s
+- Output: Same dimensions, same basic structure
+  - The 6s that were scattered in the upper region appear to have moved/repositioned
+  - The 7s that were scattered in the lower region appear to have moved/repositioned
+  - The main shapes (4s and 3s) remain largely unchanged
+
+**Example 2:**
+- Input: 10x10 grid with two distinct regions
+  - Left region: Contains 3s (forming a vertical line/column pattern) and scattered 9s
+  - Right region: Contains 6s (forming a small cluster) and scattered 9s
+- Output: Same dimensions
+  - The 9s appear to have been repositioned/moved
+  - The main structures (3s and 6s) remain mostly unchanged
+  - Some 9s appear above their original regions
+
+**Example 3:**
+- Input: 12x12 grid with one main region
+  - Contains 6s forming a diamond-like or symmetric pattern
+  - Contains 7s scattered within this 6-pattern
+- Output: Same dimensions
+  - The 7s have been moved/repositioned to form a vertical line above the 6-pattern
+  - The 6-pattern structure remains the same but the 7s inside have been removed
+
+PHASE 2 — MODEL:
+
+Looking at the patterns across all examples, I can see a consistent transformation rule:
+
+**Transformation Rule:** For each distinct colored region (defined by one primary color), any secondary/accent colors within or near that region get extracted and repositioned to form vertical lines extending upward from the top of that region. The secondary colors are removed from their original positions within the primary colored regions.
+
+More specifically:
+1. Identify primary colored regions (the main structural elements)
+2. Identify secondary colors that appear within or associated with each primary region
+3. Remove secondary colors from within the primary regions
+4. Place the secondary colors in vertical lines extending upward from the topmost point of each primary region
+5. The number and positioning of secondary color cells in the vertical lines corresponds to their original count/distribution
+
+Testing this rule:
+- Example 1: 6s extracted from 4-region, 7s extracted from 3-region, both form vertical extensions
+- Example 2: 9s extracted from both regions, form vertical lines above
+- Example 3: 7s extracted from 6-region, form vertical line above
+
+PHASE 3 — GOAL:
+
+Applying the transformation rule to the test input:
+
+Test input analysis:
+- Upper region (rows 2-4): Primary color 2, secondary color 4
+- Lower-left region (rows 6-11): Primary color 9, secondary color 7  
+- Lower-right region (rows 7-11): Primary color 8, secondary color 2
+
+Expected transformations:
+1. Extract 4s from the 2-region, place in vertical line above
+2. Extract 7s from the 9-region, place in vertical line above  
+3. Extract 2s from the 8-region, place in vertical line above
+4. Clean the secondary colors from within their respective primary regions
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid:
+
+1. Start with the test input structure
+2. For the upper 2-region: Remove the 4s from positions (3,6), (3,7), (3,8) and place them vertically above at (0,7), (1,7)
+3. For the 9-region: Remove 7s from positions (9,2), (9,3), (10,3), (11,2) and place them vertically above starting from row 3
+4. For the 8-region: Remove 2s from positions (9,7), (9,10), (10,9) and place them vertically above starting from row 4
+
+Let me construct this systematically:
+
+[[0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0],
+ [0, 0, 0, 7, 0, 2, 2, 2, 2, 2, 0, 2, 0],
+ [0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 2, 2, 0],
+ [0, 0, 0, 7, 0, 2, 2, 2, 2, 2, 2, 0, 0],
+ [0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 9, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 0, 8, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0]]
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0], [0, 0, 0, 7, 0, 2, 2, 2, 2, 2, 0, 2, 0], [0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 2, 2, 0], [0, 0, 0, 7, 0, 2, 2, 2, 2, 2, 2, 0, 0], [0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 9, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 0, 8, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0]]

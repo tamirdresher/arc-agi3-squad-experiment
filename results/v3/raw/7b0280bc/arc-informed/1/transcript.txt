@@ -1,0 +1,100 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 18x18 grid with background color 8
+- Contains scattered 0s, 1s, and 2s in various patterns
+- 2x2 blocks of value 2 appear in several locations
+- 2x2 blocks of value 1 appear in several locations
+- Single 0s form vertical and horizontal lines/paths
+
+- Output: Same grid but some 0s have been replaced with 5s and some 2s have been replaced with 3s
+- The 1s remain unchanged
+- Background 8s remain unchanged
+- Pattern: It appears 0s that form continuous vertical lines are replaced with 5s
+- Pattern: 2x2 blocks of 2s are replaced with 3s
+
+**Example 2:**
+- Input: 15x15 grid with background color 9
+- Contains 4s, 6s, and 7s in various patterns
+- 2x2 blocks of value 7 appear in several locations
+- 2x2 blocks of value 6 appear in several locations
+- Single 4s form various patterns
+
+- Output: Some 7s replaced with 3s, some 4s replaced with 5s
+- 6s and background 9s remain unchanged
+- Pattern: 2x2 blocks of 7s are replaced with 3s
+- Pattern: 4s that form vertical lines are replaced with 5s
+
+**Example 3:**
+- Input: 20x20 grid with background color 7
+- Contains 1s, 2s, and 6s in various patterns
+- 2x2 blocks of value 1 appear in several locations
+- 2x2 blocks of value 2 appear in several locations
+- Single 6s form vertical lines/paths
+
+- Output: Some 1s replaced with 3s, some 6s replaced with 5s
+- 2s and background 7s remain unchanged
+- Pattern: 2x2 blocks of 1s are replaced with 3s
+- Pattern: 6s that form continuous vertical lines are replaced with 5s
+
+PHASE 2 — MODEL:
+
+Based on the analysis, I can identify a consistent transformation rule:
+
+**Transformation Rule:**
+1. Find all 2x2 blocks of the same non-background color
+2. Replace those 2x2 blocks with a specific target color (appears to be 3)
+3. Find all single-cell values that form continuous vertical lines/columns
+4. Replace those vertical line values with another target color (appears to be 5)
+5. All other values remain unchanged
+
+Let me verify this against each example:
+- Example 1: 2x2 blocks of 2→3, vertical lines of 0→5 ✓
+- Example 2: 2x2 blocks of 7→3, vertical lines of 4→5 ✓  
+- Example 3: 2x2 blocks of 1→3, vertical lines of 6→5 ✓
+
+PHASE 3 — GOAL:
+
+Applying the rule to the test input:
+- Background color is 4
+- Look for 2x2 blocks of non-background colors (1, 9, 0)
+- Look for vertical lines of non-background colors
+- Grid dimensions: 30x30
+
+Identifying patterns in test input:
+- 2x2 blocks of 9s at multiple locations
+- 2x2 blocks of 1s at multiple locations  
+- 2x2 blocks of 0s at multiple locations
+- Need to identify which colors form vertical lines
+
+PHASE 4 — EXECUTE:
+
+Let me carefully scan the test input:
+
+1. **2x2 blocks of 9s** (should become 3s):
+   - Rows 2-3, cols 2-3
+   - Rows 2-3, cols 13-14  
+   - Rows 5-6, cols 21-22
+   - Rows 12-13, cols 13-14
+   - Rows 12-13, cols 24-25
+   - Rows 15-16, cols 3-4
+   - Rows 20-21, cols 7-8
+   - Rows 25-26, cols 13-14
+
+2. **2x2 blocks of 1s** (should become 3s):
+   - Rows 2-3, cols 5-6 and continuing right
+   - Rows 5-6, cols 2-3
+   - Multiple other locations
+
+3. **2x2 blocks of 0s** (should become 3s):
+   - Rows 8-9, cols 6-7
+   - Rows 19-20, cols 21-22
+
+4. **Vertical lines**: Looking for single-cell colors that form continuous vertical columns - this appears to be individual 1s that form vertical patterns.
+
+Constructing the output grid by applying these transformations:
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4], [4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 4, 4, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 9, 9, 9, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 3, 3, 3, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4], [4, 4, 4, 1, 1, 4, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4], [4, 4, 4, 9, 9, 9, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 3, 3, 3, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

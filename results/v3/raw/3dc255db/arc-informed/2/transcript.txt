@@ -1,0 +1,87 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 12x12 grid with two main colored regions:
+  - Upper region: Blue (4) shapes with scattered cyan (6) cells
+  - Lower region: Green (3) shapes with scattered red (7) cells
+- Output: Same grid but the scattered cells (6 and 7) have been moved/repositioned
+- The 6s appear to move from their scattered positions to form a small cluster at position (3,7-8)
+- The 7s appear to move from their scattered positions to form a small cluster at position (10,1-2)
+
+**Example 2:**
+- Input: 10x10 grid with two main colored regions:
+  - Left region: Green (3) vertical line with scattered purple (9) cells
+  - Right region: Cyan (6) rectangular shape with scattered purple (9) cells
+- Output: The scattered 9s have been moved to form vertical extensions above their respective regions
+- Left 9s form a vertical line extending upward from the green region
+- Right 9s form a vertical extension above the cyan region
+
+**Example 3:**
+- Input: 12x12 grid with one main colored region:
+  - Cyan (6) forms a roughly rectangular border/frame
+  - Red (7) cells are scattered within this frame
+- Output: The scattered 7s have been moved to form a vertical line extending upward from the top of the cyan frame
+
+PHASE 2 — MODEL:
+
+Based on the examples, I can identify the transformation rule:
+
+**Rule**: For each distinct colored region (non-zero, non-scattered cells), identify any "scattered" cells of a different color that appear within or near that region. These scattered cells should be moved to form a vertical extension above the topmost point of their associated region. The scattered cells maintain their original color but are repositioned to create a vertical line extending upward from the region's boundary.
+
+More specifically:
+1. Identify main colored regions (coherent shapes)
+2. Identify scattered cells (different colors appearing sporadically within/near these regions)
+3. For each set of scattered cells, move them to form a vertical line extending upward from the topmost boundary of their associated region
+4. The vertical line should be positioned at the horizontal center or a characteristic point of the associated region
+
+Testing this rule:
+- Example 1: 6s move above the blue region, 7s move above the green region ✓
+- Example 2: 9s move above both their respective regions (left and right) ✓  
+- Example 3: 7s move above the cyan frame region ✓
+
+PHASE 3 — GOAL:
+
+Applying the rule to the test input:
+
+The test input has:
+1. Upper region: Red (2) rectangular frames with scattered blue (4) cells
+2. Lower left region: Green (9) L-shaped border with scattered red (7) cells
+3. Lower right region: Yellow (8) diagonal line with scattered red (2) cells
+
+Expected transformations:
+- The scattered 4s should move to form a vertical line above the red (2) frame region
+- The scattered 7s should move to form a vertical line above the green (9) region
+- The scattered 2s near the yellow (8) region should move to form a vertical line above that region
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid:
+
+Looking at the test input more carefully:
+- Red (2) frame is at rows 2-4, columns 5-10, with scattered 4s at (3,6-8)
+- Green (9) L-shape at rows 6-11, columns 1-4, with scattered 7s at (9,2-3) and (10,3) and (11,2)
+- Yellow (8) diagonal at rows 7-11, columns 9-11, with scattered 2s at (9,7) and (9,10) and (10,9)
+
+The 4s should extend upward from the red region (around column 7)
+The 7s should extend upward from the green region (around column 2-3)  
+The 2s should extend upward from the yellow region (around column 10)
+
+Building the output grid:
+
+[[0, 0, 7, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0],
+ [0, 0, 7, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0],
+ [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+ [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 9, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 0, 8, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0],
+ [0, 9, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0]]
+
+ANSWER:
+[[0, 0, 7, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0], [0, 0, 7, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0], [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0], [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 9, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 0, 8, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0]]

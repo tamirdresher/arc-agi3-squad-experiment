@@ -1,0 +1,67 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 12×10 grid with values 2 and 4
+- Output: Same dimensions, mostly identical but some 4s are changed to 8s
+- Changes: In rows 4-6, columns 9-10, several 4s become 8s
+- The changed region forms a small rectangular area where 4s cluster together
+
+**Example 2:**
+- Input: 15×17 grid with values 2 and 4
+- Output: Same dimensions, some 4s changed to 8s
+- Changes: Multiple rectangular regions where 4s become 8s
+- Pattern: The 4s that change appear to be in repeating rectangular blocks
+- Rows 2-4, 6-8, 11-13 have 4s changed to 8s in columns 3, 8, 13 (regular intervals)
+
+**Example 3:**
+- Input: 12×12 grid with values 2 and 4
+- Output: Same dimensions, some 4s changed to 8s
+- Changes: Various 4s scattered throughout become 8s
+- The 8s appear in areas where 4s form connected regions
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I need to identify what determines which 4s become 8s.
+
+In all examples:
+1. Only 4s can become 8s (2s never change)
+2. The grid dimensions remain the same
+3. Not all 4s change - only specific ones
+
+Examining more closely:
+- In Example 1: The 4s that change form a connected rectangular region
+- In Example 2: The pattern shows repeating blocks where interior 4s of rectangular formations change
+- In Example 3: 4s in certain connected regions change
+
+**Refined Rule:** The transformation identifies rectangular regions or clusters of 4s, and changes some 4s to 8s within these regions. Specifically, it appears to target 4s that are:
+1. Part of rectangular formations of 4s
+2. Not on the border/edge of these formations
+3. Interior 4s within connected 4-regions
+
+**More precise rule:** Find connected rectangular regions of 4s (at least 2×2), then change the interior 4s (not on the border of the rectangle) to 8s.
+
+PHASE 3 — GOAL:
+
+Applying this rule to the test input:
+- Scan the 22×22 grid for rectangular regions of 4s
+- Identify which 4s are interior to these regions
+- Change interior 4s to 8s while keeping border 4s and all 2s unchanged
+
+Looking at the test input, I need to identify connected rectangular regions of 4s and determine which 4s are interior vs. border positions within these regions.
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid by scanning for rectangular 4-regions and changing interior 4s to 8s:
+
+After careful analysis of the test input, I can see several rectangular formations of 4s. The key areas where changes should occur are:
+- Row 2: The long horizontal line of 4s - interior 4s should become 8s
+- Row 7: Another horizontal line of 4s with interior positions
+- Row 12: A very long horizontal line of 4s 
+- Row 17: Another horizontal formation
+
+Applying the transformation rule systematically:
+
+ANSWER:
+[[4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 8, 8, 8, 4, 2, 8, 4, 2, 8, 8, 8, 4, 2, 8, 4, 2, 2, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 2, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 2, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 4, 2, 8, 4, 2, 4, 2, 8, 8, 8, 8, 8, 8, 4, 2, 2, 8, 8, 4], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 2, 4, 2, 4, 2, 4, 4, 2, 2, 2, 2, 4, 2, 4, 2, 4, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2], [4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 2, 4, 4, 2, 4, 2, 4, 2, 2], [2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 8, 8, 8, 8, 8, 8, 8, 4, 2, 4, 2, 8, 8, 8, 8, 8, 8, 4, 2, 4, 2], [2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 4, 2, 4, 2, 2, 4, 2, 2, 2, 4, 4, 2], [4, 2, 4, 2, 4, 4, 2, 4, 2, 4, 2, 2, 4, 2, 4, 4, 2, 2, 2, 4, 4, 2], [2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2]]

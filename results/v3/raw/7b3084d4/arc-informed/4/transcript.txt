@@ -1,0 +1,103 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+Input: 20x20 grid with several colored regions:
+- Blue (9) region in upper left area (roughly rectangular)
+- Red (7) region in upper right area (roughly rectangular) 
+- Yellow (4) region in middle left area (roughly rectangular)
+- Green (3) region in bottom right area (roughly rectangular)
+- One cell with 5 in the red region
+
+Output: 6x6 grid containing colors 9, 7, 4, 3, and 5
+
+**Example 2:**
+Input: 20x20 grid with several colored regions:
+- Red (7) region in upper left area
+- Pink (2) region in upper right area  
+- Green (3) region in middle left area
+- Cyan (6) region in lower middle area
+- One cell with 5 in the red region
+
+Output: 10x5 grid containing colors 7, 2, 3, 6, and 5
+
+**Example 3:**
+Input: 20x20 grid with several colored regions:
+- Pink (2) region in upper left corner (small)
+- Cyan (6) region in upper right area (small)
+- Orange (8) region in middle right area
+- Red (7) region in lower left area (small)
+- One cell with 5 in the red region
+
+Output: 4x4 grid containing colors 2, 6, 8, 7, and 5
+
+**Key observations:**
+1. Each input has multiple colored rectangular regions scattered across a 20x20 grid
+2. One region always contains a single cell with value 5
+3. The output is much smaller than the input
+4. The output contains all the colors from the input regions
+5. The output dimensions seem related to the bounding box of all colored regions
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I believe the transformation rule is:
+
+**Rule: Extract the minimal bounding rectangle that contains all non-zero colored regions from the input, then create a condensed version where each colored region maintains its relative spatial relationships but is compressed to fit the output dimensions.**
+
+Let me test this:
+
+Example 1: The colored regions span roughly from row 3 to row 19 and columns 3 to 19. The output is 6x6, suggesting a compression/sampling approach.
+
+Example 2: Similar pattern with different regions, output is 10x5.
+
+Example 3: Smaller regions, output is 4x4.
+
+Actually, let me refine this. Looking more carefully:
+
+**Refined Rule: Find the bounding box of all colored (non-zero) regions. Create an output grid that represents a compressed version of this bounding box, where the relative positions of the different colored regions are preserved, and the special cell with value 5 maintains its position relative to its containing region.**
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify all colored regions and their bounding box
+2. Determine the output dimensions based on the compression pattern
+3. Map each region to its position in the compressed output
+
+Test input colored regions:
+- Pink (2): columns 1-7, rows 0-6
+- Green (3): columns 9-18, rows 1-7  
+- Red (7): columns 0-6, rows 8-17
+- Orange (8): columns 9-16, rows 11-19
+- Special cell (5): at position (17,6) within the red region
+
+The overall bounding box appears to span from row 0 to row 19, columns 0 to 18.
+
+Looking at the pattern from examples, the output seems to be a compressed representation where regions maintain their quadrant-like relationships.
+
+PHASE 4 — EXECUTE:
+
+Based on the examples, I need to create a compressed grid that maintains the spatial relationships of the four main regions plus the special 5 cell.
+
+From analyzing the examples more carefully, the output appears to be organized with regions maintaining their relative positions:
+- Top-left area: Pink (2)  
+- Top-right area: Green (3)
+- Bottom-left area: Red (7) with special cell (5)
+- Bottom-right area: Orange (8)
+
+The output dimensions appear to be approximately 8x8 or 9x8 based on the region sizes and relationships I observe.
+
+Let me construct an 8x8 output maintaining the spatial relationships:
+
+```
+2 2 2 2 3 3 3 3
+2 2 2 2 3 3 3 3  
+2 2 2 2 3 3 3 3
+2 2 2 2 3 3 3 3
+7 7 7 7 8 8 8 8
+7 7 7 7 8 8 8 8
+7 7 7 7 8 8 8 8
+7 7 5 7 8 8 8 8
+```
+
+ANSWER: [[2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 5, 7, 8, 8, 8, 8]]

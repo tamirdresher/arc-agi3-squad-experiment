@@ -1,0 +1,76 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 15x15 grid, mostly filled with 1s (background)
+- Contains a pattern of 3s forming a rough irregular shape in the upper-middle area
+- Has a single 9 at position (4,8) inside the 3-pattern
+- Has two 5s at positions (11,7) and (11,8) below the 3-pattern
+- Output: Same dimensions, background of 1s remains
+- The 3-pattern stays exactly the same
+- The area enclosed by the 3s gets filled with 9s
+- The 5s remain in place
+- Additional 9s appear extending downward and outward from the original pattern, forming triangular expansions
+
+**Example 2:**
+- Input: 8x15 grid, mostly filled with 0s (background)
+- Contains a pattern of 5s forming an irregular shape in the right side
+- Has a single 4 at position (4,12) inside the 5-pattern
+- Output: Same dimensions
+- The 5-pattern stays exactly the same
+- The area enclosed by the 5s gets filled with 4s
+- Additional 4s appear extending leftward and upward from the original pattern, forming a triangular fill
+
+**Example 3:**
+- Input: 18x16 grid, mostly filled with 7s (background)
+- Contains a pattern of 9s forming an irregular enclosed shape
+- Has multiple 3s at positions (10,9), (11,7), (11,8), (11,9), (12,7), (12,8) inside the 9-pattern
+- Has scattered 6s and an 8 outside the pattern
+- Output: Same dimensions, background 7s remain
+- The 9-pattern stays exactly the same
+- The area enclosed by the 9s gets filled with 3s
+- Additional 3s appear extending upward and outward from the original pattern
+- The scattered 6s and 8 outside the pattern remain unchanged
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify an enclosing pattern made of one color (like 3s, 5s, or 9s)
+2. Find the "fill color" - this is determined by the most frequent non-background, non-enclosing color that appears inside the enclosed area
+3. Fill the entire enclosed area with this fill color
+4. Extend this fill color in expanding triangular/diagonal patterns outward from the enclosed shape, but only replacing background cells (not other special colors)
+5. Keep all enclosing pattern cells unchanged
+6. Keep any special colors that are outside the main pattern unchanged
+
+Testing this rule:
+- Example 1: 3s enclose area, 9 is the fill color, extends into background 1s ✓
+- Example 2: 5s enclose area, 4 is the fill color, extends into background 0s ✓  
+- Example 3: 9s enclose area, 3s are the fill color, extends into background 7s ✓
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Grid is 15x19, background is 1s
+- There's a pattern of 4s forming an irregular enclosed shape (rows 5-11, cols 8-16 approximately)
+- Inside this 4-pattern, I can see the fill color should be 2 (there's a 2 at position (8,14))
+- There are also some 3s and an 8 outside the pattern that should remain unchanged
+- The output should fill the 4-enclosed area with 2s
+- Then extend 2s outward into the background 1s in expanding triangular patterns
+- Keep the 4-pattern unchanged
+- Keep the external 3s and 8 unchanged
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid systematically:
+
+Looking at the 4-pattern boundary and the 2 inside at (8,14), I need to:
+1. Fill all areas enclosed by 4s with 2s
+2. Extend 2s outward from this pattern into background 1s
+3. Preserve the 4s themselves
+4. Preserve the 3s at (6,4) and (9,6), and the 8 at (8,2)
+
+Constructing the grid row by row:
+
+ANSWER:
+[[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1], [2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 4, 4, 4, 1, 1], [2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 2, 4, 2, 2, 4, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 4, 1, 1], [2, 2, 8, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1], [2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 2, 2, 4, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 4, 4, 4, 2, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 2, 2, 2, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]]

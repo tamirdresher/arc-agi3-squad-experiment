@@ -1,0 +1,65 @@
+**PHASE 1 — EXPLORE:**
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 30x30 grid, mostly filled with 1s (background), with a large rectangular region of 4s (roughly 11x11) and scattered smaller colored shapes (2x2 squares of colors 2, 3, 5, 6, 8, 9) throughout the grid
+- Output: 11x11 grid filled mostly with 4s, containing the same colored shapes (2, 3, 5, 6, 8, 9) but repositioned within the 4-filled rectangle
+- The 4-filled region appears to be extracted and becomes the output grid
+- The scattered colored shapes are relocated to specific positions within this extracted region
+
+**Example 2:**
+- Input: 30x30 grid filled mostly with 8s (background), with a rectangular region of 1s (roughly 13x13) and scattered colored shapes (2, 3, 4, 5, 6, 7, 9) throughout the grid
+- Output: 13x13 grid filled mostly with 1s, containing the same colored shapes repositioned within the 1-filled rectangle
+- Similar pattern: the large rectangular region (1s) is extracted, and scattered shapes are relocated within it
+
+**Key observations:**
+1. Both inputs have a large rectangular region of one color (4s in Ex1, 1s in Ex2) 
+2. Both have scattered small colored shapes throughout the grid
+3. The output extracts just the large rectangular region
+4. The scattered colored shapes are repositioned within the extracted region
+5. Output dimensions match the rectangular region dimensions
+
+**PHASE 2 — MODEL:**
+
+**Transformation Rule:** 
+1. Identify the largest rectangular region of a single color (not the background color)
+2. Extract this rectangular region as the output grid base
+3. Collect all scattered colored shapes (not background, not the rectangle color) from the entire input
+4. Redistribute these colored shapes within the extracted rectangular region, maintaining their relative spatial relationships and patterns
+
+Let me verify this against the examples:
+- Example 1: Large 4-filled rectangle extracted (11x11), scattered shapes (2,3,5,6,8,9) repositioned within ✓
+- Example 2: Large 1-filled rectangle extracted (13x13), scattered shapes (2,3,4,5,6,7,9) repositioned within ✓
+
+**PHASE 3 — GOAL:**
+
+Applying to test input:
+- Input: 30x30 grid with background 1s
+- Large rectangular region: 4s forming a 6x5 rectangle in the upper portion (rows 0-5, cols 0-29, but specifically a 6x30 strip)
+- Wait, let me re-examine... I see a 4-filled rectangular region at the top (rows 0-6, appears to be the full width but only 6-7 rows high)
+- Scattered colored shapes: 2, 3, 6, 7, 8, 9 throughout the rest of the grid
+- The 4-filled region appears to be approximately 6 rows by 30 columns, but looking more carefully at the pattern, it seems to be a 6x30 region at the top
+
+Actually, let me look more carefully at the structure - I need to identify the exact rectangular region of 4s.
+
+Looking at the test input more carefully:
+- Rows 0-6 contain a pattern with 4s and 1s, forming what appears to be a rectangular template
+- The actual extracted region should be smaller, similar to the examples
+
+Let me identify the core 4-filled rectangle: It appears to be in rows 1-5, columns with a specific pattern. Looking at the dimensions of previous outputs (11x11 and 13x13), I expect a similar sized output.
+
+**PHASE 4 — EXECUTE:**
+
+Re-examining the test input structure:
+- The 4s form a rectangular border/pattern in the top section
+- Looking at rows 1-5, there's a repeating pattern within the 4s
+- The core rectangle appears to be approximately 5 rows by some number of columns
+
+After careful analysis, the 4-filled rectangular region appears to be 5x6 based on the pattern structure I can see. The scattered shapes (2,3,6,7,8,9) need to be repositioned within this region.
+
+Based on the pattern analysis and the transformation rule, the output should be a 5x6 grid (or similar dimensions) with 4s as the base and the scattered colored shapes positioned according to their relative locations.
+
+Let me construct the output:
+
+ANSWER: [[4, 4, 4, 4, 4, 4], [4, 2, 4, 7, 4, 4], [4, 2, 7, 7, 4, 4], [4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4]]

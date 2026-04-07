@@ -1,0 +1,79 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+Example 1:
+- Input: 20x20 grid with several colored regions on a black (0) background
+  - Upper left: Red (2) L-shaped region with some colored cells inside (1, 5, 8, 9)
+  - Upper right: Blue (7) rectangular block
+  - Lower left: Yellow (4) irregular shaped region
+  - Lower right: Green (3) small rectangular region
+- Output: 8x8 grid with colors 1, 5, 8, 9 arranged in specific patterns
+- The output seems to extract and rearrange the non-background colors found within the colored regions
+
+Example 2:
+- Input: 20x20 grid with colored regions
+  - Upper right: Orange (5) irregular region
+  - Middle left: Cyan (6) region with colored cells inside (2, 4, 8, 3)
+  - Lower left: Purple (9) rectangular region
+  - Lower right: White (1) rectangular region
+- Output: 10x10 grid with colors 2, 4, 8, 3 arranged in patterns
+- Again, the output extracts the inner colors from the cyan region and arranges them
+
+Key observations:
+- The output dimensions vary between examples
+- The output contains only the "special" colors found within one of the colored regions
+- The colored regions seem to act as containers, and we extract their contents
+- The arrangement in the output follows some spatial logic
+
+PHASE 2 — MODEL:
+
+Looking at both examples, I can identify the transformation rule:
+
+1. Identify colored regions (non-zero, non-black areas) in the input
+2. Find the region that contains multiple different colored cells within it (not just the region's own color)
+3. Extract those internal colors and their spatial relationships
+4. Create an output grid that arranges these extracted colors in a rectangular pattern that preserves some spatial relationships from the original
+
+In Example 1: The red (2) region contains cells with values 1, 5, 8, 9
+In Example 2: The cyan (6) region contains cells with values 2, 4, 8, 3
+
+The output grid dimensions seem to be determined by creating a rectangular arrangement that can accommodate all the extracted colors while maintaining some spatial logic.
+
+Testing this rule:
+- Example 1: Red region has internal colors → output uses those colors ✓
+- Example 2: Cyan region has internal colors → output uses those colors ✓
+
+PHASE 3 — GOAL:
+
+Applying to test input:
+- Looking for colored regions with internal different-colored cells
+- I can see a large blue (9) region in the upper portion that contains cells with values 3, 6, 4, 8
+- The blue region at positions around (5,4)=(3,6) and (6,4)=(4,8)
+
+The extracted colors are: 3, 6, 4, 8
+Looking at their positions within the blue region:
+- Position (5,4): color 3
+- Position (5,5): color 6  
+- Position (6,4): color 4
+- Position (6,5): color 8
+
+This forms a 2x2 pattern:
+[3, 6]
+[4, 8]
+
+The output should be a rectangular grid that expands this pattern while maintaining the spatial relationships.
+
+PHASE 4 — EXECUTE:
+
+Based on the pattern observed in previous examples, I need to create a larger grid that preserves the 2x2 core pattern and extends it logically.
+
+Looking at the relative positions and the way the previous examples expanded their patterns, I'll create an output that maintains the spatial relationships:
+
+The core 2x2 pattern is:
+[3, 6]
+[4, 8]
+
+Expanding this into a larger rectangular pattern following the logic from the examples:
+
+ANSWER: [[3, 3, 3, 6, 6, 6], [3, 3, 3, 6, 6, 6], [3, 3, 3, 6, 6, 6], [4, 4, 4, 8, 8, 8], [4, 4, 4, 8, 8, 8], [4, 4, 4, 8, 8, 8]]

@@ -1,0 +1,65 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16x16 grid with values 3, 4, 8, 9
+- The grid appears to have distinct regions with different dominant colors
+- Upper left: mix of 3s and 4s
+- Middle area: dominated by 8s and 9s
+- Lower right: some 3s and 4s appear in small patches within the 8/9 region
+- Output: Same dimensions, but the 8s have been systematically replaced
+- Where there were 8s, now there are either 3s or 4s
+- The 9s remain mostly unchanged
+- The original 3s and 4s in the upper left remain similar
+
+**Example 2:**
+- Input: 10x10 grid with values 0, 1, 2, 5
+- Dominant regions: 0s in upper left, 5s forming boundaries/paths, small patches of 1s and 2s
+- Output: Same dimensions
+- The 5s appear to be replaced with either 1s or 2s
+- The 0s remain mostly unchanged
+- Original 1s and 2s influence the replacement pattern
+
+**Example 3:**
+- Input: 20x20 grid with values 5, 6, 7, 8
+- Large regions of different colors with 7s and 8s dominating the middle/right areas
+- Small patches of 5s and 6s appear in various locations
+- Output: Same dimensions
+- The 7s appear to be replaced systematically
+- 8s remain mostly unchanged
+- 5s and 6s influence replacement patterns
+
+PHASE 2 — MODEL:
+
+Looking at all examples, I can identify a consistent transformation rule:
+
+**Transformation Rule:** 
+1. Identify the grid's color regions and find boundary/connector colors (colors that separate major regions)
+2. For each boundary/connector color, replace it with colors from adjacent regions
+3. The replacement follows a pattern where the boundary color gets replaced by the colors that appear in nearby smaller patches or minority regions
+4. Specifically, it appears that one intermediate color gets replaced by colors from the "source" regions (the regions with smaller patches)
+
+Testing this rule:
+- Example 1: 8s (boundary color) get replaced by 3s and 4s (from upper region)
+- Example 2: 5s (boundary color) get replaced by 1s and 2s (from smaller patches)  
+- Example 3: 7s (boundary color) get replaced by 5s and 6s (from smaller patches)
+
+PHASE 3 — GOAL:
+
+For the test input (30x30 grid):
+- Main regions: 3s and 2s in upper left, 6s dominating most of the grid, 4s as boundaries, 2s in lower right
+- The 4s appear to be the boundary/connector color
+- Small patches of 2s and 3s appear in various locations
+- Following the rule: 4s should be replaced by 2s and 3s from the source regions
+
+Expected output: Same 30x30 dimensions, with 4s replaced by appropriate 2s and 3s based on proximity to source regions.
+
+PHASE 4 — EXECUTE:
+
+I'll construct the output by replacing 4s with 2s and 3s based on the patterns observed. The 6s should remain mostly unchanged, and original 2s and 3s should remain.
+
+Looking at the pattern more carefully, I notice that 4s get replaced by the minority colors (2s and 3s) that appear in small patches throughout the grid. The replacement seems to follow the local context of where these minority colors appear.
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 2, 3, 3, 3, 3, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [3, 3, 2, 2, 3, 3, 3, 3, 3, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2], [2, 2, 3, 2, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 3, 2], [2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 3, 2], [3, 3, 3, 3, 3, 3, 2, 3, 3, 2, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 2, 2, 2, 2], [2, 2, 3, 3, 3, 3, 3, 2, 3, 2, 2, 2, 2, 6, 2, 6, 6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6], [3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 6, 6, 2, 6, 2, 6, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 2, 6, 2, 6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 2, 6, 2, 6, 6, 6, 6, 6, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 2, 2, 2, 6, 6, 6, 6, 2, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 6, 6, 2, 6, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 6, 6, 2, 6, 2, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 6, 6, 2, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 2, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 2, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 2, 6, 6, 6, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6], [6, 6, 6, 6, 6, 6, 2, 6, 6, 6, 6, 6, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 6, 6, 6, 2, 6, 6, 6, 6, 6, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [3, 3, 2, 2, 2, 2, 2, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [3, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 3, 2], [3, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2], [2, 2, 2, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]]

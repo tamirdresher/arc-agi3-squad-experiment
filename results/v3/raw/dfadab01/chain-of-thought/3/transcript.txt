@@ -1,0 +1,48 @@
+Looking at the examples, I need to identify the transformation pattern.
+
+Let me analyze the examples step by step:
+
+**Example 1 Analysis:**
+- Input has a 2x2 block of 6s at positions (1-2, 1-2) and (3-4, 3-4)
+- Input has scattered 2s, 3s, and 5s at various positions
+- Output shows rectangular patterns filled with different numbers
+
+**Example 2 Analysis:**
+- Input has a 2x2 block of 1s at positions (5-6, 6-7) and (6-7, 7-8)
+- Input has scattered 2s and 3s
+- Output creates rectangular patterns around the 1s and other positions
+
+**Example 3 Analysis:**
+- Input has a 4x4 block of 4s at positions (0-3, 0-3)
+- Input has scattered 2s
+- Output replicates the 4x4 pattern at positions where 2s appear
+
+**Pattern Recognition:**
+The transformation rule appears to be:
+1. Identify rectangular/square blocks of the same non-zero number in the input
+2. For each other unique non-zero number in the input, create a hollow rectangle pattern at those positions
+3. The rectangle size and pattern seem to be based on the original block structure
+
+**Example 4 Analysis:**
+This confirms the pattern - there are various numbers scattered throughout, and the output creates hollow rectangular patterns of different sizes at the positions of each unique number.
+
+**For the Test Input:**
+- I see scattered 8s at various positions: (1,0), (1,4), (1,8), (1,12), (1,16), (5,0), (5,16), (9,0), (9,8), (9,16), (13,0), (13,12), (13,16), (17,0), (17,4), (17,8), (17,12), (17,16)
+- I see a 2x2 block of 7s at positions (5,5), (5,6), (6,5), (6,6), (7,5), (7,6), (8,4), (8,7) - actually this looks like a cross/diamond pattern
+
+Looking more carefully at the 7s pattern:
+- (5,5): 7, (5,7): 7
+- (6,5): 7, (6,6): 7
+- (7,5): 7, (7,6): 7  
+- (8,4): 7, (8,7): 7
+
+This forms a 2x2 square pattern with 7s.
+
+Based on the examples, it seems like:
+1. The 2x2 block of 7s should be replicated as hollow rectangles at the positions of 8s
+2. The 8s should create some other pattern where the 7s are located
+
+Let me apply this transformation:
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]

@@ -1,0 +1,78 @@
+PHASE 1 — EXPLORE:
+
+**Example 1:**
+- Input: 16×16 grid, mostly 7s (background)
+- Non-7 values: scattered 2s, 9s, and 1s forming diagonal-like patterns
+- 2s appear in upper-left area in a diagonal pattern
+- 9s form a diagonal line in the middle
+- 1s form diagonal patterns in the right and lower areas
+- Output: Same grid size, same background of 7s
+- Changes: Some cells that were 7s in input became non-7 values
+- The diagonal patterns appear to be extended/completed
+
+**Example 2:**
+- Input: 16×16 grid, mostly 7s
+- Non-7 values: 
+  - Row 2: two 5s at positions (2,3) and (2,4)
+  - Row 6: seven 9s from (6,3) to (6,9)
+  - Row 8: twelve 3s from (8,3) to (8,14)
+- Output: Same dimensions and background
+- Changes: The 5s are extended to match the length of the 9s (7 cells total)
+- The 3s are shortened to match the length of the 9s (7 cells total)
+- All three horizontal lines now have the same length (7 cells)
+
+**Example 3:**
+- Input: 16×16 grid, mostly 7s
+- Non-7 values: 8s forming vertical columns in rows 2-7
+- Columns of 8s at various x-coordinates: 2, 5, 7, 9, 13
+- Some columns are incomplete (missing cells in certain rows)
+- Output: Same dimensions and background
+- Changes: All 8 columns are extended to fill rows 2-5 completely
+- The pattern is "completed" to form a rectangular block
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+**"Complete rectangular regions by extending patterns to form uniform rectangular blocks."**
+
+More specifically:
+1. Identify groups of non-background (non-7) values that form partial rectangular patterns
+2. For each group with the same value, determine the bounding rectangle that would contain all instances
+3. Fill in the complete rectangular region with that value
+4. If multiple different values exist, align their extents to match the largest/most complete pattern
+
+Testing against examples:
+- Example 1: Diagonal patterns are extended to complete their implicit rectangular bounds
+- Example 2: Three horizontal lines are normalized to the same length (7 cells)
+- Example 3: Vertical columns of 8s are completed to form a solid rectangular block
+
+PHASE 3 — GOAL:
+
+Applying to test input:
+- Input has 8s in upper area forming partial diagonal/scattered pattern
+- Input has 6s in lower area forming diagonal patterns
+- Need to identify the intended rectangular regions and complete them
+
+8s appear at: (2,5), (3,4), (4,3), (4,7), (5,2), (5,6), (6,5)
+6s appear in diagonal patterns in the lower portion
+
+The 8s seem to form two potential diagonal lines, and the 6s form clear diagonal patterns.
+
+Expected output: Complete the rectangular regions that contain these patterns.
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the test input patterns:
+
+8s form patterns that should be completed into rectangular regions.
+6s form diagonal patterns that should be extended consistently.
+
+Analyzing the 8 positions: (2,5), (3,4), (4,3), (4,7), (5,2), (5,6), (6,5)
+This suggests two diagonal lines that should be completed.
+
+For the 6s, they form clear diagonal patterns that should be extended to complete their implied rectangular bounds.
+
+Constructing the output grid by completing these patterns:
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7]]

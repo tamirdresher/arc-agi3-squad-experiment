@@ -1,0 +1,80 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 16x16 grid with values 0, 5, 6
+- Column 11 is entirely filled with 5s (vertical separator)
+- Left side (cols 0-10): Contains patterns of 0s within a 6-filled background
+- Right side (cols 12-15): Initially all 6s
+- Output: Same structure, but right side now has some 2s replacing 6s in specific locations
+- The 2s appear in a 4x4 block at positions (4-6, 12-15) and (12-13, 12-15)
+
+**Example 2:**
+- Input: 16x10 grid with values 0, 5, 6
+- Column 5 is entirely filled with 5s (vertical separator)
+- Left side (cols 0-4): Contains patterns of 0s within 6-filled background
+- Right side (cols 6-9): Initially all 6s
+- Output: Right side has 2s in 4x4 blocks at rows 3, 8, and 14 (cols 6-9)
+
+**Example 3:**
+- Input: 20x10 grid with values 0, 5, 6
+- Column 7 is entirely filled with 5s (vertical separator)
+- Left side (cols 0-6): Contains patterns of 0s within 6-filled background
+- Right side (cols 8-9): Initially all 6s
+- Output: Right side has 2s in 2x2 blocks at specific rows
+
+Key observations:
+- All grids have a vertical column of 5s acting as a separator
+- Left side contains patterns with 0s and 6s
+- Right side starts as all 6s but gets 2s added in output
+- The 2s appear to be related to specific patterns on the left side
+
+PHASE 2 — MODEL:
+
+Looking more closely at the patterns:
+
+In Example 1, I notice that certain rectangular regions of 0s on the left correspond to where 2s appear on the right.
+
+Let me check for a pattern: The 2s seem to appear on the right side at rows where there are specific 0-patterns on the left side that form particular shapes.
+
+After careful analysis, the rule appears to be:
+1. The grid is divided by a vertical column of 5s
+2. On the left side, identify rectangular regions that contain 0s in a specific pattern
+3. For rows that contain 0-patterns that form "enclosed" or "framed" rectangles (0s forming borders with 6s or other 0s inside), mark the corresponding rows on the right side
+4. Specifically, when there's a pattern where 0s form a rectangular frame with some internal structure, place 2s on the right side for those rows
+
+Let me refine: The 2s appear on the right side at rows where the left side has 0-patterns that form rectangular regions with internal 6s (not just solid blocks of 0s).
+
+More precisely: 2s appear on the right for rows where there are 0-patterns on the left that have "internal structure" - meaning 0s that enclose or frame other values (particularly 6s).
+
+PHASE 3 — GOAL:
+
+Applying to the test input (25x12 grid):
+- Column 8 contains all 5s (separator)
+- Left side: cols 0-7
+- Right side: cols 9-11
+
+I need to identify which rows on the left have 0-patterns with internal structure and mark corresponding rows on the right with 2s.
+
+Looking at the left side patterns:
+- Rows 2-4: Has a rectangular pattern with 0s and internal 6s
+- Rows 8-10: Has 0-patterns 
+- Rows 12-14: Has rectangular 0-patterns with internal structure
+- Rows 16-20: Has 0-patterns
+- Rows 22-24: Has 0-patterns with structure
+
+The rows with 0-patterns that have internal 6s (forming frames/rectangles with content inside) should get 2s on the right.
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the examples, I see that 2s appear when there are 0-patterns on the left that form rectangular shapes with internal variations (not solid blocks).
+
+For the test input, examining each 0-pattern:
+- Row 3: 0,6,0,6 pattern - has internal structure → should get 2s
+- Row 13: 0,6,6,0 pattern - has internal structure → should get 2s  
+- Rows 17,19: 0,6,0 patterns - have internal structure → should get 2s
+- Row 23: 0,6,0 pattern - has internal structure → should get 2s
+
+ANSWER:
+[[6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 0, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 0, 6, 0, 6, 6, 6, 5, 2, 2, 2], [6, 6, 0, 0, 0, 0, 0, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 0, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 0, 6, 6, 0, 5, 2, 2, 2], [6, 6, 6, 6, 0, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 6, 0, 6, 6, 5, 2, 2, 2], [6, 0, 0, 0, 0, 6, 6, 6, 5, 6, 6, 6], [6, 6, 0, 6, 0, 6, 6, 6, 5, 2, 2, 2], [6, 6, 0, 0, 0, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 0, 0, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 6, 0, 2, 2, 2], [6, 6, 6, 6, 6, 6, 0, 0, 0, 6, 6, 6]]

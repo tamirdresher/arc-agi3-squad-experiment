@@ -1,0 +1,64 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 23x24 grid with various colored regions and patterns
+- Key observations:
+  - There's a rectangular border made of 5s in the middle-right portion (rows 8-22, cols 3-21)
+  - Inside this border are repeating 3x3 blocks of colors 3 and 1, separated by 8s
+  - Outside the border are scattered small colored regions (1s, 3s, 2s, 4s) in the upper left
+- Output: 15x19 grid
+- The output appears to be the interior of the 5-bordered rectangle, but transformed
+- The 3x3 blocks of 3s and 1s are replaced with different colors (2s and 4s)
+- The output maintains the 5-border and internal structure
+
+**Example 2:**
+- Input: 22x23 grid
+- Key observations:
+  - There's a rectangular border made of 5s in the lower portion (rows 8-20, cols 1-22)
+  - Inside this border are 4x4 blocks of colors 2, 6, and 3
+  - Outside the border are small colored regions in upper left
+- Output: 13x18 grid
+- Again, this appears to be the interior of the 5-bordered rectangle
+- The 4x4 blocks are transformed to different colors (4→4, 6→7, 3→8, 2→4)
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. **Identify the 5-bordered rectangle**: Find the rectangular region completely enclosed by 5s
+2. **Extract the interior**: Take only the content inside this 5-border (excluding the border itself)
+3. **Apply color mapping**: Transform specific colors within structured blocks according to a mapping derived from small colored regions outside the 5-border
+4. **Preserve structure**: Maintain the spatial arrangement and block patterns, just with recolored blocks
+
+The color mapping seems to come from the small colored regions in the upper-left area outside the main 5-bordered rectangle. These small regions appear to define a color substitution key.
+
+Let me verify this against the examples:
+- Example 1: Small regions show pairs like (1,1) with (4,4), (3,3) with (2,2), suggesting 1→4, 3→2 mappings
+- Example 2: Small regions show pairs suggesting similar color mappings
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. **Find the 5-border**: I can see it runs from rows 9-29, cols 0-20
+2. **Extract interior**: Remove the 5-border to get the internal content
+3. **Identify color mappings**: Look at the small colored regions outside the border in upper-left area
+4. **Apply transformations**: Map colors in the structured blocks according to the identified mappings
+
+Looking at the upper-left small regions in test input:
+- (3,3) paired with (9,9): 3→9 mapping
+- (1,1) paired with (6,6): 1→6 mapping  
+- (2,2) paired with (7,7): 2→7 mapping
+- (8,8) regions present: 8→8 (unchanged)
+
+PHASE 4 — EXECUTE:
+
+The 5-bordered rectangle interior spans from row 10 to row 29, columns 1 to 19 (excluding the 5-border itself).
+
+Extracting this region and applying the color mappings:
+- 3→9, 1→6, 2→7, 8→8 (and other colors remain unchanged)
+
+Let me construct the output grid:
+
+ANSWER:
+[[5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4], [5, 4, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 4], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 4], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 4], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 4], [5, 4, 9, 9, 9, 9, 9, 4, 7, 7, 7, 7, 7, 4, 6, 6, 6, 6, 4], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 4], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 4], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 4], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 4], [5, 4, 4, 4, 4, 4, 4, 4, 8, 8, 8, 8, 8, 4, 7, 7, 7, 7, 4], [5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5], [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]]

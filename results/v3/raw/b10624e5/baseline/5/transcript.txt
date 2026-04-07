@@ -1,0 +1,30 @@
+Looking at this pattern recognition puzzle, I need to analyze how the input transforms to the output.
+
+Key observations:
+1. There's a cross-shaped divider made of 1's - a vertical line at column 13 and a horizontal line at row 13
+2. This creates 4 quadrants: upper-left, upper-right, lower-left, and lower-right
+3. The transformation appears to involve reflecting or mirroring colored patterns across these dividing lines
+
+Let me analyze the examples:
+
+In Example 1:
+- Upper-left quadrant has colored patterns (8s, 2s, 3s)
+- Upper-right quadrant has some 2s
+- Lower-left quadrant has a single 2
+- Lower-right quadrant has a 3x3 block of 2s
+
+In the output, I can see that patterns are reflected across the central lines to create symmetry.
+
+In Example 2:
+- Similar pattern of reflection/mirroring occurs across the central cross
+
+For the test input:
+- Upper-left has: 8s at (3,3)-(4,4), 3s at (3,5)-(4,6), 9s at (5,1)-(6,4), 2s at (5,5)-(6,6), 1s at (7,5)-(8,6)
+- Upper-right has: 2s at (4,19)-(6,21)  
+- Lower-left has: single 2 at (21,5)
+- Lower-right has: 2s at (19,18)-(22,21)
+
+The pattern seems to be that each quadrant gets reflected across both the vertical and horizontal center lines, creating a symmetric pattern.
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 8, 8, 3, 3, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 3, 3, 8, 8, 4, 4, 4], [4, 4, 4, 8, 8, 3, 3, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 3, 3, 8, 8, 4, 4, 4, 4], [4, 9, 9, 9, 9, 2, 2, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 2, 2, 9, 9, 9, 9, 4, 4, 4], [4, 9, 9, 9, 9, 2, 2, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 2, 2, 9, 9, 9, 9, 4, 4, 4], [4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 9, 9, 9, 9, 2, 2, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 2, 2, 9, 9, 9, 9, 4, 4, 4], [4, 9, 9, 9, 9, 2, 2, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 2, 2, 9, 9, 9, 9, 4, 4, 4], [4, 4, 4, 8, 8, 3, 3, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 3, 3, 8, 8, 4, 4, 4, 4, 4], [4, 4, 4, 8, 8, 3, 3, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 3, 3, 8, 8, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

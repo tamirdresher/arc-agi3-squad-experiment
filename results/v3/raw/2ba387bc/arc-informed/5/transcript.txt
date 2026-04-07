@@ -1,0 +1,126 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+Input: 24x23 grid with several colored rectangular regions scattered throughout:
+- Blue (1) 4x4 solid rectangle at top-left area
+- Red (2) 4x4 solid rectangle in upper-middle
+- Gray (8) 4x4 rectangle with hollow center (border only) in upper-right
+- Purple (7) 4x4 solid rectangle in middle-left
+- Green (3) 4x4 rectangle with hollow center in middle-center
+- Cyan (6) 4x4 solid rectangle in middle-right
+- Yellow (4) 4x4 rectangle with hollow center in lower-left
+
+Output: 16x8 grid arranged in a 4x2 pattern of 4x4 blocks:
+- Top row: Gray(8) hollow, Blue(1) solid, Green(3) hollow, Red(2) solid
+- Middle row: Yellow(4) hollow, Purple(7) solid, empty(0), Cyan(6) solid
+
+**Example 2:**
+Input: 20x21 grid with colored regions:
+- Red (2) 4x4 hollow rectangle in upper-left
+- Blue (1) 4x4 solid rectangle in upper-right
+- Yellow (4) 4x4 hollow rectangle in middle-left
+- Gray (8) 4x4 solid rectangle in middle-center
+- Purple (9) 4x4 solid rectangle in lower-right
+
+Output: 12x8 grid arranged in a 3x2 pattern:
+- Top row: Red(2) hollow, Blue(1) solid
+- Middle row: Yellow(4) hollow, Gray(8) solid
+- Bottom row: empty(0), Purple(9) solid
+
+**Example 3:**
+Input: 20x23 grid with colored regions:
+- Gray (8) 4x4 hollow rectangle in upper-left
+- Yellow (4) 4x4 solid rectangle in upper-right
+- Red (2) 4x4 solid rectangle in middle-left
+- Purple (7) 4x4 hollow rectangle in lower-right
+
+Output: 8x8 grid arranged in a 2x2 pattern:
+- Top row: Gray(8) hollow, Yellow(4) solid
+- Bottom row: Purple(7) hollow, Red(2) solid
+
+**Example 4:**
+Input: 22x21 grid with colored regions:
+- Red (2) 4x4 hollow rectangle in upper-left
+- Gray (8) 4x4 hollow rectangle in upper-right
+- Green (3) 4x4 solid rectangle in middle-left
+- Cyan (6) 4x4 hollow rectangle in middle-center
+- Yellow (4) 4x4 solid rectangle in lower-center
+
+Output: 12x8 grid arranged in a 3x2 pattern:
+- Top row: Red(2) hollow, Green(3) solid
+- Middle row: Gray(8) hollow, Yellow(4) solid
+- Bottom row: Cyan(6) hollow, empty(0)
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I can identify the transformation rule:
+
+1. **Identify 4x4 colored regions**: Find all 4x4 rectangular regions in the input that contain non-zero values
+2. **Classify regions**: Each region is either "solid" (completely filled) or "hollow" (border only with 0s in the center)
+3. **Sort by vertical position**: Order regions by their top-left corner's row position
+4. **Pair regions**: Group consecutive regions by vertical bands/rows in the input
+5. **Output arrangement**: Create output grid where:
+   - Each pair of regions becomes one row in the output (8 cells wide, 4 cells tall)
+   - Hollow regions go on the left (columns 0-3)
+   - Solid regions go on the right (columns 4-7)
+   - If a pair has only one region, the other side becomes all 0s
+   - If a pair has two hollow or two solid regions, arrange by horizontal position
+
+Let me verify this rule against the examples... Yes, this matches all the transformations.
+
+PHASE 3 — GOAL:
+
+Applying the rule to the test input, I need to:
+
+1. Identify all 4x4 colored regions:
+   - Cyan (6) solid at rows 1-4, cols 1-4
+   - Yellow (4) hollow at rows 4-7, cols 8-11
+   - Purple (7) solid at rows 7-10, cols 14-17
+   - Blue (1) solid at rows 11-14, cols 2-5
+   - Red (2) hollow at rows 14-17, cols 8-11
+   - Gray (8) solid at rows 19-22, cols 3-6
+
+2. Group by vertical bands:
+   - Band 1 (rows 1-10): Cyan(6) solid, Yellow(4) hollow, Purple(7) solid
+   - Band 2 (rows 11-17): Blue(1) solid, Red(2) hollow
+   - Band 3 (rows 19-22): Gray(8) solid
+
+3. Create pairs and arrange:
+   - Row 1: Yellow(4) hollow left, Cyan(6) solid right
+   - Row 2: Red(2) hollow left, Blue(1) solid right  
+   - Row 3: empty left, Gray(8) solid right
+
+Expected output: 12x8 grid
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid:
+
+Row 1 (Yellow hollow + Cyan solid):
+```
+[4, 4, 4, 4, 6, 6, 6, 6]
+[4, 0, 0, 4, 6, 6, 6, 6]
+[4, 0, 0, 4, 6, 6, 6, 6]
+[4, 4, 4, 4, 6, 6, 6, 6]
+```
+
+Row 2 (Red hollow + Blue solid):
+```
+[2, 2, 2, 2, 1, 1, 1, 1]
+[2, 0, 0, 2, 1, 1, 1, 1]
+[2, 0, 0, 2, 1, 1, 1, 1]
+[2, 2, 2, 2, 1, 1, 1, 1]
+```
+
+Row 3 (Empty + Gray solid):
+```
+[0, 0, 0, 0, 8, 8, 8, 8]
+[0, 0, 0, 0, 8, 8, 8, 8]
+[0, 0, 0, 0, 8, 8, 8, 8]
+[0, 0, 0, 0, 8, 8, 8, 8]
+```
+
+ANSWER:
+[[4, 4, 4, 4, 6, 6, 6, 6], [4, 0, 0, 4, 6, 6, 6, 6], [4, 0, 0, 4, 6, 6, 6, 6], [4, 4, 4, 4, 6, 6, 6, 6], [2, 2, 2, 2, 1, 1, 1, 1], [2, 0, 0, 2, 1, 1, 1, 1], [2, 0, 0, 2, 1, 1, 1, 1], [2, 2, 2, 2, 1, 1, 1, 1], [0, 0, 0, 0, 8, 8, 8, 8], [0, 0, 0, 0, 8, 8, 8, 8], [0, 0, 0, 0, 8, 8, 8, 8], [0, 0, 0, 0, 8, 8, 8, 8]]

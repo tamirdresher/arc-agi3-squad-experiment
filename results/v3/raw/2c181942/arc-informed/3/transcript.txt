@@ -1,0 +1,98 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 20x23 grid with background 8s. Contains scattered colored shapes:
+  - Top area: some 2s forming small clusters
+  - Middle area: small clusters of 6s, 3s, 2s, 1s
+  - Bottom areas: clusters of 4s and 3s
+- Output: Same dimensions. Most of the grid is cleared to 8s, but there's a consolidated rectangular region around rows 8-11, columns 2-11 that contains organized patterns of the same colors (3, 6, 2, 1).
+
+**Example 2:**
+- Input: 18x21 grid with background 8s. Contains:
+  - Scattered 3s in upper right
+  - Central area with 1s, 2s, 4s
+  - Lower left with larger 1 cluster
+  - Lower right with 2s cluster  
+- Output: Same dimensions. Most cleared to 8s, but consolidated rectangular region around rows 4-9, columns 3-13 contains organized patterns of same colors (1, 3, 2, 4).
+
+**Example 3:**
+- Input: 20x25 grid with background 8s. Contains:
+  - Upper areas: 2s and 3s clusters
+  - Middle area: 1s, 2s, 7s, 3s
+  - Lower areas: 7s and 1s clusters
+- Output: Same dimensions. Most cleared to 8s, but consolidated rectangular region around rows 3-12, columns 8-18 contains organized patterns of same colors (1, 2, 7, 3).
+
+**Common patterns:**
+- All inputs have scattered colored shapes on background of 8s
+- All outputs preserve the same grid dimensions
+- Most of output is cleared to background 8s
+- There's always one consolidated rectangular region that contains organized/rearranged versions of the input colors
+- The consolidated region seems to be positioned around the center/middle area of the grid
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify all non-background colored regions in the input (colors other than 8)
+2. Find the geometric center or central area of the grid
+3. Create a consolidated rectangular region around this center
+4. Reorganize all the colored patterns into this central region in a structured/symmetric way
+5. Clear all other areas to background (8s)
+
+Let me test this against the examples:
+- Example 1: Colors 1,2,3,4,6 from scattered locations → organized in central rectangle ✓
+- Example 2: Colors 1,2,3,4 from scattered locations → organized in central rectangle ✓  
+- Example 3: Colors 1,2,3,7 from scattered locations → organized in central rectangle ✓
+
+The rule seems consistent.
+
+PHASE 3 — GOAL:
+
+For the test input (24x26 grid):
+- Input contains scattered colors: 1, 2, 3, 4, 6
+- Colors appear in various clusters throughout the grid
+- Following the rule, I need to:
+  1. Identify the central region of the 24x26 grid (around rows 10-13, columns 10-15)
+  2. Consolidate all colored patterns into an organized rectangular region around this center
+  3. Clear everything else to 8s
+
+PHASE 4 — EXECUTE:
+
+Looking at the test input colors and their positions:
+- 1s: appear in upper right area and middle area
+- 2s: appear in upper left and middle right
+- 3s: appear in middle left
+- 4s: appear in middle and lower right areas  
+- 6s: appear in middle and lower areas
+
+I need to organize these into a central consolidated region. Based on the pattern from examples, this should be around rows 8-15, columns 8-17, organized symmetrically.
+
+Constructing the output grid:
+
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 2, 2, 8, 8, 8, 8, 1, 1, 1, 8, 8, 8, 8, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 2, 2, 2, 8, 8, 8, 1, 1, 1, 8, 8, 8, 8, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 2, 2, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], 
+[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]
+
+ANSWER: [[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 2, 2, 8, 8, 8, 8, 1, 1, 1, 8, 8, 8, 8, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 2, 2, 2, 8, 8, 8, 1, 1, 1, 8, 8, 8, 8, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 2, 2, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 3, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 3, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

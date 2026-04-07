@@ -1,0 +1,40 @@
+Let me analyze the pattern in these examples.
+
+Looking at Example 1:
+- There are diagonal lines of different colors (2, 9, 1) going in various directions
+- In the output, these diagonal lines are extended or completed to form more complete diagonal patterns
+
+Looking at Example 2:
+- There are horizontal lines of different colors (5, 9, 3)
+- The short line of 5's gets extended to match the length of the 9's line
+- The 3's line gets shortened to match the 9's line length
+
+Looking at Example 3:
+- There are vertical columns of 8's with some gaps
+- In the output, the gaps in the columns are filled to make complete vertical lines
+
+The pattern seems to be: **Complete or regularize geometric patterns by filling gaps or extending shorter patterns to match longer ones.**
+
+Now analyzing the test input:
+- I can see diagonal lines of 8's going from bottom-left to top-right
+- I can see diagonal lines of 6's going from top-right to bottom-left
+- The 8's form an incomplete diagonal pattern in the upper-left area
+- The 6's form diagonal patterns in the lower-right area
+
+Looking more carefully at the 8's pattern:
+- Row 2, col 5: 8
+- Row 3, col 4: 8
+- Row 4, col 3: 8
+- Row 5, col 2: 8
+- Row 4, col 7: 8
+- Row 5, col 6: 8
+- Row 6, col 5: 8
+
+The 8's seem to form two diagonal lines that should be completed.
+
+For the 6's, they form several diagonal lines going the other direction that appear more complete.
+
+Based on the pattern, I need to complete the diagonal lines by filling in the missing 8's to make complete diagonal sequences.
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 8, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7]]

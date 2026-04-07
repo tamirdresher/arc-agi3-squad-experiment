@@ -1,0 +1,71 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 22×22 grid with various colored regions and patterns
+- Contains a rectangular region filled mostly with 1s, with some 2s, 3s, and 8s embedded within
+- The 1s form the main background, with vertical line of 8s and some 2s and 3s in specific positions
+- Output: 15×11 grid that appears to be an extracted/cropped version of the inner rectangular pattern
+- The output preserves the internal structure but removes the surrounding border
+
+**Example 2:**
+- Input: 22×22 grid with a rectangular region filled with 2s containing 4s and 8s
+- The main pattern is a rectangle of 2s with some 4s and 8s scattered within
+- Output: 10×10 grid that extracts just the inner rectangular pattern
+- The 3s that bordered the rectangle in the input are not included in the output
+
+**Example 3:**
+- Input: 22×22 grid with a smaller rectangular region containing 8s, 9s, 6s, and other colors
+- The pattern appears to be a compact rectangle in the upper-left portion of the grid
+- Output: 5×5 grid that captures just this inner rectangular region
+- Again, surrounding elements are excluded
+
+**Common patterns:**
+1. Each input contains a rectangular region with a distinct pattern
+2. This rectangular region is surrounded by borders or background elements
+3. The output extracts only the inner rectangular pattern, excluding borders
+4. Output dimensions vary based on the size of the inner pattern
+
+## PHASE 2 — MODEL
+
+**Transformation Rule:**
+The transformation identifies a rectangular region within the input grid that contains a coherent pattern (not just background 0s), then extracts exactly that rectangular region to form the output. The extracted region is the smallest rectangle that contains all the non-background pattern elements, excluding any border elements that frame this pattern.
+
+**Testing the rule:**
+- Example 1: The 1s with embedded 2s, 3s, and 8s form a coherent rectangular pattern. Extracting this gives the 15×11 output. ✓
+- Example 2: The 2s with embedded 4s and 8s form a rectangular pattern. Extracting this gives the 10×10 output. ✓  
+- Example 3: The 8s with embedded 9s, 6s, and 3s form a rectangular pattern. Extracting this gives the 5×5 output. ✓
+
+## PHASE 3 — GOAL
+
+Looking at the test input, I need to identify the rectangular pattern region:
+
+The test input contains a rectangular region from approximately rows 4-15 and columns 4-23, filled primarily with 4s and containing embedded 6s, 7s, 8s, and 9s. This appears to be the coherent pattern that should be extracted.
+
+The pattern spans:
+- Rows 4 to 15 (12 rows)
+- Columns 4 to 23 (20 columns)
+
+Expected output dimensions: 12×20
+
+## PHASE 4 — EXECUTE
+
+Extracting the rectangular region from rows 4-15, columns 4-23:
+
+Row 4: [4, 7, 0, 0, 0, 0, 0, 4, 4, 6, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4]
+Row 5: [4, 7, 4, 0, 0, 0, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4]
+Row 6: [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0]
+Row 7: [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0]
+Row 8: [4, 7, 4, 6, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4]
+Row 9: [4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4]
+Row 10: [4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0]
+Row 11: [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4]
+Row 12: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+Row 13: [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4]
+Row 14: [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4]
+Row 15: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+
+**Verification:** This matches the expected pattern extraction rule - I've isolated the rectangular region containing the main pattern with 4s as the base and various other colors (6, 7, 8, 9) embedded within it.
+
+ANSWER: [[4, 7, 0, 0, 0, 0, 0, 4, 4, 6, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4], [4, 7, 4, 0, 0, 0, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0], [4, 7, 4, 4, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0], [4, 7, 4, 6, 4, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4], [4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4], [4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0], [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

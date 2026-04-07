@@ -1,0 +1,86 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 22×22 grid, mostly filled with 4s (background)
+- Contains a small pattern of 2s in rows 3-5, columns 12-14 (forming a cross-like shape)
+- Contains scattered 8s at positions: (6,4), (8,2), (8,6), (10,4), (12,4)
+- Output: Same dimensions, background still 4s
+- The 2-pattern appears to be replicated/extended, and 8s seem to form a pattern around it
+- The original 2-pattern at (3-5, 12-14) is preserved
+- Additional 2-patterns appear above, below, and to the sides
+- 8s appear to form connections or bridges between the 2-patterns
+
+**Example 2:**
+- Input: 22×22 grid, background of 3s
+- Contains a pattern of 1s in rows 6-9, columns 5-7 (L-shaped or irregular pattern)
+- Contains scattered 2s at positions: (11,13), (11,15), (11,17), (13,15), (15,15)
+- Output: Same dimensions, background still 3s
+- The 1-pattern is replicated in multiple positions
+- 2s seem to be replaced by 1s or integrated into the pattern
+- The original 1-pattern spawns copies above and below
+
+**Example 3:**
+- Input: 22×22 grid, background of 7s
+- Contains a pattern of 4s in rows 5-7, columns 3-5 (triangular arrangement)
+- Contains scattered 6s at positions: (8,13), (10,11), (10,15), (12,11), (12,15)
+- Output: Same dimensions, background still 7s
+- The 4-pattern is replicated and extended
+- 6s seem to be integrated into the pattern or replaced
+- Multiple copies of the 4-pattern appear in a systematic arrangement
+
+PHASE 2 — MODEL:
+
+Analyzing the patterns, I observe:
+
+1. There's always a main "template" pattern (made of one color) in the input
+2. There are scattered "marker" points (made of another color) elsewhere in the grid
+3. The transformation creates copies of the template pattern centered at or near the marker positions
+4. In some cases, the markers themselves become part of the replicated pattern (changing color to match the template)
+
+**Refined Rule:**
+- Identify the main template pattern (the connected/clustered non-background colored region)
+- Identify marker points (isolated colored pixels of a different color than the template)
+- For each marker position, create a copy of the template pattern centered on that position
+- The marker pixels may be replaced by the template color or integrated into the pattern
+- Preserve the original template pattern in its original location
+
+Testing this rule:
+- Example 1: Template is the 2-pattern, markers are 8s → copies of 2-pattern placed at 8 positions, some 8s become part of the pattern
+- Example 2: Template is the 1-pattern, markers are 2s → copies of 1-pattern placed at 2 positions
+- Example 3: Template is the 4-pattern, markers are 6s → copies of 4-pattern placed at 6 positions, 6s become part of pattern
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Background: 8s
+- Template pattern: 6s forming a pattern in rows 5-8, columns 8-10
+- Marker points: 4s at positions (12,8), (14,2), (14,4), (14,6), (14,8), (16,2)
+
+The template pattern (6s) forms:
+```
+  6 6
+6 6 6
+  6
+6 6 6
+```
+
+I need to replicate this pattern centered at each 4-marker position.
+
+PHASE 4 — EXECUTE:
+
+Starting with the background of 8s, I'll place the original 6-pattern and then replicate it at each 4-marker position:
+
+Original pattern at (5-8, 8-10) stays.
+For marker at (12,8): center the pattern around this position
+For marker at (14,2): center the pattern around this position  
+For marker at (14,4): center the pattern around this position
+For marker at (14,6): center the pattern around this position
+For marker at (14,8): center the pattern around this position
+For marker at (16,2): center the pattern around this position
+
+The 4-markers should be replaced by the template color (6) where they overlap with the pattern placement.
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 7, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 6, 6, 6, 6, 6, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 6, 8, 6, 8, 6, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

@@ -1,0 +1,17 @@
+{
+  "task_id": "2ba387bc",
+  "condition": "chain-of-thought",
+  "run_number": 4,
+  "timestamp": "2026-04-07T05:10:17.718231+00:00",
+  "tokens_used": 9824,
+  "wall_clock_seconds": 17.08,
+  "response_hash": "ba6c081b5fe91fb18dfb6b1a347ea1abe075f5071a9a8ea63dcf5470f026f3ca",
+  "extraction_success": true,
+  "exact_match": false,
+  "cell_accuracy": 0.0,
+  "dimension_match": false,
+  "predicted_rows": 12,
+  "predicted_cols": 12,
+  "ground_truth_rows": 16,
+  "ground_truth_cols": 8
+}

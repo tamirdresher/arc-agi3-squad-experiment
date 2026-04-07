@@ -1,0 +1,91 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+- Input: 22×22 grid with various colors (0-8)
+- Contains a rectangular region filled mostly with 1s, with some other colors (2, 3, 8) embedded within
+- The rectangular region appears to be bounded by other colors
+- Output: 11×15 grid containing only the rectangular region with 1s as background and other colors preserved
+- The output seems to be an extracted/cropped version of the main rectangular pattern
+
+**Example 2:**
+- Input: 22×22 grid 
+- Contains a rectangular region filled mostly with 2s, with colors 4 and 8 embedded within
+- The region is bounded by 3s on the left and 1s on the bottom
+- Output: 10×10 grid containing the rectangular pattern
+- Again, this appears to be an extraction of the main rectangular region
+
+**Example 3:**
+- Input: 22×22 grid
+- Contains a smaller rectangular region with 8s as background and colors 9, 3, 6 embedded
+- The region is bounded by 4s and 2s
+- Output: 5×5 grid containing just the rectangular pattern
+- Same extraction pattern
+
+**Common observations:**
+1. Each input has a large grid (22×22) with a smaller rectangular pattern embedded within
+2. The rectangular patterns have a dominant background color with other colors embedded
+3. The output is always just the extracted rectangular pattern, cropped to its boundaries
+4. The extracted region maintains its internal structure exactly
+
+## PHASE 2 — MODEL
+
+**Transformation Rule:**
+1. Identify the main rectangular region in the input that contains a pattern with a dominant background color and embedded elements
+2. This region is typically bounded by border colors or distinct markers
+3. Extract/crop this rectangular region exactly as it appears
+4. Output only this cropped region, preserving all internal colors and patterns
+
+Testing against examples:
+- Example 1: ✓ Extracts the 1-filled rectangle with embedded 2s, 3s, 8s
+- Example 2: ✓ Extracts the 2-filled rectangle with embedded 4s and 8s  
+- Example 3: ✓ Extracts the 8-filled rectangle with embedded 9s, 3s, 6s
+
+The rule consistently identifies and extracts the main patterned rectangular region from each larger input grid.
+
+## PHASE 3 — GOAL
+
+Applying the rule to the test input:
+
+Looking at the test input (29×29), I need to identify the main rectangular pattern:
+- I can see a rectangular region that starts around row 4 and contains 4s as the dominant color
+- This region has 7s forming borders/lines and other embedded colors (6, 8, 9)
+- The region appears to span from approximately column 4 to column 23, and from row 4 to row 15
+- Looking more carefully, the main pattern is bounded and contains:
+  - Background of 4s
+  - Vertical and horizontal lines of 7s
+  - Embedded 6s in various positions
+  - 8s and 9s in specific locations
+
+The extracted region should be approximately 12 rows by 20 columns based on the pattern boundaries.
+
+## PHASE 4 — EXECUTE
+
+Looking more precisely at the test input, I can identify the rectangular region from rows 4-15 and columns 4-23:
+
+The pattern contains:
+- Row 0: 4,7,0,0,0,0,0,4,4,6,4,4,4,4,4,4,4,4,0,0
+- Row 1: 4,7,4,0,0,0,4,4,4,6,4,6,6,6,6,6,4,7,4,4
+- And so on...
+
+Let me extract the exact rectangular region:
+
+Looking at rows 4-15 and columns 4-23 (the main patterned area):
+
+```
+4,7,0,0,0,0,0,4,4,6,4,4,4,4,4,4,4,4,0,0
+4,7,4,0,0,0,4,4,4,6,4,6,6,6,6,6,4,7,4,4
+4,7,4,4,4,4,4,4,4,6,4,6,4,4,4,6,4,7,4,0
+4,7,4,4,4,4,4,4,4,6,4,4,4,4,4,6,4,7,4,0
+4,7,4,6,4,6,6,6,6,6,4,4,4,4,4,6,4,7,4,4
+4,7,4,6,6,4,4,4,4,4,4,4,4,4,6,6,4,7,4,4
+4,7,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,4,0
+4,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,4,4
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,4
+4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,4
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+```
+
+ANSWER: [[4,7,0,0,0,0,0,4,4,6,4,4,4,4,4,4,4,4,0,0],[4,7,4,0,0,0,4,4,4,6,4,6,6,6,6,6,4,7,4,4],[4,7,4,4,4,4,4,4,4,6,4,6,4,4,4,6,4,7,4,0],[4,7,4,4,4,4,4,4,4,6,4,4,4,4,4,6,4,7,4,0],[4,7,4,6,4,6,6,6,6,6,4,4,4,4,4,6,4,7,4,4],[4,7,4,6,6,4,4,4,4,4,4,4,4,4,6,6,4,7,4,4],[4,7,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,4,0],[4,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,4,4],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,4],[4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4,4],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]]

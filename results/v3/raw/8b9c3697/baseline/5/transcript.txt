@@ -1,0 +1,45 @@
+Looking at the examples, I need to identify the pattern:
+
+1. There are rectangular structures made of a specific color (1 in Example 1, 4 in Examples 2&3, 4 in test input)
+2. There are scattered 2s throughout the grid
+3. In the output:
+   - Some 2s are preserved in their original positions
+   - Some 2s are replaced with 0s
+   - Vertical lines of 0s extend downward from certain 2s
+
+Let me analyze the pattern more carefully:
+
+In Example 1:
+- There's a rectangular structure made of 1s
+- 2s that are horizontally aligned with openings in the rectangular structure create vertical lines of 0s downward
+- Other 2s are removed
+
+In Example 2:
+- There's a rectangular structure made of 4s
+- A 2 at position (9,6) is horizontally aligned with an opening in the structure and creates a vertical line of 0s
+- 2s that form 2x2 blocks within the rectangular boundaries are preserved
+- Other isolated 2s are removed
+
+In Example 3:
+- Similar pattern with 4-structures
+- 2s create vertical lines of 0s when aligned with openings
+- 2x2 blocks of 2s within structures are preserved
+
+For the test input:
+- There are 4-structures (rectangular frames)
+- I need to identify which 2s are:
+  1. Part of 2x2 blocks within the structures (preserve as 2s)
+  2. Aligned with openings in structures (create vertical 0-lines)
+  3. Isolated (remove completely)
+
+Looking at the test input, I can see:
+- A 4-structure around rows 3-6, columns 14-20
+- Another 4-structure around rows 7-13, columns 7-10
+- A 4-structure around rows 17-20, columns 20-26
+
+The 2 at (11,14) appears to be aligned with an opening and should create a vertical line of 0s.
+The 2 at (11,17) also appears to be aligned with an opening.
+The 2x2 blocks should be preserved where they fall within structure boundaries.
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 2, 2, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3], [3, 3, 2, 2, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3], [3, 3, 2, 2, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 2, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 4, 3, 4, 3], [3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4], [3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

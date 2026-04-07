@@ -1,0 +1,40 @@
+Looking at the examples, I need to identify the pattern:
+
+In Example 1:
+- There's a cross pattern made of 1s at position (4,4) with arms extending up/down/left/right
+- There's a horizontal stripe of alternating 2,3,2,3... starting from the right arm of the cross
+- There's another cross pattern of 1s at position (14,10)
+- There's a small pattern with 4 and 2 near the second cross
+- The output extends the alternating 2,4,2,4... pattern vertically through the column where the small pattern appears
+
+In Example 2:
+- There's a rectangular block of 1s in the upper left
+- There's a vertical stripe of alternating 2,3,2,3... 
+- There's another rectangular block of 1s in the lower right
+- There's a small pattern with 4 and 2 near the second block
+- The output extends the 4,2,4,2... pattern vertically through that column
+
+The pattern seems to be:
+1. Identify small marker patterns (like the 4,2 or 2,5 etc.)
+2. These markers indicate where to extend alternating patterns vertically
+3. The alternating pattern uses the values from the marker
+
+For the test input:
+- I can see cross patterns of 1s at (5,3) and (16,10) and (20,15)
+- There are alternating stripes: 4,3,6,2,4,3,6,2... and 2,5,7,3... patterns
+- Small marker patterns appear at (13,9): 2,5 and (22,14): 2,4 and (23,14): 3,5
+
+Looking more carefully at the vertical positions:
+- At column 9: there's a 2,5 pattern at row 13-14, and I should extend a 2,7,2,7... pattern vertically
+- At column 14: there's a 2,4 and 3,5 pattern, suggesting alternating values vertically
+
+Let me trace through the test input more systematically:
+
+The marker patterns suggest:
+- Column 9 should have alternating 2,7 values
+- Column 14 should have alternating 2,3 and 4,5 in some pattern
+
+After analyzing the structure, the pattern extends the alternating sequences vertically through the columns where marker patterns appear.
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 8, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 8, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 1, 1, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 1, 1, 1, 1, 8, 8, 8, 7, 8, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 1, 1, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 8, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 8, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 8, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 2, 5, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 7, 3, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 1, 1, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 1, 1, 1, 1, 8, 8, 2, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 1, 1, 8, 8, 8, 4, 8, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 8, 8, 8, 8, 1, 1, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 8, 8, 8, 1, 1, 1, 1, 8], [8, 8, 8, 4, 3, 8, 8, 8, 8, 7, 8, 8, 8, 8, 1, 1, 8, 8], [8, 8, 8, 6, 2, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 4, 8, 8], [8, 8, 8, 6, 3, 8, 8, 8, 8, 7, 8, 8, 8, 8, 3, 5, 8, 8], [8, 8, 8, 4, 2, 8, 8, 8, 8, 2, 8, 8, 8, 8, 2, 8, 8, 8]]

@@ -1,0 +1,26 @@
+Looking at the examples, I can see a pattern where rectangular regions of 1s are transformed according to specific rules:
+
+1. Each rectangular region of 1s gets surrounded by a border of 2s
+2. The interior 1s are replaced with different colors based on their position and context
+3. There's a hierarchical transformation: 1 → 8 → 6, where isolated 1s become 8s, and 1s that would become 8s but are inside larger rectangular regions become 6s
+
+Let me analyze the test input:
+
+I can identify several rectangular regions of 1s:
+- Large region from rows 2-11, cols 4-16
+- Region from rows 10-15, cols 18-25  
+- Region from rows 15-20, cols 7-12
+- Small region from rows 21-23, cols 20-23
+
+Applying the transformation rules:
+
+1. Add 2-borders around each region
+2. Transform interior 1s:
+   - Most 1s become 8s
+   - Isolated single 1s within larger regions become 6s
+   - 1s that are part of small sub-regions within larger regions get special treatment
+
+Following this pattern systematically:
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4], [4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4], [4, 4, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 2, 8, 8, 8, 8, 2, 4, 4, 4], [4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 8, 8, 2], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 2, 8, 6, 6, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 8, 8, 2, 4, 4, 4, 4, 4, 4, 2, 8, 8, 8, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

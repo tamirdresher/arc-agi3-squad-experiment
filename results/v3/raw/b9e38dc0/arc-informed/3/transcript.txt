@@ -1,0 +1,55 @@
+PHASE 1 — EXPLORE:
+
+**Example 1:**
+- Input: 15x15 grid with background of 1s, contains a shape made of 3s (forming an irregular enclosed region), a single 9 inside the 3-shape, and two 5s near the bottom
+- Output: Same grid but the area enclosed by the 3s is filled with 9s, and there's a triangular expansion of 9s extending downward from the enclosed region, with the 5s preserved in their original positions
+- The 3s boundary remains intact
+
+**Example 2:**
+- Input: 8x15 grid with background of 0s, contains a shape made of 5s (forming an irregular enclosed region), and a single 4 inside the 5-shape
+- Output: The area enclosed by the 5s is filled with 4s, and there's a triangular expansion of 4s extending leftward and upward from the enclosed region
+- The 5s boundary remains intact
+
+**Example 3:**
+- Input: 18x16 grid with background of 7s, contains a shape made of 9s (forming an irregular enclosed region), several 3s inside the 9-shape, scattered 6s outside the shape, and one 8
+- Output: The area enclosed by the 9s is filled with 3s, and there's a triangular/rectangular expansion of 3s extending upward from the enclosed region
+- The 9s boundary remains intact, scattered elements (6s, 8) outside the main shape are preserved
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify a closed boundary made of one color (the "boundary color")
+2. Find the "fill color" - a distinctive color that appears inside the bounded region
+3. Fill the entire enclosed region with the fill color
+4. Create a geometric expansion of the fill color extending outward from the bounded region in a specific direction (seems to be toward the nearest edge or a direction that creates a triangular/trapezoidal pattern)
+5. Preserve all other elements outside the main transformation area
+6. Keep the original boundary intact
+
+Testing against examples:
+- Example 1: 3s boundary, 9 fill color → 9s fill the enclosed area and expand downward ✓
+- Example 2: 5s boundary, 4 fill color → 4s fill the enclosed area and expand leftward/upward ✓  
+- Example 3: 9s boundary, 3s fill color → 3s fill the enclosed area and expand upward ✓
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Grid is 15x19
+- Background is 1s
+- There's a shape made of 4s forming a boundary
+- Inside the 4s boundary, there's a 2
+- Outside the main region: scattered 3s and one 8
+- The 4s form an irregular enclosed region in the upper-middle part of the grid
+- Fill color should be 2 (the distinctive color inside the 4s boundary)
+- The expansion should extend outward from the bounded region, likely downward and/or leftward based on the pattern
+
+PHASE 4 — EXECUTE:
+
+Looking at the 4s boundary in the test input, it forms an irregular shape roughly between rows 5-11 and columns 8-16. The 2 is at position (8,14). I need to:
+1. Fill the area enclosed by 4s with 2s
+2. Create an expansion of 2s extending from this region
+3. Preserve the 4s boundary, the scattered 3s, and the 8
+
+The bounded region appears to be roughly in the area from (5,8) to (11,16). The expansion should extend leftward and downward to create a triangular pattern similar to the examples.
+
+ANSWER:
+[[2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 2, 2, 2, 4, 4, 4, 1, 1], [2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 2, 4, 2, 2, 4, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 2, 2, 2, 4, 1, 1], [2, 2, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1], [2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 4, 4, 2, 2, 4, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 2, 4, 4, 4, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]

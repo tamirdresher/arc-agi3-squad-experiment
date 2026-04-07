@@ -1,0 +1,76 @@
+PHASE 1 — EXPLORE:
+
+Looking at Example 1:
+- Input: 22x22 grid mostly filled with 4s (background)
+- Contains a pattern of 2s forming a cross-like shape at rows 3-5, columns 12-14
+- Contains scattered 8s at various positions: (6,4), (8,2), (8,6), (10,4), (12,4)
+- Output: The 2 pattern is replicated multiple times, and 8s appear to influence where replications occur
+
+Looking at Example 2:
+- Input: 22x22 grid mostly filled with 3s (background)
+- Contains a pattern of 1s forming an L-like shape at rows 6-9, columns 5-7
+- Contains scattered 2s at: (11,13), (11,15), (11,17), (13,15), (15,15)
+- Output: The 1 pattern is replicated multiple times, with 2s appearing in some replications
+
+Looking at Example 3:
+- Input: 22x22 grid mostly filled with 7s (background)
+- Contains a pattern of 4s forming a triangular shape at rows 5-7, columns 3-5
+- Contains scattered 6s at: (8,13), (10,11), (10,15), (12,11), (12,15)
+- Output: The 4 pattern is replicated, with 6s appearing in the center of some replications
+
+Common observations:
+- All grids are 22x22
+- Each has a dominant background color
+- Each has one main pattern (made of one color)
+- Each has scattered single cells of another color
+- The output replicates the main pattern multiple times
+- The scattered single cells seem to mark positions where pattern replications occur
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify the main pattern (non-background, non-scattered cells that form a connected shape)
+2. Identify scattered marker cells (isolated single cells of a different color)
+3. For each marker cell position, replicate the main pattern centered on that marker
+4. In the replication, replace the main pattern's color with the marker's color
+5. Keep the original main pattern in its original location
+
+Testing this rule:
+- Example 1: 2-pattern replicated at 8-marker positions, with 8s replacing 2s in replications ✓
+- Example 2: 1-pattern replicated at 2-marker positions, with 2s replacing 1s in replications ✓  
+- Example 3: 4-pattern replicated at 6-marker positions, with 6s replacing 4s in replications ✓
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Background: 8s
+- Main pattern: 6s forming a shape at rows 5-8, columns 8-10
+- Marker cells: 4s at positions (12,8), (14,2), (14,4), (14,6), (14,8), (16,2)
+
+The 6-pattern should be replicated at each 4-marker position, with 6s replaced by 4s in the replications.
+
+Main pattern shape (relative to center):
+```
+  6 6
+6 6 6
+  6
+6 6 6
+```
+
+PHASE 4 — EXECUTE:
+
+Starting with the original grid and applying transformations:
+
+1. Keep original 6-pattern at rows 5-8, columns 8-10
+2. For each 4-marker, place the pattern (with 4s instead of 6s) centered on that position
+3. Marker at (12,8): pattern centered here
+4. Marker at (14,2): pattern centered here  
+5. Marker at (14,4): pattern centered here
+6. Marker at (14,6): pattern centered here
+7. Marker at (14,8): pattern centered here
+8. Marker at (16,2): pattern centered here
+
+Constructing the output grid:
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 4, 4, 8, 8, 8, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 4, 4, 4, 8, 8, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 4, 4, 3, 4, 4, 8, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [4, 4, 4, 4, 4, 4, 4, 8, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 4, 8, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

@@ -1,0 +1,85 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully.
+
+**Example 1:**
+Input: 22x22 grid with background 0s, containing rectangular structures with colored borders (8) and colored interiors (5, 1, 3, 9, 6, 4), and some structures with different colored borders (2).
+
+Output: Same dimensions, but the rectangular structures appear to have been moved/repositioned. The structures maintain their shape and internal colors, but their positions have changed.
+
+Looking more closely:
+- Structures with border 8 seem to move to different locations
+- Structures with border 2 also move to different locations
+- The background remains 0
+- The internal structure (border + interior) remains intact
+
+**Example 2:**
+Input: 22x22 grid with background 4s, containing rectangular structures with borders (8, 2) and various colored interiors (9, 5, 3, 6, 1).
+
+Output: Same dimensions, background still 4s, but rectangular structures have moved to different positions while maintaining their internal structure.
+
+**Example 3:**
+Input: 22x22 grid with background 1s, containing rectangular structures with borders (8, 2) and colored interiors (2, 3, 6, 5, 4).
+
+Output: Same dimensions, background still 1s, but rectangular structures have repositioned.
+
+**Pattern observation:** In all cases, rectangular structures (defined by a border and interior) move positions but maintain their internal composition. The background color remains unchanged.
+
+PHASE 2 — MODEL:
+
+Looking at the movement patterns more carefully:
+
+In Example 1, I notice that structures seem to move towards the edges/corners of the grid. Let me check if there's a systematic movement pattern.
+
+Examining the coordinates more carefully, I see that rectangular structures appear to be moving to align with the leftmost and rightmost edges of the grid, while maintaining their relative vertical positions approximately.
+
+**Refined observation:** 
+- Structures with border color 8 move to the left edge (column 0)
+- Structures with border color 2 move to the right edge 
+- When structures would overlap, they seem to connect or merge their borders
+
+**Transformation Rule:**
+1. Identify all rectangular structures (defined by border pixels of the same color enclosing different colored interiors)
+2. Move structures with border color 8 to align with the left edge of the grid
+3. Move structures with border color 2 to align with the right edge of the grid
+4. Maintain the internal structure and size of each rectangle
+5. When moved structures would have adjacent borders, merge the borders
+6. Keep the background color unchanged in unoccupied areas
+
+PHASE 3 — GOAL:
+
+Applying this rule to the test input:
+
+The test input has a 22x22 grid with background 9s. I can identify several rectangular structures:
+
+1. Structures with border 2 containing interiors 4, 3, 6, 3
+2. Structures with border 8 containing interiors 4, 1, 7, 3
+
+According to the rule:
+- Border 8 structures should move to the left edge
+- Border 2 structures should move to the right edge
+- Background remains 9s
+- Internal structures are preserved
+
+PHASE 4 — EXECUTE:
+
+Let me construct the output grid systematically:
+
+Starting with background 9s, then placing:
+
+Left side (border 8 structures):
+- 8-bordered structure with interior 1 at rows 7-11
+- 8-bordered structure with interior 7 at rows 8-12  
+- 8-bordered structure with interior 4 at rows 3-7
+- 8-bordered structure with interior 3 at rows 16-20
+
+Right side (border 2 structures):
+- 2-bordered structure with interior 4 at rows 0-4
+- 2-bordered structure with interior 3 at rows 2-6
+- 2-bordered structure with interior 6 at rows 13-17
+- 2-bordered structure with interior 3 at rows 15-19
+
+When structures are adjacent, their borders merge.
+
+ANSWER:
+[[2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [2, 4, 4, 4, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [2, 2, 2, 2, 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 3, 3, 3, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 1, 1, 1, 8, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9], [8, 1, 1, 1, 8, 9, 9, 9, 9, 9, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9], [8, 1, 1, 1, 8, 9, 9, 9, 9, 9, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 8, 7, 7, 7, 8, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 6, 6, 6, 2], [8, 3, 3, 3, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 2, 2, 2, 2, 2], [8, 3, 3, 3, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 3, 3, 3, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

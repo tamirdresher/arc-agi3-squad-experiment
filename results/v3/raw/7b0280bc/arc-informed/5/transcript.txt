@@ -1,0 +1,94 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 18x18 grid with background color 8, contains colored blocks (0, 1, 2) forming rectangular patterns
+- Output: Same grid but some 0s have been changed to 5s, and some 2s have been changed to 3s
+- The 1s remain unchanged as 1s
+- Grid dimensions stay the same (18x18)
+
+**Example 2:**
+- Input: 15x14 grid with background color 9, contains colored blocks (4, 6, 7) forming rectangular patterns
+- Output: Same grid but some 4s have been changed to 5s, and some 7s have been changed to 3s
+- The 6s remain unchanged as 6s
+- Grid dimensions stay the same (15x14)
+
+**Example 3:**
+- Input: 20x20 grid with background color 7, contains colored blocks (1, 2, 6) forming rectangular patterns
+- Output: Same grid but some 6s have been changed to 5s, and some 1s have been changed to 3s
+- The 2s remain unchanged as 2s
+- Grid dimensions stay the same (20x20)
+
+**Key observations:**
+- Background color always remains unchanged
+- There are always exactly 3 non-background colors in each input
+- One color remains completely unchanged
+- The other two colors get transformed to new values (3 and 5)
+
+PHASE 2 — MODEL:
+
+Looking at the pattern of transformations:
+
+**Example 1:** 0→5, 1→1 (unchanged), 2→3
+**Example 2:** 4→5, 6→6 (unchanged), 7→3  
+**Example 3:** 6→5, 2→2 (unchanged), 1→3
+
+The transformation rule appears to be:
+1. Identify the three non-background colors in the input
+2. One of these colors remains unchanged (appears to be the "middle" color in some ordering)
+3. One color gets mapped to 5
+4. One color gets mapped to 3
+5. The background color remains unchanged
+
+Let me verify this pattern more carefully. Looking at the color values:
+- Example 1: Colors {0,1,2} → 0→5, 1→1, 2→3
+- Example 2: Colors {4,6,7} → 4→5, 6→6, 7→3  
+- Example 3: Colors {1,2,6} → 1→3, 2→2, 6→5
+
+It seems like:
+- The color that maps to 5 varies
+- The color that maps to 3 varies  
+- The unchanged color varies
+
+Let me look for a different pattern. Perhaps it's based on frequency or position of the colors...
+
+Actually, looking more carefully at spatial relationships, it appears:
+- The color that appears in certain rectangular blocks gets mapped to 5
+- The color that appears in other rectangular blocks gets mapped to 3
+- One color consistently remains unchanged
+
+The rule seems to be:
+**Transform specific non-background colors: one type → 5, another type → 3, one type unchanged, background unchanged**
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Background color: 4
+- Non-background colors: {0, 1, 9}
+- Grid dimensions: 30x30
+
+Based on the pattern from examples, I need to determine which color maps to which:
+- One color → 5
+- One color → 3  
+- One color → unchanged (stays as is)
+
+Looking at the test input patterns, I can see rectangular blocks of colors 0, 1, and 9 mixed with background color 4.
+
+Following the established pattern:
+- 0 → 5 (based on similar positioning patterns from examples)
+- 1 → 1 (unchanged, as it appears frequently like in other examples)
+- 9 → 3 (based on similar positioning patterns from examples)
+
+PHASE 4 — EXECUTE:
+
+I'll construct the output grid by applying the transformation:
+- 4 → 4 (background unchanged)
+- 0 → 5
+- 1 → 1 (unchanged)
+- 9 → 3
+
+Let me go through the test input systematically and apply these mappings:
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4], [4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 5, 5, 5, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 1, 1, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4], [4, 4, 4, 1, 1, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4], [4, 4, 4, 3, 3, 3, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 1, 1, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 3, 3, 3, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 3, 3, 3, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

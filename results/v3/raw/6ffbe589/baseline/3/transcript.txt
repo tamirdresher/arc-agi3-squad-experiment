@@ -1,0 +1,44 @@
+Looking at the examples, I need to identify the pattern for extracting a smaller grid from the larger input.
+
+Let me analyze the examples:
+
+Example 1: The input has a rectangular region bounded by 3's (forming a frame), with 8's and 6's inside. The output extracts this bounded region.
+
+Example 2: Similar pattern - there's a region with 5's forming an outer boundary and 3's forming an inner frame, with 4's inside. The output extracts this region.
+
+Example 3: There's a checkerboard-like pattern of 4's forming boundaries, with 1's and 2's inside. The output extracts this bounded region.
+
+The pattern appears to be:
+1. Find a rectangular region that contains non-zero values arranged in some structured pattern
+2. Extract that region as the output
+3. The region typically has boundary elements (like 3's, 5's, or 4's) and inner content
+
+For the test input, I can see:
+- There are 5's forming what appears to be boundary lines
+- There are 3's forming an inner rectangular frame
+- There's a 4 inside the 3's frame
+- The main structured region appears to be around rows 10-14, columns 7-19
+
+Looking more carefully at the test input, I can identify a rectangular region from approximately:
+- Rows 10-14 (the area with the dense 3's and 5's pattern)
+- Columns 7-19 (spanning the width of this pattern)
+
+Let me extract this region:
+
+Row 10: [0, 5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+Row 11: [0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+Row 12: [0, 5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5]
+Row 13: [0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5]
+Row 14: [0, 5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]
+
+Wait, let me look more carefully. I see there's a more compact region. Looking at columns 10-16 and rows 10-14:
+
+Row 10: [3, 3, 3, 3, 3, 3, 0]
+Row 11: [0, 3, 0, 0, 0, 3, 3]
+Row 12: [3, 3, 0, 4, 0, 3, 3]
+Row 13: [0, 3, 0, 0, 0, 3, 3]
+Row 14: [3, 3, 3, 3, 3, 3, 0]
+
+Actually, let me be more systematic and look at the full pattern including the 5's:
+
+ANSWER: [[0, 5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5], [0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [0, 5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5], [0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5], [0, 5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5]]

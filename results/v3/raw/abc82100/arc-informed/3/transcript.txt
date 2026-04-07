@@ -1,0 +1,80 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 5x5 grid with values 1, 2, 8, 0. Has a pattern of 1s in specific positions and 8s in the top row.
+- Output: 5x5 grid with only values 2 and 0. The 2s appear to form a pattern related to where 1s were in the input.
+- The 8s from the input seem to disappear, and 2s appear in positions that seem related to the 1 positions.
+
+**Example 2:**
+- Input: 15x15 grid with various numbers (0,2,4,6,7,8). Contains structured patterns.
+- Output: 15x15 grid with numbers 0,2,4,6,7. The 8s are gone, and other numbers form regular patterns.
+- There are alternating patterns in rows 0-1 with 7s, and other structured arrangements.
+
+**Example 3:**
+- Input: 20x20 grid with numbers 0,1,2,4,7,8. Contains scattered patterns of different numbers.
+- Output: 20x20 grid with numbers 0,2,7. Again, 8s are removed, and remaining numbers form patterns.
+- The top section has alternating 2s, bottom section has 7s in specific patterns.
+
+**Example 4:**
+- Input: 8x8 grid with numbers 0,1,2,8. Column 5 is entirely 2s, row 0 has several 1s.
+- Output: 8x8 grid with numbers 0,1,2. The 8s are removed. Row 0 becomes all 2s, column 5 becomes all 1s.
+- This suggests a swapping or transformation between certain numbers.
+
+**Common observations:**
+- 8s always disappear from input to output
+- Other numbers seem to rearrange in specific patterns
+- Grid dimensions remain the same
+
+PHASE 2 — MODEL:
+
+Looking at the patterns more carefully, particularly Example 4 which is clearest:
+
+In Example 4:
+- Input has 1s in row 0, positions 0-4
+- Input has 2s in column 5, all rows
+- Output has 2s in row 0, positions 0-4 (where 1s were)
+- Output has 1s in column 5, all rows (where 2s were)
+- All 8s are removed (become 0s)
+
+This suggests a **swap rule**: Numbers 1 and 2 swap positions, and 8s become 0s.
+
+Testing this on other examples:
+- In examples 2 and 3, this pattern is harder to see due to complexity, but the principle seems to hold
+- The transformation appears to involve identifying certain number pairs and swapping their positions
+- 8s consistently become 0s
+
+**Refined rule:** The transformation removes all 8s (converts to 0s) and swaps the positions of certain number pairs. Based on the examples, it appears that 1↔2 swap positions in the grid.
+
+PHASE 3 — GOAL:
+
+Applying the transformation rule to the test input:
+1. Remove all 8s (convert to 0s)
+2. Swap positions of 1s and 2s
+
+The test input is 20x20, so output will be 20x20.
+
+Looking at the test input:
+- 8s appear in various positions - these will become 0s
+- 1s appear at positions: (2,2), (2,10)
+- 2s appear at positions: (1,0), (6,1), (6,11), (8,6), (12,16), (14,1), (14,5), (14,13)
+
+After transformation:
+- All 8 positions become 0
+- 1s move to where 2s were: (1,0), (6,1), (6,11), (8,6), (12,16), (14,1), (14,5), (14,13)
+- 2s move to where 1s were: (2,2), (2,10)
+- All other numbers (0,4,5,6,7) stay in their original positions
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid by applying the transformation:
+
+Starting with the test input and applying the rules:
+- Replace all 8s with 0s
+- Move 1s to 2 positions: (1,0), (6,1), (6,11), (8,6), (12,16), (14,1), (14,5), (14,13)
+- Move 2s to 1 positions: (2,2), (2,10)
+- Keep all other values unchanged
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0], [1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6], [0, 4, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0], [0, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0], [0, 5, 7, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6], [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 6, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [5, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]

@@ -1,0 +1,86 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 22×22 grid with various colors (0,1,2,3,4,5,6,8)
+- Contains a rectangular region with 1s that has internal patterns (2s, 3s, 8s)
+- Has border elements: row 0 all 4s, column 0 all 6s, bottom row and rightmost column have 5s scattered
+- Output: 11×15 grid containing only the internal rectangular region, transformed
+- The 1s become the background, internal patterns (2,3,8) are preserved but repositioned
+
+**Example 2:**
+- Input: 22×21 grid with colors (0,1,2,3,4,5,8)
+- Contains a rectangular region filled with 2s that has internal patterns (4s, 8s)
+- Has border elements: bottom row all 3s, rightmost column all 1s, scattered 5s elsewhere
+- Output: 10×10 grid containing only the internal rectangular region
+- The 2s become the background, internal patterns (4,8) are preserved
+
+**Example 3:**
+- Input: 22×22 grid with colors (0,2,3,4,5,6,8,9)
+- Contains a small rectangular region with 8s that has internal patterns (3,6,9)
+- Has border elements: leftmost column all 2s, bottom row all 4s, scattered 5s elsewhere
+- Output: 5×5 grid containing only the internal rectangular region
+- The 8s become the background, internal patterns are preserved
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify the main rectangular region containing a dominant color with internal patterns
+2. Extract only this rectangular region 
+3. In the output, the dominant background color of the region becomes the new background
+4. Internal patterns within the region are preserved in their relative positions
+5. The output grid size matches exactly the dimensions of the extracted rectangular region
+
+Testing this rule:
+- Example 1: Rectangle of 1s (rows 4-18, cols 4-18) → 15×15 output ✗ (actual is 11×15)
+- Let me re-examine...
+
+Looking more carefully, I notice the extracted regions are smaller than the full rectangles. Let me identify the actual boundaries:
+
+Example 1: The region with mixed patterns is roughly rows 4-14, cols 4-18
+Example 2: The region with 2s and patterns is roughly rows 6-15, cols 4-13  
+Example 3: The region with 8s and patterns is roughly rows 5-9, cols 4-8
+
+Refined rule:
+1. Find the rectangular region containing the main pattern with internal variations
+2. Extract the minimal bounding box that contains all the pattern variations
+3. Output this region with the dominant color as background and patterns preserved
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify the main rectangular region with patterns
+2. Find the rectangular area with 4s as background and internal patterns (6s, 7s, 8s, 9s)
+3. This appears to be roughly rows 4-15, cols 3-23
+4. Extract this region and preserve the internal patterns
+
+Looking at the test input, I can see a large rectangular region filled with 4s that contains various internal patterns including 6s, 7s, 8s, and 9s.
+
+The region spans approximately:
+- Rows: 4 to 15 (12 rows)
+- Cols: 4 to 22 (19 columns)
+
+PHASE 4 — EXECUTE:
+
+Let me carefully extract the rectangular region with 4s and internal patterns:
+
+Looking at rows 4-15, cols 4-22 in the test input:
+
+Row 4: [4,7,0,0,0,0,0,4,4,6,4,4,4,4,4,4,0,0,0]
+Row 5: [4,7,4,0,0,0,4,4,4,6,4,6,6,6,6,6,4,7,4] 
+Row 6: [4,7,4,4,4,4,4,4,4,6,4,6,4,4,4,6,4,7,4]
+Row 7: [4,7,4,4,4,4,4,4,4,6,4,4,4,4,4,6,4,7,4]
+Row 8: [4,7,4,6,4,6,6,6,6,6,4,4,4,4,4,6,4,7,4]
+Row 9: [4,7,4,6,6,4,4,4,4,4,4,4,4,4,6,6,4,7,4]
+Row 10: [4,7,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,4]
+Row 11: [4,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,4]
+Row 12: [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]
+Row 13: [4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4]
+Row 14: [4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4]
+Row 15: [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]
+
+The actual pattern region appears to be cols 4-22 (19 columns) and rows 4-15 (12 rows).
+
+ANSWER:
+[[4,7,0,0,0,0,0,4,4,6,4,4,4,4,4,4,0,0,0],[4,7,4,0,0,0,4,4,4,6,4,6,6,6,6,6,4,7,4],[4,7,4,4,4,4,4,4,4,6,4,6,4,4,4,6,4,7,4],[4,7,4,4,4,4,4,4,4,6,4,4,4,4,4,6,4,7,4],[4,7,4,6,4,6,6,6,6,6,4,4,4,4,4,6,4,7,4],[4,7,4,6,6,4,4,4,4,4,4,4,4,4,6,6,4,7,4],[4,7,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,4],[4,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,4],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],[4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4],[4,8,8,9,4,9,4,9,4,9,4,9,4,9,4,9,4,9,4],[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]]

@@ -1,0 +1,79 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 20x20 grid with scattered colored cells (2s, 3s, 5s, 6s)
+- Notable patterns: 2x2 blocks of 6s at positions (1,1) and (3,3)
+- Scattered single cells of values 2, 3, 5
+- Output: Same dimensions, but the 6s blocks are gone, replaced by complex rectangular patterns made of 1s, 4s, and 6s
+- The patterns seem to be placed at locations related to the scattered single cells
+
+**Example 2:**
+- Input: 10x10 grid with a 2x2 block of 1s and scattered 2s and 3s
+- Output: The 1s block remains, but rectangular patterns of 1s and 4s appear at locations of the 2s and 3s
+
+**Example 3:**
+- Input: 10x10 grid with a 4x4 block of 4s in top-left, scattered 2s
+- Output: The original 4s block is cleared to 0s, but 4x4 blocks of 4s appear at the positions of the 2s
+
+**Example 4:**
+- Input: 20x20 grid with scattered values (2, 3, 5, 8)
+- Output: Complex rectangular patterns appear at various positions, using colors 1, 4, 6, 7
+
+PHASE 2 — MODEL:
+
+After analyzing all examples, I can see the transformation rule:
+
+1. **Identify template objects**: Find rectangular blocks of non-zero values in the input
+2. **Identify marker positions**: Find scattered single non-zero cells
+3. **Copy templates to markers**: For each marker position, place a copy of one of the template objects
+4. **Clear original templates**: Set the original template locations to 0
+5. **Color mapping**: The copied templates use different colors than the originals
+
+More specifically:
+- Template objects (rectangular blocks) are identified
+- Single scattered cells act as "markers" indicating where to place copies
+- The copies use a systematic color remapping
+- Original template locations are cleared to 0
+
+Looking closer at the color mappings and placements, it appears that:
+- Different marker values correspond to different template types or color schemes
+- The templates are placed with their top-left corner at or near the marker positions
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Template object: 2x2 block of 7s at positions (5,5) to (7,6) - actually it's a cross pattern with 7s
+- Marker positions: Multiple 8s scattered throughout the grid
+- Expected transformation: Place copies of the 7-pattern at each 8 position, clear original 7s, use appropriate color mapping
+
+The 7-pattern appears to be:
+```
+7 0 0 7
+0 7 7 0
+0 7 7 0
+7 0 0 7
+```
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the test input, I see:
+- There's a cross-like pattern made of 7s around position (5-8, 5-7)
+- Multiple 8s scattered as markers
+- The pattern should be copied to each 8 position
+
+The 7-pattern is:
+```
+Row 5: 7 0 0 7 (at cols 4,7)
+Row 6: 0 7 7 0 (at cols 5,6)  
+Row 7: 0 7 7 0 (at cols 5,6)
+Row 8: 7 0 0 7 (at cols 4,7)
+```
+
+This forms a 4x4 pattern. I need to place this pattern at each 8 position, using a different color (likely 1s based on the pattern from other examples).
+
+Constructing the output grid:
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0], [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], [1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1], [0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0], [1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1], [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0]]

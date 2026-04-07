@@ -1,0 +1,88 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 5x5 grid with values 1, 2, 8 in top row, and some 1s scattered in other positions
+- Output: 5x5 grid with only 0s and 2s, where 2s appear in specific positions
+- The 8s from input disappear, 1s disappear, only 2 remains and gets replicated in certain positions
+
+**Example 2:**
+- Input: 15x15 grid with various numbers (0,2,4,6,7,8)
+- Output: 15x15 grid with different arrangement - some rows have alternating patterns
+- Row 1 in output has alternating 7s and 0s
+- Row 2 has alternating 0s and 7s  
+- Some vertical patterns with 2s and 4s
+- Bottom rows have 6s in specific patterns
+
+**Example 3:**
+- Input: 20x20 grid with scattered 1s, 2s, 4s, 7s, 8s
+- Output: 20x20 grid with different patterns
+- Top section has alternating 2s and 0s in diagonal/geometric patterns
+- Bottom section has 7s in specific arrangements
+- Middle section is mostly 0s
+
+**Example 4:**
+- Input: 8x8 grid with 1s, 2s, 8s
+- Output: 8x8 grid where top row becomes all 2s (except last columns), and column 5 becomes all 1s
+- Much simpler transformation
+
+PHASE 2 — MODEL:
+
+Looking for patterns across all examples:
+
+1. The grids maintain their original dimensions
+2. Certain numbers seem to "dominate" different regions
+3. There appears to be some form of region-based transformation
+
+Let me look more carefully at the spatial relationships:
+
+In Example 4, I notice:
+- Input has a vertical line of 2s in column 5
+- Output has this become a line of 1s in column 5
+- Input has 1s in top row, output has these become 2s
+
+This suggests a **swap/exchange rule** between certain numbers in certain geometric patterns.
+
+Looking at other examples:
+- Example 1: The 1s form a diagonal-like pattern, in output 2s appear in similar but modified positions
+- Examples 2&3: More complex but seem to involve geometric patterns being filled with specific numbers
+
+**Refined Model:** The transformation appears to:
+1. Identify geometric patterns/lines formed by certain numbers
+2. Replace or swap the numbers in these patterns
+3. Often involves swapping between pairs of numbers (like 1↔2)
+4. The "8" values seem to act as markers or get eliminated
+5. Patterns get extended/completed in geometric shapes
+
+PHASE 3 — GOAL:
+
+Applying to test input (20x20):
+
+Looking at the test input, I can identify:
+- Vertical line of 8s in column 3 (and some at column 4)
+- Various scattered 2s, 4s, 5s, 6s, 7s, 1s
+- The 8s seem to form a dominant vertical pattern
+
+Based on the pattern from examples, especially Example 4:
+- The vertical line of 8s should be replaced by another number
+- Other numbers may form patterns that get extended
+
+Looking at which numbers appear most frequently and their positions, I need to determine what replaces what.
+
+PHASE 4 — EXECUTE:
+
+Based on the transformation pattern, particularly noting that:
+- Column 3 has many 8s vertically
+- This should be replaced systematically
+- Other values should form geometric patterns
+
+Let me construct the output by identifying the key transformation:
+- The 8s in column 3 appear to be a dominant vertical line
+- Based on Example 4's pattern, this line should be replaced
+- Looking at surrounding values, the 2s seem to be the replacement pattern
+
+Constructing the 20x20 output grid:
+
+ANSWER:
+[[0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]

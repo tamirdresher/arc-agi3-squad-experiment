@@ -1,0 +1,44 @@
+Looking at this pattern recognition puzzle, I need to analyze the examples to understand the transformation rule.
+
+Let me examine the examples:
+
+**Example 1:**
+- Input has two separate colored regions: one with 4s and 6s (upper left), another with 3s and 7s (lower right)
+- In the output: 
+  - The 6s are moved/repositioned within the 4s region
+  - The 7s are moved/repositioned within the 3s region
+  - The base colors (4s and 3s) remain largely unchanged
+
+**Example 2:**
+- Input has two regions: one with 3s and 9s (left), another with 6s and 9s (right)
+- In the output:
+  - The 9s from the left region are moved upward
+  - The 9s from the right region are moved to a different position
+  - The base colors (3s and 6s) remain mostly in place
+
+**Example 3:**
+- Input has a 6s region with 7s inside it
+- In the output:
+  - The 7s are moved upward, extending above the 6s region
+  - The 6s structure remains but the internal 7s are removed
+
+The pattern seems to be:
+1. Identify distinct colored regions
+2. For each region, there's a "base" color and a "special" color
+3. The special colors get relocated/extended, often in a directional manner (upward seems common)
+4. The base structure is preserved but cleaned of the special colors
+
+**Test Input Analysis:**
+I can identify several regions:
+- Region 1 (upper): 2s with 4s inside (rows 2-4)
+- Region 2 (lower left): 9s with 7s inside (rows 6-11)  
+- Region 3 (lower right): 8s with 2s inside (rows 7-11)
+
+Applying the pattern:
+- The 4s (special color in 2s region) should be moved/extended upward
+- The 7s (special color in 9s region) should be moved/extended upward
+- The 2s (special color in 8s region) should be moved/extended upward
+- Base structures (2s, 9s, 8s) should remain but be cleaned of their special colors
+
+ANSWER:
+[[0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0], [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0], [0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0], [0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 2, 0], [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 2, 0], [0, 0, 9, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 0, 8, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0], [0, 9, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0]]

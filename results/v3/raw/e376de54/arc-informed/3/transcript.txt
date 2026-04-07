@@ -1,0 +1,69 @@
+**PHASE 1 — EXPLORE:**
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16x16 grid filled mostly with 7s, with scattered non-7 values (2s, 9s, 1s)
+- The non-7 values appear to form diagonal or linear patterns
+- Output: Same grid dimensions, mostly 7s, but some non-7 values have been moved/extended
+- Looking closely: It seems like some values have been "extended" or "completed" into more regular patterns
+
+**Example 2:**
+- Input: 16x16 grid with 7s as background
+- Row 2: has two 5s at positions (2,3) and (2,4)
+- Row 6: has seven 9s from positions (6,3) to (6,9)
+- Row 8: has twelve 3s from positions (8,3) to (8,14)
+- Output: The 5s in row 2 are extended to match the length of the 9s (7 elements), from (2,3) to (2,9)
+- The 9s and 3s remain unchanged
+- The 3s are shortened to match the 9s length (7 elements), from (8,3) to (8,9)
+
+**Example 3:**
+- Input: 16x16 grid with 8s forming a partial rectangular pattern in rows 2-7
+- Output: The 8s are completed to form a more regular rectangular pattern
+- Missing 8s are filled in to complete the rectangle from rows 2-5, columns 2, 5, 7, 9, 13
+
+**PHASE 2 — MODEL:**
+
+Looking at all examples, I need to identify the transformation rule:
+
+In Example 2, I see that horizontal lines of non-7 values are made to have the same length - they're normalized to match the longest line's length.
+
+Let me re-examine Example 1 more carefully:
+- There are diagonal patterns of 2s, 9s, and 1s
+- These appear to be extended or completed into more regular diagonal lines
+
+In Example 3:
+- The 8s form columns, and missing cells in those columns are filled to complete the pattern within the defined rectangular region.
+
+The rule appears to be: **For each non-7 value, extend or complete its pattern to form regular geometric shapes (lines, rectangles, diagonals) by filling in missing positions within the bounding region of that value.**
+
+Testing this against Example 2:
+- The 5s, 9s, and 3s all form horizontal lines
+- The rule would make them all the same length as the longest line (the 9s with 7 elements)
+- This matches the output ✓
+
+**PHASE 3 — GOAL:**
+
+Applying the rule to the test input:
+
+Looking at the test input, I can identify:
+1. 8s forming a partial diagonal pattern in the upper left
+2. 6s forming diagonal patterns in the lower right portion
+
+For the 8s: They appear to form two intersecting diagonal lines. I need to complete these diagonals.
+For the 6s: They form multiple diagonal patterns that should be completed.
+
+The 8s seem to form diagonals from upper-right to lower-left and upper-left to lower-right.
+The 6s form several diagonal patterns that should be extended consistently.
+
+**PHASE 4 — EXECUTE:**
+
+Let me trace the patterns more carefully:
+
+8s pattern: Looking at positions, they form diagonal lines that intersect. I need to complete both diagonals.
+6s pattern: Multiple diagonal lines that should be completed.
+
+After careful analysis of the diagonal patterns and applying the completion rule:
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 8, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 8, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 6, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7], [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7, 7]]

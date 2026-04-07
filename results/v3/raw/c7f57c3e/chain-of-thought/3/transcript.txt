@@ -1,0 +1,65 @@
+Let me analyze the examples step by step to understand the pattern.
+
+**Example 1 Analysis:**
+
+Looking at the input and output, I need to identify what changes between them:
+
+1. Most of the grid remains the same (filled with 4s as background)
+2. There are some non-4 values in both input and output
+3. Let me compare specific differences:
+   - Row 3, col 13: Input has 8, Output has 2
+   - Row 4, cols 12-14: Input has [8,8,8], Output has [3,3,3]
+   - Row 7, col 4: Input has 2, Output has 8
+   - Row 8, cols 3-5: Input has [3,3,3], Output has [8,8,8]
+   - Row 13-14, cols 10-11: Input has 2s, Output has 8s
+   - Row 15-16, cols 8-13: Input has 3s, Output has 8s
+
+**Example 2 Analysis:**
+
+1. Background is 3s
+2. Key changes I notice:
+   - Row 0, col 2: Input has 3, Output has 6
+   - Row 4, col 3: Input has 3, Output has 3 (no change)
+   - Row 4-5, cols 10-11: Input has 3s, Output has 6s
+   - Row 10, col 3: Input has 6, Output has 3 (seems like a swap)
+   - Row 12-14, cols 10-11: Input has 4s, Output has 3s
+
+**Pattern Recognition:**
+
+Looking more carefully, I notice that there are distinct "structures" or "shapes" in the input that seem to get transformed. Let me focus on identifying these structures:
+
+In Example 1, I can see several small patterns:
+1. A cross-like pattern with 1s and 2 in the center around rows 1-3, cols 12-14
+2. A similar pattern around rows 5-8, cols 3-5
+3. A larger rectangular pattern around rows 9-16, cols 8-13
+
+In Example 2, there are similar small cross/diamond patterns.
+
+**Key Insight:** 
+It appears that when there are certain "template" patterns (like crosses made of 1s with other numbers in the center), these get transformed by swapping specific values. Looking more closely:
+
+- In small cross patterns, the center value gets swapped with another specific value
+- The "other" value that was elsewhere in a different pattern gets moved to replace the center
+- This creates a kind of "value exchange" between different pattern locations
+
+**Applying to Test Input:**
+
+Looking at the test input, I can identify several key patterns:
+
+1. Small cross pattern at rows 1-4, cols 2-4 with center values 1,1 and 3,3
+2. Small cross pattern at rows 6-9, cols 9-12 with center values 6,6
+3. Small cross pattern at rows 16-19, cols 20-22 with center values 3,3
+4. Large rectangular pattern at rows 11-22, cols 5-10
+
+Based on the pattern I observed, I need to:
+1. Find the "standalone" values that should be swapped
+2. The value 4 appears at rows 9, cols 10-11 in the small pattern
+3. The value 6 appears at rows 7, cols 10-11 in the small pattern
+4. The values need to be exchanged between corresponding patterns
+
+Let me trace through the specific swaps:
+- The 4s in the center pattern should swap with 6s
+- The pattern suggests 4→6 and 6→4
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 1, 3, 3, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 4, 4, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 1, 6, 6, 1, 8, 8, 8, 8, 8], [8, 8, 1, 1, 1, 4, 4, 4, 4, 4, 4, 1, 1, 1, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

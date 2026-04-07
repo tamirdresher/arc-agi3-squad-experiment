@@ -1,0 +1,17 @@
+{
+  "task_id": "d59b0160",
+  "condition": "baseline",
+  "run_number": 2,
+  "timestamp": "2026-04-06T18:45:21.945797+00:00",
+  "tokens_used": 6764,
+  "wall_clock_seconds": 19.17,
+  "response_hash": "26a9fb5baa2e6aa0c2a41ff40468919d813b7326a3abefb714b63cc7a4159ee7",
+  "extraction_success": true,
+  "exact_match": false,
+  "cell_accuracy": 0.796875,
+  "dimension_match": true,
+  "predicted_rows": 16,
+  "predicted_cols": 16,
+  "ground_truth_rows": 16,
+  "ground_truth_cols": 16
+}

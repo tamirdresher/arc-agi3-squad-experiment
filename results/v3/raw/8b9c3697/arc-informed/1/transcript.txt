@@ -1,0 +1,77 @@
+I'll analyze this step by step following the structured reasoning contract.
+
+**PHASE 1 — EXPLORE**
+
+Let me examine each example pair:
+
+**Example 1:**
+- Input: 18×22 grid, mostly 4s (background), with 1s forming rectangular structures and scattered 2s
+- Two main structures made of 1s: one in upper-left area (rows 3-9, cols 5-8), another in middle-right (rows 11-14, cols 11-17)
+- Scattered 2s at various positions: (1,2), (1,13), (6,15), (14,2), (17,11), (17,12), (18,11), (18,12)
+- Output: Same grid but 2s are removed from most positions, and a horizontal line of 0s appears at row 6, cols 8-15
+- The 1-structures remain intact
+
+**Example 2:**
+- Input: 18×22 grid, mostly 3s (background), with 4s forming rectangular structures and scattered 2s
+- Two main 4-structures: upper-left (rows 3-6, cols 3-8) and middle-right (rows 9-12, cols 13-19)
+- Multiple 2×2 blocks of 2s at various positions
+- Output: Most 2s removed, but some remain within or adjacent to 4-structures. Vertical line of 0s from row 1 to row 8 at cols 15-16
+
+**Example 3:**
+- Input: 18×22 grid, mostly 4s (background), with 8s forming rectangular structures and scattered 2s
+- Two main 8-structures: upper area (rows 2-5, cols 6-14) and left area (rows 10-13, cols 1-8)
+- Various 2-patterns including blocks and single cells
+- Output: 2s mostly removed except those within 8-structures, which remain. Lines of 0s extend downward and rightward from certain positions
+
+**PHASE 2 — MODEL**
+
+Analyzing the pattern across all examples:
+
+1. There are rectangular structures made of a specific color (1s, 4s, or 8s)
+2. There are scattered markers of color 2
+3. The transformation:
+   - Removes most 2s from the grid
+   - Keeps 2s that are inside the rectangular structures
+   - Creates lines of 0s that connect certain 2-positions to the rectangular structures
+   - The 0-lines seem to extend from 2s toward or between structures
+
+More specifically: 
+- 2s that are isolated (not within structures) get removed
+- 2s within rectangular structures are preserved
+- Lines of 0s are drawn to connect or extend from 2-positions, often forming straight lines (horizontal, vertical) that reach toward the structures
+- The background and structures remain otherwise unchanged
+
+**PHASE 3 — GOAL**
+
+For the test input (23×27 grid):
+- Background: 3s
+- Rectangular structures made of 4s in multiple locations
+- Scattered 2s and 2×2 blocks of 2s
+
+I need to:
+1. Identify all rectangular 4-structures
+2. Determine which 2s are within these structures vs isolated
+3. Remove isolated 2s
+4. Keep 2s within structures
+5. Draw 0-lines connecting appropriate positions
+
+Main 4-structures I can identify:
+- Upper-middle: around rows 3-6, cols 14-20
+- Left-middle: around rows 7-13, cols 7-10
+- Bottom-right: around rows 17-20, cols 20-26
+
+**PHASE 4 — EXECUTE**
+
+Looking more carefully at the examples, the pattern seems to be:
+- Remove 2s that are isolated
+- Keep 2s that are within or immediately adjacent to 4-structures  
+- Create lines of 0s that extend from certain 2-positions
+
+For the test input, I'll:
+1. Keep the 4-structures intact
+2. Remove most isolated 2s
+3. Keep 2s that are within the 4-structures
+4. Add 0-lines where appropriate
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 2, 2, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3], [3, 3, 2, 2, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 4, 3, 4, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

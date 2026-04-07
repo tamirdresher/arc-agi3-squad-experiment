@@ -1,0 +1,97 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16×16 grid, mostly filled with 8s, with some 1s scattered throughout and a single 6 at position (15,0)
+- Key patterns: Vertical line of 1s at column 6, some 1s in upper right area, some 1s in middle area, block of 1s in bottom right
+- Output: Same dimensions, but large portions of 8s are replaced with 7s, forming rectangular regions. The 6 remains at (15,0), and 1s remain as 1s
+- The 7s form a rectangular border/frame structure
+
+**Example 2:**
+- Input: 10×10 grid, mostly 8s with scattered 1s and a 6 at (9,0)
+- Key patterns: Block of 1s in upper area, scattered individual 1s
+- Output: Similar to Example 1, portions of 8s become 7s in rectangular regions, 6 and 1s remain unchanged
+- The 7s again form structured rectangular areas
+
+**Example 3:**
+- Input: 20×20 grid, mostly 8s with 1s forming various patterns and a 6 at (19,0)
+- Key patterns: Triangular/diagonal pattern of 1s on left side, vertical line of 1s, scattered 1s, rectangular block of 1s in bottom right
+- Output: Large rectangular regions of 8s become 7s, forming a border-like structure, 6 and 1s preserved
+
+**Common observations:**
+- All grids have a single 6 in the bottom-left corner (last row, first column)
+- 1s remain unchanged in all outputs
+- 8s are selectively replaced with 7s in rectangular regions
+- The 7s seem to form a border or frame structure around the grid
+
+## PHASE 2 — MODEL
+
+Looking at the transformation pattern, I can see that:
+
+1. The 6 acts as a marker/anchor point (always at bottom-left)
+2. All 1s remain unchanged
+3. The 8s are replaced with 7s in a way that creates a rectangular border/frame structure
+
+The rule appears to be:
+**Create a rectangular border of 7s around the entire grid, but preserve all 1s and the 6. The border extends inward from the edges, replacing 8s with 7s, but stops when it encounters 1s or needs to preserve the internal structure.**
+
+More precisely:
+- Keep all 1s and the 6 unchanged
+- Replace 8s with 7s to form a border structure that:
+  - Forms the top row (all 8s become 7s)
+  - Forms the bottom row (all 8s become 7s, 6 stays 6)
+  - Forms the left and right columns (all 8s become 7s)
+  - May extend inward to form a frame, but preserves the spatial relationships of existing 1s
+
+Testing this against examples... this seems to match the pattern where 7s form rectangular border regions while preserving all 1s.
+
+## PHASE 3 — GOAL
+
+For the test input (12×12 grid):
+- Has 1s in various positions forming patterns
+- Has a 6 at position (11,0)
+- Following the rule, I need to:
+  - Keep all 1s unchanged
+  - Keep the 6 unchanged
+  - Replace appropriate 8s with 7s to form a border structure
+
+The output should be 12×12 with:
+- A border of 7s around the perimeter
+- All existing 1s preserved in their positions
+- The 6 preserved at (11,0)
+- Internal 8s that don't conflict with the border pattern remain as 8s or become 7s based on the border structure
+
+## PHASE 4 — EXECUTE
+
+Let me construct the output grid systematically:
+
+Looking at the test input pattern and applying the border rule:
+- Top row: all 8s become 7s except where there are 1s
+- Bottom row: 7s except for the 6 at position (11,0) and existing 1s
+- Left and right columns: 8s become 7s
+- Interior: preserve 1s, and create border structure with 7s
+
+Constructing row by row:
+
+```
+Row 0: [7,7,7,7,7,7,7,7,7,7,1,7]  # Top border, preserve 1 at col 10
+Row 1: [7,8,8,8,8,8,8,8,8,7,1,7]  # Left/right border
+Row 2: [7,8,8,8,8,8,8,8,8,7,1,7]  # Left/right border
+Row 3: [7,8,8,8,8,8,8,8,8,7,1,7]  # Left/right border
+Row 4: [7,8,8,8,8,8,8,1,1,1,1,7]  # Left/right border, preserve 1s
+Row 5: [7,8,8,8,8,8,8,1,1,1,1,7]  # Left/right border, preserve 1s
+Row 6: [7,8,8,8,8,8,8,8,1,1,1,7]  # Left/right border, preserve 1s
+Row 7: [7,8,8,8,8,8,8,8,8,7,1,7]  # Left/right border
+Row 8: [7,8,8,8,8,8,8,8,8,7,1,7]  # Left/right border
+Row 9: [7,8,8,8,8,8,8,8,8,1,1,1]  # Preserve 1s at end
+Row 10:[7,8,8,8,8,8,8,8,8,1,1,1]  # Preserve 1s at end
+Row 11:[6,7,1,1,1,1,7,7,7,1,1,1]  # Bottom border, preserve 6 and 1s
+```
+
+Wait, let me reconsider the pattern more carefully by looking at how the border interacts with existing 1s...
+
+Actually, looking more closely at the examples, the pattern seems to be creating a complete rectangular frame around the perimeter, but the internal structure is more complex. Let me revise:
+
+ANSWER:
+[[7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 1, 7], [7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 7], [7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 7], [7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 7], [7, 8, 8, 8, 8, 8, 8, 1, 1, 1, 1, 7], [7, 8, 8, 8, 8, 8, 8, 1, 1, 1, 1, 7], [7, 8, 8, 8, 8, 8, 8, 8, 1, 1, 1, 7], [7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 7], [7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 1, 7], [7, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 1], [7, 8, 8, 8, 8, 8, 8, 8, 8, 1, 1, 1], [6, 7, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1]]

@@ -1,0 +1,92 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 16x16 grid with values 0, 5, 6
+- Column 11 contains all 5s (acts as a vertical divider)
+- Left side (cols 0-10): Contains patterns of 0s and 6s, with rectangular blocks of 0s
+- Right side (cols 12-15): All 6s initially
+- Output changes:
+  - Left side: 0-patterns seem to shift/move right by some amount
+  - Right side: Some cells change from 6 to 2, specifically in a rectangular pattern
+  - Column 11 (5s) remains unchanged
+
+**Example 2:**
+- Input: 16x10 grid with values 0, 5, 6
+- Column 5 contains all 5s (vertical divider)
+- Left side (cols 0-4): Contains 0-patterns
+- Right side (cols 6-9): All 6s initially
+- Output changes:
+  - Left side: 0-patterns appear to shift right
+  - Right side: Some rows have cells changed to 2 (specifically cols 6-9 in certain rows)
+  - Pattern: Rows with "0 6 0" pattern in input get 2s in right side
+
+**Example 3:**
+- Input: 20x10 grid with values 0, 5, 6
+- Column 7 contains all 5s (vertical divider)
+- Left side (cols 0-6): Contains 0-patterns
+- Right side (cols 8-9): All 6s initially
+- Output changes:
+  - Left side: 0-patterns shift right
+  - Right side: Some cells become 2s
+  - Pattern seems related to specific 0-patterns in the left side
+
+PHASE 2 — MODEL:
+
+After analyzing all examples, I can see the transformation rule:
+
+1. The grid is divided by a vertical column of 5s
+2. **Left side transformation**: All 0-patterns shift right by 2 positions, with 6s filling the leftmost positions
+3. **Right side transformation**: When a row contains the pattern "0 6 0" (with 6 in the middle) anywhere in the LEFT side of the input, the entire right side of that row becomes 2s. Otherwise, it remains 6s.
+
+Let me verify this rule:
+
+**Example 1 verification:**
+- Rows 4-6 and 12-13 have "0 6 0" patterns in the left side
+- In output, these rows have 2s in the right side (cols 12-15)
+- Left patterns shift right by 2, with 6s filling positions 0-1
+
+**Example 2 verification:**
+- Rows 3, 8, 14 have "0 6 0" patterns in left side
+- These rows get 2s in right side (cols 6-9) in output
+- Left patterns shift right by 2
+
+**Example 3 verification:**
+- Rows 1, 5, 6, 13, 17 have "0 6 0" patterns in left side
+- These rows get 2s in right side in output
+- Left patterns shift right by 2
+
+The rule checks out for all examples!
+
+PHASE 3 — GOAL:
+
+For the test input (25x12 grid):
+- Divider column: column 8 (all 5s)
+- Left side: cols 0-7
+- Right side: cols 9-11
+
+I need to:
+1. Identify rows with "0 6 0" pattern in the left side
+2. Shift all left-side patterns right by 2 positions, filling with 6s
+3. Set right side to 2s for rows with "0 6 0" pattern, otherwise keep as 6s
+
+Scanning for "0 6 0" patterns in left side:
+- Row 3: "0 6 0 6" at positions 1-4 ✓
+- Row 13: "0 6 6 0" at positions 3-6 ✓ 
+- Row 17: "0 6 0" at positions 1-3 ✓
+- Row 19: "0 6 0" at positions 1-3 ✓
+- Row 23: "0 6 0" at positions 5-7 ✓
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid:
+
+For each row:
+1. Fill positions 0-1 with 6s
+2. Shift original left pattern (cols 0-5) to positions 2-7
+3. Keep column 8 as 5
+4. Set right side (cols 9-11) based on whether row had "0 6 0" pattern
+
+ANSWER:
+[[6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 0, 0, 0, 6, 5, 6, 6, 6], [6, 6, 6, 0, 6, 0, 6, 6, 5, 2, 2, 2], [6, 6, 6, 0, 0, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 0, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 0, 6, 6, 0, 5, 2, 2, 2], [6, 6, 6, 6, 0, 0, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 6, 0, 6, 6, 5, 2, 2, 2], [6, 6, 0, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 6, 0, 6, 0, 6, 6, 5, 2, 2, 2], [6, 6, 6, 0, 0, 0, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 0, 5, 6, 6, 6], [6, 6, 6, 6, 6, 6, 0, 6, 5, 2, 2, 2], [6, 6, 6, 6, 6, 6, 0, 0, 5, 6, 6, 6]]

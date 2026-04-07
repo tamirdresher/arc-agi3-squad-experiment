@@ -1,0 +1,92 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 5x5 grid with values 1, 2, 8, 0
+- Top row has [1, 2, 8, 8, 8], other rows have patterns of 0s and 1s
+- Output: 5x5 grid with only values 0 and 2
+- The 1s in the input seem to be replaced by 2s in specific positions
+- The 8s disappear, and other values become 0
+
+**Example 2:**
+- Input: 15x15 grid with various values (0, 2, 4, 6, 7, 8)
+- Output: 15x15 grid with values 0, 2, 4, 6, 7
+- Pattern shows alternating structures in different regions
+- Row 1 had 6s in even columns, output has 7s in odd positions
+- There are distinct regional patterns
+
+**Example 3:**
+- Input: 20x20 grid with values 0, 1, 2, 4, 7, 8
+- Output: 20x20 grid with values 0, 2, 7
+- Upper region shows 2s in a checkerboard-like pattern
+- Lower region shows 7s in specific positions
+- Middle region is mostly 0s
+
+**Example 4:**
+- Input: 8x8 grid with values 0, 1, 2, 8
+- Top row: [1, 1, 1, 1, 1, 2, 0, 0]
+- Column 5 has all 2s
+- Output: Top row becomes [2, 2, 2, 2, 2, 1, 0, 0] - the 1s and 2 swap!
+- Column 5 becomes all 1s
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I notice a key transformation rule:
+**The rule appears to be a value swap between two specific numbers in each grid.**
+
+In Example 4, this is clearest: 1s become 2s and 2s become 1s, while other values (0, 8) become 0.
+
+Testing this hypothesis:
+- Example 1: 1↔2 swap, 8→0, 0→0
+- Example 2: More complex, but appears to involve 6↔7 swap primarily
+- Example 3: Appears to involve 1↔2 and 4↔7 swaps in different regions
+- Example 4: Clear 1↔2 swap
+
+Refined rule: **Identify the two most prominent non-zero, non-8 values and swap them. Set 8s to 0. Keep 0s as 0.**
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify the two main values to swap (looking at frequency and pattern)
+2. Apply the swap transformation
+3. Convert 8s to 0s
+4. Keep 0s as 0s
+
+Analyzing the test input:
+- Values present: 0, 1, 2, 4, 5, 6, 7, 8
+- Most frequent non-zero, non-8 values appear to be 2 and 5, or 4 and 6
+- Looking at patterns, 2 and 5 seem to be the primary values that should swap
+
+PHASE 4 — EXECUTE:
+
+Applying the 2↔5 swap rule to the test input:
+- All 2s become 5s
+- All 5s become 2s  
+- All 8s become 0s
+- All other values (0, 1, 4, 6, 7) stay the same
+
+Let me construct the output grid:
+
+Row 0: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0]
+Row 1: [5, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6]
+Row 2: [0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0]
+Row 4: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 5: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0]
+Row 6: [0, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 7: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 8: [0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0]
+Row 9: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0]
+Row 10: [0, 2, 7, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 11: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 12: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0]
+Row 13: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 14: [0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 6]
+Row 15: [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 16: [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 17: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 6, 0, 0, 0]
+Row 18: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Row 19: [2, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+ANSWER: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0], [5, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6], [0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0], [0, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0], [0, 2, 7, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 6], [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 6, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]

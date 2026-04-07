@@ -1,0 +1,36 @@
+Looking at the examples, I need to identify the pattern for extracting a rectangular region from the input grid.
+
+Let me analyze each example:
+
+Example 1:
+- Input has a rectangular region bounded by 3's (forming a frame)
+- The frame extends from rows 0-11, columns 7-17
+- Output extracts this region with some adjustments to the frame
+
+Example 2:
+- Input has a rectangular region with 5's forming vertical/horizontal boundaries
+- Region spans rows 2-11, columns 6-15
+- Output extracts this 10x10 region
+
+Example 3:
+- Input has a rectangular region bounded by 4's in a checkerboard pattern
+- Region spans rows 9-18, columns 0-9
+- Output extracts this 10x10 region
+
+The pattern seems to be:
+1. Identify the rectangular region defined by boundary markers (3's, 5's, or 4's)
+2. Extract that region to form the output grid
+3. The boundary markers themselves become part of the output
+
+For the test input:
+Looking at the grid, I can see:
+- 5's forming boundaries at columns 4, 7-8, 11-15, 18-19
+- 3's forming an inner rectangular structure around rows 9-14, columns 10-16
+- The main rectangular region appears to be bounded by the 5's and contains the 3-framed area with the inner 4
+
+The most prominent rectangular region appears to be from rows 9-14, columns 7-18, which would give us a 6x12 region. However, looking more carefully at the structure, the key region seems to be rows 10-14, columns 10-16 (the area with the 3's frame and inner content).
+
+Let me extract the region from rows 10-14, columns 7-19:
+
+ANSWER:
+[[5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 0, 4, 0, 3, 3, 0, 5, 5], [0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 5, 5], [5, 5, 0, 3, 3, 3, 3, 3, 3, 0, 0, 5, 5]]

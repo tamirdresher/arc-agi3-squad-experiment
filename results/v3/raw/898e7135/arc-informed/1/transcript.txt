@@ -1,0 +1,78 @@
+PHASE 1 — EXPLORE:
+
+**Example 1:**
+- Input: 15×20 grid with various colored regions
+- Contains rectangular blocks of different colors: 2s (gray), 8s (dark), 1s (blue), 3s (green)
+- Scattered 7s (red) appear as single cells throughout
+- 0s fill empty space
+- Output: 12×12 grid
+- All background becomes 2s (gray)
+- The colored blocks (8, 1, 3) are preserved in their relative positions but repositioned
+- No 7s or 0s in output
+
+**Example 2:**
+- Input: 19×30 grid with colored rectangular regions
+- Contains blocks of: 3s (green), 1s (blue), 5s (yellow), 6s (cyan), 4s (red)
+- Scattered 8s (dark) appear as single cells
+- 0s fill empty space
+- Output: 28×20 grid (larger than input!)
+- All background becomes 3s (green)
+- The colored blocks (1, 5, 6, 4) are preserved and repositioned
+- No 8s or 0s in output
+
+PHASE 2 — MODEL:
+
+Analyzing the patterns:
+
+1. **Background transformation**: The most frequent non-zero colored block becomes the background fill
+   - Example 1: 2s were most prominent → background becomes all 2s
+   - Example 2: 3s were most prominent → background becomes all 3s
+
+2. **Block preservation**: Rectangular regions of solid colors (excluding background and scatter) are preserved with their original shapes and colors
+
+3. **Scatter removal**: Single scattered cells (7s in Ex1, 8s in Ex2) are removed
+
+4. **Repositioning**: The preserved blocks are arranged in a regular grid pattern within the new background
+
+5. **Output dimensions**: The output is sized to accommodate all preserved blocks in an organized layout
+
+**Transformation Rule**: 
+- Identify the most frequent colored rectangular region → this becomes background
+- Identify all other solid rectangular regions → these are preserved objects
+- Remove scattered single cells
+- Create output grid with background color, arrange preserved objects in organized positions
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Most prominent rectangular regions: 8s, 4s, 5s, 3s, 6s, 9s
+- Scattered 2s appear as individual cells
+- The 4s region appears to be the largest/most prominent rectangular area
+- Preserved objects: 8s blocks, 3s blocks, 5s blocks, 6s blocks, 9s blocks
+- Background should become 4s
+- Output should arrange these blocks systematically
+
+Expected blocks to preserve:
+- 8s: Large rectangular region in upper area
+- 3s: Small rectangular blocks 
+- 5s: Multiple rectangular regions
+- 6s: Rectangular regions
+- 9s: Rectangular regions
+
+PHASE 4 — EXECUTE:
+
+Looking more carefully at the input, I need to identify the exact rectangular regions:
+
+**8s block**: Rows 0-2, cols 1-9 (solid rectangle) + rows 3-5, cols 4-6 + rows 6-8, cols 1-9
+**4s blocks**: Large complex region rows 10-19, cols 0-9 with internal pattern
+**3s blocks**: Small 3×3 block at rows 7-8, cols 13-15; rows 21-23, cols 1-3  
+**5s blocks**: Multiple 3×3 regions around rows 9-17, cols 18-26
+**6s blocks**: Region around rows 21-29, cols 7-15
+**9s blocks**: Region around rows 20-28, cols 18-26
+
+The 4s region is the largest, so background becomes 4.
+
+Arranging in organized grid pattern:
+
+ANSWER:
+[[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 5, 5, 5, 4], [4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 5, 5, 5, 4], [4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 5, 5, 5, 4], [4, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4], [4, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4], [4, 4, 4, 4, 8, 8, 8, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4], [4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4], [4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4], [4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 4, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4], [4, 3, 3, 3, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4], [4, 3, 3, 3, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4], [4, 3, 3, 3, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4], [4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4], [4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4], [4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

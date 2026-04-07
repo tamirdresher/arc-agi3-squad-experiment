@@ -1,0 +1,92 @@
+PHASE 1 — EXPLORE:
+
+Let me examine each example carefully:
+
+**Example 1:**
+Input: 20x20 grid with several colored regions:
+- Blue (9) region: roughly rectangular, around rows 3-5, cols 3-6
+- Orange (7) region: scattered around rows 3-5, cols 13-15
+- Yellow (4) region: diamond-like shape around rows 11-15, cols 3-6
+- Green (3) region: small cross-like shape around rows 16-19, cols 17-19
+- One red (5) cell at position (3,15)
+
+Output: 6x6 grid containing colors 9,7,5,4,3 arranged in a specific pattern
+
+**Example 2:**
+Input: 20x20 grid with colored regions:
+- Orange (7) region: large rectangular area around rows 2-7, cols 3-7
+- Red (2) region: rectangular area around rows 6-10, cols 15-19
+- Green (3) region: rectangular area around rows 10-15, cols 0-4
+- Cyan (6) region: rectangular area around rows 13-19, cols 8-12
+- One pink (5) cell at position (7,3)
+
+Output: 10x5 grid (or 5x10?) containing the same colors arranged differently
+
+**Example 3:**
+Input: 20x20 grid with smaller colored regions:
+- Red (2) region: small L-shape at top-left
+- Cyan (6) region: 2x2 square around rows 2-3, cols 16-17
+- Gray (8) region: small cross around rows 12-14, cols 13-15
+- Orange (7) region: small L-shape around rows 15-16, cols 3-4
+- One pink (5) cell at position (15,3)
+
+Output: 4x4 grid containing these colors
+
+**Key observations:**
+- Input is always 20x20, output is much smaller
+- Output contains the same non-zero colors as input
+- There's always exactly one cell of color 5 (pink) in the input
+- The colored regions seem to be "compressed" or "combined" in the output
+
+PHASE 2 — MODEL:
+
+Looking at the patterns, I believe the transformation rule is:
+
+1. Identify all non-zero colored regions in the input
+2. Find the bounding rectangle that encompasses ALL colored regions
+3. Create an output grid that represents a compressed/downsampled version of this bounding rectangle
+4. The output preserves the relative positions and relationships of the colored regions
+5. The pink (5) cell seems to act as a special marker or reference point
+
+Let me test this against the examples:
+
+**Example 1:** The colored regions span roughly from row 3 to row 19 and from col 3 to col 19. The output is 6x6, which could represent a compressed version of this area.
+
+**Example 2:** Similar pattern - large bounding box gets compressed to smaller output.
+
+**Example 3:** Smaller colored regions result in smaller output (4x4).
+
+Refined rule: The transformation creates a compact representation where each colored region from the input is mapped to a corresponding area in a smaller output grid, maintaining relative spatial relationships.
+
+PHASE 3 — GOAL:
+
+For the test input, I need to:
+1. Identify all colored regions: 2 (red), 3 (green), 7 (orange), 8 (gray), 5 (pink - one cell)
+2. Find the bounding box of all colored regions
+3. Create a compressed representation
+
+Looking at the test input:
+- Red (2) regions: rows 0-6, cols 1-7
+- Green (3) regions: rows 1-6, cols 9-18
+- Orange (7) regions: rows 8-17, cols 0-6
+- Gray (8) regions: rows 11-19, cols 9-16
+- Pink (5): one cell at position (17,6)
+
+The overall bounding box spans roughly from row 0 to row 19 and col 0 to col 18.
+
+PHASE 4 — EXECUTE:
+
+Based on the pattern analysis, the output should be a compressed grid that maintains the relative positions of the colored regions. Looking at the spatial relationships:
+
+- Red (2) is in the upper-left
+- Green (3) is in the upper-right
+- Orange (7) is in the lower-left
+- Gray (8) is in the lower-right
+- Pink (5) is at the boundary between orange and gray regions
+
+The output should be approximately 8x8 or similar size to accommodate all regions proportionally.
+
+Constructing the output grid based on the spatial relationships and the pattern from the examples:
+
+ANSWER:
+[[2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [2, 2, 2, 2, 3, 3, 3, 3], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 7, 7, 8, 8, 8, 8], [7, 7, 7, 5, 8, 8, 8, 8]]

@@ -1,0 +1,85 @@
+## PHASE 1 — EXPLORE
+
+Let me examine each example pair carefully:
+
+**Example 1:**
+- Input: 21x21 grid, mostly filled with 1s (background)
+- Contains rectangular regions bounded by 0s
+- Inside regions: colored numbers (3, 4, 2, 8)
+- Two main rectangular regions with 0-boundaries
+- Output: Same structure, but colored numbers appear to "extend" outside their original regions in specific patterns
+
+**Example 2:**
+- Input: 23x23 grid, mostly filled with 8s (background)
+- Multiple rectangular regions bounded by 0s
+- Inside regions: various colored numbers (1, 4, 6, 3, 2, 7)
+- Output: Colored numbers extend beyond their original rectangular boundaries in organized patterns
+
+**Example 3:**
+- Input: 21x21 grid, mostly filled with 2s (background)
+- Multiple rectangular regions bounded by 0s
+- Inside regions: colored numbers (1, 3, 4, 9, 8)
+- Output: Similar extension pattern of colored numbers
+
+**Common patterns observed:**
+- Background color remains unchanged
+- 0-bounded rectangular regions contain colored numbers
+- In outputs, these colored numbers appear to "project" or extend outside their original boundaries
+- The extensions seem to create symmetrical patterns around the original regions
+
+## PHASE 2 — MODEL
+
+After analyzing all examples, I can identify the transformation rule:
+
+**Transformation Rule:** For each rectangular region bounded by 0s that contains colored numbers (non-background, non-0):
+1. Identify the colored numbers within the region
+2. For each colored number, create a 2x2 block of that color positioned such that:
+   - The 2x2 block is placed outside the 0-boundary
+   - The block is positioned to "mirror" or "extend" the original number's position
+   - The block appears to be placed adjacent to where the number would project through the boundary
+
+More specifically:
+- Each colored number inside a 0-bounded rectangle gets "projected" outside the rectangle
+- The projection creates a 2x2 block of the same color
+- The 2x2 block is positioned relative to the rectangle's boundary based on the original number's position within the rectangle
+
+Testing this rule against the examples:
+- Example 1: ✓ Numbers 3, 4, 2, 8 each get 2x2 extensions outside their rectangles
+- Example 2: ✓ Numbers 1, 4, 6, 3, 2, 7 each get 2x2 extensions
+- Example 3: ✓ Numbers 1, 3, 4, 9, 8 each get 2x2 extensions
+
+## PHASE 3 — GOAL
+
+Applying the rule to the test input:
+
+**Test Input Analysis:**
+- 19x22 grid with background color 3
+- Multiple 0-bounded rectangular regions
+- Colored numbers inside regions: 4, 1, 2, 6, 8, 5
+
+**Expected transformations:**
+1. Number 4 (at position [3,3]) should create a 2x2 block outside its rectangle
+2. Number 1 (at position [6,6]) should create a 2x2 block outside its rectangle  
+3. Number 2 (at positions [4,13], [5,12], [5,13], [6,14], [6,15]) should create 2x2 blocks
+4. Number 6 (at position [6,19]) should create a 2x2 block
+5. Number 8 (at position [11,19]) should create a 2x2 block
+6. Number 5 (at position [15,5]) should create a 2x2 block
+
+## PHASE 4 — EXECUTE
+
+Constructing the output grid by applying the transformation:
+
+1. Copy the original grid structure
+2. For each colored number, add the corresponding 2x2 block outside its rectangle boundary
+3. Verify the positioning follows the pattern observed in examples
+
+The 2x2 blocks should be positioned:
+- Number 4: creates 2x2 block above-left of its rectangle
+- Number 1: creates 2x2 block below-right of its rectangle
+- Number 2: creates 2x2 blocks above the top boundary
+- Number 6: creates 2x2 block to the right of its rectangle
+- Number 8: creates 2x2 block to the right of its rectangle  
+- Number 5: creates 2x2 block to the left of its rectangle
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [4, 4, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 4, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3], [3, 3, 0, 3, 3, 3, 1, 0, 3, 3, 3, 3, 3, 0, 2, 2, 3, 3, 3, 6, 0, 6], [3, 3, 0, 0, 0, 0, 0, 1, 1, 3, 3, 3, 3, 0, 2, 3, 3, 3, 3, 3, 0, 6], [3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 3], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 8, 0, 8], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 8, 8], [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 3], [5, 5, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [5, 5, 3, 3, 3, 5, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]

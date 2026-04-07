@@ -1,0 +1,32 @@
+Looking at this pattern recognition puzzle, I need to analyze how the input grids are transformed into output grids.
+
+Let me examine the examples:
+
+Example 1:
+- Input: 14×14 grid with horizontal bands of colors (8, 2, 6, 8, 1, 2)
+- Output: 26×26 grid (roughly doubled in size) with nested rectangular structures
+
+Example 2:
+- Input: 13×12 grid with horizontal bands of colors (2, 3, 2, 3, 2, 1, 2, 8)
+- Output: 24×24 grid with nested rectangular structures
+
+The pattern appears to be:
+1. The output grid is roughly double the size of the input grid
+2. Each unique color from the input becomes a nested rectangular "frame" or border
+3. The nesting order seems to follow the order of appearance of colors in the input
+4. Colors that appear in single rows become thin borders, while colors that appear in multiple consecutive rows become thicker borders or fill larger areas
+
+For the test input (14×11 grid):
+- Colors and their positions: 3 (rows 0-1), 8 (rows 2-4, 6-7, 12-13), 2 (row 5), 3 (row 8), 7 (rows 9-10), 5 (row 11)
+- Unique colors in order of first appearance: 3, 8, 2, 7, 5
+
+The output should be approximately 22×28 (doubling the dimensions) with nested rectangular structures.
+
+Based on the pattern, I expect:
+- Outermost border: 8 (most frequent color)
+- Next level: 3 (first appearing color)
+- Then: 2, 7, 5 in nested order
+- Center filled with the most common background color
+
+ANSWER:
+[[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8], [8, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 2, 2, 2, 2, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 2, 7, 7, 2, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 2, 7, 5, 7, 2, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 2, 7, 7, 2, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 2, 2, 2, 2, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 8, 8], [8, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8], [8, 8, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]]

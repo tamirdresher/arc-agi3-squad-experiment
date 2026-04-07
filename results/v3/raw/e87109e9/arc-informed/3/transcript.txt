@@ -1,0 +1,63 @@
+PHASE 1 — EXPLORE:
+
+Looking at Example 1:
+- Input has a top section with colored cells (1,6,4,2) in boxes separated by 5s
+- Below that is a grid mostly filled with 3s, with some colored rectangular regions (1s, 4s, 2s) and a small 8x8 region
+- Output transforms this into a grid where the 8s appear to "spread" or create cross-like patterns
+- The colored regions (1,4,2) remain but the 8s extend in lines
+
+Looking at Example 2:
+- Similar structure: top section with colored boxes (2,4,6,3)
+- Lower section with background of 1s and colored rectangular regions (2s, 6s, 3s, 4s) plus small 8x8 region
+- Output shows 8s forming cross-like extensions from their original position
+- Colored regions are preserved
+
+Looking at Example 3:
+- Top section with boxes containing colors (4,6,3,2)
+- Lower section with 7s as background, colored regions (2s, 3s, 6s, 4s) and 8x8 region
+- Output shows similar 8-extension pattern
+
+Common patterns across all examples:
+1. There's a reference section at the top showing colored numbers in boxes
+2. The main grid has a background color and several colored rectangular regions
+3. There's always a small 2x2 region of 8s somewhere in the main grid
+4. The transformation extends the 8s in cross-like patterns while preserving other colored regions
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Identify the small 2x2 region of 8s in the input grid
+2. From this 8-region, extend 8s vertically and horizontally to create cross-like lines
+3. The 8s extend until they hit the boundaries of colored regions or the grid edges
+4. All other colored regions remain unchanged in their positions
+5. The 8s seem to connect or align with positions that correspond to the colored boxes shown in the top reference section
+
+Testing this against examples:
+- Example 1: 8s extend from their 2x2 position creating crosses, other regions preserved ✓
+- Example 2: Same pattern, 8s extend in crosses, colored regions maintained ✓  
+- Example 3: Consistent behavior with 8-extensions and region preservation ✓
+
+PHASE 3 — GOAL:
+
+For the test input:
+- Top section shows boxes with colors: 1, 3, 2, 4
+- Main grid has background of 9s (mostly) with regions of 2s, 3s, 1s, 4s
+- There's a 3x3 region of 8s at positions around (13-15, 8-10)
+- The transformation should extend 8s from this region in cross patterns
+- Other colored regions (1s, 2s, 3s, 4s) should remain in place
+
+Expected output dimensions: Same as input (30 rows × 24 columns)
+
+PHASE 4 — EXECUTE:
+
+Looking at the 8-region location in test input: rows 13-15, columns 8-10 (3x3 region of 8s)
+
+From this position, 8s should extend:
+- Vertically up and down 
+- Horizontally left and right
+- Creating cross-like patterns while preserving other colored regions
+
+Constructing the output grid:
+
+ANSWER:
+[[2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [2, 2, 2, 8, 8, 8, 8, 8, 8, 8, 8, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3, 3, 3], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [1, 1, 1, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9]]

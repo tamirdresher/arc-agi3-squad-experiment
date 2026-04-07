@@ -1,0 +1,31 @@
+Looking at the examples, I need to identify the pattern for extracting a smaller output grid from the larger input grid.
+
+Let me analyze the examples:
+
+Example 1: The input has a rectangular region filled with 1s and other numbers (2, 3, 8). This region appears to be bounded by coordinates and contains the main pattern. The output extracts and transforms this region.
+
+Example 2: There's a rectangular region with 2s and other numbers (3, 4, 8) that gets extracted and transformed.
+
+Example 3: A smaller rectangular region with 8s and other numbers that gets extracted.
+
+The pattern seems to be:
+1. Find a rectangular region in the input that contains a structured pattern (not just 0s)
+2. Extract this region 
+3. The output preserves the internal structure but may involve some transformation
+
+For the test input, I can see there's a rectangular region from roughly rows 4-15 and columns 4-23 that contains 4s, 6s, 7s, 8s, and 9s in a structured pattern.
+
+Looking more closely at this region, I can see:
+- It's bounded by 4s on most edges
+- Contains 7s in specific patterns (horizontal line and vertical column)
+- Has 6s arranged in rectangular patterns
+- Has 8s and 9s in the bottom rows
+
+The key rectangular pattern appears to be from rows 4-15, columns 4-23 (20 columns wide, 12 rows tall). But the actual output should be smaller based on the examples.
+
+Looking at the internal structure, I can identify a core pattern that should be extracted. The region with the most structured internal pattern appears to be around rows 4-15, columns 4-23.
+
+After careful analysis, the output should extract the core pattern preserving the 4s, 6s, 7s, 8s, and 9s in their relative positions.
+
+ANSWER:
+[[4, 7, 4, 4, 4, 4, 4, 6, 4, 6, 6, 6, 6, 6, 4, 7, 4, 4, 4, 4], [4, 7, 4, 4, 4, 4, 4, 6, 4, 6, 4, 4, 4, 6, 4, 7, 4, 0, 4, 4], [4, 7, 4, 4, 4, 4, 4, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 0, 4, 4], [4, 7, 4, 6, 4, 6, 6, 6, 4, 4, 4, 4, 4, 6, 4, 7, 4, 4, 4, 4], [4, 7, 4, 6, 6, 4, 4, 4, 4, 4, 4, 4, 6, 6, 4, 7, 4, 4, 4, 4], [4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 0, 4, 4], [4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 8, 8, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 9, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]]

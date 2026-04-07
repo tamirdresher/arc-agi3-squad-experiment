@@ -1,0 +1,57 @@
+PHASE 1 — EXPLORE:
+
+Looking at Example 1:
+- Input has a 18x22 grid with background color 4
+- Contains scattered 2s (single cells and 2x2 blocks)
+- Contains 1-shaped structures (rectangular frames/borders made of 1s)
+- Output: Same dimensions, most 2s are removed, but some 2s remain and 0s appear in specific locations
+- The 1-structures remain unchanged
+
+Looking at Example 2:
+- Input has a 18x22 grid with background color 3
+- Contains scattered 2s and 2x2 blocks of 2s
+- Contains 4-shaped rectangular structures (frames/borders made of 4s)
+- Output: Same dimensions, most isolated 2s are removed, but 2x2 blocks of 2s remain, and 0s appear in specific vertical/horizontal lines
+- The 4-structures remain unchanged
+
+Looking at Example 3:
+- Input has a 18x22 grid with background color 4
+- Contains scattered 2s and rectangular blocks of 2s
+- Contains 8-shaped rectangular structures (frames/borders made of 8s)
+- Output: Same dimensions, isolated 2s are removed, rectangular 2-blocks remain in place, and 0s appear in vertical/horizontal extensions from the 2-blocks
+- The 8-structures remain unchanged
+
+PHASE 2 — MODEL:
+
+The transformation rule appears to be:
+1. Keep all structured patterns (made of colors other than 2 and background) unchanged
+2. For isolated 2s: remove them (replace with background color)
+3. For 2x2 or larger rectangular blocks of 2s: keep them in place
+4. From each kept 2-block, extend lines of 0s in cardinal directions until hitting a structured pattern boundary or grid edge
+5. The 0s replace background color cells but stop at structured boundaries
+
+Testing this rule:
+- Example 1: 2s at (1,2), (1,13), (6,15), (14,2) are isolated → removed. 2x2 block at (17,11)-(17,12),(18,11)-(18,12) → kept, with 0-line extending horizontally from (6,7) to (6,15)
+- Example 2: Similar pattern - isolated 2s removed, 2x2 blocks kept, 0-lines extend vertically and horizontally 
+- Example 3: 2x3 and 2x2 blocks of 2s kept, isolated 2s removed, 0-lines extend from blocks
+
+PHASE 3 — GOAL:
+
+Applying to test input (23x27 grid, background 3):
+1. Identify structured patterns: 4-shaped rectangular frames at multiple locations
+2. Identify 2-patterns: Several 2x2 blocks of 2s and some isolated 2s
+3. Keep 2x2 blocks: (1,3)-(1,4),(2,3)-(2,4); (1,23)-(1,24),(2,23)-(2,24); (2,23)-(2,24),(3,23)-(3,24); (9,2)-(9,3)-(10,2)-(10,3)-(11,2)-(11,3); (9,22)-(9,23)-(10,22)-(10,23); (20,6)-(20,7)-(21,6)-(21,7)
+4. Remove isolated 2s at: (0,14), (2,11), (11,14), (11,17), (14,14), (20,15)
+5. Extend 0-lines from kept 2x2 blocks in cardinal directions until hitting 4-structures or boundaries
+
+PHASE 4 — EXECUTE:
+
+Constructing the output grid by applying the transformation:
+- Keep background 3s
+- Keep all 4-structures unchanged
+- Remove isolated 2s
+- Keep 2x2+ blocks of 2s
+- Add 0-lines extending from 2-blocks
+
+ANSWER:
+[[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 4, 3, 3, 3, 4, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3], [3, 3, 2, 2, 0, 0, 0, 0, 0, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3], [3, 3, 2, 2, 0, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 0, 0, 4, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 0, 0, 4, 3], [3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 4, 3, 4, 3], [3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4], [3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3], [3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]]
